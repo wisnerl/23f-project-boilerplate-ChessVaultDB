@@ -2,7 +2,7 @@ CREATE DATABASE ChessVaultDB;
 
 USE ChessVaultDB;
 
-# Sales table
+-- Sales table
 CREATE TABLE IF NOT EXISTS sales (
     salesID INTEGER NOT NULL AUTO_INCREMENT,
     password VARCHAR(100) NOT NULL,
@@ -50,7 +50,7 @@ insert into sales (salesID, password, email, firstname, lastname, timeWorking) v
 insert into sales (salesID, password, email, firstname, lastname, timeWorking) values (34, 'fQ4\9=WdQ_H/OKn', 'cspollenx@dmoz.org', 'Cori', 'Spollen', 5438);
 insert into sales (salesID, password, email, firstname, lastname, timeWorking) values (35, 'vM5y$'')w*s', 'jrahly@odnoklassniki.ru', 'Jacenta', 'Rahl', 908);
 
-# Advertiser table
+-- Advertiser table
 CREATE TABLE IF NOT EXISTS advertiser (
     advertiserID INTEGER NOT NULL AUTO_INCREMENT,
     companyName VARCHAR(75) UNIQUE NOT NULL,
@@ -222,7 +222,7 @@ insert into topAdvertisers (advertiserID, salesID) values (71, 18);
 insert into topAdvertisers (advertiserID, salesID) values (72, 3);
 insert into topAdvertisers (advertiserID, salesID) values (73, 34);
 
-# Advertisement table
+-- Advertisement table
 CREATE TABLE IF NOT EXISTS advertisement (
     advertisementID INTEGER NOT NULL AUTO_INCREMENT,
     advertiserID INTEGER NOT NULL,
@@ -280,7 +280,7 @@ insert into advertisement (advertisementID, advertiserID, content, viewNumber, m
 insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (43, 27, 'Discover the power of our cutting-edge technology!', 396644057, 942, 448);
 insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (44, 33, 'Our product is the best in the market!', 609800700, 646, 297);
 
-# User table
+-- User table
 CREATE TABLE IF NOT EXISTS user (
     userID INTEGER NOT NULL AUTO_INCREMENT,
     username VARCHAR(100) UNIQUE NOT NULL,
@@ -290,20 +290,20 @@ CREATE TABLE IF NOT EXISTS user (
     lastname VARCHAR(100) NOT NULL,
     birthdate DATE NOT NULL,
     dateCreated DATETIME DEFAULT CURRENT_TIMESTAMP,
-    following INTEGER, # Recursive
+    following INTEGER, -- Recursive
     notifications TEXT,
     advertiserID INTEGER,
     tag TEXT,
-    rating INTEGER DEFAULT 1200, # 0 - infinity but to allow adjustment depending on initial level before playing
-    professional BOOLEAN DEFAULT 0, # not professional until given title (1)
-    totalGames INTEGER DEFAULT 0, # if not played any gamed then 0 - instead of null
+    rating INTEGER DEFAULT 1200, -- 0 - infinity but to allow adjustment depending on initial level before playing
+    professional BOOLEAN DEFAULT 0, -- not professional until given title (1)
+    totalGames INTEGER DEFAULT 0, -- if not played any gamed then 0 - instead of null
     totalWins INTEGER DEFAULT 0,
     totalLosses INTEGER DEFAULT 0,
     totalDraws INTEGER DEFAULT 0,
     winPercentage DOUBLE DEFAULT 0,
     drawPercentage DOUBLE DEFAULT 0,
-    averageSpectators INTEGER DEFAULT 0, # rounding as half people not relevant for us
-    adMoney DECIMAL(50,2) DEFAULT 0, # always round to 2 decimal as it's money - any digit < x*10^50
+    averageSpectators INTEGER DEFAULT 0, -- rounding as half people not relevant for us
+    adMoney DECIMAL(50,2) DEFAULT 0, -- always round to 2 decimal as its money - any digit < x*10^50
     postID INTEGER NOT NULL,
     PRIMARY KEY (userID),
     FOREIGN KEY (advertiserID) REFERENCES advertiser (advertiserID)
@@ -332,7 +332,7 @@ CREATE TABLE IF NOT EXISTS community (
                                      ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-# Admin table
+-- Admin table
 CREATE TABLE IF NOT EXISTS admin (
     adminID INTEGER NOT NULL AUTO_INCREMENT,
     password VARCHAR(100) NOT NULL,
@@ -377,7 +377,7 @@ insert into admin (adminID, password, email, firstname, lastname) values (31, '$
 insert into admin (adminID, password, email, firstname, lastname) values (32, '$2a$04$dDA7vyVu26BbpiZ/Vejzn.T9XtIatWiTBo5sWXO7FMnL.KvWQxhRG', 'cbattistav@eepurl.com', 'Correna', 'Battista');
 insert into admin (adminID, password, email, firstname, lastname) values (33, '$2a$04$oEPEVd7E7ZNWMpLctuDIsO2Vy6vaXsYsiYKG1y2YEVBvU2sN5BYQa', 'osockellw@theguardian.com', 'Orelia', 'Sockell');
 
-# reportsTo table
+-- reportsTo table
 CREATE TABLE IF NOT EXISTS report (
     reportID INTEGER NOT NULL AUTO_INCREMENT,
     dateCreated DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -391,7 +391,7 @@ CREATE TABLE IF NOT EXISTS report (
                                   ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-# Tournament table
+-- Tournament table
 CREATE TABLE IF NOT EXISTS tournament (
     tournamentID INTEGER NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (tournamentID)
@@ -408,7 +408,7 @@ insert into tournament (tournamentID) values (8);
 insert into tournament (tournamentID) values (9);
 insert into tournament (tournamentID) values (10);
 
-# SingularGame table
+-- SingularGame table
 CREATE TABLE IF NOT EXISTS singularGame (
     gameID INTEGER NOT NULL AUTO_INCREMENT,
     moves TEXT NOT NULL, # string of all moves in a game
@@ -529,7 +529,7 @@ insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, 
 insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (99, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 277, 374, 0, 'rshowering57', 'etimmes5a', 339, 30, 8);
 insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (100, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 207, 224, 0, 'rshowering57', 'etimmes5a', 272, 1, 3);
 
-# GameArchive
+-- GameArchive
 CREATE TABLE IF NOT EXISTS gameArchive(
     gameID INTEGER NOT NULL,
     PRIMARY KEY (gameID),
@@ -638,7 +638,7 @@ insert into gameArchive (gameID) values (98);
 insert into gameArchive (gameID) values (99);
 insert into gameArchive (gameID) values (100);
 
-# UserLibrary
+-- UserLibrary
 CREATE TABLE IF NOT EXISTS userLibrary (
     libraryID INTEGER NOT NULL AUTO_INCREMENT,
     gameID INTEGER NOT NULL,
