@@ -2,6 +2,8 @@ CREATE DATABASE ChessVaultDB;
 
 USE ChessVaultDB;
 
+-- Create user --> Grant all privileges to...
+
 -- Sales table
 CREATE TABLE IF NOT EXISTS sales (
     salesID INTEGER NOT NULL AUTO_INCREMENT,
@@ -137,7 +139,7 @@ insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPref
 insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (72, 'Emard and Sons', 97434.52, 'kverchambre13', 'casual', 3);
 insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (73, 'Lubowitz and Sons', 65812.05, 'srowe14', 'casual', 34);
 
-# topAdvertisers table
+-- topAdvertisers table
 CREATE TABLE IF NOT EXISTS topAdvertisers (
     salesID INTEGER NOT NULL,
     advertiserID INTEGER NOT NULL,
@@ -222,7 +224,7 @@ insert into topAdvertisers (advertiserID, salesID) values (71, 18);
 insert into topAdvertisers (advertiserID, salesID) values (72, 3);
 insert into topAdvertisers (advertiserID, salesID) values (73, 34);
 
--- Advertisement table
+# Advertisement table
 CREATE TABLE IF NOT EXISTS advertisement (
     advertisementID INTEGER NOT NULL AUTO_INCREMENT,
     advertiserID INTEGER NOT NULL,
@@ -280,6 +282,7 @@ insert into advertisement (advertisementID, advertiserID, content, viewNumber, m
 insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (43, 27, 'Discover the power of our cutting-edge technology!', 396644057, 942, 448);
 insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (44, 33, 'Our product is the best in the market!', 609800700, 646, 297);
 
+
 -- User table
 CREATE TABLE IF NOT EXISTS user (
     userID INTEGER NOT NULL AUTO_INCREMENT,
@@ -290,47 +293,392 @@ CREATE TABLE IF NOT EXISTS user (
     lastname VARCHAR(100) NOT NULL,
     birthdate DATE NOT NULL,
     dateCreated DATETIME DEFAULT CURRENT_TIMESTAMP,
-    following INTEGER, -- Recursive
+    following INTEGER, # Recursive - double check
     notifications TEXT,
     advertiserID INTEGER,
-    tag TEXT,
-    rating INTEGER DEFAULT 1200, -- 0 - infinity but to allow adjustment depending on initial level before playing
-    professional BOOLEAN DEFAULT 0, -- not professional until given title (1)
-    totalGames INTEGER DEFAULT 0, -- if not played any gamed then 0 - instead of null
-    totalWins INTEGER DEFAULT 0,
-    totalLosses INTEGER DEFAULT 0,
-    totalDraws INTEGER DEFAULT 0,
-    winPercentage DOUBLE DEFAULT 0,
-    drawPercentage DOUBLE DEFAULT 0,
-    averageSpectators INTEGER DEFAULT 0, -- rounding as half people not relevant for us
-    adMoney DECIMAL(50,2) DEFAULT 0, -- always round to 2 decimal as its money - any digit < x*10^50
-    postID INTEGER NOT NULL,
     PRIMARY KEY (userID),
     FOREIGN KEY (advertiserID) REFERENCES advertiser (advertiserID)
                                         ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-# post table
-CREATE TABLE IF NOT EXISTS posts (
-    postID INTEGER NOT NULL AUTO_INCREMENT,
-    userID INTEGER NOT NULL,
-    content TEXT,
-    datePublished DATETIME DEFAULT CURRENT_TIMESTAMP,
-    communityID INTEGER NOT NULL,
-    PRIMARY KEY (postID),
-    FOREIGN KEY (userID) REFERENCES user (userID)
-                                 ON UPDATE RESTRICT ON DELETE RESTRICT
-);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (1, 'may6enexttime', 'fB4F``5R3', 'tsillett0@ameblo.jp', 'Theresita', 'Sillett', '1987-01-03', 6, 'New message', 54);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (2, 'A-Liang', 'mM6DBw+R', 'aellul1@amazon.co.jp', 'Alric', 'Ellul', '1964-05-30', 5, 'Notification received', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (3, 'athena-pallada', 'xR3Pc6rbu"', 'iburgill2@cnn.com', 'Ivette', 'Burgill', '1998-12-09', 20, 'Reminder', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (4, 'fireheart92', 'yG9iX#Y*&/u9GlE', 'zburley3@marriott.com', 'Zarla', 'Burley', '1972-08-04', 29, 'Alert', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (5, 'Azumilover', 'sP3?ZCN`.uQ', 'rastill4@gravatar.com', 'Romonda', 'Astill', '2000-10-05', 14, 'Update', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (6, 'DrawDenied_Twitch', 'qH5\&Olq6,$r0s', 'aokeshott5@bluehost.com', 'Andeee', 'Okeshott', '2000-12-05', 22, 'New message', 54);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (7, 'IVK88', 'cH6ieL(%gq"', 'rfattorini6@myspace.com', 'Rodie', 'Fattorini', '1977-11-23', 31, 'Notification received', 56);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (8, 'Elda64', 'kT8_id>!({bqP''', 'rgoudman7@ft.com', 'Rourke', 'Goudman', '2000-05-22', 23, 'Reminder', 65);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (9, 'temp006', 'fI6LH=Rmv|Xh', 'igennerich8@icq.com', 'Isabella', 'Gennerich', '2000-12-09', 4, 'Alert', 56);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (10, 'Shant7777777', 'iV7{/rty"E_#*', 'pbleckly9@netlog.com', 'Pernell', 'Bleckly', '2000-09-30', 7, 'Update', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (11, 'Inventing_Invention', 'kN3Sz,%QY<zC(fp', 'dhankarda@wikipedia.org', 'Devina', 'Hankard', '2000-05-14', 20, 'New message', 24);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (12, 'Chesssplayer21', 'hU5''Jn)M.Hc*q9#r', 'jfarranceb@last.fm', 'Jeddy', 'Farrance', '1989-12-29', 29, 'Notification received', 7);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (13, 'BabaRamdev', 'vG9Gx*e6f2cTd', 'cgetcliffec@google.com.hk', 'Corrie', 'Getcliffe', '2000-10-31', 26, 'Reminder', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (14, 'RussianBlizzard', 'gI5dwLUZkPw/=', 'kstannasd@slideshare.net', 'Kiele', 'Stannas', '1970-11-30', 12, 'Alert', 12);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (15, 'wizard98', 'eT9LoR,~', 'cimmse@squarespace.com', 'Chalmers', 'Imms', '2000-12-31', 17, 'Update', 12);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (16, 'KontraJaKO', 'eM1}vHH?eiGbt6JL', 'manyonf@alexa.com', 'Mimi', 'Anyon', '2000-08-31', 17, 'New message', 25);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (17, 'arturchix', 'bG2(M>,@JBKdH<', 'kmastertong@studiopress.com', 'Kessiah', 'Masterton', '2000-05-01', 26, 'Notification received', 28);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (18, 'Arseniii_Nesterov', 'hV2Wi_$kZ>)N', 'eswetlandh@columbia.edu', 'Eberhard', 'Swetland', '2000-10-30', 22, 'Reminder', 12);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (19, 'chesswithmra', 'tM2<6ejQ8f+=x1', 'oquippi@shop-pro.jp', 'Otha', 'Quipp', '1995-04-30', 27, 'Alert', 36);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (20, 'V_M', 'iK8{M/jR', 'dbrahamj@apple.com', 'Dunn', 'Braham', '2000-12-22', 15, 'Update', 61);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (21, 'RebeccaHarris', 'iL3Di/O8}TmJo"7{', 'ereimersk@photobucket.com', 'Elisabetta', 'Reimers', '2000-01-03', 13, 'New message', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (22, 'Watneg', 'pQ6"NNGxM', 'arheadl@shop-pro.jp', 'Alberik', 'Rhead', '2000-03-31', 26, 'Notification received', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (23, 'RealDavidNavara', 'lJ2GfSiP', 'dpottm@whitehouse.gov', 'Dodie', 'Pott', '1960-07-12', 2, 'Reminder', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (24, 'Night-King96', 'zE3>iD=pCM6j', 'mclappsonn@miibeian.gov.cn', 'Melosa', 'Clappson', '2000-12-31', 2, 'Alert', 54);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (25, 'MatthewG-p4p', 'cA7V_|1f', 'djewsburyo@cbsnews.com', 'Darrel', 'Jewsbury', '2000-06-08', 4, 'Update', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (26, 'klari64', 'gV240N.2PZGs', 'dabraminop@telegraph.co.uk', 'Damon', 'Abramino', '1978-10-30', 21, 'New message', 49);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (27, 'SindarovGM', 'lL5PkJAgO\z4I', 'rskogginsq@purevolume.com', 'Rey', 'Skoggins', '2000-11-11', 4, 'Notification received', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (28, 'PeshkaCh', 'gU1`0YGE0P=', 'peversfieldr@businessinsider.com', 'Pacorro', 'Eversfield', '1983-09-08', 20, 'Reminder', 1);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (29, 'AngelitoRT', 'mG8"A.}SH)E&E~|', 'afotitts@theglobeandmail.com', 'Alverta', 'Fotitt', '1980-10-07', 17, 'Alert', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (30, 'Mishka_The_Great', 'aP8P"5?gnl', 'ififoott@imdb.com', 'Idaline', 'Fifoot', '2000-01-30', 22, 'Update', 64);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (31, 'Aronyak1', 'yH19,O}P$&', 'mtidswellu@jigsy.com', 'Marty', 'Tidswell', '1963-09-07', 26, 'New message', 67);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (32, 'dimochka_tsoi', 'kK53cP=a/U', 'ffatharlyv@va.gov', 'Feliks', 'Fatharly', '2000-11-19', 30, 'Notification received', 12);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (33, 'dbotcherby0', '$2a$04$i2CalA3IY.EbnAPJ9RmMjudiB.x5.0wZBa.E.1SNBEUPWgRj3kuYa', 'kdionisi0@altervista.org', 'Kelcy', 'Dionisi', '1995-10-02', 9, 'Notification received', 72);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (34, 'phanlin1', '$2a$04$SRO8zzxeSw6M6mgQCknNfuutf8M9p/JeLCHmAbjNzlm0zQb5aglSO', 'dfree1@wunderground.com', 'Dionysus', 'Free', '2000-11-29', 19, 'Notification received', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (35, 'goconor2', '$2a$04$txlHlFxtjnRe3Ho.K1QvkOdVUzy635dAS7f3RZ3E.leR.nal7uvLa', 'bmellows2@hatena.ne.jp', 'Borg', 'Mellows', '1991-07-31', 4, 'Reminder', 56);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (36, 'nbessett3', '$2a$04$PZZQebo11v16WKe8ilmtoe6Cj8fpEaUaCi5tNHtlX1zcIbATI4RA.', 'fjankiewicz3@fotki.com', 'Florentia', 'Jankiewicz', '1993-04-28', 18, 'Alert', 66);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (37, 'ajouhning4', '$2a$04$3rgJnm0U2xurZdBMhkX5Puy725IffxMNjqUih89VfuSDUBUXW.KQG', 'delson4@freewebs.com', 'Drusy', 'Elson', '2000-12-02', 28, 'Notification received', 67);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (38, 'jmantha5', '$2a$04$e0qKuwZLMXcSkozXKgezDecv6FYkHQ2IyVifuyZXejaDqE/vuUbku', 'gdaal5@goo.gl', 'Guilbert', 'Daal', '2000-10-30', 27, 'Notification received', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (39, 'brydeard6', '$2a$04$ScoB0W45dNjxEC3m6buwDOsj4SyOqQ4Yewp2EUgAmPvZvWYjH1NMm', 'nseally6@google.ru', 'Nichole', 'Seally', '1970-05-21', 24, 'Update', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (40, 'eserjent7', '$2a$04$GHmwK48qcZBHPzyt94r9nOAKgQrdCNDbfj7cX9yUINcgNwybnsCP6', 'cfryman7@gizmodo.com', 'Cornie', 'Fryman', '1985-03-23', 5, 'Alert', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (41, 'mdugood8', '$2a$04$EozSfUrZ4YS32xBxolGtQeNvY1zfCH7nz2WDItqyybpCtlD3tbSgq', 'aschaffler8@utexas.edu', 'Alison', 'Schaffler', '1970-10-07', 15, 'Notification received', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (42, 'mmoden9', '$2a$04$/P8cMpe9Ipjpf.qRxm3GfuD5J3BM4pyRfHRfICLHVvgFlCGGPMoMq', 'hkaradzas9@ocn.ne.jp', 'Hedwiga', 'Karadzas', '2000-09-03', 25, 'Alert', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (43, 'kgoodiera', '$2a$04$ZKLGjLCVWAZGh8S/TihLm.mj3nnSyB//vIjgP8N12m/PL8b636Iwy', 'sastletta@nydailynews.com', 'Smitty', 'Astlett', '1985-12-16', 30, 'Alert', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (44, 'mscholardb', '$2a$04$LQPbFAX6TA8aSlFaSyicEe1o7ObMu2LXURfkPyEr1mM4EjqIFDSjy', 'cdaverinb@issuu.com', 'Chelsy', 'Daverin', '2000-10-29', 8, 'Reminder', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (45, 'llafontc', '$2a$04$RatdBK6iWQIMxDGGoQiGAeXB.DOC7hYgn3PcVG00hqrHoebf9grc2', 'tfinanc@is.gd', 'Teresina', 'Finan', '2000-06-19', 7, 'Update', 43);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (46, 'dfarressd', '$2a$04$NMW1BSk.BUMim17AWKZ89.c6Gh/ca3EmbB4Tn2TMMetCrAmiQMIiO', 'equarringtond@bravesites.com', 'Ezra', 'Quarrington', '2000-10-31', 16, 'Reminder', 12);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (47, 'radenete', '$2a$04$AJYcpwvTtk0290mKUqApVOSIgwvH5kisjTSTn4zwxpIGFbID.oERa', 'jjentgense@toplist.cz', 'Jacquenetta', 'Jentgens', '1971-12-12', 5, 'New message', 32);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (48, 'hritchleyf', '$2a$04$JTABiRM6QA41HJwwU2soPO8o9A/Oe4k3h0xoUtOU8SwbNEw8zYUR2', 'sokroyf@newyorker.com', 'Shamus', 'Okroy', '1983-10-23', 11, 'New message', 21);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (49, 'mguiraudg', '$2a$04$7TJ4ahAU9l6mxLDNPsbeAu4homjbGIRLysyWRDrUtTPP.ZgHQunEu', 'groyseg@123-reg.co.uk', 'Gaven', 'Royse', '2000-01-07', 7, 'Update', 12);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (50, 'npaylerh', '$2a$04$oYG/xlhVU2.q75qjmbb/U.LCh0349sy64WJpuIbS1xN5QpyiHr1za', 'fblibenh@nbcnews.com', 'Flo', 'Bliben', '2000-11-20', 11, 'New message', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (51, 'jslymei', '$2a$04$Ik3BJjl995tuv6MeSeZ38.wIu8gVWDvLNea2jElV2n5rYTjuITSWm', 'phenroti@walmart.com', 'Panchito', 'Henrot', '1996-11-27', 16, 'New message', 3);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (52, 'jbusej', '$2a$04$oD19N9QBoAcqjUKWwaQQdObjYmORnc.6J497q.usAIYsNBpRW9CQ.', 'sbosworthj@goodreads.com', 'Sterling', 'Bosworth', '2000-10-02', 17, 'New message', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (53, 'ssteptoek', '$2a$04$t5keUBWwowRZKtZAANbwEeAeyIwn3oqUDQrWRqdFZA8XCiwDoiiQu', 'lmuatk@istockphoto.com', 'Lavinie', 'Muat', '2000-12-30', 30, 'Alert', 32);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (54, 'choveel', '$2a$04$0GTNYo0a/Kphj/dg4HvyNuHvx3fGQeaeQ1GwCou1gFwL5bLPin62C', 'etownshendl@alexa.com', 'Elane', 'Townshend', '2000-11-30', 5, 'Alert', 43);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (55, 'scattowm', '$2a$04$XZKJcknNd3QrVIDaiP97j.v86slG5awVqd1ikADPri.oBwNnde64.', 'bvigerm@eepurl.com', 'Byrle', 'Viger', '1973-01-25', 24, 'New message', 55);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (56, 'amozzettin', '$2a$04$Et5LtrMrr3CWNI4U6RfxAOZdfxNsUotMPtlp8fZd6JI/j2AbU2b7a', 'sgobeln@sun.com', 'Storm', 'Gobel', '2000-12-23', 10, 'New message', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (57, 'ringledewo', '$2a$04$xw0f/wuOnocQifVjVRUBM.dGOui3ep3aBKSyaci5646MJoB5RTfHm', 'iporcaso@biglobe.ne.jp', 'Ingelbert', 'Porcas', '1981-09-03', 21, 'Update', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (58, 'llepardp', '$2a$04$RKTqYzhSdVmlI50NW5hvb.T5h9NCV8yxH2F39Bzmb9vBfdzI55tFO', 'adoryp@nhs.uk', 'Adara', 'Dory', '1960-11-01', 15, 'Update', 32);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (59, 'hleaverq', '$2a$04$.fDKO8MztuMpx/rsQQBoa.FrIM6NLg8p.gpNsXwUiVK/IXa6mh2IW', 'zbowlasq@google.co.uk', 'Zarah', 'Bowlas', '2000-12-03', 11, 'Alert', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (60, 'swheelikerr', '$2a$04$79vuANblxZiTNo12pn3R5eWxuw.Cm5KgbVNGJoijyQWDVaPnPciCO', 'fewingr@yelp.com', 'Fayette', 'Ewing', '2000-10-22', 5, 'Update', 32);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (61, 'rmoraless', '$2a$04$tvqwceZLyvrpskhGtphfbuUEN/ODKIW4WMopk/9MnMVH1i4WXz9wm', 'eshimmans@google.com.au', 'Elaine', 'Shimman', '2000-09-05', 16, 'New message', 2);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (62, 'efelipet', '$2a$04$xog7YN0KnXlfl/4LMIC89e1c/KdQwhUZAXzRWKNTa1Zl.encT9ZFC', 'subankt@sun.com', 'Sheffy', 'Ubank', '2000-08-18', 24, 'New message', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (63, 'hsolmanu', '$2a$04$RItSsI/i.wDjg/WzjyeVa.6XTNi9BN827lygugTApHUss.nth1voy', 'bmacadieu@howstuffworks.com', 'Bourke', 'MacAdie', '2000-10-01', 2, 'Notification received', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (64, 'aavramowv', '$2a$04$KWVkqwBKD9xbbEDssfDD4.HfumtO91FQxbj0yXvyzlSuUmbbi51p6', 'bkaliszewskiv@sohu.com', 'Brandice', 'Kaliszewski', '2000-10-07', 1, 'New message', 65);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (65, 'mpottberryw', '$2a$04$kSuWonZrfS5ILv7PkPFLJOpnqBWG8UoZoRfs7RpMx/rNsGADNglTG', 'tmullinsw@boston.com', 'Timothee', 'Mullins', '2000-10-05', 12, 'Notification received', 32);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (66, 'iwadelingx', '$2a$04$pvzKMkepcB4Ej5HodCgmYe.AVyVIy.asgomELGhPkR7iD5OVtY3/C', 'nhexumx@psu.edu', 'Nicoline', 'Hexum', '1981-04-07', 21, 'New message', 27);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (67, 'fhelliary', '$2a$04$f8rn65aqNdncRpD/gkPXY.jl.VCaj8bkR5nkQWI/C5WXwkISwn0I6', 'fblowery@instagram.com', 'Fayina', 'Blower', '2000-09-03', 19, 'Reminder', 54);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (68, 'tstillmannz', '$2a$04$PX2KBXet9vKWqemcXB5nxOZBMIcMkTFPhALXhwAagG6AxUUMIgVa2', 'fainsliez@fda.gov', 'Freddie', 'Ainslie', '2000-12-26', 1, 'Alert', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (69, 'svedeneev10', '$2a$04$rsfwFeGUpV8xigahR9P60uEmyMpDGgTUppXhJ2jFPqj159srdg5Fy', 'sawmack10@usgs.gov', 'Skylar', 'Awmack', '2000-01-02', 5, 'Alert', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (70, 'ccorser11', '$2a$04$wwAi/OZxDJjs/PuDpMHpF.eYLgLH4r52/yTS8xr99oRAMk463CBRK', 'cdeason11@exblog.jp', 'Clari', 'Deason', '1972-10-14', 1, 'New message', 54);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (71, 'ctwittey12', '$2a$04$MJFTn3VEWEydUGFusBOJAuS1MAJGShR2vknlnTdwWsKgU48Fxbv9S', 'ahedworth12@engadget.com', 'Annora', 'Hedworth', '1997-02-17', 2, 'Update', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (72, 'kverchambre13', '$2a$04$q7nVuDw8TWucvTH3RKW3OuWNiGGHQMRVEYdZZSqF8TFjlNZIVz1Ty', 'wtredger13@vkontakte.ru', 'Waldo', 'Tredger', '2000-03-05', 2, 'Update', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (73, 'srowe14', '$2a$04$jviv53hqpZvGDEgPSLv8xO.2nHDtZCFoyXUKAye95hD6pn7/g5Lu2', 'tmetts14@wunderground.com', 'Tatiania', 'Metts', '1972-10-30', 8, 'Alert', 13);
 
-# community table
-CREATE TABLE IF NOT EXISTS community (
-    communityID INTEGER NOT NULL AUTO_INCREMENT,
-    postID INTEGER NOT NULL,
-    communityName TEXT,
-    PRIMARY KEY (communityID),
-    FOREIGN KEY (postID) REFERENCES posts (postID)
-                                     ON UPDATE RESTRICT ON DELETE RESTRICT
-);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (74, 'nwhaley0', '$2a$04$u19bJFPzBHZh1EfPrZSgIOVD.2j3zfP7PRzg2oqzv2ASNPLDuVRwO', 'nwhaley0@chron.com', 'Neill', 'Whaley', '2000-01-25', 11, 'Alert', 72);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (75, 'halster1', '$2a$04$8mZdTroj22DZ70jJ5FYnH.JhnsNVFNFphuXM6.FTXLI8GuteeW58y', 'halster1@gravatar.com', 'Hewett', 'Alster', '2000-08-27', 15, 'Notification received', 31);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (76, 'mlasselle2', '$2a$04$wzAi9AkHl2/a0L2bLXWG4euKbJIEhVc7BWiMDhF1X8lYvYJQhlYSe', 'mlasselle2@columbia.edu', 'Mikaela', 'Lasselle', '1993-02-11', 31, 'Update', 46);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (77, 'gjohananov3', '$2a$04$W4VXeAwM7YMUhfbUjQ0CY.cFVKgxrAORU.of9aKS5W.G5hxsYSsPq', 'gjohananov3@msn.com', 'Genevra', 'Johananov', '1968-05-05', 22, 'Notification received', 3);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (78, 'mfonso4', '$2a$04$I1tk1I7sPdJjCK1Sd.05cudi6juLr/lqPb8o1LJ3i4pr2kaIUjppq', 'mfonso4@zdnet.com', 'Mellisent', 'Fonso', '1977-05-22', 15, 'New message', 37);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (79, 'clesurf5', '$2a$04$lt9lMqkL4v9MJor1Pd0pq.y3MH7QhZgSLDTOBsjRNiBLcTa3D1Eu6', 'clesurf5@cloudflare.com', 'Chrysler', 'Lesurf', '2000-10-03', 8, 'Notification received', 58);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (80, 'jweaben6', '$2a$04$m4Ecpa5.jjJTSTLsKfAmuuI2qF6L6ecODnYbn3iakrnE6UHtvO4/y', 'jweaben6@a8.net', 'Jannel', 'Weaben', '2000-10-28', 25, 'Reminder', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (81, 'ktimmermann7', '$2a$04$Xb.RMEGxWJS626D1nC1mmeHi3tEYAuk/oFiRkFfjxaFVE71Jcb/tW', 'ktimmermann7@examiner.com', 'Kiele', 'Timmermann', '1976-10-04', 13, 'New message', 66);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (82, 'lbrownsea8', '$2a$04$aoNo8NDUSpphX9nbgRIZVOqitnVbcIf1gA9wJ5BfghoONOAnhEEKy', 'lbrownsea8@barnesandnoble.com', 'Livia', 'Brownsea', '2000-01-20', 21, 'Reminder', 36);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (83, 'jciabatteri9', '$2a$04$EwgICCyzCBl59pfcxGajNuneLS4v4e4/nMNG.Y6WZbAlBU9VtTtsC', 'jciabatteri9@mysql.com', 'Jermain', 'Ciabatteri', '1993-11-27', 22, 'Reminder', 29);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (84, 'lworgana', '$2a$04$Dw3CZXXNbCpFe2wzzeyDme0d9S5/T7g67Jj32YHDRQnM/aU9rO3fS', 'lworgana@ucoz.ru', 'Lorry', 'Worgan', '1975-12-03', 17, 'New message', 13);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (85, 'hgrouerb', '$2a$04$y.qDQJRFDErG9Rpwn3TpPuNaXUdLA4zD9d4LfvJOuyz9iZdshkwOa', 'hgrouerb@slashdot.org', 'Hettie', 'Grouer', '2000-11-20', 24, 'New message', 11);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (86, 'pslymec', '$2a$04$oM6YZ5j3Y8mZEwf5HIUGWuSpryD6YeiZ21Xq34GDYdtknuRLw.MGa', 'pslymec@vistaprint.com', 'Patience', 'Slyme', '2000-12-27', 4, 'New message', 59);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (87, 'wdemanged', '$2a$04$DSgNSMYEBuB1OG9P23isiuRVDJil.zaBZK5vPM9B0PZNgPAEkzbyC', 'wdemanged@networksolutions.com', 'Warren', 'Demange', '2000-11-18', 5, 'Reminder', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (88, 'mruberrye', '$2a$04$HWYbQuBimoFXskbTNjgNwOWq7D4hr/w.iZnPZ04J4YJSHgRPALuAC', 'mruberrye@addtoany.com', 'Michaela', 'Ruberry', '2000-03-13', 31, 'Reminder', 32);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (89, 'kprimakf', '$2a$04$CCxFwCCRpfcHFuLpaHHuyeyxvVYHPUEVr3Hm2Tje4bES6O0OfOk/6', 'kprimakf@bloglines.com', 'Katharina', 'Primak', '2000-11-05', 25, 'Alert', 5);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (90, 'ftiddg', '$2a$04$k2r9ZpySSn17aZA0U/a7DOAb3e3g46dvet/TCEyt5efh1RS6F/LhW', 'ftiddg@auda.org.au', 'Franciskus', 'Tidd', '2000-01-21', 28, 'Alert', 50);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (91, 'mkelingeh', '$2a$04$iTLx.9epnRPViUQwcgj7HOT3T.b4iRVykWIeFZg4uWqwRQ66PMeIm', 'mkelingeh@ezinearticles.com', 'Mano', 'Kelinge', '2000-11-03', 10, 'Update', 62);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (92, 'bsoutheyi', '$2a$04$1ELaLht32NCnkh78fpEyNeb2NtTK/iz9I29mUd9IK8vinyLzwJcGq', 'bsoutheyi@hibu.com', 'Barron', 'Southey', '1971-03-15', 10, 'New message', 33);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (93, 'zseelerj', '$2a$04$XzspnY1H9Zld0m4/gh51Y.JYC0EGWP5iJ7or/DEfweG9Ft0IwnwYq', 'zseelerj@rambler.ru', 'Zuzana', 'Seeler', '1998-12-20', 9, 'New message', 18);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (94, 'dschenkelk', '$2a$04$h5xGYfIXy6VjKhtcarRj9ezG39Rg/Weh8Ys3eoSGYCSevQ47l7xAi', 'dschenkelk@dedecms.com', 'Dulce', 'Schenkel', '2000-12-05', 11, 'New message', 54);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (95, 'braimanl', '$2a$04$dtoHlBYn7teSHRtObnPxW.q9T.V1SnLLdB4GeXSEUUGcS7GDuTtd6', 'braimanl@google.fr', 'Buckie', 'Raiman', '1998-04-06', 26, 'New message', 66);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (96, 'dhanrettym', '$2a$04$nvHPR4eTJIQflk618WDQ4eWTsf5ZEM7O20hFsmlyz3LPC/0LJTCwK', 'dhanrettym@ustream.tv', 'Dukey', 'Hanretty', '2000-02-09', 18, 'New message', 6);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (97, 'smatfinn', '$2a$04$vtH0XXKnQja7C1XT4EYnUe1HGHRuMCinEWr0riGcdFeorPIpmp.je', 'smatfinn@imageshack.us', 'Steffi', 'Matfin', '2000-03-20', 9, 'Update', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (98, 'nreddieo', '$2a$04$w/EBq0B6xd/vFWTmJqtkv.rHh7K78tuYAQCZGllRCeNTt44tvtXTu', 'nreddieo@disqus.com', 'Nicoli', 'Reddie', '2000-10-20', 12, 'Notification received', 46);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (99, 'hcohnp', '$2a$04$U0RpWWF8Yxd0hJSFFNNS3eCSkeNbO2q3f1dmoRtAd/8LD4pXHBCD.', 'hcohnp@npr.org', 'Hyacinth', 'Cohn', '1997-10-05', 14, 'Update', 25);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (100, 'cvonbrookq', '$2a$04$olTX8L6jsq2suKmOW4v.8u2JkysDGuqXzuiDwJu3dNs8k6aYceZHO', 'cvonbrookq@google.it', 'Cad', 'Von Brook', '1971-12-21', 22, 'Notification received', 33);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (101, 'dmitchinsonr', '$2a$04$ll6./aqoOBY9R6xAbPeR8OJhK.6gMsOpO51Xr/eqV21itgKKkDSQS', 'dmitchinsonr@msu.edu', 'Del', 'Mitchinson', '1960-11-27', 28, 'Notification received', 10);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (102, 'bwyres', '$2a$04$9coOWNoAVic5Bj8XzLD25OrsvxQ0SW/FBT7JWTKOeOQmxT6pwNG8G', 'bwyres@intel.com', 'Bea', 'Wyre', '1998-10-29', 7, 'Update', 14);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (103, 'wivant', '$2a$04$p2Cv3xRLmjvhOdRhd1pI.eGgWDawyGgxzfiqciviNTEigUDtEIat.', 'wivant@usa.gov', 'Willa', 'Ivan', '2000-06-17', 14, 'Notification received', 72);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (104, 'cbaumaieru', '$2a$04$C9x6Mmh.ndgydkUmhzxtSeD.1i2LBFnpr7UT4VT3UHCdo6BUXhCF6', 'cbaumaieru@sbwire.com', 'Cheryl', 'Baumaier', '2000-03-26', 28, 'Reminder', 35);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (105, 'mferrierev', '$2a$04$HCB8/9Ax8fEDJ.sgP62NBemKKduC1uIAmq32N8/YADWAeXnj6ffNO', 'mferrierev@yellowpages.com', 'Marci', 'Ferriere', '1988-10-24', 25, 'Update', 47);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (106, 'jmcmeekanw', '$2a$04$B4jtUlE73KrDgeNRQcIvueGwF4CjYQNDZa8JDY5QCpQiYJho2esZ6', 'jmcmeekanw@wsj.com', 'Jeremie', 'Mc Meekan', '1973-06-02', 5, 'Notification received', 43);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (107, 'gkoppeckx', '$2a$04$pPK6w0Ssvl0GKn7QBfH24O6rBZhLieBzNZKoIwWpb8fJgIXY8Ih8K', 'gkoppeckx@dedecms.com', 'Giustino', 'Koppeck', '2000-11-27', 19, 'Notification received', 4);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (108, 'ctrymey', '$2a$04$4hT9AXnyWn./XKeMEFRbFep6FBHfgf7xc5l1B1u0OP5QdIMippBxK', 'ctrymey@yellowpages.com', 'Clarinda', 'Tryme', '1961-07-29', 2, 'New message', 30);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (109, 'kfardyz', '$2a$04$mRtnV1d2z/9SzNRYEFccpeh/Q3NoBYPpR/HHBv7wQmaJ8jtDJ447m', 'kfardyz@sciencedaily.com', 'Kathy', 'Fardy', '1966-04-12', 21, 'Update', 68);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (110, 'mmabbett10', '$2a$04$0Jwx3hujssA/ILb84V0Vje5YfbgEQcaWjtcarCUi0v0Mp7nlkoSSK', 'mmabbett10@cnn.com', 'Mohammed', 'Mabbett', '2000-10-07', 16, 'New message', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (111, 'lblum11', '$2a$04$Mcp.3.3J8AY6f1zpGCWVV.6DiYU5g79y.kxXKZ2Ih7xHXJEDmIfVO', 'lblum11@blog.com', 'Lavinia', 'Blum', '1983-02-16', 7, 'Notification received', 48);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (112, 'tagdahl12', '$2a$04$AfZi5zvThCsdHJARiN/.W.Te7OS16eOhok/lGeLDwt2xWI3pIaXcm', 'tagdahl12@spotify.com', 'Tedie', 'Agdahl', '2000-04-27', 3, 'Reminder', 71);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (113, 'kfoale13', '$2a$04$As4qYRo.oNaDCQa2GoGbe.oJ9YMVEPI.cFht86lgJqxQJaUPomvkG', 'kfoale13@e-recht24.de', 'Kyla', 'Foale', '2000-10-06', 31, 'Alert', 36);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (114, 'bpoinsett14', '$2a$04$VCkU2EZInUTNyUJG7HCaD.IRgsSDpXBg4l0DxzLWFmERG8TDZrL3K', 'bpoinsett14@pcworld.com', 'Brenn', 'Poinsett', '1980-10-20', 3, 'Alert', 50);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (115, 'ktoffano15', '$2a$04$PHZSJ7/zWwaF0ecv49nFyuqxKpvn.21H9Be1fiAtV9wLYuNcv/Jru', 'ktoffano15@cdbaby.com', 'Klemens', 'Toffano', '2000-01-26', 8, 'Notification received', 21);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (116, 'mdemattia16', '$2a$04$UGJL2zwVTcoq1pDwyY5YkelC.LCparfzHo4l9UmYVu6v1VjFLC35y', 'mdemattia16@zdnet.com', 'Marten', 'De Mattia', '1990-08-20', 20, 'Reminder', 42);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (117, 'mbawden17', '$2a$04$5s/dhybfdw/wiJ7S4xgMKuo1mODbPmfWUOjprb7OVpA6cxK8ZD31a', 'mbawden17@goo.gl', 'Maurene', 'Bawden', '2000-10-22', 31, 'Update', 69);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (118, 'abernholt18', '$2a$04$gO98SebDpXUm.gqqno49iem0DxBI7GOGNkkbs9mbt7mn0Fk.ydXOO', 'abernholt18@discuz.net', 'Aubrette', 'Bernholt', '1971-10-03', 25, 'Alert', 11);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (119, 'dballsdon19', '$2a$04$Xn7KVfBhU/ZOkgOMbxOaeeHLtXmLH3RmARwsoHd9lyAevBUNosCEy', 'dballsdon19@hao123.com', 'Dacey', 'Ballsdon', '1987-11-27', 27, 'Alert', 41);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (120, 'rhuguenet1a', '$2a$04$Ulf5uRVWRtzVk8wGRsnKsOC8ckW4LTILTc0oR1tSxgmC4pD0fMI0q', 'rhuguenet1a@prnewswire.com', 'Rikki', 'Huguenet', '2000-10-20', 11, 'New message', 64);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (121, 'craddish1b', '$2a$04$BTXgwlrX7bgptsCAwmpUCOok.vv4NG2WyfQTq0U8KNYboMhTFaEd6', 'craddish1b@youtu.be', 'Charlotta', 'Raddish', '1963-10-27', 14, 'Reminder', 56);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (122, 'wdowner1c', '$2a$04$XUmO0A1u70J0J6EBuz25oecEqW7kTv6nQYkb2fZmVESIe8SxTqycS', 'wdowner1c@bloglovin.com', 'Wain', 'Downer', '1986-10-22', 27, 'Notification received', 28);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (123, 'hbigg1d', '$2a$04$TVfNXJdV7u9tYh7.DGIUjeq0fqwnmcSoWfcZgPY.nKv4nvvaQhxG.', 'hbigg1d@feedburner.com', 'Harper', 'Bigg', '2000-07-24', 2, 'Reminder', 57);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (124, 'itchir1e', '$2a$04$W5NznYJSbLOWhk2op66Mwe2Em1/45ET1fEOPmgyc9pCi/KSAfQiCy', 'itchir1e@godaddy.com', 'Isac', 'Tchir', '1993-11-03', 20, 'Reminder', 22);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (125, 'ksilley1f', '$2a$04$Q9ktOteDh57v94L9BtlhgeaVf9keeiKoxW7v4hXanK.5.lBtsNPke', 'ksilley1f@imgur.com', 'Klarrisa', 'Silley', '2000-02-03', 23, 'Notification received', 38);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (126, 'dffoulkes1g', '$2a$04$ZcSOAfZrbDjAqrdx0jZMZO2BppX2D4cKTMqds/GCR0Ysb6Bdb/P4e', 'dffoulkes1g@w3.org', 'Dell', 'Ffoulkes', '1975-10-27', 6, 'New message', 43);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (127, 'flockier1h', '$2a$04$dj62LVsNMRU.oRlthVy9d.vcHuseYQvXWyLzabwvwDPbOy1RqCZjm', 'flockier1h@youku.com', 'Fabien', 'Lockier', '2000-07-28', 21, 'Notification received', 39);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (128, 'hbazley1i', '$2a$04$kiEHLJ9oMZJ9wULdoMhgDuP1yTdPDeQi.aE.ieF55cI2KPnzyfj8u', 'hbazley1i@businesswire.com', 'Helli', 'Bazley', '2000-06-18', 20, 'Notification received', 67);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (129, 'gdomico1j', '$2a$04$goZZECRnwpTt.8mjwFooF.rsM8zHQEH36t4894m6XKMCSKtGCAvJK', 'gdomico1j@youtu.be', 'Georgeta', 'Domico', '1963-11-20', 30, 'Update', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (130, 'dgleasane1k', '$2a$04$9yjdd9G.TxOaubL0WaYaquXl1jEEgRPsk2s2ygMMtkBTPzBORpnAm', 'dgleasane1k@omniture.com', 'Darlleen', 'Gleasane', '2000-11-01', 18, 'Alert', 50);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (131, 'scavan1l', '$2a$04$QtQcMxRrNCybmD.5icWELuibP4AFtSvte/EyyHQ6kg0Q7SmZSmLr.', 'scavan1l@constantcontact.com', 'Shawn', 'Cavan', '1999-11-12', 8, 'Reminder', 48);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (132, 'hgisby1m', '$2a$04$4LZQ4XWUYn9uGIYfWAtNuuT.XIUb7xvjtNPcZmMCZqJIX8upkr.KS', 'hgisby1m@artisteer.com', 'Harrie', 'Gisby', '2000-11-21', 13, 'Reminder', 55);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (133, 'faizikowitz1n', '$2a$04$xoOdLvabezDU59it4tNfCOiYlbw37Nr7Qzai44Cc.0f.tptRq9aBK', 'faizikowitz1n@latimes.com', 'Feodor', 'Aizikowitz', '2000-10-10', 25, 'Update', 48);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (134, 'fbellon1o', '$2a$04$44LEFgrH3WETyN7g16CA3O51CsGwsIBdKEh82.K2jPyFL2BtnCleS', 'fbellon1o@ftc.gov', 'Frayda', 'Bellon', '2000-12-20', 25, 'New message', 24);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (135, 'kkeast1p', '$2a$04$qBxOofMAeZSOI3.M.4ICFe5wKHmp5fH6mMkMo2OAk1v7AOwRoYRlu', 'kkeast1p@topsy.com', 'Karlik', 'Keast', '2000-11-17', 14, 'Update', 61);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (136, 'mkirkby1q', '$2a$04$LyTclEkDyPYinrTdG5gm.Od34meWiCkPmRPcwz/vjcvlYcpH8cs0a', 'mkirkby1q@skype.com', 'Matthieu', 'Kirkby', '1985-12-27', 5, 'Reminder', 60);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (137, 'alabbett1r', '$2a$04$sUp5LkEwAVYlDmpRbP5P2OKlVNGBNASeFS/3ExzgqyJJ.LpsjfQ72', 'alabbett1r@privacy.gov.au', 'Alix', 'Labbett', '1977-12-20', 24, 'Reminder', 22);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (138, 'bohms1s', '$2a$04$Ue583gAZ4/j8oqcutFidIeyh9F458jEgTGHcGAXp7fbpDLLUdR1Me', 'bohms1s@nydailynews.com', 'Berkly', 'Ohms', '2000-10-15', 1, 'Alert', 60);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (139, 'gtowse1t', '$2a$04$5c45CX8jwSxPlExATfFbKuytaHqzLYFAbHzKQ4Ky3VMX7oYNyG6BW', 'gtowse1t@w3.org', 'Garrot', 'Towse', '2000-11-03', 23, 'New message', 1);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (140, 'nfilippov1u', '$2a$04$XRr2wwQPI/aS3hdj5SW1J.jghCvP55NngqWUejIALflvp5jmmXUEe', 'nfilippov1u@csmonitor.com', 'Northrop', 'Filippov', '2000-10-23', 25, 'Update', 55);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (141, 'wdermot1v', '$2a$04$XQTkqJkP.nVL9nNwBnReXuLIF/ASVlyZQkoWD78SuHT/zYv4p8pC6', 'wdermot1v@1und1.de', 'Witty', 'Dermot', '2000-07-16', 8, 'New message', 35);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (142, 'mkingsmill1w', '$2a$04$y.k/ukoK1rPZxQAZYH6v0OTmD4r4e7xR5BpT9tZ5ojS4eHxEBBqIu', 'mkingsmill1w@slate.com', 'Mildrid', 'Kingsmill', '1962-04-20', 10, 'Notification received', 7);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (143, 'rheckle1x', '$2a$04$gmJrBMB7BtSxD/KEI8/2buKp1FXDBqlRHDkxMSuEpjKwFRIjPU/ey', 'rheckle1x@geocities.jp', 'Regina', 'Heckle', '1962-08-01', 12, 'Reminder', 63);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (144, 'lfilshin1y', '$2a$04$E9YfW2kBP/8g4shxAkPXc.3YXuGIDqLsjorCyKNFEVg9V7MPmGO8C', 'lfilshin1y@sogou.com', 'Lanny', 'Filshin', '1970-08-21', 31, 'New message', 16);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (145, 'rjakubovitch1z', '$2a$04$RedDHI1ARkTVcY9c5xmkM.yJXn/spG4bBUSF22RivYf44fmE2TC4W', 'rjakubovitch1z@statcounter.com', 'Ruthy', 'Jakubovitch', '1987-03-03', 4, 'Reminder', 33);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (146, 'mstorton20', '$2a$04$v3i3IuzGhB5mme0.7f1cm.slQs9c4SIbf6GrMS60V26wIWnffJHBy', 'mstorton20@techcrunch.com', 'Maiga', 'Storton', '2000-08-20', 23, 'Notification received', 6);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (147, 'mmammatt21', '$2a$04$IvqhnrZpHe/2UMeiliETIOppR04cbxS0A3DvllJjCnaw9gCId1LiK', 'mmammatt21@columbia.edu', 'Mabelle', 'Mammatt', '1972-06-08', 10, 'Reminder', 64);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (148, 'jwhyard22', '$2a$04$fCUA2IyVumO.qGY4/lIlYet6aS6ZFVDT2ZcTc5sEidwXNpwKOsaVS', 'jwhyard22@mac.com', 'Jacinthe', 'Whyard', '1961-11-11', 29, 'Reminder', 30);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (149, 'ntravers23', '$2a$04$Xqj4hNtCdkKjoztJYbqsa.RStxNrUUJnxonMRa/DGuJTwe8WetyiO', 'ntravers23@woothemes.com', 'Nita', 'Travers', '1963-10-20', 28, 'Update', 3);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (150, 'lscoffins24', '$2a$04$dnTmzK5NOXYXMHOK8XgsA.IE/TJ7Sh.kzK5jX5PeiTDk4/J6xfF9u', 'lscoffins24@storify.com', 'Lek', 'Scoffins', '2000-12-09', 18, 'Notification received', 20);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (151, 'ywardington25', '$2a$04$L1lI1lN8SDkrhRFGM1i06e9EVY4KobIbtj7TyIrUqDF.ogAucS9ju', 'ywardington25@jugem.jp', 'Yuma', 'Wardington', '1981-11-27', 9, 'New message', 12);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (152, 'upyvis26', '$2a$04$xT.Wg0WmeTjJu4tViByR3uwP0mdS/yPRt2GAwnkM4mdykitITOwvK', 'upyvis26@dell.com', 'Ulric', 'Pyvis', '2000-04-08', 18, 'Update', 8);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (153, 'ecotgrave27', '$2a$04$vkgp3IMbi5lC94Liz1sIVuaZ.n04Cf22vtive4woeNqyQeop4E4MC', 'ecotgrave27@hexun.com', 'Essa', 'Cotgrave', '1979-05-04', 19, 'Alert', 54);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (154, 'lloftus28', '$2a$04$Oa.GrmBCVaROvIqkwNRsPerNk5N1kiIa2UzXNIQ6G8.HN6BmQDCG6', 'lloftus28@sciencedaily.com', 'Lemuel', 'Loftus', '1978-10-20', 20, 'New message', 39);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (155, 'mbarbara29', '$2a$04$22jKA6YviisuFms9.KzR9ud4k44zsy6gHf7VHvA8kRVUFAF3p9UzC', 'mbarbara29@baidu.com', 'Marie-ann', 'Barbara', '2000-12-03', 10, 'New message', 8);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (156, 'rjeppensen2a', '$2a$04$HtqZlPHf4sEE7tjqOdzwsuwzsiozMUV1MkPcJ.qVpiRl5P57novf2', 'rjeppensen2a@jalbum.net', 'Rheta', 'Jeppensen', '1994-10-20', 13, 'Update', 56);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (157, 'ikembery2b', '$2a$04$7lBnHEb/BeiKw7GtE8inVOYRBvo3.aKlxrIBfgHze9iANscvS4O.6', 'ikembery2b@dyndns.org', 'Iolande', 'Kembery', '1977-12-25', 4, 'Alert', 21);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (158, 'barmor2c', '$2a$04$7b7oiRBos8Haa4DpbB47TOO/NA7QvCxHj3kYVtfwKNMxOgYmfjV1m', 'barmor2c@yahoo.com', 'Brear', 'Armor', '2000-08-27', 22, 'New message', 6);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (159, 'idate2d', '$2a$04$P2tOe6kkv4tLnwHScJz8q.xCwL68WXvUPk1B8dgovmD.wNOyasHh6', 'idate2d@storify.com', 'Ian', 'Date', '1962-11-27', 19, 'Update', 35);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (160, 'edinse2e', '$2a$04$PmKE0tm6Bjd87yhSaM0q3.ZFMC1Z.nuqNVmpax3avXSBZ7r/AFn2O', 'edinse2e@photobucket.com', 'Evita', 'Dinse', '1961-01-27', 21, 'Update', 72);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (161, 'dmontgomery2f', '$2a$04$sVfclQ8g0iEFwh3ZcsDMh.fOMfHBowv9eRtwrV4yFrXnfMu8/Ksy.', 'dmontgomery2f@mozilla.com', 'Dulsea', 'Montgomery', '1988-11-04', 7, 'Alert', 7);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (162, 'lpina2g', '$2a$04$QhDqZ/6WPKmEbsSyMhMr/uzz5LqCmxMI1IzsBDAEeCzYuU6T9.R2a', 'lpina2g@nps.gov', 'Lynelle', 'Pina', '2000-06-27', 31, 'Alert', 71);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (163, 'hjenne2h', '$2a$04$Ri4H/aVEnHnz3CpFUnmVxunrDjzj3uQQkMCsztBkeHzCpVowNYttS', 'hjenne2h@about.me', 'Harriette', 'Jenne', '1962-11-06', 21, 'New message', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (164, 'mibeson2i', '$2a$04$C8sq1FW/cl05yuQr3Tfi9eKUOj7108X0CQDNgvbu8k.j0xey8G/7W', 'mibeson2i@wordpress.com', 'Marshal', 'Ibeson', '2000-06-17', 6, 'Update', 64);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (165, 'troder2j', '$2a$04$DDuLlfkQSiqbZyJ9kbDcGOZ5jnWwvM2hZBlflysbAHg4XsliJVBSa', 'troder2j@dailymail.co.uk', 'Tabbi', 'Roder', '1979-05-18', 28, 'Reminder', 14);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (166, 'ksotheron2k', '$2a$04$6dPcuwHvoqxt7qf0v.K3NOBRVPvefXSnwnNnr9UMWuV43AubkGpHa', 'ksotheron2k@amazonaws.com', 'Kesley', 'Sotheron', '2000-05-14', 18, 'Alert', 25);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (167, 'jvittore2l', '$2a$04$HDEnk.8Ur8ZJhylnHI7Z7.V6kPv3ZN/ESz29YAON.gQ0owMw8FVmK', 'jvittore2l@csmonitor.com', 'Jennee', 'Vittore', '1980-10-03', 32, 'New message', 30);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (168, 'ccardo2m', '$2a$04$jgro96U1WgADTx/KHhR5SeJG3V9lmAoHQDbdBvQnXuLHRmM6EKv9u', 'ccardo2m@dot.gov', 'Chandra', 'Cardo', '2000-12-07', 2, 'Alert', 48);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (169, 'mfreda2n', '$2a$04$4cSc4E3VzLFI/kRZzcEUX.0fjM19TN.Z1Ufn7KU5BEyV64AiWcOPa', 'mfreda2n@msn.com', 'Minnaminnie', 'Freda', '1983-05-02', 12, 'Alert', 28);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (170, 'rrunacres2o', '$2a$04$MmOJjUuoG.fw/QesYHU.xe5G4AqcKnGkWH/lpDpzRaIt7ZtEJhf1K', 'rrunacres2o@flavors.me', 'Raul', 'Runacres', '1983-09-20', 3, 'Notification received', 72);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (171, 'olansdown2p', '$2a$04$ZsWjrSJE4lGSRIPaCf0N1O7d6OXvMkp9OWoru68jPRjgQMqYXMKle', 'olansdown2p@posterous.com', 'Odele', 'Lansdown', '2000-12-20', 4, 'Update', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (172, 'kloade2q', '$2a$04$Ngi6BdJITLJ42eGEwGivieKUk9y5kjRFwqGehMFgjfgpy.91JSV/C', 'kloade2q@ycombinator.com', 'Ker', 'Loade', '2000-12-20', 20, 'Notification received', 54);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (173, 'gyakobowitz2r', '$2a$04$UJ2NndMRsp5.UCNG.ho81OVanFNQ/xckCq/FJGqDKaPbhLUOqO.7q', 'gyakobowitz2r@simplemachines.org', 'Gerry', 'Yakobowitz', '2000-04-15', 2, 'Reminder', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (174, 'ppiff2s', '$2a$04$FjM1goj1IiRB9G7JH1K37OJ57CT8HfbdULmCATMKYn7PcP6VwKkfG', 'ppiff2s@123-reg.co.uk', 'Padget', 'Piff', '1983-01-27', 22, 'Notification received', 73);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (175, 'apeasegod2t', '$2a$04$E3G/lPMEJfHi5Nhw2NJm/etYsgXv6xJAYdALpdv2Vu4g1ODBGhW.m', 'apeasegod2t@fda.gov', 'Angele', 'Peasegod', '1975-11-25', 26, 'Reminder', 49);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (176, 'estrickler2u', '$2a$04$0qrx6DyRAtYTLUUG4dGOa.84mrHO3NGXpm7O04A/HbfHdnH3.2lx2', 'estrickler2u@e-recht24.de', 'Erena', 'Strickler', '1985-07-07', 14, 'Reminder', 24);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (177, 'tbeynon2v', '$2a$04$BlwluwtVay8/z6yVcoNuAOIGnQ924GhpFDmI.MH1FoBXIoqaD0Kvm', 'tbeynon2v@nhs.uk', 'Tonie', 'Beynon', '2000-12-20', 18, 'Update', 73);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (178, 'lmendenhall2w', '$2a$04$.D7vU73DUTEgjTOFbXInTuEpGNdt.3rtOBX47yLRhioWqS/t8E7a2', 'lmendenhall2w@google.nl', 'Lindsey', 'Mendenhall', '1992-10-24', 26, 'Notification received', 12);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (179, 'lborel2x', '$2a$04$mMr27l5bV2NP3thL86bLYeQ9BKh0eEagh6EbQT9jtzpoRjljYh8N.', 'lborel2x@independent.co.uk', 'Letizia', 'Borel', '1969-10-20', 30, 'New message', 28);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (180, 'fhexter2y', '$2a$04$t1J/dSAvwHGor3rOmeTXU.TqvOn/66meanMHrbTKuruNpvehPZt5G', 'fhexter2y@surveymonkey.com', 'Felicio', 'Hexter', '1974-01-20', 2, 'Alert', 19);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (181, 'mtimmermann2z', '$2a$04$Uvcg2Wi/sx/OSVEXLBrgPexFi.Qkgk9vpSZH1kkqaYRNyyyTMuXk.', 'mtimmermann2z@constantcontact.com', 'Malva', 'Timmermann', '1969-10-04', 7, 'Notification received', 13);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (182, 'rnutty30', '$2a$04$zx/NF3jKTfSxQTYPiHu2dO3X7aAi/6mvWmZobiTzlpnpM94n0JSrm', 'rnutty30@mysql.com', 'Rebekkah', 'Nutty', '2000-12-20', 25, 'Update', 42);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (183, 'ileser31', '$2a$04$s.7/bEYS3h.UNSiBwwnxbOJd/MSaQIbYkNmiozh4TNr12Xunp4IIq', 'ileser31@state.tx.us', 'Ileane', 'Leser', '1997-11-17', 4, 'Notification received', 2);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (184, 'icommander32', '$2a$04$zhNnKkOQedX.7iTXDTTYT.BI2TboRRMw4QmdAkB0TK6rcXhF0tcXi', 'icommander32@bloglines.com', 'Ingamar', 'Commander', '1976-10-27', 27, 'Alert', 4);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (185, 'dbrandes33', '$2a$04$oWPfKFE0fv/YSEaYlvUmv.s5vJBBV2qLRkhMr/i0j2GWAU2YnwLDq', 'dbrandes33@princeton.edu', 'Dyane', 'Brandes', '1968-06-20', 20, 'New message', 31);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (186, 'rschapiro34', '$2a$04$6Rg2cQQEbB5gPnBRG6ckQOBk3PRAirxpi.EPlju8lF.vFmdrhYXpi', 'rschapiro34@marketwatch.com', 'Robbin', 'Schapiro', '1988-05-12', 20, 'Update', 47);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (187, 'aorange35', '$2a$04$sxFEpzVVFMzbaGtxuiqVp.X3En1Z9lWUGrwcByDY/nmYtiaVkD3Ou', 'aorange35@huffingtonpost.com', 'Aryn', 'Orange', '2000-05-27', 6, 'Notification received', 55);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (188, 'jwarn36', '$2a$04$lYr9CoyaIV8GJnVe6lcg0uAqGbuCsosyVjEzCIC06DJq5IGRL/DSu', 'jwarn36@bloglines.com', 'Johnathon', 'Warn', '2000-02-05', 3, 'Reminder', 57);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (189, 'nfealey37', '$2a$04$JSmuDZxkxPmGrLGRB1F1feCMTjNrKyhIbf/mSfKUp8akDmqy5tj82', 'nfealey37@sina.com.cn', 'Nicolea', 'Fealey', '1980-10-13', 1, 'Update', 18);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (190, 'nmatherson38', '$2a$04$.HXusniPyGbpk2XLCHs0x.Oir4QCxCurABUjNHSunUhrjDmgPPMam', 'nmatherson38@drupal.org', 'Niki', 'Matherson', '2000-07-11', 26, 'Reminder', 57);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (191, 'graubenheim39', '$2a$04$kg6aE4fCGwrw2SwMKTZzIOV1Td8R3wd7YH7idL1xiPgwTTVZtUzLy', 'graubenheim39@examiner.com', 'Gwenni', 'Raubenheim', '1975-11-12', 20, 'Reminder', 53);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (192, 'pspykings3a', '$2a$04$MUm7NoBRvuoqoD37/lUwu.omkiT0MHlpxLw474.gVNFpG7bHg2TY.', 'pspykings3a@columbia.edu', 'Paige', 'Spykings', '2000-10-03', 12, 'Notification received', 15);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (193, 'gmitkcov3b', '$2a$04$wL9KRjVpSNu49n21Nf59ReOAn6POs5xq7Ja84Ew5vIEM0zq1lIz16', 'gmitkcov3b@soundcloud.com', 'Georg', 'Mitkcov', '2000-02-03', 14, 'Update', 6);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (194, 'adyshart3c', '$2a$04$DXOI.tTeCZxC6DuQ4OpQ8Oj9IyGOXn8ipsf0CkaPXPBGAxJo9LdWG', 'adyshart3c@amazonaws.com', 'Agathe', 'Dyshart', '2000-11-11', 8, 'Alert', 7);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (195, 'hedwardes3d', '$2a$04$KBsN/HLKK.tD49X4TcrzM.KBoOt7TIrUUWu8v6ylhz.EUab02.yx.', 'hedwardes3d@google.pl', 'Hanni', 'Edwardes', '1984-11-20', 27, 'Notification received', 63);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (196, 'acariss3e', '$2a$04$NdLt1MDQWKQmhXSpFvpA4eMVpumKDiMq1ILLB8qWSXlKQNouA0XTq', 'acariss3e@sun.com', 'Albrecht', 'Cariss', '1989-11-03', 27, 'Notification received', 42);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (197, 'agerholz3f', '$2a$04$j4OorBE0v93sGiN3UXk/JuDL8lqqEgXVjen0mIxQcWWUEMQExUZUm', 'agerholz3f@columbia.edu', 'Allistir', 'Gerholz', '1964-05-09', 3, 'Alert', 41);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (198, 'ibernadzki3g', '$2a$04$n4VInPJ3e9PyZ7xRqYpm0Oeg1zsWNzY.2gnTmLo6CCFdPIehJswIu', 'ibernadzki3g@tumblr.com', 'Isabeau', 'Bernadzki', '1960-03-20', 14, 'Alert', 63);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (199, 'arivers3h', '$2a$04$/GsWP5ZHQ2eiedBtwgTo8eDHsl/6fDkN.EgKXiFuQwYKfQJDwow9.', 'arivers3h@deviantart.com', 'Alfi', 'Rivers', '2000-01-20', 31, 'Alert', 7);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (200, 'bhoggan3i', '$2a$04$hpAlOQZs.E.jv/XLiUnmmOI47.PBrEwule6NEpsNsDxS34yCG95Km', 'bhoggan3i@tamu.edu', 'Beatrisa', 'Hoggan', '2000-08-20', 6, 'Update', 51);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (201, 'wbattabee3j', '$2a$04$nCciYyfxVnutUljH1S.v9egcOdnVCoIbAF0hqv5EsiCkmk4E/Fszq', 'wbattabee3j@phoca.cz', 'Wildon', 'Battabee', '2000-01-06', 12, 'Alert', 6);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (202, 'egravy3k', '$2a$04$h6n7TSOX077AYvl4KsbUDu02xM9ldyEjQ1z3uQ5.LyrQ0/9bN9K/i', 'egravy3k@indiatimes.com', 'Ellene', 'Gravy', '2000-10-20', 19, 'Alert', 62);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (203, 'cerskinesandys3l', '$2a$04$/.8WHiHLGjmwOBJdFkLUQu/lCWhB0qSFn9nVYxCUOYNyNfAhVrZIu', 'cerskinesandys3l@biglobe.ne.jp', 'Chick', 'Erskine Sandys', '1998-04-08', 29, 'Notification received', 66);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (204, 'wacors3m', '$2a$04$H4nlutyPc4qc0jSP1DIttOypgm/l9QZ7RgxZ87315DCSBn0TRTOZm', 'wacors3m@ow.ly', 'Winonah', 'Acors', '1991-02-27', 1, 'Update', 58);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (205, 'ksynke3n', '$2a$04$BUCQg/dUvUrlJiKfTs6U3u6yJGjnBZzo5O9dMt43Afh.FtZah1ttm', 'ksynke3n@lulu.com', 'Korey', 'Synke', '2000-11-02', 1, 'Update', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (206, 'iwisedale3o', '$2a$04$1brQHcMLuWPMBnqBltcw4Oy6SfjtsXmaEvK/ehuLHXJtUAyu86KIC', 'iwisedale3o@census.gov', 'Ivory', 'Wisedale', '1984-09-19', 1, 'Alert', 40);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (207, 'mkingaby3p', '$2a$04$NVA8EVLI/tx1noDjOL7g9O4M3Q.QYvVZP/xzs/gGwuizib5y1txfq', 'mkingaby3p@vistaprint.com', 'Margie', 'Kingaby', '1969-07-06', 23, 'Alert', 24);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (208, 'mdeortega3q', '$2a$04$1Db4FmFZKSZ5f2ntLu9OAeHm6lxn5qbs10OeOQd.mATMXasjagwuy', 'mdeortega3q@auda.org.au', 'Melony', 'De Ortega', '1983-10-20', 13, 'Notification received', 38);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (209, 'hloren3r', '$2a$04$EwkltnEqpXh.3ICZmiSOi.DOtMxVNeNHVeRXOzWiI47AasRrfiVpO', 'hloren3r@histats.com', 'Hoebart', 'Loren', '1992-11-20', 17, 'Notification received', 40);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (210, 'nhulance3s', '$2a$04$9TJtl2mkpEofN6ez1yPpD.eZlMdg3P65uCtzGvNGUJ65THWOU8LTi', 'nhulance3s@berkeley.edu', 'Nicola', 'Hulance', '2000-12-24', 13, 'Update', 46);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (211, 'hokenfold3t', '$2a$04$z4xNuVono/oWV0GJSo6ePuZL6B8Ldqu/fMj9l68y4aHQoOMzce.9e', 'hokenfold3t@typepad.com', 'Henry', 'Okenfold', '2000-12-04', 30, 'Alert', 53);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (212, 'cdrinnan3u', '$2a$04$ipEWqAU7AkcHrxW67xaM8us1tBFV8uiK0EGHkjmEHU7ACVgIwWq.q', 'cdrinnan3u@pinterest.com', 'Cybill', 'Drinnan', '2000-10-27', 2, 'Alert', 49);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (213, 'ysenussi3v', '$2a$04$BD1tlXQO/qal8SNuhKgvI.tDehZQu2q.8huJUnhm12vtnCxcVxuIK', 'ysenussi3v@netscape.com', 'Yoko', 'Senussi', '1961-09-01', 6, 'New message', 21);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (214, 'kgierke3w', '$2a$04$ti32oAcFabvt6ydwqWdOaeeQ1muq5kcNyATYWufTLWhqc7T6FzD/.', 'kgierke3w@oracle.com', 'Klarrisa', 'Gierke', '2000-04-20', 21, 'Notification received', 71);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (215, 'dlenham3x', '$2a$04$QPDcMxaylxCx//y7L0ydLO9Dll7..DanpfAkZLLbASIQ4w.eoPrqy', 'dlenham3x@miibeian.gov.cn', 'Daisy', 'Lenham', '1967-09-27', 17, 'Alert', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (216, 'nmcmillam3y', '$2a$04$OjxzzYJItsxxQdNwJKcck.Cgar8zS5qgn3NKp68mdhVcZ6C9hAsg2', 'nmcmillam3y@reverbnation.com', 'Nora', 'McMillam', '1990-08-20', 11, 'Reminder', 60);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (217, 'anorcott3z', '$2a$04$2YRw9LMa8JKoEVOCNAJVqeJ.KAkbuGHZ0FWxj8jPOZGVWvw5fJ3sm', 'anorcott3z@ihg.com', 'Alister', 'Norcott', '2000-10-19', 12, 'Alert', 62);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (218, 'lbrayfield40', '$2a$04$LcSM0a.vUmum5AuPuKPcEuxxuYUerBC8hW1rUTDlTb8diqGewdRle', 'lbrayfield40@admin.ch', 'Lizette', 'Brayfield', '2000-10-27', 11, 'Notification received', 42);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (219, 'oduguid41', '$2a$04$y7bWHyStoEQCe9ZUuoF7Rux8CwzyNSC773FLm3LecXTYKDZRRDmHa', 'oduguid41@blogspot.com', 'Oswell', 'Duguid', '2000-12-27', 21, 'Reminder', 22);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (220, 'sswafield42', '$2a$04$tlIkAxL05.DQGA8qgkqKAu2w.288lORvT30fwcwH9p8yeawWnCHKa', 'sswafield42@csmonitor.com', 'Selinda', 'Swafield', '2000-06-14', 10, 'New message', 65);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (221, 'mcanero43', '$2a$04$JN6jBQxE0CZ.E7jGT6wkN.myqid4lgWic6d9/34NWEYgQWx6DseZW', 'mcanero43@joomla.org', 'Mort', 'Canero', '1967-01-27', 32, 'Notification received', 22);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (222, 'rmingus44', '$2a$04$hk2.vZt55zmouwnHQTrFnemsZYoeMj7HquBc.ERJ.5FJf8r5C06n2', 'rmingus44@sbwire.com', 'Rouvin', 'Mingus', '1962-02-17', 3, 'Notification received', 61);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (223, 'morans45', '$2a$04$HjLfj.z4hSsGCv3wG8zRHOatieBhoe0QJNoM6K/TgwxFw0ARhUe1O', 'morans45@booking.com', 'Margie', 'Orans', '2000-12-20', 27, 'Reminder', 15);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (224, 'afoulsham46', '$2a$04$7bccP79NhkZAFSIJrFAk3..va9xCzYb8yUiiDuf43CDCXFSBvy5Ie', 'afoulsham46@people.com.cn', 'Aili', 'Foulsham', '1986-04-27', 18, 'Update', 13);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (225, 'jassel47', '$2a$04$EEXm8x/ua/oRlGfYd2wNZuknkw3JUkoIMeS1cZZ.WJPXZzhqxjhmy', 'jassel47@miibeian.gov.cn', 'Janka', 'Assel', '2000-01-15', 26, 'Alert', 22);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (226, 'fhuyge48', '$2a$04$o.pKczVEeJ3lq8P43wfSKOqEuuTj1qw2jWKNK2eb6iQ2LEkH8IT.2', 'fhuyge48@newyorker.com', 'Fran', 'Huyge', '2000-03-05', 1, 'Update', 57);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (227, 'lmesias49', '$2a$04$912NNLRJGBdWKFFOW2HlK.z7NhDdWw5iv6Uo6J1PjMnqfyWFxN06q', 'lmesias49@senate.gov', 'Lee', 'Mesias', '1999-10-27', 23, 'Notification received', 53);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (228, 'gutley4a', '$2a$04$sXJ6mm7YmYPwUdGlsKKvXuOFCTTirK.Oe/j79dupkPaKM8ghDzJl2', 'gutley4a@barnesandnoble.com', 'Goldie', 'Utley', '2000-12-20', 27, 'New message', 65);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (229, 'zthurner4b', '$2a$04$et9PdbtoaQ9iw08EXRuWxeEaQKEIF73gIYYWHfo/26fgPPsw2TpX2', 'zthurner4b@google.fr', 'Zachary', 'Thurner', '2000-12-26', 15, 'Alert', 69);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (230, 'aconstantine4c', '$2a$04$VW92nXg/3YOljSbI9/Grs.6ebft/myLLIl70dMrRBqOAdx1i51wGu', 'aconstantine4c@twitpic.com', 'Anabal', 'Constantine', '1978-12-27', 8, 'New message', 61);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (231, 'jtrevett4d', '$2a$04$hnOAoXo2mHV8eHZCwj8/H.Fz1fsCqav61X5X45I3bKdMbJ5QGsH8K', 'jtrevett4d@deviantart.com', 'Jobey', 'Trevett', '1977-07-28', 4, 'Notification received', 31);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (232, 'rwinning4e', '$2a$04$8UUwzPUfGWmLjKkxjVDXLO7x7nAk1Oqj7hYP5YI0dTebEm2Lbl3zm', 'rwinning4e@aol.com', 'Rebeca', 'Winning', '2000-10-06', 7, 'Update', 16);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (233, 'mmccafferty4f', '$2a$04$.BKhaKZLjwcfo9uyhC8HL..3NYi3jIu.OwWjMP4dyAFLrqN9JeE1y', 'mmccafferty4f@ibm.com', 'Margareta', 'McCafferty', '2000-03-20', 18, 'Update', 38);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (234, 'mrewcastle4g', '$2a$04$f31BP6hJvKffASnmV42kKOJe17Sqc4U2ydux4D5mb7LYzUNaE5opm', 'mrewcastle4g@ning.com', 'Marlyn', 'Rewcastle', '1968-05-20', 3, 'Notification received', 17);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (235, 'mschaffel4h', '$2a$04$DB4ekXzjiCV2uIbQi.tCl.1hIrSP6lFtYWsxbZHhloWInOOBETrj.', 'mschaffel4h@tuttocitta.it', 'Muire', 'Schaffel', '1980-03-27', 13, 'Reminder', 59);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (236, 'aroscoe4i', '$2a$04$J86Dc6SHTPiFtSjtR8MJuell3AJSNvWcsr8pTbOczcaqE628hfjpq', 'aroscoe4i@tiny.cc', 'Ancell', 'Roscoe', '1992-09-06', 2, 'New message', 61);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (237, 'cpochin4j', '$2a$04$6bs.TJLUHZ75fgtYK12n6OWHwJxSkJrmEMbmR9Ja1dY//VzRMVW8m', 'cpochin4j@foxnews.com', 'Chad', 'Pochin', '1990-10-08', 12, 'Alert', 15);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (238, 'ntommen4k', '$2a$04$fYtZhobSn2UiYuK4CmtDZOc.56mn37sOhj.okya8sqjkg2JGmwSb.', 'ntommen4k@nps.gov', 'Noam', 'Tommen', '2000-10-20', 1, 'Update', 16);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (239, 'smcconnulty4l', '$2a$04$vZn3OcIzTogcMU9Xn4yWO.HyH0Ka5eI0w2UIt5kdSfb7oOTROalBe', 'smcconnulty4l@tinypic.com', 'Shanna', 'McConnulty', '1982-01-20', 32, 'Reminder', 62);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (240, 'kdaingerfield4m', '$2a$04$y9Ncj9Ht0XVN09sPuffrKum8nhbjIyUs5r65EL4MQU53uOO2qDZB6', 'kdaingerfield4m@sbwire.com', 'Keefe', 'Daingerfield', '2000-10-20', 21, 'Reminder', 14);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (241, 'jbraunroth4n', '$2a$04$G7PWTR6wbM4SNsGY8EmIAuTzPboHOc13PMoGV/BmcvVKeK72MEUBe', 'jbraunroth4n@example.com', 'Jobi', 'Braunroth', '2000-12-27', 21, 'New message', 18);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (242, 'lperrinchief4o', '$2a$04$ytg.l/x03fVRHm4D6Vz71Odl8CE8y2q1WA0ARaOKSIda95c4JTCsS', 'lperrinchief4o@vkontakte.ru', 'Lucio', 'Perrinchief', '1985-05-08', 6, 'Alert', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (243, 'fseven4p', '$2a$04$vYo7SVajnUg72qRCpB5kteGO1MXJDczGw8GGCmFInfZX1MK4m.vb6', 'fseven4p@51.la', 'Frederique', 'Seven', '2000-05-20', 5, 'Reminder', 31);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (244, 'cfranklin4q', '$2a$04$UInGsaDalw9Sa6.9668SO.TQpcsqw.GoVGAWkt7cTrOV8PXte.Cs.', 'cfranklin4q@jugem.jp', 'Cass', 'Franklin', '2000-11-29', 14, 'Update', 36);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (245, 'gabrams4r', '$2a$04$RaNJBlfTlESxkrluw/ZmiuxctLluLZ8ZPiDHZr1OvJEaztkeNxz5q', 'gabrams4r@typepad.com', 'Gianna', 'Abrams', '2000-09-03', 22, 'Update', 61);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (246, 'sjouen4s', '$2a$04$F9mRtj6qc6mdPjTMq87iMOnmECebRthlBlyLYzha86RIBKoxKRncK', 'sjouen4s@patch.com', 'Somerset', 'Jouen', '2000-12-20', 22, 'Notification received', 72);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (247, 'jcicco4t', '$2a$04$Bg8V7kfDuTzRuRUvSEJJg.DRuG1MYqrazG4Rlw6Q6EMSNGdLooEjq', 'jcicco4t@imgur.com', 'Jeffry', 'Cicco', '1970-06-27', 14, 'Notification received', 41);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (248, 'ccannicott4u', '$2a$04$NnaZcZWO9aS3hUQmJOtof.q2PQfO/JPJ3gtohLnlF.V/6Svx1swtm', 'ccannicott4u@comcast.net', 'Christan', 'Cannicott', '2000-12-18', 11, 'New message', 22);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (249, 'ileynham4v', '$2a$04$sKc2DbN1ZAqM3nogTCUqsuW8MPwJb.ZaB1VngRT16EVoVf7aeSJeS', 'ileynham4v@is.gd', 'Iosep', 'Leynham', '1991-12-03', 13, 'Reminder', 19);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (250, 'epocknoll4w', '$2a$04$OIbx/6cDwn6huvrWzUmjl.bSBMTh70yW/EUJWqUU0QfxTZYzXH.wG', 'epocknoll4w@dyndns.org', 'Edik', 'Pocknoll', '1980-09-15', 16, 'Reminder', 19);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (251, 'iaggis4x', '$2a$04$A2DF/WrKrxOKAzRdrGRgEuQy.awYA.IzxEW9R/xQUCld8dw.dq9sa', 'iaggis4x@oakley.com', 'Isidoro', 'Aggis', '2000-11-18', 1, 'Alert', 28);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (252, 'tattrie4y', '$2a$04$Hz8p4.wxgKsWQ7W27rxFiO9T0PI7EEsDPc9YBG2xKRVrjgU3Su1Ma', 'tattrie4y@dmoz.org', 'Tiffy', 'Attrie', '2000-12-08', 25, 'New message', 1);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (253, 'gredford4z', '$2a$04$XZQr/9xiON8kAtLD8bElYeZiUgvQpmIpoKS6ZpmIT3raZaJd0cQ/K', 'gredford4z@whitehouse.gov', 'Gayelord', 'Redford', '2000-11-20', 29, 'Alert', 5);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (254, 'hdella50', '$2a$04$npVyIW.rsfpp1GbUqZXy0eqhIpH1oLx/QRfTWT9Uy1kjeYJI29RRG', 'hdella50@myspace.com', 'Howard', 'Della', '2000-02-20', 25, 'Alert', 15);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (255, 'neager51', '$2a$04$aPiJwZxdVsGnq/Fyvkl55e6mLkM7sVregptBE6.zire.t1RCa4.lO', 'neager51@tinypic.com', 'Nilson', 'Eager', '2000-05-29', 1, 'Notification received', 36);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (256, 'helleray52', '$2a$04$/npFcRwSvaUQPF9vAg/oge2E0OAwwElJk9YkRbN2puXvLUIg8BNFm', 'helleray52@noaa.gov', 'Honoria', 'Elleray', '1962-06-28', 28, 'New message', 7);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (257, 'stanti53', '$2a$04$Sk7uhk3LDEWBw/R8hobJ0e8YvRLtBSL2YYt7NIyOyXbt9Ll3R1dIK', 'stanti53@loc.gov', 'Shem', 'Tanti', '2000-10-09', 20, 'New message', 26);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (258, 'shelliker54', '$2a$04$bgmoRImqChdQ36tGXt6MF.F1ikivLxXXoeT5LUKaShprtPc7h7gGa', 'shelliker54@stumbleupon.com', 'Simone', 'Helliker', '1986-02-03', 32, 'Notification received', 58);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (259, 'rhaskey55', '$2a$04$u5maH8.OZsGMLHc0MzHkp.qd2bcCUfa.dERKtxtpGCgOsPCTxVYcK', 'rhaskey55@about.com', 'Roger', 'Haskey', '2000-02-23', 18, 'Notification received', 44);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (260, 'jmacmaster56', '$2a$04$btUydQSM.wiZDFqCW7o3K.qBbILpMVlu/fsD2r.XkdfxU68nOmtQ6', 'jmacmaster56@vimeo.com', 'Jermaine', 'MacMaster', '1982-06-06', 30, 'Update', 57);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (261, 'rshowering57', '$2a$04$EqHjz4lFAD9Cc7hsvYvB2O2enBeLtrPxukahG5JVUhmP6PLUF7l1q', 'rshowering57@free.fr', 'Rhodia', 'Showering', '1979-02-27', 28, 'Notification received', 26);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (262, 'kgeffen58', '$2a$04$fjhg7jIXm2ZFfdoaByuSAe/KOcKIbu3.V4AFlhFUYFgMzYeFtqs.G', 'kgeffen58@over-blog.com', 'Kory', 'Geffen', '1970-10-27', 25, 'Alert', 42);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (263, 'abrodest59', '$2a$04$C7.GeLpyrCVIVgAdnrDZXeOCE/Rm0ANv7e8/NozfZywxjNN1nv1wK', 'abrodest59@hostgator.com', 'Atalanta', 'Brodest', '1964-12-20', 11, 'Notification received', 22);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (264, 'etimmes5a', '$2a$04$zYiukmSXtzYWaCMC8y6jTe1dUON.Dy0nKfHt3mDnVoytKxaAWyVmq', 'etimmes5a@mozilla.com', 'Emilee', 'Timmes', '1986-11-27', 22, 'Reminder', 71);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (265, 'mwyeth5b', '$2a$04$FlFuwWkyLn.5/DvOPxBpKOjs9TWsirEqf8BYYCbT5Alu8BPrTmXju', 'mwyeth5b@mit.edu', 'Matt', 'Wyeth', '1997-04-06', 21, 'Update', 36);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (266, 'gweine5c', '$2a$04$IyHORJu3NUHxGXzu8uQMkOzuWAIrKRRV9XzOeRunhV0813snm8C9.', 'gweine5c@squidoo.com', 'Gisella', 'Weine', '2000-06-11', 3, 'New message', 58);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (267, 'bwyd5d', '$2a$04$ZlcuAmJELHqu7nSkOpMVsO.zIWRJ7R2H..ZG1BhSb0ZO33OWAcriq', 'bwyd5d@ftc.gov', 'Boote', 'Wyd', '1996-12-09', 31, 'Alert', 60);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (268, 'wdowe5e', '$2a$04$uFkqoGGaasyKe5XvW5NgLOWZRkUHRb6yJ1nEUkq0Up/n.11N0bese', 'wdowe5e@sakura.ne.jp', 'Willie', 'Dowe', '1984-07-08', 10, 'New message', 42);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (269, 'spresswell5f', '$2a$04$EuMI7A8jVz0Hk7HFGS1Viujyo6osZ69a2J/6ZJl0Zy.vHCGEcQyKe', 'spresswell5f@ibm.com', 'Sharity', 'Presswell', '1984-12-27', 24, 'Alert', 58);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (270, 'bthyng5g', '$2a$04$EV2EAJ5xmWHjgMkflQVPG.me7Lu80O8xpY6DMHpNtb3bNdiLOcLle', 'bthyng5g@people.com.cn', 'Billi', 'Thyng', '1980-03-21', 9, 'Alert', 47);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (271, 'sarran5h', '$2a$04$v4jAcoNBsfVJ3MXZJabGkeafJxr5IS8nP8ebD45Lr3FpKRW0xooCW', 'sarran5h@who.int', 'Susanetta', 'Arran', '2000-02-01', 4, 'New message', 60);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (272, 'hmarusyak5i', '$2a$04$EEx.cmzn/ZpAG3NWmleq5eWN7fx2g9zphj9TxkvS9eVOPCHPQLwUu', 'hmarusyak5i@jigsy.com', 'Haroun', 'Marusyak', '1987-10-27', 12, 'Update', 11);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (273, 'rherrema5j', '$2a$04$awWZNsBAvOcEpWk8lfbOzeensBPwTL2jyemam53M.UW3vttu0PoZm', 'rherrema5j@amazon.co.uk', 'Rosabel', 'Herrema', '1975-08-23', 6, 'New message', 33);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (274, 'wsaw5k', '$2a$04$rkrcJ7hozZeO2Yrm62exG.lDRrwNwmC7yIeF5AhFgDgt4PT.Dh3ea', 'wsaw5k@berkeley.edu', 'Wittie', 'Saw', '1980-08-20', 32, 'Reminder', 19);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (275, 'lmogford5l', '$2a$04$scqiTu3SOoIlBWBRkrL32OUn1h9D.9ql37P.RifpwxnZLgy7ltQ5y', 'lmogford5l@hubpages.com', 'Lynett', 'Mogford', '1981-01-25', 19, 'Notification received', 3);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (276, 'fkew5m', '$2a$04$NoY.WrWPf/bXJ9ndHApvX.Y6Nn9J46KrIKKHcKzD2XXZDjSAame5y', 'fkew5m@tinypic.com', 'Fawnia', 'Kew', '2000-04-27', 20, 'Reminder', 38);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (277, 'rbassill5n', '$2a$04$V0pyLLM2W5oDOa2ed4gEuemqsAbqMED9RhxWTleV7I7YIZQbV7S1S', 'rbassill5n@ifeng.com', 'Rutter', 'Bassill', '1994-07-26', 18, 'Reminder', 13);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (278, 'awashtell5o', '$2a$04$k80HspI/onShef4F4iK.Uut1Lzs6Ie0hTucEY/lTknpnNNvX..mqu', 'awashtell5o@latimes.com', 'Angelo', 'Washtell', '1993-04-01', 3, 'Update', 73);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (279, 'mverdun5p', '$2a$04$TO6bOYA5TusHnMu1QHkmIudOaKki2bOTO/rmYD6P9dlgiHevDpeRW', 'mverdun5p@msu.edu', 'Marcille', 'Verdun', '2000-06-20', 5, 'Notification received', 72);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (280, 'jtutchell5q', '$2a$04$kkOd7wbYKiIO6QznN9b.s.OdF0dzvl3FYDR4kUhBt2cQ29/MmoHme', 'jtutchell5q@indiegogo.com', 'Jayne', 'Tutchell', '1970-07-20', 14, 'Update', 28);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (281, 'zgallimore5r', '$2a$04$Pwuw7BJfXOVbQN2dTuoXfOkuj7tQnPWxgxZcoVWC2W4xllzrPzaZS', 'zgallimore5r@cpanel.net', 'Zachary', 'Gallimore', '2000-01-20', 24, 'Notification received', 49);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (282, 'obaudasso5s', '$2a$04$SFa2CWI0DvwHyh2tXd8C8.snycT.qutKOTFst7UvDl6bEGy4vmgmW', 'obaudasso5s@amazon.com', 'Olly', 'Baudasso', '2000-04-20', 2, 'Reminder', 51);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (283, 'wtoyer5t', '$2a$04$DRuQSmEiIJ/fcBv8wZI0g.Dn7Vyd/6FrgOlvX3fOJtWsy/Tz1euKK', 'wtoyer5t@ameblo.jp', 'Wain', 'Toyer', '2000-10-14', 1, 'Alert', 33);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (284, 'cbrattell5u', '$2a$04$pTUp.UoWxncE4.bRy7Uunuzudk2/n9xxLtQG81SA6vQgdi6xeqyCa', 'cbrattell5u@google.com.au', 'Cathleen', 'Brattell', '1978-08-20', 17, 'Alert', 48);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (285, 'djenney5v', '$2a$04$a4S5F6zzUJdRtIu3qzN33eXicnUS2T5txK7VCxZ/nv4hw0uvLAbZe', 'djenney5v@examiner.com', 'Dannye', 'Jenney', '1991-12-27', 28, 'Reminder', 3);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (286, 'bcompson5w', '$2a$04$hhUvNlInsexK3QAHy7os2.rNwUW7lNm3T.xKOPXwo09rwrQQPS4ju', 'bcompson5w@nature.com', 'Beilul', 'Compson', '2000-12-27', 2, 'Alert', 51);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (287, 'ewilles5x', '$2a$04$CmeVAocgMDbGeQOZJzQrqecpGLamiE6of/Af6kBZ5hlw11VQv3s7m', 'ewilles5x@go.com', 'Errol', 'Willes', '1970-12-06', 17, 'Reminder', 60);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (288, 'cwilbore5y', '$2a$04$1lbsY4/5N0usvMa94SvGeenO9b56o.empZYmlkguU13rtRLRE5bZS', 'cwilbore5y@tiny.cc', 'Christoph', 'Wilbore', '2000-01-23', 29, 'New message', 59);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (289, 'alucchi5z', '$2a$04$3dptY1.UnSfWR6GIbso.NODza7lX7/40ggoaB38lm.AYVGRUpWp1K', 'alucchi5z@google.co.uk', 'Avrit', 'Lucchi', '2000-12-07', 27, 'Notification received', 43);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (290, 'cplane60', '$2a$04$0XQ39YCXxHg5GPwi4k.VweWSd0oiXKuYOpiZCmV4Qbo.86HK.jJ6C', 'cplane60@chronoengine.com', 'Christalle', 'Plane', '2000-10-05', 7, 'Update', 54);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (291, 'cvickerman61', '$2a$04$4BcXtDQZHjhXr8bW88xjNucftiDSeT1vnhLfMbnC8uu060NH/XE7a', 'cvickerman61@drupal.org', 'Claribel', 'Vickerman', '1986-11-27', 4, 'New message', 40);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (292, 'rwellman62', '$2a$04$BqAjO99rDd5P8G5fKeEz3.aoh.tYg4sTGqnPM9/YWd3P.Wc6oo9.K', 'rwellman62@storify.com', 'Rainer', 'Wellman', '2000-02-13', 26, 'Reminder', 36);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (293, 'ltenbroek63', '$2a$04$Wb1uGp.GPlnP.xnyopqJP.Bo54NWUD5IPw94uKTDTlFsY7m0OBjHq', 'ltenbroek63@sciencedaily.com', 'Loydie', 'Ten Broek', '1977-12-03', 18, 'Update', 27);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (294, 'gmityushin64', '$2a$04$zLUW7eBKX6Kdgg7Wag/uY.0LeQpQfjLEwGTq40ZVylMYt724ns07.', 'gmityushin64@reference.com', 'Gherardo', 'Mityushin', '2000-10-20', 3, 'New message', 39);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (295, 'measom65', '$2a$04$4SIAiiqbrpTg3MB7oyfEVOgrYfYC7ZGAT3az/O5kVtj/CCS0xQ/06', 'measom65@berkeley.edu', 'Minta', 'Easom', '1970-06-14', 17, 'Update', 66);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (296, 'rbourke66', '$2a$04$/tYtkUXXcTcEUYlsGPVdxuTzL.J/B8DZ5DAagTFBppnozILnfK9dy', 'rbourke66@paginegialle.it', 'Rosemaria', 'Bourke', '2000-08-27', 25, 'New message', 22);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (297, 'bgoaks67', '$2a$04$toylHxcIJXw9Oe6BA9H6FO941J5xWkfGZCx6D6gFuaoOICUR.7iwi', 'bgoaks67@usgs.gov', 'Bobbi', 'Goaks', '2000-10-21', 32, 'New message', 33);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (298, 'nbanbury68', '$2a$04$XgBwQUQHxBjGFWpkjycfLukFalNSnP9QdDQkeEPWh8mZPFn1W4ntm', 'nbanbury68@imgur.com', 'Nev', 'Banbury', '1967-07-20', 13, 'New message', 12);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (299, 'dcliss69', '$2a$04$Jp97H/S9XREMZhz0Q1Ed8erO0Ld6/ssKbBLSwP/b4XLW46U/ibiC2', 'dcliss69@friendfeed.com', 'Dew', 'Cliss', '1969-12-09', 2, 'Alert', 73);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (300, 'llapworth6a', '$2a$04$suWwQC0fTKb/c51Mp9vLfOx7Ac7mcjcQ4clIzOCMPqD2LogFlURx6', 'llapworth6a@illinois.edu', 'Lenard', 'Lapworth', '2000-11-18', 17, 'Update', 68);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (301, 'sbenoiton6b', '$2a$04$txtnspIl3TpjyDz.LOr24OpuIlUA7muGB9qQWx8oiBPkX5ltzoEJe', 'sbenoiton6b@noaa.gov', 'Sigfrid', 'Benoiton', '1973-10-22', 3, 'Update', 41);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (302, 'sitzkin6c', '$2a$04$WmwfKTItQ67EU2alwgc2dOUD3SscjU05xTKpmbuPEEl5bHRxj4ZpK', 'sitzkin6c@dailymotion.com', 'Sascha', 'Itzkin', '1960-11-27', 10, 'Notification received', 38);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (303, 'linnot6d', '$2a$04$g38KA10V0q4eKsCHVvGX6ea55ROqkpyrKqFBOZxZ2FFGTTKF4wrUS', 'linnot6d@shareasale.com', 'Louella', 'Innot', '2000-11-22', 4, 'Alert', 54);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (304, 'isimms6e', '$2a$04$q9vqAWI1OaUDQibGEFK5reZP.9EnYSPbck/I3gTLn00ZsEvASU20y', 'isimms6e@purevolume.com', 'Igor', 'Simms', '2000-04-13', 24, 'Alert', 52);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (305, 'ctrue6f', '$2a$04$3lYKRulxG3ZDD9s6Y0YEEebMhN0qTmkbBMsUVECl/on2zPDhiF/P.', 'ctrue6f@constantcontact.com', 'Carmelle', 'True', '2000-07-07', 18, 'Alert', 73);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (306, 'amcgrah6g', '$2a$04$Z3/qNO5AYt1JLqn9nUHxmO8WfVVIjytpXXylepEjMxhLeIadie146', 'amcgrah6g@privacy.gov.au', 'Anthiathia', 'McGrah', '1969-03-09', 28, 'New message', 5);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (307, 'eballintime6h', '$2a$04$98sGm1X6gRb/0jKMrFM8NeLpUAcWIx5DOJQYbUOA8E0m9r0fOqVTW', 'eballintime6h@eventbrite.com', 'Elden', 'Ballintime', '1998-12-01', 3, 'Reminder', 51);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (308, 'aspeke6i', '$2a$04$bO2hiqHnz3HHGxWcnRJYPuvwJ1fh0e0qzPSZ9c.VULeKnVs9iCrKW', 'aspeke6i@meetup.com', 'Allayne', 'Speke', '2000-12-27', 12, 'Notification received', 21);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (309, 'tbovey6j', '$2a$04$s7qV9CBmTsRH58jB.BqAZuagC.VHZxX8HUW/F/Jqs3zeB94lSnyXS', 'tbovey6j@google.es', 'Troy', 'Bovey', '1968-11-20', 24, 'Alert', 61);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (310, 'jhumbell6k', '$2a$04$6fW9zemFjw3sVq01.QhMBOp1msyu0Ys7ykOLJ3qUHT6mT1YiU9xIu', 'jhumbell6k@gizmodo.com', 'Jareb', 'Humbell', '1980-06-20', 22, 'Update', 63);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (311, 'etremaine6l', '$2a$04$pKyJjpxcyiCTIqZRM2UbuunSvEqMHZbJV1w3.E8ekJErnN3y0Y92G', 'etremaine6l@wikimedia.org', 'Ebony', 'Tremaine', '1978-10-27', 3, 'Notification received', 55);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (312, 'cfredi6m', '$2a$04$Qy4TXJV4LYiTSQyeWSEXzecrjfwXQqemPrgCAtZ2/17NI4Klfxwby', 'cfredi6m@time.com', 'Connie', 'Fredi', '2000-03-18', 19, 'Notification received', 13);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (313, 'kardy6n', '$2a$04$sUGXADRZwSMxGo87HKt.dueJrsquiKMfobv2wVFDLHKcMe2tp3twm', 'kardy6n@amazon.co.uk', 'Kiley', 'Ardy', '1983-04-27', 8, 'Notification received', 6);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (314, 'cmoxon6o', '$2a$04$VWS5q51ucOGswpIH2vSQj.LMUQx3swLb0K3jU5rV3hCw.Nw1Iu6JC', 'cmoxon6o@netlog.com', 'Corny', 'Moxon', '2000-06-15', 28, 'Notification received', 14);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (315, 'hyesipov6p', '$2a$04$pFpwPyZJ5aIF2CyIyyvkF.tfOBlUJjnRewphSJCi7TSfGRY5K0TvG', 'hyesipov6p@nytimes.com', 'Hill', 'Yesipov', '1962-11-16', 29, 'Alert', 2);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (316, 'thailey6q', '$2a$04$vvjtoOqxUKo2EuQHrDyQ/OdusQUESf7AYP09AJtfZ29HrrJqYY0Yq', 'thailey6q@uiuc.edu', 'Towny', 'Hailey', '1997-07-14', 27, 'Reminder', 48);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (317, 'speagram6r', '$2a$04$cNNVIYMdUWCrVuKOYu4NI.JTu03h7ZOCUicvBrPGCJxHOj2eiRFte', 'speagram6r@newyorker.com', 'Sollie', 'Peagram', '2000-09-03', 11, 'Notification received', 10);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (318, 'wcurphey6s', '$2a$04$9FPA3dSHsftUflzvRPsSieMlNLF4p4.bPUqUA2MR/sMkOn2nV8Z.y', 'wcurphey6s@godaddy.com', 'Wilmette', 'Curphey', '2000-07-02', 20, 'Alert', 43);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (319, 'acruces6t', '$2a$04$hegnWNly33A0ElkAF/fs0.qSLFLEK.riKOyg3frljVOMtMeoHNOtS', 'acruces6t@dmoz.org', 'Aguistin', 'Cruces', '2000-01-27', 29, 'Notification received', 15);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (320, 'ckleisel6u', '$2a$04$JnIHlhBSlTX6bjYJkfU6r.Tv3hu2U0TtvCADvGprndwSnOHceX4gO', 'ckleisel6u@opera.com', 'Cosimo', 'Kleisel', '1997-11-27', 11, 'Alert', 23);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (321, 'nbevar6v', '$2a$04$.xbXlq7qFQkDv0Nz7ImurukNwd7s08h3vcMIYww.uMtbVBUG6JMxG', 'nbevar6v@ifeng.com', 'Nevins', 'Bevar', '2000-12-05', 3, 'Alert', 57);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (322, 'hohrtmann6w', '$2a$04$hqhjUe5WtmoXBMXxtVHjrOD3GmP79g6ac8d.Eq1FoE9jOUzSyZJG6', 'hohrtmann6w@ucoz.com', 'Hendrika', 'Ohrtmann', '2000-12-08', 13, 'Update', 37);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (323, 'astabler6x', '$2a$04$hcDwnbJHURyc4zjoM5BkyOIYV0F5B4VIwXqdsRaWVF9IvbEFoOjAe', 'astabler6x@xing.com', 'Adela', 'Stabler', '2000-07-26', 31, 'Reminder', 1);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (324, 'cglaysher6y', '$2a$04$neDixD8OsL7i5.OiVsi.e.A4xQ.goIhrwJdtd13hJ8sMYv3x5QusS', 'cglaysher6y@ehow.com', 'Claudette', 'Glaysher', '1999-11-27', 19, 'New message', 29);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (325, 'aglitherow6z', '$2a$04$bVe41FwBwNxBSZdQwwEweuwjsAr1ry4SHVsdgqk8uS3s4TmmIAJWW', 'aglitherow6z@vk.com', 'Andi', 'Glitherow', '2000-04-27', 7, 'Update', 69);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (326, 'mguidera70', '$2a$04$UWsTHbyLq/w6S.8hNjTqFuUOd/fV5A7hJGx.QO5Qwaku.XIz0RWHC', 'mguidera70@umn.edu', 'Mommy', 'Guidera', '2000-11-20', 13, 'Reminder', 3);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (327, 'grides71', '$2a$04$FWQXn7yoEpSkzGj8z2quT.7J.I7KQvfnB23c/4DODiOyd92T7nWgq', 'grides71@smh.com.au', 'Germayne', 'Rides', '1989-11-13', 20, 'Reminder', 16);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (328, 'scroney72', '$2a$04$J7moLLKP32sEBAXd5G2Yj.GSpVTaqEiVRyVBB8vJxNQ2uqTUtDyl6', 'scroney72@barnesandnoble.com', 'Sigismund', 'Croney', '2000-05-22', 29, 'Update', 69);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (329, 'cdunk73', '$2a$04$4T4ZTHpgFDd./15sk5m15.AY/s.8VcLBwcYUCCTA.DSoaSlITmpeC', 'cdunk73@diigo.com', 'Carolyne', 'Dunk', '2000-01-04', 10, 'New message', 20);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (330, 'dpinnigar74', '$2a$04$WBwsugU3QqJIHGZxmnxxLOHo5DAV3zwnSnQc73pbmZppsdPgD5Fty', 'dpinnigar74@about.com', 'Dulcinea', 'Pinnigar', '2000-11-05', 3, 'Reminder', 39);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (331, 'asussams75', '$2a$04$GW.MyBYWcTbCWHgakb4wg.twJd7Kilj09XCZ55CWwK2Z5cafrUs2.', 'asussams75@themeforest.net', 'Artemus', 'Sussams', '2000-08-12', 2, 'New message', 21);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (332, 'pcollingridge76', '$2a$04$PO9/M9g83Z6sHjIF5F8yJOn3Q/dsV6C1..R1xPrRFrcJJJu8s8zdm', 'pcollingridge76@npr.org', 'Philipa', 'Collingridge', '2000-08-22', 20, 'Reminder', 43);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (333, 'pduffit77', '$2a$04$NSV72tdLD2X3FS8QDRGF6.l6VPW89kNPB0ZEArsHLO5nt8jpeeyBC', 'pduffit77@vkontakte.ru', 'Phil', 'Duffit', '2000-03-10', 28, 'Update', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (334, 'lspellsworth78', '$2a$04$TjF1wKLOLt1gfVEAMpe9euBPrf9yga40Kz4En1bhnidtD9FzSgoK6', 'lspellsworth78@facebook.com', 'Leilah', 'Spellsworth', '2000-10-09', 22, 'New message', 46);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (335, 'pghilardi79', '$2a$04$LNJQZEM6j34RIlAtn4r32uWPcv3nhE59fW7EQfPVRXdxzQS/x0LFW', 'pghilardi79@indiegogo.com', 'Pietra', 'Ghilardi', '1963-03-08', 4, 'Notification received', 53);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (336, 'mkollach7a', '$2a$04$XtNw2/FXNHtAAU/I1nORNe25J0U93VUzYOWf3UMlcHgm4kOQGd0Fm', 'mkollach7a@hubpages.com', 'Mike', 'Kollach', '2000-03-20', 16, 'Alert', 40);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (337, 'mrivallant7b', '$2a$04$Szz.4lindpWqCgyjhc3NmeE8DPaoCesgTStQLSDt7rm3/ylCGdgAC', 'mrivallant7b@msn.com', 'Marylinda', 'Rivallant', '2000-10-10', 25, 'Alert', 11);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (338, 'gjustis7c', '$2a$04$AvoRzJ9Gdq9wlTsKy//rMOmimybxdJeXXsAs2ZUAEBjmlwlrpou1q', 'gjustis7c@istockphoto.com', 'Gilligan', 'Justis', '1991-12-20', 4, 'Notification received', 49);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (339, 'xhutchence7d', '$2a$04$m3RENCRCQQxhxtWVUQgafePR2wf5VKSHKIGhhCkuHG9PbXx8Zro.6', 'xhutchence7d@ted.com', 'Xever', 'Hutchence', '2000-10-11', 16, 'Reminder', 50);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (340, 'yraselles7e', '$2a$04$FxSrSZwISy3lLYvwu24RlerHt9930G1CPBPJfD2el00LsZ/j7Hx.y', 'yraselles7e@4shared.com', 'Yetta', 'Raselles', '1998-05-11', 12, 'Update', 56);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (341, 'cpaolino7f', '$2a$04$lspnyQ/zNFL0DRX/j8y6aO2yHoxbcUrq5klkjvIxt5zW/UgQRpjN6', 'cpaolino7f@gravatar.com', 'Cosimo', 'Paolino', '1969-10-10', 1, 'Reminder', 34);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (342, 'abocking7g', '$2a$04$puU2jQFRnef2TFH9G5b3aOGTdEh8WWAqWxGqLREsu9U6fjbh7TZaa', 'abocking7g@trellian.com', 'Aretha', 'Bocking', '1997-01-20', 4, 'Alert', 16);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (343, 'dhawkwood7h', '$2a$04$.HJXB1FgqZTfuh4.P/Kh8.IwmzGvJduIqYzzEnHaCI0spuyXtlMFW', 'dhawkwood7h@aboutads.info', 'Dunstan', 'Hawkwood', '1986-08-27', 31, 'Update', 49);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (344, 'dshurrocks7i', '$2a$04$AS/BwdTzIgumuf9Ob6ApLOI/af3mr34pVyqhaAD0e7O10qIWDpsLu', 'dshurrocks7i@cnet.com', 'Dugald', 'Shurrocks', '2000-12-27', 24, 'Update', 42);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (345, 'jwinterbottom7j', '$2a$04$3eN8ASP.oRpEau/tqEn6a.DTEra7wIBQ7Ckrwx9SqMgV.Hiil1eQy', 'jwinterbottom7j@howstuffworks.com', 'Jessey', 'Winterbottom', '2000-12-27', 10, 'Notification received', 45);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (346, 'hfeldfisher7k', '$2a$04$Q9IZK8saYZyyemSeKN1/q.CmUgWSiCJJqg0s1yhOSYkaLULZY8y1W', 'hfeldfisher7k@cdbaby.com', 'Hesther', 'Feldfisher', '1990-08-15', 1, 'Reminder', 27);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (347, 'msaywood7l', '$2a$04$Q91avHqHLe/DMo3Gj7sXVe6SdKAsHhOTo26UTURGMiaNYZRw8kP6S', 'msaywood7l@nationalgeographic.com', 'Michaeline', 'Saywood', '2000-10-20', 28, 'New message', 17);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (348, 'omilkins7m', '$2a$04$qTOnHJNMGc9.5azj3An2pu4S1uNxIXrV0Q.bNVl.9aNbNr.MOgOWi', 'omilkins7m@cnbc.com', 'Orton', 'Milkins', '2000-05-27', 1, 'Notification received', 38);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (349, 'cgavey7n', '$2a$04$WlN3qmK7vr3sganUqhDxaO8jB2ly6eGsvqu1/Y.uagE.KcmsUvKK.', 'cgavey7n@theguardian.com', 'Carmella', 'Gavey', '2000-12-27', 23, 'New message', 32);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (350, 'lcoopland7o', '$2a$04$EM6aMUUqbBbb3GBVqr0OTeIHxaiI3ki2ajSLalJzSysT/G0i0JVb6', 'lcoopland7o@gmpg.org', 'Latia', 'Coopland', '2000-09-27', 31, 'Notification received', 48);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (351, 'alarge7p', '$2a$04$PFUpNXbahdJ2qJDyxKzAruHLg43Qyw5I.CdRbFteUdnwFaIrTjKAi', 'alarge7p@odnoklassniki.ru', 'Adore', 'Large', '2000-05-21', 7, 'Alert', 39);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (352, 'lheyward7q', '$2a$04$2P7naNa6cliLw6sEyZaKeui0GcyQUHV77Go4EuKuhAHYm8I4fLb/W', 'lheyward7q@netvibes.com', 'Lemuel', 'Heyward', '1991-07-20', 8, 'Alert', 58);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (353, 'cpeplow7r', '$2a$04$cyPJSLUGVuR.kgICTc3KxeV0STsQ5ERP5A0S.NriA4dwBIcIhBJly', 'cpeplow7r@icio.us', 'Casie', 'Peplow', '1974-06-08', 9, 'Notification received', 30);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (354, 'ipitone7s', '$2a$04$mPQ0Qlghw7CJrdmFfKipqO2S8AKRU8l7ustItIKCo.mjJKHbKRVdG', 'ipitone7s@scribd.com', 'Irita', 'Pitone', '2000-05-27', 31, 'Update', 29);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (355, 'bhaygreen7t', '$2a$04$UX5ZwDP9cfXEfWbl4xjKR.KiH.VvAriRgLLLyWFWMrMw728yx72Sy', 'bhaygreen7t@hhs.gov', 'Beaufort', 'Haygreen', '1970-12-09', 11, 'Notification received', 56);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (356, 'astranaghan7u', '$2a$04$0h1OrdB.K356AFLsC1fEsOOeql2YIa35IdiSfrOKj91rkQF9mDnp2', 'astranaghan7u@jigsy.com', 'Angelique', 'Stranaghan', '2000-05-04', 8, 'Alert', 27);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (357, 'mmanoelli7v', '$2a$04$B58QzKohtmYAd1yPPfyQtegh8t4RXUsg2EExfa1j6ca1P96A0JIcm', 'mmanoelli7v@cam.ac.uk', 'Mathian', 'Manoelli', '1960-10-24', 17, 'Alert', 53);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (358, 'fgunston7w', '$2a$04$0Hylaw2e2Bhbb4AqkyJ1v.CkcuO9HnwFXHayX710CM1GDI4Oa43bS', 'fgunston7w@scribd.com', 'Franklin', 'Gunston', '1973-01-27', 9, 'New message', 59);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (359, 'gcharlson7x', '$2a$04$Nv/mg.RQFwJbTHO3C8uZwOKbpabeGwSOrzQyZ5HqZ5cjU.DkRuim2', 'gcharlson7x@vkontakte.ru', 'Genni', 'Charlson', '1996-07-16', 14, 'Update', 11);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (360, 'smangham7y', '$2a$04$O02meRyMygWNEi68Ir1S5Oz1WCuA5h6iskFOX9TjyUjoNYZnHDi36', 'smangham7y@discovery.com', 'Sebastien', 'Mangham', '1994-02-04', 18, 'Update', 65);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (361, 'mchristopherson7z', '$2a$04$UWE4a01G23VNUEYbKxRsUe/pEYeWYl9Pdfk/gdEkxignLNuGtUqR2', 'mchristopherson7z@gravatar.com', 'Milena', 'Christopherson', '2000-11-20', 28, 'New message', 30);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (362, 'granahan80', '$2a$04$4iTYU/IQySJ0wG1yJbM.P.deXmzOoEQRt5QmD7Jzze2Oa7XMA4phO', 'granahan80@census.gov', 'Gav', 'Ranahan', '2000-08-03', 22, 'Reminder', 36);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (363, 'khauxby81', '$2a$04$NDmBiJ7UQb0MNC0eMqgET.Zxd.PsIS7Ff4tmclXis0j3FeKim0MTa', 'khauxby81@berkeley.edu', 'Kimball', 'Hauxby', '1972-12-20', 22, 'Reminder', 58);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (364, 'smaccaghan82', '$2a$04$/dVj4d7AAmhHN6/o7cgRh.Lko/aRyTiwKq021iKnudyqZ40znLI.S', 'smaccaghan82@zimbio.com', 'Salli', 'MacCaghan', '1981-10-27', 18, 'Alert', 31);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (365, 'rattenbrough83', '$2a$04$Ie1AMRYLuby3cPvj.Ahqhe0A27cShKo1LdpCjP5Vw3dGskh.bqMSC', 'rattenbrough83@ycombinator.com', 'Reena', 'Attenbrough', '2000-12-14', 31, 'Notification received', 42);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (366, 'fbumphrey84', '$2a$04$yZIc1Y0llJIJuX7vdavy1eERaPpggcO05MnMWhArMpo1YBmDyfVPm', 'fbumphrey84@uol.com.br', 'Fabien', 'Bumphrey', '1967-08-09', 13, 'Reminder', 51);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (367, 'fwaryk85', '$2a$04$.BIQ70kcUrm.pkOOiAVsSe0dS2a39GqY0fbTI2T9K0uTN.kXzsb0S', 'fwaryk85@spotify.com', 'Fawnia', 'Waryk', '2000-11-11', 31, 'Notification received', 35);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (368, 'jfinnick86', '$2a$04$rBoguS4Fu9kOO9nD1nS79elfRZnUW4tCpYFbC9o87WtvxdHGCYKcm', 'jfinnick86@photobucket.com', 'Joell', 'Finnick', '2000-11-26', 3, 'Alert', 68);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (369, 'rself87', '$2a$04$.Q5MFIckP5bP8QT92EYZ3eGO1hAnnpuHPOb.ikc9tQ.wM5ICSaeIa', 'rself87@creativecommons.org', 'Rycca', 'Self', '1982-03-20', 20, 'Reminder', 48);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (370, 'smcgaughay88', '$2a$04$F.yt3b0.1ZBCMiohvz/XOuiWv/OSQ4iRI.vLoqdJ6X95LfBspHmoO', 'smcgaughay88@techcrunch.com', 'Sharity', 'McGaughay', '1967-07-06', 9, 'Reminder', 17);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (371, 'mtrinkwon89', '$2a$04$owKYTYqYAr54M7e0SZq1x.1LeETGTtDL63mEIVWqzagUze7UGXVGu', 'mtrinkwon89@quantcast.com', 'Milissent', 'Trinkwon', '2000-10-09', 17, 'Reminder', 58);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (372, 'ndeane8a', '$2a$04$Gcd6rgBjUoJos.cxetkTzeZw7CBSZlb46.n86qRiS9k5GZpgEkcgu', 'ndeane8a@pcworld.com', 'Nathanael', 'Deane', '2000-10-04', 31, 'Reminder', 30);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (373, 'bmetcalf8b', '$2a$04$6w7XS2uXyZ8jJtMChY4z8uOn/UhKFU9b/m4OqDLlAN3pwti6PjQ/O', 'bmetcalf8b@purevolume.com', 'Brok', 'Metcalf', '2000-01-20', 31, 'Alert', 57);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (374, 'erance8c', '$2a$04$W.pl6SyIoXh81oRnCAH6iepmQn4sYlTwvz9jH.ACeLjNG2mUQdlD2', 'erance8c@sun.com', 'Euphemia', 'Rance', '2000-12-20', 13, 'Update', 20);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (375, 'vdolden8d', '$2a$04$8WLjLcK5TKkXA0OtEvESjeT40GmD0UPYM.jd62AfPRqibadIGpIq2', 'vdolden8d@surveymonkey.com', 'Vilma', 'Dolden', '1973-11-03', 10, 'Notification received', 24);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (376, 'ekiloh8e', '$2a$04$G4fO1TxLUSuLeNn4jSt5zOTYg.SFs2.NZ6vEZjjDGH2xGvZvSFDVq', 'ekiloh8e@symantec.com', 'Edlin', 'Kiloh', '1965-10-13', 27, 'Reminder', 64);
+insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (377, 'tdobel8f', '$2a$04$FCEJ9IRxyL5fULviZKDSCe6wmVwb9S1CKYREctkOrW25ZuI4FhQjO', 'tdobel8f@businessweek.com', 'Tilda', 'Dobel', '1985-07-27', 28, 'Reminder', 70);
 
 -- Admin table
 CREATE TABLE IF NOT EXISTS admin (
@@ -390,6 +738,241 @@ CREATE TABLE IF NOT EXISTS report (
     FOREIGN KEY (userID) REFERENCES user (userID)
                                   ON UPDATE RESTRICT ON DELETE RESTRICT
 );
+
+insert into report (reportID, content, adminID, userID) values (1, 'Poor', 28, 200);
+insert into report (reportID, content, adminID, userID) values (2, 'Average', 19, 206);
+insert into report (reportID, content, adminID, userID) values (3, 'Excellent', 24, 78);
+insert into report (reportID, content, adminID, userID) values (4, 'Excellent', 20, 38);
+insert into report (reportID, content, adminID, userID) values (5, 'Poor', 19, 274);
+insert into report (reportID, content, adminID, userID) values (6, 'Poor', 33, 35);
+insert into report (reportID, content, adminID, userID) values (7, 'Average', 23, 275);
+insert into report (reportID, content, adminID, userID) values (8, 'Terrible', 2, 317);
+insert into report (reportID, content, adminID, userID) values (9, 'Good', 5, 299);
+insert into report (reportID, content, adminID, userID) values (10, 'Excellent', 9, 47);
+insert into report (reportID, content, adminID, userID) values (11, 'Poor', 33, 173);
+insert into report (reportID, content, adminID, userID) values (12, 'Good', 17, 227);
+insert into report (reportID, content, adminID, userID) values (13, 'Excellent', 14, 289);
+insert into report (reportID, content, adminID, userID) values (14, 'Excellent', 12, 362);
+insert into report (reportID, content, adminID, userID) values (15, 'Terrible', 28, 315);
+insert into report (reportID, content, adminID, userID) values (16, 'Poor', 25, 105);
+insert into report (reportID, content, adminID, userID) values (17, 'Excellent', 28, 119);
+insert into report (reportID, content, adminID, userID) values (18, 'Poor', 13, 82);
+insert into report (reportID, content, adminID, userID) values (19, 'Average', 1, 89);
+insert into report (reportID, content, adminID, userID) values (20, 'Excellent', 13, 233);
+insert into report (reportID, content, adminID, userID) values (21, 'Excellent', 32, 99);
+insert into report (reportID, content, adminID, userID) values (22, 'Excellent', 15, 263);
+insert into report (reportID, content, adminID, userID) values (23, 'Average', 20, 335);
+insert into report (reportID, content, adminID, userID) values (24, 'Poor', 11, 162);
+insert into report (reportID, content, adminID, userID) values (25, 'Average', 31, 103);
+insert into report (reportID, content, adminID, userID) values (26, 'Good', 14, 224);
+insert into report (reportID, content, adminID, userID) values (27, 'Good', 12, 167);
+insert into report (reportID, content, adminID, userID) values (28, 'Poor', 23, 209);
+insert into report (reportID, content, adminID, userID) values (29, 'Good', 14, 66);
+insert into report (reportID, content, adminID, userID) values (30, 'Terrible', 7, 20);
+insert into report (reportID, content, adminID, userID) values (31, 'Terrible', 27, 143);
+insert into report (reportID, content, adminID, userID) values (32, 'Poor', 33, 80);
+insert into report (reportID, content, adminID, userID) values (33, 'Excellent', 3, 49);
+insert into report (reportID, content, adminID, userID) values (34, 'Average', 14, 175);
+insert into report (reportID, content, adminID, userID) values (35, 'Poor', 24, 55);
+insert into report (reportID, content, adminID, userID) values (36, 'Average', 6, 100);
+insert into report (reportID, content, adminID, userID) values (37, 'Poor', 29, 287);
+insert into report (reportID, content, adminID, userID) values (38, 'Poor', 20, 2);
+insert into report (reportID, content, adminID, userID) values (39, 'Poor', 18, 153);
+insert into report (reportID, content, adminID, userID) values (40, 'Good', 11, 113);
+insert into report (reportID, content, adminID, userID) values (41, 'Good', 28, 369);
+insert into report (reportID, content, adminID, userID) values (42, 'Good', 8, 153);
+insert into report (reportID, content, adminID, userID) values (43, 'Good', 20, 349);
+insert into report (reportID, content, adminID, userID) values (44, 'Poor', 9, 248);
+insert into report (reportID, content, adminID, userID) values (45, 'Good', 20, 23);
+insert into report (reportID, content, adminID, userID) values (46, 'Terrible', 30, 63);
+insert into report (reportID, content, adminID, userID) values (47, 'Average', 7, 215);
+insert into report (reportID, content, adminID, userID) values (48, 'Excellent', 15, 68);
+insert into report (reportID, content, adminID, userID) values (49, 'Excellent', 18, 234);
+insert into report (reportID, content, adminID, userID) values (50, 'Excellent', 22, 178);
+insert into report (reportID, content, adminID, userID) values (51, 'Terrible', 8, 355);
+insert into report (reportID, content, adminID, userID) values (52, 'Excellent', 6, 368);
+insert into report (reportID, content, adminID, userID) values (53, 'Excellent', 15, 248);
+insert into report (reportID, content, adminID, userID) values (54, 'Poor', 29, 56);
+insert into report (reportID, content, adminID, userID) values (55, 'Poor', 26, 336);
+insert into report (reportID, content, adminID, userID) values (56, 'Terrible', 18, 189);
+insert into report (reportID, content, adminID, userID) values (57, 'Average', 18, 102);
+insert into report (reportID, content, adminID, userID) values (58, 'Terrible', 10, 277);
+insert into report (reportID, content, adminID, userID) values (59, 'Excellent', 15, 297);
+insert into report (reportID, content, adminID, userID) values (60, 'Good', 29, 188);
+insert into report (reportID, content, adminID, userID) values (61, 'Average', 30, 249);
+insert into report (reportID, content, adminID, userID) values (62, 'Good', 30, 271);
+insert into report (reportID, content, adminID, userID) values (63, 'Terrible', 14, 282);
+insert into report (reportID, content, adminID, userID) values (64, 'Terrible', 27, 331);
+insert into report (reportID, content, adminID, userID) values (65, 'Average', 4, 314);
+insert into report (reportID, content, adminID, userID) values (66, 'Excellent', 32, 103);
+insert into report (reportID, content, adminID, userID) values (67, 'Excellent', 22, 198);
+insert into report (reportID, content, adminID, userID) values (68, 'Poor', 31, 17);
+insert into report (reportID, content, adminID, userID) values (69, 'Average', 21, 56);
+insert into report (reportID, content, adminID, userID) values (70, 'Excellent', 4, 144);
+insert into report (reportID, content, adminID, userID) values (71, 'Excellent', 17, 348);
+insert into report (reportID, content, adminID, userID) values (72, 'Excellent', 29, 211);
+insert into report (reportID, content, adminID, userID) values (73, 'Average', 17, 254);
+insert into report (reportID, content, adminID, userID) values (74, 'Excellent', 5, 181);
+insert into report (reportID, content, adminID, userID) values (75, 'Good', 12, 130);
+insert into report (reportID, content, adminID, userID) values (76, 'Terrible', 2, 1);
+insert into report (reportID, content, adminID, userID) values (77, 'Poor', 27, 206);
+insert into report (reportID, content, adminID, userID) values (78, 'Excellent', 14, 121);
+insert into report (reportID, content, adminID, userID) values (79, 'Good', 1, 308);
+insert into report (reportID, content, adminID, userID) values (80, 'Terrible', 19, 142);
+insert into report (reportID, content, adminID, userID) values (81, 'Average', 4, 315);
+insert into report (reportID, content, adminID, userID) values (82, 'Poor', 33, 218);
+insert into report (reportID, content, adminID, userID) values (83, 'Terrible', 33, 192);
+insert into report (reportID, content, adminID, userID) values (84, 'Terrible', 32, 173);
+insert into report (reportID, content, adminID, userID) values (85, 'Average', 21, 152);
+insert into report (reportID, content, adminID, userID) values (86, 'Terrible', 16, 306);
+insert into report (reportID, content, adminID, userID) values (87, 'Poor', 20, 331);
+insert into report (reportID, content, adminID, userID) values (88, 'Average', 13, 24);
+insert into report (reportID, content, adminID, userID) values (89, 'Terrible', 33, 234);
+insert into report (reportID, content, adminID, userID) values (90, 'Terrible', 26, 131);
+insert into report (reportID, content, adminID, userID) values (91, 'Excellent', 3, 223);
+insert into report (reportID, content, adminID, userID) values (92, 'Excellent', 6, 173);
+insert into report (reportID, content, adminID, userID) values (93, 'Poor', 18, 125);
+insert into report (reportID, content, adminID, userID) values (94, 'Poor', 4, 231);
+insert into report (reportID, content, adminID, userID) values (95, 'Excellent', 24, 120);
+insert into report (reportID, content, adminID, userID) values (96, 'Terrible', 1, 178);
+insert into report (reportID, content, adminID, userID) values (97, 'Excellent', 11, 216);
+insert into report (reportID, content, adminID, userID) values (98, 'Terrible', 3, 333);
+insert into report (reportID, content, adminID, userID) values (99, 'Terrible', 17, 276);
+insert into report (reportID, content, adminID, userID) values (100, 'Average', 13, 189);
+
+-- post table
+CREATE TABLE IF NOT EXISTS posts (
+    postID INTEGER NOT NULL AUTO_INCREMENT,
+    userID INTEGER NOT NULL,
+    content TEXT,
+    datePublished DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (postID),
+    FOREIGN KEY (userID) REFERENCES user (userID)
+                                 ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+insert into posts (postID, userID, content) values (1, 348, 'Good');
+insert into posts (postID, userID, content) values (2, 47, 'Good');
+insert into posts (postID, userID, content) values (3, 191, 'Average');
+insert into posts (postID, userID, content) values (4, 214, 'Excellent');
+insert into posts (postID, userID, content) values (5, 136, 'Poor');
+insert into posts (postID, userID, content) values (6, 139, 'Excellent');
+insert into posts (postID, userID, content) values (7, 327, 'Average');
+insert into posts (postID, userID, content) values (8, 136, 'Terrible');
+insert into posts (postID, userID, content) values (9, 249, 'Terrible');
+insert into posts (postID, userID, content) values (10, 276, 'Excellent');
+insert into posts (postID, userID, content) values (11, 355, 'Terrible');
+insert into posts (postID, userID, content) values (12, 365, 'Good');
+insert into posts (postID, userID, content) values (13, 146, 'Good');
+insert into posts (postID, userID, content) values (14, 245, 'Poor');
+insert into posts (postID, userID, content) values (15, 125, 'Excellent');
+insert into posts (postID, userID, content) values (16, 230, 'Terrible');
+insert into posts (postID, userID, content) values (17, 299, 'Excellent');
+insert into posts (postID, userID, content) values (18, 40, 'Good');
+insert into posts (postID, userID, content) values (19, 38, 'Excellent');
+insert into posts (postID, userID, content) values (20, 86, 'Poor');
+insert into posts (postID, userID, content) values (21, 228, 'Average');
+insert into posts (postID, userID, content) values (22, 319, 'Terrible');
+insert into posts (postID, userID, content) values (23, 64, 'Terrible');
+insert into posts (postID, userID, content) values (24, 57, 'Excellent');
+insert into posts (postID, userID, content) values (25, 146, 'Terrible');
+insert into posts (postID, userID, content) values (26, 172, 'Good');
+insert into posts (postID, userID, content) values (27, 262, 'Excellent');
+insert into posts (postID, userID, content) values (28, 338, 'Poor');
+insert into posts (postID, userID, content) values (29, 64, 'Excellent');
+insert into posts (postID, userID, content) values (30, 295, 'Terrible');
+insert into posts (postID, userID, content) values (31, 35, 'Good');
+insert into posts (postID, userID, content) values (32, 147, 'Good');
+insert into posts (postID, userID, content) values (33, 280, 'Poor');
+insert into posts (postID, userID, content) values (34, 137, 'Poor');
+insert into posts (postID, userID, content) values (35, 267, 'Average');
+insert into posts (postID, userID, content) values (36, 355, 'Average');
+insert into posts (postID, userID, content) values (37, 184, 'Terrible');
+insert into posts (postID, userID, content) values (38, 71, 'Average');
+insert into posts (postID, userID, content) values (39, 234, 'Excellent');
+insert into posts (postID, userID, content) values (40, 359, 'Terrible');
+insert into posts (postID, userID, content) values (41, 62, 'Terrible');
+insert into posts (postID, userID, content) values (42, 64, 'Average');
+insert into posts (postID, userID, content) values (43, 94, 'Good');
+insert into posts (postID, userID, content) values (44, 219, 'Good');
+insert into posts (postID, userID, content) values (45, 359, 'Good');
+insert into posts (postID, userID, content) values (46, 278, 'Good');
+insert into posts (postID, userID, content) values (47, 171, 'Good');
+insert into posts (postID, userID, content) values (48, 64, 'Excellent');
+insert into posts (postID, userID, content) values (49, 64, 'Terrible');
+insert into posts (postID, userID, content) values (50, 230, 'Good');
+insert into posts (postID, userID, content) values (51, 317, 'Terrible');
+insert into posts (postID, userID, content) values (52, 97, 'Good');
+insert into posts (postID, userID, content) values (53, 104, 'Average');
+insert into posts (postID, userID, content) values (54, 51, 'Poor');
+insert into posts (postID, userID, content) values (55, 367, 'Good');
+
+-- community table
+CREATE TABLE IF NOT EXISTS community (
+    postID INTEGER NOT NULL AUTO_INCREMENT,
+    listOfUsers INTEGER NOT NULL,
+    PRIMARY KEY (postID, listOfUsers),
+    FOREIGN KEY (listOfUsers) REFERENCES user (userID)
+                                     ON UPDATE RESTRICT ON DELETE RESTRICT ,
+    FOREIGN KEY (postID) REFERENCES posts (postID)
+                                     ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+insert into community (postID, listOfUsers) values (1, 348);
+insert into community (postID, listOfUsers) values (2, 47);
+insert into community (postID, listOfUsers) values (3, 191);
+insert into community (postID, listOfUsers) values (4, 214);
+insert into community (postID, listOfUsers) values (5, 136);
+insert into community (postID, listOfUsers) values (6, 139);
+insert into community (postID, listOfUsers) values (7, 327);
+insert into community (postID, listOfUsers) values (8, 136);
+insert into community (postID, listOfUsers) values (9, 249);
+insert into community (postID, listOfUsers) values (10, 276);
+insert into community (postID, listOfUsers) values (11, 355);
+insert into community (postID, listOfUsers) values (12, 365);
+insert into community (postID, listOfUsers) values (13, 146);
+insert into community (postID, listOfUsers) values (14, 245);
+insert into community (postID, listOfUsers) values (15, 125);
+insert into community (postID, listOfUsers) values (16, 230);
+insert into community (postID, listOfUsers) values (17, 299);
+insert into community (postID, listOfUsers) values (18, 40);
+insert into community (postID, listOfUsers) values (19, 38);
+insert into community (postID, listOfUsers) values (20, 86);
+insert into community (postID, listOfUsers) values (21, 228);
+insert into community (postID, listOfUsers) values (22, 319);
+insert into community (postID, listOfUsers) values (23, 64);
+insert into community (postID, listOfUsers) values (24, 57);
+insert into community (postID, listOfUsers) values (25, 146);
+insert into community (postID, listOfUsers) values (26, 172);
+insert into community (postID, listOfUsers) values (27, 262);
+insert into community (postID, listOfUsers) values (28, 338);
+insert into community (postID, listOfUsers) values (29, 64);
+insert into community (postID, listOfUsers) values (30, 295);
+insert into community (postID, listOfUsers) values (31, 35);
+insert into community (postID, listOfUsers) values (32, 147);
+insert into community (postID, listOfUsers) values (33, 280);
+insert into community (postID, listOfUsers) values (34, 137);
+insert into community (postID, listOfUsers) values (35, 267);
+insert into community (postID, listOfUsers) values (36, 355);
+insert into community (postID, listOfUsers) values (37, 184);
+insert into community (postID, listOfUsers) values (38, 71);
+insert into community (postID, listOfUsers) values (39, 234);
+insert into community (postID, listOfUsers) values (40, 359);
+insert into community (postID, listOfUsers) values (41, 62);
+insert into community (postID, listOfUsers) values (42, 64);
+insert into community (postID, listOfUsers) values (43, 94);
+insert into community (postID, listOfUsers) values (44, 219);
+insert into community (postID, listOfUsers) values (45, 359);
+insert into community (postID, listOfUsers) values (46, 278);
+insert into community (postID, listOfUsers) values (47, 171);
+insert into community (postID, listOfUsers) values (48, 64);
+insert into community (postID, listOfUsers) values (49, 64);
+insert into community (postID, listOfUsers) values (50, 230);
+insert into community (postID, listOfUsers) values (51, 317);
+insert into community (postID, listOfUsers) values (52, 97);
+insert into community (postID, listOfUsers) values (53, 104);
+insert into community (postID, listOfUsers) values (54, 51);
+insert into community (postID, listOfUsers) values (55, 367);
 
 -- Tournament table
 CREATE TABLE IF NOT EXISTS tournament (
@@ -638,7 +1221,7 @@ insert into gameArchive (gameID) values (98);
 insert into gameArchive (gameID) values (99);
 insert into gameArchive (gameID) values (100);
 
--- UserLibrary
+# UserLibrary
 CREATE TABLE IF NOT EXISTS userLibrary (
     libraryID INTEGER NOT NULL AUTO_INCREMENT,
     gameID INTEGER NOT NULL,
@@ -650,4 +1233,114 @@ CREATE TABLE IF NOT EXISTS userLibrary (
                                        ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
+insert into userLibrary (libraryID, gameID, userID) values (1, 85, 48);
+insert into userLibrary (libraryID, gameID, userID) values (2, 41, 260);
+insert into userLibrary (libraryID, gameID, userID) values (3, 25, 354);
+insert into userLibrary (libraryID, gameID, userID) values (4, 22, 155);
+insert into userLibrary (libraryID, gameID, userID) values (5, 94, 324);
+insert into userLibrary (libraryID, gameID, userID) values (6, 51, 290);
+insert into userLibrary (libraryID, gameID, userID) values (7, 65, 251);
+insert into userLibrary (libraryID, gameID, userID) values (8, 37, 15);
+insert into userLibrary (libraryID, gameID, userID) values (9, 60, 147);
+insert into userLibrary (libraryID, gameID, userID) values (10, 82, 295);
+insert into userLibrary (libraryID, gameID, userID) values (11, 46, 156);
+insert into userLibrary (libraryID, gameID, userID) values (12, 86, 139);
+insert into userLibrary (libraryID, gameID, userID) values (13, 41, 129);
+insert into userLibrary (libraryID, gameID, userID) values (14, 91, 67);
+insert into userLibrary (libraryID, gameID, userID) values (15, 5, 340);
+insert into userLibrary (libraryID, gameID, userID) values (16, 64, 226);
+insert into userLibrary (libraryID, gameID, userID) values (17, 13, 234);
+insert into userLibrary (libraryID, gameID, userID) values (18, 42, 109);
+insert into userLibrary (libraryID, gameID, userID) values (19, 76, 270);
+insert into userLibrary (libraryID, gameID, userID) values (20, 84, 372);
+insert into userLibrary (libraryID, gameID, userID) values (21, 60, 90);
+insert into userLibrary (libraryID, gameID, userID) values (22, 24, 343);
+insert into userLibrary (libraryID, gameID, userID) values (23, 92, 239);
+insert into userLibrary (libraryID, gameID, userID) values (24, 71, 250);
+insert into userLibrary (libraryID, gameID, userID) values (25, 58, 82);
+insert into userLibrary (libraryID, gameID, userID) values (26, 18, 71);
+insert into userLibrary (libraryID, gameID, userID) values (27, 42, 102);
+insert into userLibrary (libraryID, gameID, userID) values (28, 97, 260);
+insert into userLibrary (libraryID, gameID, userID) values (29, 100, 313);
+insert into userLibrary (libraryID, gameID, userID) values (30, 44, 236);
+insert into userLibrary (libraryID, gameID, userID) values (31, 63, 75);
+insert into userLibrary (libraryID, gameID, userID) values (32, 18, 239);
+insert into userLibrary (libraryID, gameID, userID) values (33, 79, 95);
+insert into userLibrary (libraryID, gameID, userID) values (34, 86, 260);
+insert into userLibrary (libraryID, gameID, userID) values (35, 82, 231);
+insert into userLibrary (libraryID, gameID, userID) values (36, 53, 359);
+insert into userLibrary (libraryID, gameID, userID) values (37, 69, 150);
 
+-- player table
+CREATE TABLE IF NOT EXISTS player (
+    userID INTEGER NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    username VARCHAR(100) NOT NULL,
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    tag TEXT,
+    rating INTEGER DEFAULT 1200, -- 0 - infinity but to allow adjustment depending on initial level before playing
+    professional BOOLEAN DEFAULT 0, -- not professional until given title (1)
+    totalGames INTEGER DEFAULT 0, -- if not played any gamed then 0 - instead of null
+    totalWins INTEGER DEFAULT 0,
+    totalLosses INTEGER DEFAULT 0,
+    totalDraws INTEGER DEFAULT 0,
+    winPercentage DOUBLE DEFAULT 0,
+    drawPercentage DOUBLE DEFAULT 0,
+    averageSpectators INTEGER DEFAULT 0, # rounding as half people not relevant for us
+    adMoney DECIMAL(50,2) DEFAULT 0, -- always round to 2 decimal as its money - any digit < x*10^50
+    gameID INTEGER NOT NULL,
+    PRIMARY KEY (userID),
+    FOREIGN KEY (userID) REFERENCES user (userID)
+                                  ON UPDATE RESTRICT ON DELETE RESTRICT ,
+    FOREIGN KEY (username) REFERENCES user (username)
+                                  ON UPDATE RESTRICT ON DELETE RESTRICT ,
+    FOREIGN KEY (email) REFERENCES user (email)
+                                  ON UPDATE RESTRICT ON DELETE RESTRICT ,
+    FOREIGN KEY (gameID) REFERENCES singularGame (gameID)
+                                  ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (1, 'tdobel8f@businessweek.com', 'tdobel8f', 'Tilda', 'Dobel', 'GM', 2762, 1, 10, 4, 4, 2, 0.4, 0.2, 34, 57286, 40);
+insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (2, 'ekiloh8e@symantec.com', 'ekiloh8e', 'Edlin', 'Kiloh', 'GM', 3026, 1, 10, 4, 4, 2, 0.4, 0.2, 25, 26400, 47);
+insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (3, 'vdolden8d@surveymonkey.com', 'vdolden8d', 'Vilma', 'Dolden', 'GM', 2700, 1, 10, 4, 4, 2, 0.4, 0.2, 51, 88556, 39);
+insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (4, 'erance8c@sun.com', 'erance8c', 'Euphemia', 'Rance', 'GM', 3062, 1, 10, 4, 4, 2, 0.4, 0.2, 107, 14435, 6);
+insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (5, 'bmetcalf8b@purevolume.com', 'bmetcalf8b', 'Brok', 'Metcalf', 'GM', 2895, 1, 10, 4, 4, 2, 0.4, 0.2, 89, 20152, 15);
+insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (6, 'ndeane8a@pcworld.com', 'ndeane8a', 'Nathanael', 'Deane', 'GM', 2906, 1, 10, 4, 4, 2, 0.4, 0.2, 42, 36344, 92);
+insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (7, 'mtrinkwon89@quantcast.com', 'mtrinkwon89', 'Milissent', 'Trinkwon', 'GM', 3159, 1, 10, 4, 4, 2, 0.4, 0.2, 60, 90346, 90);
+insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (8, 'smcgaughay88@techcrunch.com', 'smcgaughay88', 'Sharity', 'McGaughay', 'GM', 2903, 1, 10, 4, 4, 2, 0.4, 0.2, 106, 82220, 1);
+insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (9, 'rself87@creativecommons.org', 'rself87', 'Rycca', 'Self', 'GM', 2733, 1, 10, 4, 4, 2, 0.4, 0.2, 78, 66797, 23);
+insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (10, 'jfinnick86@photobucket.com', 'jfinnick86', 'Joell', 'Finnick', 'GM', 2980, 1, 10, 4, 4, 2, 0.4, 0.2, 60, 62299, 94);
+
+-- spectator table
+CREATE TABLE IF NOT EXISTS spectator (
+    userID INTEGER NOT NULL,
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    gameID INTEGER NOT NULL,
+    playerID INTEGER NOT NULL,
+    PRIMARY KEY (userID),
+    FOREIGN KEY (playerID) REFERENCES player (userID)
+                                     ON UPDATE RESTRICT ON DELETE RESTRICT ,
+    FOREIGN KEY (userID) REFERENCES user (userID)
+                                     ON UPDATE RESTRICT ON DELETE RESTRICT ,
+    FOREIGN KEY (username) REFERENCES user (username)
+                                     ON UPDATE RESTRICT ON DELETE RESTRICT ,
+    FOREIGN KEY (email) REFERENCES user (email)
+                                     ON UPDATE RESTRICT ON DELETE RESTRICT ,
+    FOREIGN KEY (gameID) REFERENCES singularGame (gameID)
+                                     ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (1, 'tdobel8f', 'tdobel8f@businessweek.com', 'Tilda', 'Dobel', 40, 8);
+insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (2, 'ekiloh8e', 'ekiloh8e@symantec.com', 'Edlin', 'Kiloh', 47, 8);
+insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (3, 'vdolden8d', 'vdolden8d@surveymonkey.com', 'Vilma', 'Dolden', 39, 2);
+insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (4, 'erance8c', 'erance8c@sun.com', 'Euphemia', 'Rance', 6, 2);
+insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (5, 'bmetcalf8b', 'bmetcalf8b@purevolume.com', 'Brok', 'Metcalf', 15, 7);
+insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (6, 'ndeane8a', 'ndeane8a@pcworld.com', 'Nathanael', 'Deane', 92, 3);
+insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (7, 'mtrinkwon89', 'mtrinkwon89@quantcast.com', 'Milissent', 'Trinkwon', 90, 4);
+insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (8, 'smcgaughay88', 'smcgaughay88@techcrunch.com', 'Sharity', 'McGaughay', 1, 5);
+insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (9, 'rself87', 'rself87@creativecommons.org', 'Rycca', 'Self', 23, 5);
+insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (10, 'jfinnick86', 'jfinnick86@photobucket.com', 'Joell', 'Finnick', 94, 10);
