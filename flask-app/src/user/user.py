@@ -2,9 +2,9 @@ from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from src import db
 
-player = Blueprint('player', __name__)
+player = Blueprint('user', __name__)
 
-@player.route('/player', methods=['GET'])
+@player.route('/user', methods=['GET'])
 def get_statistics():
     
     query = '''
