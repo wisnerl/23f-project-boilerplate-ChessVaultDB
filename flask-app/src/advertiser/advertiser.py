@@ -6,7 +6,7 @@ advertiser = Blueprint('advertiser', __name__)
 
 # Return a list of the top 10 advertisers and their relevant info
 @advertiser.route('/topAdvertisers', methods=['GET'])
-def get_advertiser():
+def get_top_advertiser():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
@@ -69,58 +69,71 @@ def get_advertiser():
 
     return jsonify(json_data)
 
-@advertiser.route('/advertisedUsers', methods=['GET'])
-def get_10_most_expensive_products():
+@advertiser.route('/advertiser', methods=['POST'])
+def post_advertiser():
     
-    query = '''
-        SELECT userID, advertiserID, username
-        FROM user JOIN advertiser ON user.advertiserID = advertiser.advertiserID
-    '''
+    # collecting data from the request object 
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    #extracting the variable
+    ad_id = the_data['advertiserID']
+    name = the_data['companyName']
+    spent = the_data['totalSpent']
+    user_id = the_data['topUser']
+    user_pref = the_data['userPreference']
+    sales_id = the_data['salesID']
+
+    # Constructing the query
+    query = 'insert into products (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values ('
+    query += ad_id + ', "'
+    query += name + '", '
+    query += spent + ', '
+    query += user_id + ', '
+    query += user_pref + ', '
+    query += sales_id + ')'
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    
+    return 'Success!'
+
+@advertiser.route('/advertiser/<id>', methods=['GET'])
+def get_specific_advertiser (id):
+
+    query = 'SELECT advertiserID, companyName, totalSpent, topUser, userPreference, salesID FROM products WHERE advertiserID = ' + str(id)
+    current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
     cursor.execute(query)
-
-    column_headers = [x[0] for x in cursor.description]
-
-    # create an empty dictionary object to use in 
-    # putting column headers together with data
-    json_data = []
-
-    # fetch all the data from the cursor
-    theData = cursor.fetchall()
-
-    # for each of the rows, zip the data elements together with
-    # the column headers. 
-    for row in theData:
-        json_data.append(dict(zip(column_headers, row)))
     
+    column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    the_data = cursor.fetchall()
+    
+    for row in the_data:
+        json_data.append(dict(zip(column_headers, row)))
+
     return jsonify(json_data)
 
+@advertiser.route('/advertiser/<id>', methods=['PUT'])
+def get_specific_advertiser (id):
 
-@advertiser.route('/topAdvertisers', methods=['GET'])
-def get_top_10_advertisers():
-    
-    query = '''
-        SELECT advertiser.advertiserID, advertiser.companyName, advertiser.totalSpent, sales.salesID
-        FROM advertiser JOIN topAdvertisers ON advertiser.advertiserID = topAdvertisers.advertiserID
-            JOIN sales ON topAdvertisers.salesID = sales.salesID
-    '''
+    query = 'SELECT advertiserID, companyName, totalSpent, topUser, userPreference, salesID FROM products WHERE advertiserID = ' + str(id)
+    current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
     cursor.execute(query)
-
-    column_headers = [x[0] for x in cursor.description]
-
-    # create an empty dictionary object to use in 
-    # putting column headers together with data
-    json_data = []
-
-    # fetch all the data from the cursor
-    theData = cursor.fetchall()
-
-    # for each of the rows, zip the data elements together with
-    # the column headers. 
-    for row in theData:
-        json_data.append(dict(zip(column_headers, row)))
     
+    column_headers = [x[0] for x in cursor.description]
+    json_data = []
+    the_data = cursor.fetchall()
+    
+    for row in the_data:
+        json_data.append(dict(zip(column_headers, row)))
+
     return jsonify(json_data)
+    
