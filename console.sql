@@ -111,6 +111,7 @@ insert into user (userID, username, password, email, firstname, lastname, nation
 insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (30, 'Azumilover', '$2a$04$qHZNetpcsajcuJkvLTodwuv1cD7/iyA.GOXRmwyqeuVJLetwNqbVK', 'veisikovitsht@odnoklassniki.ru', 'Vanya', 'Eisikovitsh', 'China', 20, 'Alert', 'nan', 2602, 0, 29280, 19994, 8216, 1070, 0.68, 0.04, 0.28, 20, 5275323.25);
 insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (31, 'SVODMEVKO', '$2a$04$ie/7JnWqYH9oPSE7iThKPOOvNEhCU3Sbk7I1usNrjwCci/3Oau8.i', 'poconnellu@statcounter.com', 'Perice', 'Connell', 'Japan', 26, 'Alert', 'GM', 2074, 1, 43294, 31166, 10120, 2008, 0.72, 0.05, 0.23, 26, 3178408.99);
 
+# Remove any nan values that are coming from data_generator.py python file
 UPDATE user SET notifications = NULL WHERE notifications = 'nan';
 UPDATE user SET tag = NULL WHERE tag = 'nan';
 
@@ -120,63 +121,63 @@ CREATE TABLE IF NOT EXISTS advertiser (
     companyName VARCHAR(75) UNIQUE NOT NULL,
     totalSpent DOUBLE,
     topUser VARCHAR(100),
-    userPreference TEXT,
+    professional INTEGER DEFAULT 1,
     salesID INTEGER NOT NULL,
     PRIMARY KEY (advertiserID),
     FOREIGN KEY (topUser) REFERENCES user (username)
                                       ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (1, 'Wordware', 2258279.52, 'rehbwf', 'Professional', 5);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (2, 'Plajo', 6473405.66, 'Siegwhite', 'Professional', 35);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (3, 'Livefish', 858619.17, 'Tuzakli_Egitim', 'Professional', 16);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (4, 'Gigashots', 8472207.11, 'TheGreenCloud', 'Professional', 3);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (5, 'Tagchat', 1540955.92, 'ARM__55555', 'Professional', 23);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (6, 'Ntag', 819356.01, 'toomanymanoevres', 'Professional', 5);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (7, 'Edgeclub', 2169974.59, 'rehbwf', 'Professional', 22);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (8, 'Rhynyx', 5612071.5, 'chessmaster2006', 'Professional', 20);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (9, 'Ainyx', 3128949.94, 'rehbwf', 'Professional', 3);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (10, 'Snaptags', 4850165.75, 'ARM__55555', 'Professional', 11);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (11, 'Eayo', 7802660.21, 'chessmaster2006', 'Professional', 4);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (12, 'Yozio', 8567090.68, 'DrawDenied_Twitch', 'Professional', 34);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (13, 'Lazzy', 3427147.6, 'Azumilover', 'Professional', 30);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (14, 'Skinder', 5927999.2, 'Azumilover', 'Professional', 24);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (15, 'Yakidoo', 4931171.53, 'rehbwf', 'Professional', 19);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (16, 'BlogXS', 1463993.27, 'rehbwf', 'Professional', 12);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (17, 'Kwimbee', 1461055.21, 'rehbwf', 'Professional', 5);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (18, 'Feedspan', 6222026.45, 'rehbwf', 'Professional', 26);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (19, 'Yoveo', 2942753.79, 'rehbwf', 'Professional', 14);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (20, 'Latz', 7368728.67, 'rehbwf', 'Professional', 10);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (21, 'Meevee', 7961704.84, 'rehbwf', 'Professional', 30);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (22, 'Flashset', 9861755.96, 'rehbwf', 'Professional', 22);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (23, 'Wordpedia', 5631265.71, 'rehbwf', 'Professional', 5);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (24, 'Dabshots', 941728.99, 'rehbwf', 'Professional', 18);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (25, 'Cogidoo', 6459484.1, 'rehbwf', 'Professional', 16);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (26, 'Zoomzone', 7617020.66, 'rehbwf', 'Professional', 24);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (27, 'Wikibox', 1152305.86, 'rehbwf', 'Professional', 3);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (28, 'Edgeify', 972040.59, 'rehbwf', 'Professional', 7);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (29, 'Jetwire', 274837.71, 'rehbwf', 'Professional', 17);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (30, 'Gabvine', 2841335.26, 'rehbwf', 'Professional', 23);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (31, 'Rhybox', 860622.86, 'rehbwf', 'Professional', 5);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (32, 'Skinix', 1241733.13, 'rehbwf', 'Professional', 33);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (33, 'Devshare', 2273238.02, 'DrawDenied_Twitch', 'Professional', 7);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (34, 'Demimbu', 4916888.51, 'rehbwf', 'Professional', 20);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (35, 'Zoozzy', 8994399.11, 'rehbwf', 'Professional', 1);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (36, 'Mybuzz', 6895143.42, 'rehbwf', 'Professional', 24);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (37, 'Jetpulse', 2836812.75, 'rehbwf', 'Professional', 8);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (38, 'Edgewire', 810411.42, 'rehbwf', 'Professional', 3);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (39, 'Meetz', 2791685.91, 'rehbwf', 'Professional', 24);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (40, 'Feedmix', 5063534.73, 'rehbwf', 'Professional', 21);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (41, 'Oyoyo', 2622324.71, 'rehbwf', 'Professional', 26);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (42, 'Skinte', 3990477.75, 'rehbwf', 'Professional', 7);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (43, 'Jaxspan', 5195976.49, 'rehbwf', 'Professional', 28);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (44, 'Fivebridge', 6918590.86, 'rehbwf', 'Professional', 8);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (45, 'Fliptune', 590511.65, 'rehbwf', 'Professional', 22);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (46, 'Babblestorm', 6963407.6, 'rehbwf', 'Professional', 4);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (47, 'Dynabox', 9461786.1, 'rehbwf', 'Professional', 18);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (48, 'Ntags', 4101069.36, 'rehbwf', 'Professional', 12);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (49, 'Voolia', 1273643.35, 'rehbwf', 'Professional', 5);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (50, 'Realcube', 3275990.28, 'rehbwf', 'Professional', 6);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (1, 'Wordware', 2258279.52, 'rehbwf', 1, 5);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (2, 'Plajo', 6473405.66, 'Siegwhite', 1, 35);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (3, 'Livefish', 858619.17, 'Tuzakli_Egitim', 1, 16);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (4, 'Gigashots', 8472207.11, 'TheGreenCloud', 1, 3);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (5, 'Tagchat', 1540955.92, 'ARM__55555', 1, 23);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (6, 'Ntag', 819356.01, 'toomanymanoevres', 1, 5);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (7, 'Edgeclub', 2169974.59, 'rehbwf', 1, 22);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (8, 'Rhynyx', 5612071.5, 'chessmaster2006', 1, 20);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (9, 'Ainyx', 3128949.94, 'rehbwf', 1, 3);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (10, 'Snaptags', 4850165.75, 'ARM__55555', 1, 11);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (11, 'Eayo', 7802660.21, 'chessmaster2006', 1, 4);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (12, 'Yozio', 8567090.68, 'DrawDenied_Twitch', 1, 34);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (13, 'Lazzy', 3427147.6, 'Azumilover', 1, 30);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (14, 'Skinder', 5927999.2, 'Azumilover', 1, 24);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (15, 'Yakidoo', 4931171.53, 'rehbwf', 1, 19);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (16, 'BlogXS', 1463993.27, 'rehbwf', 1, 12);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (17, 'Kwimbee', 1461055.21, 'rehbwf', 1, 5);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (18, 'Feedspan', 6222026.45, 'rehbwf', 1, 26);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (19, 'Yoveo', 2942753.79, 'rehbwf', 1, 14);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (20, 'Latz', 7368728.67, 'rehbwf', 1, 10);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (21, 'Meevee', 7961704.84, 'rehbwf', 1, 30);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (22, 'Flashset', 9861755.96, 'rehbwf', 1, 22);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (23, 'Wordpedia', 5631265.71, 'rehbwf', 1, 5);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (24, 'Dabshots', 941728.99, 'rehbwf', 1, 18);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (25, 'Cogidoo', 6459484.1, 'rehbwf', 1, 16);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (26, 'Zoomzone', 7617020.66, 'rehbwf', 1, 24);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (27, 'Wikibox', 1152305.86, 'rehbwf', 1, 3);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (28, 'Edgeify', 972040.59, 'rehbwf', 1, 7);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (29, 'Jetwire', 274837.71, 'rehbwf', 1, 17);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (30, 'Gabvine', 2841335.26, 'rehbwf', 1, 23);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (31, 'Rhybox', 860622.86, 'rehbwf', 1, 5);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (32, 'Skinix', 1241733.13, 'rehbwf', 1, 33);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (33, 'Devshare', 2273238.02, 'DrawDenied_Twitch', 1, 7);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (34, 'Demimbu', 4916888.51, 'rehbwf', 1, 20);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (35, 'Zoozzy', 8994399.11, 'rehbwf', 1, 1);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (36, 'Mybuzz', 6895143.42, 'rehbwf', 1, 24);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (37, 'Jetpulse', 2836812.75, 'rehbwf', 1, 8);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (38, 'Edgewire', 810411.42, 'rehbwf', 1, 3);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (39, 'Meetz', 2791685.91, 'rehbwf', 1, 24);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (40, 'Feedmix', 5063534.73, 'rehbwf', 1, 21);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (41, 'Oyoyo', 2622324.71, 'rehbwf', 1, 26);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (42, 'Skinte', 3990477.75, 'rehbwf', 1, 7);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (43, 'Jaxspan', 5195976.49, 'rehbwf', 1, 28);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (44, 'Fivebridge', 6918590.86, 'rehbwf', 1, 8);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (45, 'Fliptune', 590511.65, 'rehbwf', 1, 22);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (46, 'Babblestorm', 6963407.6, 'rehbwf', 1, 4);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (47, 'Dynabox', 9461786.1, 'rehbwf', 1, 18);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (48, 'Ntags', 4101069.36, 'rehbwf', 1, 12);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (49, 'Voolia', 1273643.35, 'rehbwf', 1, 5);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (50, 'Realcube', 3275990.28, 'rehbwf', 1, 6);
 
 # topAdvertisers table
 CREATE TABLE IF NOT EXISTS topAdvertisers (
@@ -888,6 +889,7 @@ CREATE TABLE IF NOT EXISTS singularGame (
     winner TEXT,
     loser TEXT,
     draw INTEGER DEFAULT 0,
+    professional INTEGER DEFAULT 0,
     whiteUName VARCHAR(100) NOT NULL,
     blackUName VARCHAR(100) NOT NULL,
     spectators INTEGER DEFAULT 0,
@@ -900,55 +902,62 @@ CREATE TABLE IF NOT EXISTS singularGame (
                                         ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (1, 'e3 Nf6 d4 g6 c4 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O b6 b3 Bb7 Bb2 Ne4 Nbd2 Ndf6 Qc2 a5 Nxe4 Nxe4 Nd2 Nxd2 Qxd2 a4 d5 axb3 axb3 Qd7 Bxg7 Kxg7 Bg4 f5 Bf3 Kg8 Qd4 Rfd8 Rfe1 Qe8 e4 fxe4 Bxe4 Qf7 Bf3 Re8 Bg4 Qf6 Be6+ Kg7 Qxf6+ exf6 f4 f5 g4 Kf6 Kf2 h6 Kg3 fxg4 hxg4 Ra5 Rxa5 bxa5 Ra1 Ra8 f5 gxf5 gxf5 Ra6 Kf4 Rb6 Ra3 c6 dxc6 Bxc6 Rxa5 Rxb3 Ra6 Rf3+ Kg4 Be4 Rxd6 Ke5 Rd8 Rf1 Re8 Kf6 Rf8+ Ke5 Rh8 Rg1+ Kh3 Bxf5+ Bxf5 Kxf5 Kh2 Rc1 Rxh6 Rxc4 Rh5+ Kg4 Rd5 Rc2+ Kg1 Rc3 Rd2 Kg3 Rd3+ Rxd3', 'TheGreenCloud', 'LastGladiator2', 0, 'LastGladiator2', 'TheGreenCloud', 7306, 18, 41);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (2, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Bd3 O-O O-O Nc6 Bg5 h6 Bf4 Nxd4 Nxd4 e5 Bxe5 dxe5 Nf3 Qe7 Nd5 Nxd5 exd5 e4 Re1 f5 Bc4 Kh7 c3 Qc5 Nd2 b5 Bb3 Bb7 Nf1 Rad8 Ne3 f4 Ng4 h5 Rxe4 hxg4 Qxg4 Bxd5 Rxf4 Bxb3 axb3 Rxf4 Qxf4 Rf8 Qh4+ Kg8 h3 Bf6 Qg3 Kg7 b4 Qb6 Rd1 Rf7 h4 Kh7 Rd2 Qe6 Kf1 Qc4+ Kg1 Qxh4 Qd3 Qh5 Qe3 Bg5 Qe6 Re7 Rd7 Qh4 Rxe7+ Bxe7 Qa6 Bd6 Qxb5 Qh2+ Kf1 Qh1+ Ke2 Qxg2 c4 Qe4+ Kd2 Bf4+ Kc3 Qe5+ Kb3 Qxb5 cxb5', 'fireheart92', 'igormezentsev', 0, 'igormezentsev', 'fireheart92', 6532, 36, 2);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (3, 'Nf3 Nc6 g3 e5 d3 Bc5 Bg2 d6 Nc3 Bg4 h3 Bh5 a3 f5 Na4 Bb6 Nxb6 axb6 c4 Nge7 Qb3 Bf7 Ng5 O-O Nxf7 Rxf7 Bg5 Qd7 Bxe7 Nxe7 Bxb7 Rb8 Bd5 Nxd5 cxd5 f4 g4 Qe7 O-O-O Qh4 Rh2 Rf6 Kb1 Rbf8 Qc4 R8f7 Qc6 h6 Rc1 Kh7 Qb7 Rg6 Rxc7 Rxc7 Qxc7 Rxg4 hxg4 Qxh2 Qxd6 Qg1+ Ka2 Qxf2 Qxe5 Qc5 Qe4+ Kh8 Qe8+ Kh7 Qc6 Qe3 d6 Qxe2 d7 Qxd3 Qe6', 'TheGreenCloud', 'Josip_buje', 0, 'TheGreenCloud', 'Josip_buje', 1143, 24, 10);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (4, 'e4 d6 Nc3 Nf6 Nf3 g6 d4 Bg7 Bd3 O-O Be3 a6 Qd2 b5 h4 h5 a3 Bb7 O-O-O Nbd7 d5 c6 dxc6 Bxc6 Bg5 Rc8 Be2 Nxe4 Nxe4 Bxe4 Qe3 Rxc2+', 'Mishka_The_Great', 'athena-pallada', 0, 'Mishka_The_Great', 'athena-pallada', 1913, 39, 13);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (5, 'Nf3 e6 d3 d5 g3 h5 h4 Be7 Bg2 Nf6 Bg5 Nfd7 Bxe7 Qxe7 c3 e5 Qc2 Nf6 Nbd2 Ng4 e4 dxe4 Nxe4 Nc6 O-O-O a5 Rhe1 Be6 a4 Rb8 Nfg5 b5 Nxe6 fxe6 axb5 Rxb5 Qa4 O-O Qxb5 Nxf2 Nxf2 Rxf2 Bxc6 Qf6 Qxe5 Qf7 Qxe6 Qxe6 Rxe6 Rf3 Bxf3', 'Mishka_The_Great', 'Lord-Universe31', 0, 'Lord-Universe31', 'Mishka_The_Great', 3094, 14, 29);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (6, 'b3 Nf6 Bb2 g6 Nc3 Bg7 h4 h5 e3 d5 Be2 c6 Nh3 Bxh3 Rxh3 Nbd7 d4 Qc7 Qd2 O-O O-O-O a5 f3 b5 g4 a4 g5 Ne8 f4 axb3 axb3 b4 Na4 Nd6 Bf3 Rfb8 Nc5 Nxc5 dxc5 Bxb2+ Kxb2 Nb5 Rhh1 Nc3 Ra1 e5 f5 e4 Be2 Qe5 Qd4 Qxd4 exd4 Nxe2 Rh2 Nxd4 Rf2 e3 Rff1 Nxf5', 'Chesssknock', 'may6enexttime', 0, 'may6enexttime', 'Chesssknock', 3280, 40, 1);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (7, 'Nf3 e6 d3 a6 g3 b5 Bg2 d5 O-O Nd7 c4 Rb8 cxd5 exd5 Nd4 Nb6 Nc6 Qd6 Nxb8 c5 Nxa6 Bxa6 e4 d4 e5 Qe6 Qb3 Qxb3 axb3 Bb7 Bxb7 Kd7 Bf4 Ne7 Ra7 Ke6 Nd2 Ned5 Bxd5+ Nxd5 Ne4 Nxf4 gxf4 Kf5 Rxf7+ Kg6 e6 c4 bxc4 bxc4 dxc4 Bb4 Kh1 Re8 Rg1+ Kh6 f5 g6 Rg3 gxf5 Rf6+ Kh5 Rg5+ Kh4 Rh6#', 'rehbwf', 'chessmaster2006', 0, 'chessmaster2006', 'rehbwf', 6892, 17, 3);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (8, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Bd3 O-O h3 Nc6 Be3 a6 Qd2 e5 d5 Ne7 Bh6 c6 Bxg7 Kxg7 O-O cxd5 exd5 b5 b4 Bb7 a4 bxa4 Rxa4 Nexd5 Nxd5 Bxd5 Nh2 Qc8 Rfa1 Bb7 Qe2 Nd5 c4 Nc3 Qc2 Nxa4 Rxa4 Qc6 Ra5 Qxg2#', 'Azumilover', 'Ch5ssPlayer', 0, 'Azumilover', 'Ch5ssPlayer', 8715, 38, 24);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (9, 'Nf3 g6 g3 Bg7 Bg2 d6 O-O e5 c4 Ne7 Nc3 O-O d3 Nbc6 Rb1 h6 a3 Kh7 b4 f5 Qc2 Nd4 Nxd4 exd4 Nd5 c6 Nxe7 Qxe7 e3 Bd7 exd4 Bxd4 Bb2 Bxb2 Qxb2 f4 Rfe1 Qf7 Re4 f3 Bf1 Rae8 Rbe1 Bf5 R4e3 Rxe3 Rxe3 Bg4 Qd4 h5 Qxd6 Qf5 Re7+ Rf7 h3 Rxe7 Qxe7+ Kh6 hxg4 hxg4 Qe3+ Kg7 Qxa7 Qf7 Qd4+', 'may6enexttime', 'kc6', 0, 'kc6', 'may6enexttime', 294, 31, 2);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (10, 'e4 d6 Nf3 Nf6 Nc3 g6 d4 Bg7 e5 Nfd7 e6 fxe6 Ng5 Nf6 Qe2 Nc6 Nxe6 Bxe6 Qxe6 Nxd4 Qc4 Nxc2+ Kd1 Nxa1 Qb5+ Qd7 Qxb7 O-O Bc4+ Kh8 Re1 e5 Nd5 Qg4+ Be2 Qd4+ Bd2 Nxd5 Bf3 Nf4 Kc1 Nd3+ Kb1 Nxe1 Bxe1 Rab8 Bc3 Qd3+', 'Tuzakli_Egitim', 'rehbwf', 0, 'rehbwf', 'Tuzakli_Egitim', 8358, 24, 8);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (11, 'e4 d6 d4 Nf6 Bd3 e5 dxe5 dxe5 Nf3 Bc5 O-O Nbd7 h3 O-O Nc3 c6 Re1 Qc7 Be3 Bxe3 Rxe3 Nc5 Bf1 h6 b4 Ne6 Ne2 Rd8 Qc1 Nd4 Nexd4 exd4 Re1 Be6 Bd3 b6 a4 c5 bxc5 bxc5 e5 Nd5 Be4 Rab8 Rb1 Nc3 Rxb8 Rxb8 Nd2 Nxa4 Qa3 Nc3 f4 Bd5 Bxd5 Nxd5 Ne4 Nxf4 Qxc5 Qxc5 Nxc5 Rb2 e6 Nxe6 Nxe6 fxe6 Rxe6 Rxc2 Ra6 d3 Kf1 Rc1+', 'Ch5ssPlayer', 'Azumilover', 0, 'Azumilover', 'Ch5ssPlayer', 119, 14, 28);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (12, 'Nf3 d6 g3 Nf6 Bg2 g6 O-O Bg7 c4 O-O Nc3 e5 d3 Re8 Rb1 c6 e4 d5 cxd5 cxd5 Re1 dxe4 dxe4 Qxd1 Rxd1 Nc6 Bg5 Bg4 h3 Bxf3 Bxf3 Rad8 Nd5 Rd6 Nxf6+ Bxf6 Rxd6 Bxg5 Rd7 Nd4 Kg2 Re7 Rxe7 Bxe7 h4 Kf8 Rc1 Bd6 Rc8+ Ke7 Rh8 h5 g4 hxg4 Bxg4 Kf6 Ra8 a6 Bc8 Be7 Bxb7 Kg7 Bd5 Bxh4 Ra7 Kh6 Rxf7 a5 Ra7 Bd8 Ra8 Bb6 Ra6 Bc7 Bf7 Kg5 Rxg6+ Kf4 f3 Ke3 Ra6 Nxf3 Rc6 Bd8 Rc3+ Kxe4 Rxf3 a4 Bg6+ Kd4 Rd3+ Kc5 Rxd8 e4 Bxe4 a3 b3 Kb4 Rc8 Ka5 Rb8 Ka6 Rb7 Ka5 Kf3 Ka6 Ke3 Ka5 Kd4 Ka6 Kc5 Ka5 Ra7#', 'may6enexttime', 'kc6', 0, 'kc6', 'may6enexttime', 5466, 42, 29);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (13, 'e4 d6 d4 Nf6 Nc3 g6 Be3 a6 f3 b5 Qd2 Nbd7 Bh6 c5 dxc5 Nxc5 O-O-O Bb7 Kb1 Qc7 h4 Rc8 Bxf8 Rxf8 h5 Nxh5 Nge2 Nf6 g4 h5 gxh5 Nxh5 Bh3 e6 Nd5 Bxd5 exd5 Rd8 b4 Na4 dxe6 Qe7 exf7+ Rxf7 Nd4 Kf8 Nc6 Qf6 Nd4 Nf4 Bf1 Rc8 c4 bxc4 Qc2 Nb6 a3 c3 Bd3 Nxd3 Rxd3 Nd5 Re1 Nf4 Rdd1 Kg7 Rg1 Re8 Rdf1 Qxd4 Rg5 Qd2 Rfg1 Qxc2+ Kxc2 Re6 R5g4 Ne2 Kb3 Nxg1 Kxc3 Rxf3+', 'ARM__55555', 'toomanymanoevres', 0, 'ARM__55555', 'toomanymanoevres', 3303, 27, 10);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (14, 'Nf3 d5 g3 c5 Bg2 Nc6 d4 cxd4 Nxd4 e6 O-O Nf6 c4 Bc5 Nb3 Bb4 a3 Be7 cxd5 exd5 Nc3 Be6 Bg5 d4 Nb5 Bxb3 Qxb3 a6 Bxc6+ bxc6 Nxd4 Qxd4 Rfd1 Qe5 Bf4 Qe6 Qb7 O-O Rac1 Rab8 Bxb8 Ne4 Bf4 Bg5 Qxc6 Qf5 Qd5 Qg6 Bxg5 Nxg5 h4 Ne6 Qd3 Qf6 Qxa6 Qxb2 Rc8 g6 Rxf8+ Kxf8 Qd6+ Kg7 Qd3 Qe5 a4 Qa5 Ra1 Nc5 Qb5 Qc3 Rb1 Ne4 Qb2 Kf6 Qxc3+ Nxc3 Rb6+ Ke5 a5 Kd5 a6 Na4 Rf6 Ke5 Rxf7 Nb6 a7 h5 Rb7 Na8 Rb8 Nc7 Rc8 Na8 Rxa8 g5 Re8+ Kd4 a8=Q g4 Qe4+ Kc3 Qd3+ Kb4 Rb8+ Kc5 Rc8+ Kb6 Qb1+ Ka7 Rc2 Ka6 Ra2#', 'VincentKeymer2004', 'Apodex64', 0, 'Apodex64', 'VincentKeymer2004', 2663, 27, 34);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (15, 'd4 Nf6 Nf3 g6 g3 Bg7 Bg2 O-O O-O d6 b3 c6 Bb2 Bf5 c4 a5 Nc3 Ne4 e3 Nxc3 Bxc3 Be4 Nd2 Bxg2 Kxg2 Nd7 Qc2 e5 Rad1 Qc7 Nf3 Rfe8 dxe5 dxe5 e4 Nc5 Rd2 Bh6 Rdd1 b6 a3 f6 b4 axb4 axb4 Ne6 Rd3 c5 Rfd1 Nd4 Bxd4 exd4 bxc5 bxc5 Rb3 Qc6 Rdb1 Qxe4 Qxe4 Rxe4 Rb5 Bf8 Rb7 Re2 R1b2 Ra2 Rxe2 Rxe2 Kf1 Rc2 Rc7 Rxc4 Ne1 Rc1 Ke2 Ra1 Nd3 Ra2+ Kf3 Ra3 Ke2 Rc3 Nf4 Bd6 Rc8+ Kf7 Nd5 Rc2+ Kd3 Rxf2 Rc6 Ke6 Nf4+ Kd7 Ra6 Bxf4 gxf4 Rxf4 Kc4 Rf5 Ra7+ Kd6 Rxh7 Rh5 Rg7 Rxh2 Rxg6 Rf2 Rg8 Rc2+ Kd3 Rc3+ Kd2 Kd5 Rd8+ Kc4 Rf8 Rf3 Rf7 Rf2+ Ke1 Rf5', 'fireheart92', 'igormezentsev', 0, 'igormezentsev', 'fireheart92', 6923, 31, 19);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (16, 'Nf3 Nf6 g3 g6 Bg2 Bg7 O-O d6 c4 Nbd7 Nc3 O-O d3 Re8 Rb1 e5 e4 Nb6 b4 a6 a4 Be6 a5 Nbd7 Ng5 c5 Nxe6 Rxe6 Nd5 Re8 Bg5 Qc8 Bh3 Qb8 bxc5 Nxd5 Bxd7', 'muisback', 'Apodex64', 0, 'muisback', 'Apodex64', 1100, 8, 15);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (17, 'Nf3 Nf6 g3 g6 Bg2 Bg7 O-O d6 c4 O-O Nc3 Nc6 d3 e5 Rb1 Be6 b4 Qd7 b5 Ne7 Ng5 h5 Nxe6 Qxe6 Bxb7 Rac8 Bxc8 Rxc8 e4 h4 Nd5 Ng4 Nxe7+ Qxe7 Qxg4', 'muisback', 'Apodex64', 0, 'muisback', 'Apodex64', 7831, 37, 30);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (18, 'b3 Nf6 Bb2 g6 e3 Bg7 f4 O-O Nf3 d6 Be2 Nbd7 O-O b6 h3 Bb7 c4 Ne4 Bxg7 Kxg7 d4 Ng3 Rf2 Nxe2+ Rxe2 Bxf3 gxf3 e5 fxe5 dxe5 Nc3 Qh4 Qe1 Qxh3 Rf2 exd4 exd4 Rae8 Qd2 Nf6 Re1 Rxe1+ Qxe1 Re8 Ne4 Nxe4 fxe4 Qg4+ Rg2 Qxe4 Qxe4 Rxe4 d5 h5 Rd2 Re7 d6 cxd6 Rxd6 Re2 a4 Re3 b4 Ra3 c5 bxc5 bxc5 Rxa4 c6 Rc4 Kf2 h4 Ke3 h3 Kd3 Rc1 Kd2 h2 Kxc1 h1=Q+ Kd2 Qh2+ Kd3 Qxd6+', 'fireheart92', 'ChessTheory64', 0, 'fireheart92', 'ChessTheory64', 7353, 15, 4);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (19, 'Nf3 d5 g3 g6 Bg2 Bg7 O-O e6 d3 Ne7 Nbd2 O-O e4 dxe4 dxe4 f5 c3 fxe4 Nxe4 Nbc6 Qe2 Ne5 Nxe5 Bxe5 Ng5 Bg7 Nxe6 Bxe6 Qxe6+ Kh8 Bxb7 Rb8 Bg2 Nf5 Bf4 Rxb2 Rad1 Qf6 Qxf6 Bxf6 Bxc7 Rxa2 c4 Nd4 Bd5 Ne2+ Kg2 Kg7 Bd6 Rd8 c5 Ra4 Rd3 h5 Rb1 h4 Rb7+ Kh6 Bf3 hxg3 Bxe2 gxh2 Kxh2 Rh4+ Kg3 Re8 Re3 Rd8 Bf4+ Bg5 Bxg5+ Kxg5 Re5+ Kf6 Kxh4 Kxe5 Rxa7 Rd4+ Kg3 Kd5 Rd7+ Kxc5 Rxd4 Kxd4 Kf4 Kd5 Kg5 Ke6 Kxg6 Ke5 Kg5 Ke4 Kg4 Ke5 f4+ Kf6 f5 Kf7 Kg5 Kf8 f6 Kf7 Kf5 Kf8 Kg6 Kg8 f7+ Kf8 Bf1 Ke7 Kg7 Kd8 f8=Q+ Kd7 Qf6 Kc8 Qe7 Kb8 Ba6 Ka8 Qb7#', 'Ch5ssPlayer', 'Azumilover', 0, 'Azumilover', 'Ch5ssPlayer', 2129, 10, 35);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (20, 'd4 Nf6 Nf3 g6 g3 Bg7 Bg2 O-O O-O d6 c4 c6 Nc3 Bf5 Ne1 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 h6 Bxf6 Bxf6 Ne4 Bg7 Nd3 Na6 Rfd1 Rd4 b3 Bxe4', 'nihalsarin2004', 'Lord-Universe31', 0, 'nihalsarin2004', 'Lord-Universe31', 1147, 25, 39);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (21, 'Nf3 g6 g3 Bg7 Bg2 Nf6 O-O O-O c4 c5 Nc3 Nc6 d4 cxd4 Nxd4 Nxd4 Qxd4 d6 Qd3 Rb8 b3 a6 a4 Nd7 Bb2 Nc5 Qc2 Bf5 e4 Be6 h3 Qd7 Kh2 b5 axb5 axb5 Nxb5 Bxb2 Qxb2 Nd3 Qc3 Nc5 b4 Nb7 Nd4 f6 Nxe6 Qxe6 Ra7 Nd8 c5 Nc6 Ra4 dxc5 bxc5 Ne5 f4 Nc6 Ra6 Qd7 e5 fxe5 Rxc6 exf4 Rxf4 Rxf4 gxf4 Rf8 Qc4+ Kh8 Re6', 'Mishka_The_Great', 'athena-pallada', 0, 'Mishka_The_Great', 'athena-pallada', 2428, 26, 7);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (22, 'Nc3 Nf6 d4 g6 e4 d6 f3 a6 Be3 b5 Qd2 Nbd7 Bd3 Bb7 h4 h5 Nh3 c5 b3 cxd4 Bxd4 Rc8 Nd5 Bg7 Nxf6+ Nxf6 c4 bxc4 Bxc4 O-O Nf4 e5 Nxh5 Nxh5 g4 Nf4 Be3 d5 exd5 Bxd5 Bxd5 Nxd5 Bh6 Nf4', 'rehbwf', 'Tuzakli_Egitim', 0, 'rehbwf', 'Tuzakli_Egitim', 352, 6, 39);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (23, 'e4 d6 d4 Nf6 Nc3 g6 Bf4 a6 Qd2 b5 O-O-O b4 Nb1 Nxe4 Qxb4 Bg7 Be3 Nc6 Nf3 Nxb4', 'Ragehunter', 'ChessTheory64', 0, 'ChessTheory64', 'Ragehunter', 1672, 5, 29);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (24, 'Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O c4 d6 Nc3 c6 d3 Qa5 e4 Qh5 Ng5 Qxd1 Rxd1 e5 h3 Na6 Be3 Re8 a3 h6 Nf3 Be6 b4 Nc7 a4 d5 cxd5 cxd5 Nxe5 Nxe4 dxe4 Bxe5 exd5 Bxc3 Rac1 Nxd5 Bxd5 Bxd5 Rxc3 Bf3 Rdc1 g5 Bxg5 hxg5 Rxf3 Rac8 Rxc8 Rxc8 Rf5 Rc4 Rxg5+ Kf8 Rb5 b6 a5 bxa5 Rxa5 Rxb4 Rxa7', 'LastGladiator2', 'TheGreenCloud', 0, 'LastGladiator2', 'TheGreenCloud', 6443, 8, 34);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (25, 'd4 Nf6 Nf3 g6 Nc3 Bg7 e4 d6 Be3 O-O Qd2 a6 Bh6 b5 Bd3 Nc6 Bxg7 Kxg7 h4 h5 d5 Ne5 Nxe5 dxe5 f3 e6 g4 hxg4 h5 Nxh5 fxg4 Nf4 O-O-O exd5 Nxd5 Rh8 Nxf4 exf4 Qxf4 Be6 g5 Qd4 Rxh8 Rxh8 Bxb5 Qxd1+ Kxd1 axb5 Qf6+ Kh7 Qe5 Rd8+ Ke2 c6 b3 Ra8 Qb2 c5 Ke3 c4 Kd4 cxb3 cxb3 Kg8 Kc5 Rb8 Qe5 Ra8 Qh2 Bd7 Kb4 Re8 e5 Re7 Qf4 Re8 Qd4 Bc6 Qd6 Re6 Qd4 Re8 Kc5 Re6 a4 bxa4 bxa4 Bxa4 Qxa4 Rxe5+ Kd6 Rxg5 Ke7 Re5+ Kf6 Rf5+ Ke7 Re5+ Kd6 Re6+ Kd5 Kg7 Qd4+ Kg8 Qh4 Kg7 Qd8 Re1 Qg5 Re6 Qd8 Re1 Qg5 Re6 Qd8', 'HKZ2020', 'OjaiJoao', 0, 'HKZ2020', 'OjaiJoao', 20, 17, 24);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (26, 'Nf3 d5 g3 Nf6 Bg2 c5 O-O h6 d3 Nc6 Nbd2 e6 c3 g6 Qc2 Bg7 e4 O-O Re1 b6 Nf1 a5 exd5 Nxd5 Ne3 Ba6 Nxd5 Qxd5 Ne5 Qxg2+ Kxg2 Nxe5 Rxe5 Bxe5 Bxh6 Rfd8 Rd1 Rd7 Bg5 f6 Be3 Rad8 d4 cxd4 cxd4 Bb7+ Kg1 Kg7 f4 Bxd4 Bxd4 Rxd4 Rxd4', 'TheGreenCloud', 'LastGladiator2', 0, 'LastGladiator2', 'TheGreenCloud', 6558, 29, 27);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (27, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Be3 O-O Qd2 a6 Bh6 b5 Bd3 Nc6 h4 e5 d5 Nb4 h5 Nxd3+ cxd3 Bb7 Bxg7 Kxg7 hxg6 fxg6 Ng5 Bc8 Nxh7 Nxh7 Qh6+ Kf6 Qxh7 Bd7 Qh4+ Kg7 Qh6+ Kf6 O-O-O Rh8 Qe3 Kg7 Ne2 c6 dxc6 Bxc6 Ng3 Bd7 Kb1 Rc8 Rxh8 Qxh8 d4 Qh6 Qxh6+ Kxh6 dxe5 Bg4 f3 Be6 Rxd6 Bc4 Nf5+ Kg5 Rxg6+ Kf4 e6 Bd3+', 'Apodex64', 'muisback', 0, 'muisback', 'Apodex64', 1449, 3, 11);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (28, 'Nf3 d5 g3 Nf6 Bg2 c5 O-O h6 d3 Nc6 Nbd2 e6 e4 g6 Re1 Bg7 e5 Ng4 d4 cxd4 Nb3 Ngxe5 Nbxd4 Nxf3+ Nxf3 O-O c3 Bd7 Bf4 Rc8 Qc1 Kh7 h4 Ne7 Nh2 Qb6 Be3 d4 Bf4 dxc3 bxc3 Rxc3 Qd2 Bc6 Rab1 Qa6 Ng4 Bxg2 Kxg2 Qc6+ Kg1 Nf5 Ne3 Nd4 Qd1 Nf3+ Kf1 Nxe1 Qxe1 e5 Bxh6 Bxh6', 'Josip_buje', 'muisback', 0, 'Josip_buje', 'muisback', 9086, 19, 34);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (29, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Be3 O-O Qd2 a6 Bh6 b5 Bd3 Nc6 h4 Bxh6 Qxh6 e5 d5 Nd4 Nxd4 exd4 Ne2 Qe7 f3 Qe5 h5 g5 O-O-O c5 dxc6 Be6 g3 Kh8 f4 Qc5 Qxf6+ Kg8 e5 g4 Qg5+ Kh8 Qh6 f5 Qxe6 Qxc6 Nxd4 Qc7 Qxd6', 'Azumilover', 'Ch5ssPlayer', 0, 'Azumilover', 'Ch5ssPlayer', 3969, 14, 34);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (30, 'Nf3 d5 g3 Nf6 Bg2 c5 O-O h6 d4 cxd4 Nxd4 e5 Nf3 Nc6 c4 d4 a3 a5 b3 Be7 e3 O-O exd4 exd4 Bb2 d3 Nc3 Bf5 Qd2 Qd7 Rad1 Rad8 Rfe1 Rfe8 Ne5 Nxe5 Rxe5 Bd6 Rxe8+ Rxe8 Nd5 Nxd5 Bxd5 Re2 Qc3 Be5 Qxe5 Rxe5 Bxe5 b5 Bc3 a4 bxa4 bxc4 Bxc4 Qxa4 Rb1 Qxc4 Rb8+ Kh7 Bb4 Be4 f3 Bxf3 Kf2 Qe4 Re8 Qxe8', 'VincentKeymer2004', 'Azumilover', 0, 'VincentKeymer2004', 'Azumilover', 9536, 21, 11);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (31, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Be3 O-O Qd2 a6 Bh6 b5 Bd3 Nc6 h4 e5 d5 Nd4 Nxd4 exd4 Ne2 Re8 Bxg7 Kxg7 f3 c5 dxc6 Qb6 h5 d5 hxg6 fxg6 Qh6+ Kg8 exd5 Ra7 O-O-O Rg7 Nf4 Qc7 g4 Rd8 Kb1 Nxd5 Nxg6 hxg6 Bxg6 Kf8 Rde1 Qf4 Qh8+ Rg8 Qh5 Nf6 Qc5+ Kg7 Qe7+ Kxg6 Re6 Bxe6', 'fireheart92', 'igormezentsev', 0, 'igormezentsev', 'fireheart92', 1715, 30, 7);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (32, 'Nf3 d5 g3 e6 Bg2 Nf6 O-O Be7 d3 O-O Nbd2 c5 e4 Nc6 Re1 Qc7 Nf1 b5 e5 Nd7 Bf4 Bb7 h4 Rfc8 h5 h6 Ne3 a5 Nxd5 exd5 e6 Bd6 exd7 Qxd7 Ne5 Nxe5 Bxe5 Bxe5 Rxe5 d4 Qe2 Bxg2 Kxg2 Re8 Re1 Kf8 Qf3 Rac8 b3 a4 Qe4 Rxe5 Qxe5 c4 bxc4 bxc4 dxc4 Rxc4 Qb8+ Rc8 Qb4+ Kg8 Rd1 Qd5+ Kg1 Qxa2 Rxd4 a3 Rd3 Qa1+ Kg2 a2 Qb7 Re8 Rf3 Rf8 Ra3 Qb1 Qa6 Qxc2 Rxa2 Qe4+ f3 Qd5 g4 Re8 Qa4 Qe6 Rd2 Kh8 Qb5 Kg8 Qd3 Qc8 Ra2 Qb8 Qd7 Qe5 Qd3 Qe6 Rb2 f5 Qxf5 Qxf5 gxf5 Re5 Kg3 Rxf5 Rh2 Kf7 f4 Kf6 Kg4 Rb5 Ra2 Rb6 Ra5 Rc6 Rf5+ Ke6 Rf8 Rb6 Ra8 Rc6 Rg8 Kf7 Rd8 Rc7 Rd5 Rc6 Kf5 Re6 Rd7+ Re7 Rxe7+ Kxe7 Kg6 Kf8 f5 Kg8 f6 gxf6 Kxf6 Kh7 Kf7 Kh8 Kg6 Kg8 Kxh6 Kh8 Kg5 Kg8 Kf4 Kh8 h6 Kg8 Ke3 Kh8 Kd2 Kh7 Ke1 Kxh6', 'chessmaster2006', 'rehbwf', 0, 'chessmaster2006', 'rehbwf', 1355, 26, 27);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (33, 'Nf3 c6 g3 d5 Bg2 Bg4 h3 Bxf3 exf3 e5 O-O f5 Re1 Bd6 d4 e4 fxe4 fxe4 c4 Nf6 Nc3 O-O cxd5 cxd5 Qb3 Qb6 Nxd5 Qxb3 Nxf6+ Rxf6 axb3 Nc6 Be3 Re8 d5 Nb4 Rxa7 Nd3 Re2 Ref8 Bxe4 Nxf2 Rxf2 Rxf2 Bxf2 Rxf2 Kxf2 Bc5+ Ke2 Bxa7 d6 Kf7 Bd5+ Kf6 g4 Ke5 d7 Bb6 Bxb7 Kf4 Kd3 Kg3 Kc4 Kxh3 Kb5 Bd8 Bf3 Kg3 Bd1 g6 Kc6 h5 gxh5 gxh5 Bxh5 Kf4 b4', 'Aborigen100500', 'Sharkfang', 0, 'Aborigen100500', 'Sharkfang', 5817, 10, 39);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (34, 'Nf3 d5 g3 c5 Bg2 Nf6 O-O Nc6 d4 cxd4 Nxd4 e5 Nxc6 bxc6 c4 Rb8 Nc3 d4 Bxc6+ Bd7 Bxd7+ Qxd7 Nb1 h5 f3 h4 g4 e4 Nd2 Bd6 Kh1 Qc7 Qa4+ Kf8 Nxe4 Bxh2 Nxf6 gxf6 e3 Be5 f4 Bd6 exd4 Rg8 Rg1 Rb4 Qa6 Rxc4 Be3 Qe7 Qxc4 Qe4+ Kh2 Qxe3 Qf1 Bxf4+ Kh1 Bg3 Rc1 Qe4+ Qg2 Qxg4 Rgf1 Rg6 Rcd1 a5 d5 Kg7 b3 a4 Rd3 axb3 axb3 Qc8 Rdf3 Qg4 Rd3 Qd7 Rfd1 Qc8 Qf1 Qc2 R1d2 Qc8 b4 Qc4 Qf3 Qc1+ Qd1 Qc8 Qf1 Qc4 Rd1 Qxb4 d6 Qb7+ Qg2 Qxg2+ Kxg2 Bxd6+ Kh3 Be5 Kxh4 f5 Rb1 f4 Rb7 Kf6 Rdb3 Bd4 Rf3 Be3 Kh3 Rg7 Rb3 Ke5 Rbxe3+ fxe3 Rxe3+ Kd4 Re7 Kd5 Kh4 Kd6 Re1 f5 Kh3 Rg8 Kh2 f4 Re4 Rg4 Kh3 Kd5 Re8 Rg3+ Kh2 Re3 Rf8 Ke4 Kg2 Rg3+ Kf2 Rh3 Re8+ Kf5 Rf8+ Ke4 Re8+ Kf5 Rf8+ Ke4', 'chessmaster2006', 'Ch5ssPlayer', 0, 'Ch5ssPlayer', 'chessmaster2006', 5358, 20, 11);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (35, 'd4 Nf6 Bg5 g6 Bxf6 exf6 c3 d5 e3 f5 Nh3 Bd6 Nd2 c6 Bd3 Nd7 Qc2 Nf6 O-O-O Qa5 Kb1 b5 Nf4 h5 Nb3 Qb6 f3 a5 Rhe1 O-O Qf2 a4 Nc1 b4 c4 dxc4 Bxc4 Bxf4 exf4 Ba6 Bf1 Bxf1 Qxf1 Nd5 Ka1 Nxf4 Nd3 Nxd3 Qxd3 Rad8 g4 fxg4 fxg4 Rd5 Re4 Rfd8 h3 c5 Qf3 hxg4 Rxg4 Rxd4', 'may6enexttime', 'kc6', 0, 'kc6', 'may6enexttime', 7315, 39, 18);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (36, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Bd3 O-O Be3 a6 O-O b5 a3 Bb7 h3 Nbd7 Bg5 h6 Bh4 c5 dxc5 Nxc5 Bxf6 Bxf6 Qe2 Nxd3 cxd3 e6 Rac1 Rc8 Na2 Qb6 Rxc8 Rxc8 Rc1 Rxc1+ Nxc1 b4 axb4 Qxb4 b3 Qc3 Nh2 Qxc1+ Qd1 Qxd1+ Nf1', 'ChessTheory64', 'Ragehunter', 0, 'ChessTheory64', 'Ragehunter', 1736, 24, 40);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (37, 'Nf3 f6 e4 e5 d4 Bd6 dxe5 Bxe5 Nxe5 fxe5 Qh5+ Kf8 Qxe5 d6 Qf4+ Qf6 Nc3 Qxf4 Bxf4 Nf6 O-O-O Kf7 f3 Re8 g4 g5 Bxg5 Re5 Bxf6 Kxf6 Nd5+ Rxd5 Rxd5 Ke6 Bc4 Kd7 e5 Kc6 exd6 cxd6 Rhd1 Kb6 Rxd6+ Nc6 Rh6 Kc5 b3 b5 Rd5+ Kb6 Rxb5+ Kc7 Rc5 Bd7 Bb5 Rb8 Bxc6 Bxc6 Rcxc6+ Kb7 Rcf6 Rc8 Rxh7+ Rc7 Rxc7+ Kxc7 h4 Kd7 h5 Ke7 g5 a5 a4', 'fireheart92', 'ChessTheory64', 0, 'fireheart92', 'ChessTheory64', 4256, 10, 28);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (38, 'd4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Nbd7 Nd2 Nc5 O-O Bd7 b3 Qe8 Bxf6 Bxf6 Bg4 Nd3 Bxd7 Qxd7 Qf3 Nf4 Nb5 Bg7 Rfd1 f5 Rac1 c5 dxc6 bxc6 Nc3 Rad8 Nf1 fxe4 Nxe4 Qe6 Qe3 d5 cxd5 cxd5 Neg3 h5 Rc7 h4 Ne2 Qg4 Nxf4 Rxf4 Rdc1 Rdf8 Qa7 R4f7 Rxf7 Rxf7 Rc7 Rxc7 Qxc7 h3 Qd8+ Kh7 Qxd5 e4 Ne3 Qe2 gxh3 Qf3 Qxa5 Qxh3 Qg5 Qf3 Qg3 Qf6 Qh3+ Kg8', 'Watneg', 'Chesssknock', 0, 'Chesssknock', 'Watneg', 8355, 6, 17);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (39, 'Nf3 Nf6 g3 b6 Bg2 Bb7 O-O e6 c4 c5 Nc3 Be7 d4 cxd4 Qxd4 d6 Rd1 a5 Nb5', 'igormezentsev', 'Tuzakli_Egitim', 0, 'Tuzakli_Egitim', 'igormezentsev', 2443, 19, 28);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (40, 'g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O d4 d6 c4 c6 Nc3 Bf5 h3 Ne4 e3 Nxc3 bxc3 Be4 Qb3 Qb6 Ba3 Qxb3 axb3 Nd7 Nd2 Bxg2 Kxg2 Nf6 Rfb1 a6 b4 Rfb8 b5 axb5 cxb5 cxb5 Rxb5 Ra6 Rb3 Rba8 Nb1 Ne4 Ra2 R6a7 Rab2 e5 f3 Nf6 Bxd6 exd4 cxd4 Ra2 Be5 Rxb2+ Rxb2 Nd5 Bxg7 Nxe3+ Kf2 Nd1+', 'Sharkfang', 'nihalsarin2004', 0, 'Sharkfang', 'nihalsarin2004', 4317, 32, 23);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (41, 'Nf3 Nf6 d3 g6 e4 Bg7 e5 O-O exf6 Bxf6 g3 Bg7 Bg2 d6 O-O e6 c3 f6 d4 Qe7 Bd2 e5 Qc1 e4 Re1 f5 Ng5 d5 c4 Qf6 cxd5 c6 dxc6 Nxc6 Qc4+ Kh8 d5 Ne5 Bc3 Nxc4 Bxf6 Bxf6 Ne6 Bxe6 dxe6 Nxb2 Nc3 Nd3 Red1 Ne1 Rd3 e3 Rxe3 Nxg2 Kxg2 Kg7 Rb1 Be7 Rxb7 Rf7 exf7 Kxf7 Rexe7+ Kf6 Rf7+ Kg5 Ne2 Kg4 f4', 'Ch5ssPlayer', 'chessmaster2006', 0, 'Ch5ssPlayer', 'chessmaster2006', 4671, 30, 30);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (42, 'Nc3 Nf6 d4 d6 Bg5 g6 Bf4 Bg7 Bg3 h5 Nf3 h4 e3 hxg3 hxg3 e6 Rxh8+ Bxh8 e4 Bg7 e5 dxe5 dxe5 Qxd1+ Rxd1 Nd5 Nxd5 exd5 Rxd5 Nc6 Rd1 Be6 Bb5 Rd8 Bxc6+ bxc6 Rxd8+ Kxd8 Nd4 Ke7 Nxc6+ Kd7 Nd4 Bxe5 Nf3 Bd6 Ke2 Bd5 Ke3 Bxf3 gxf3 Bc5+ Ke4 Bxf2 f4 Bxg3 f5 gxf5+ Kxf5 Bd6 Kf6 Ke8 c3 Bc5 b3 Be3 c4 Bd2 a4 Bc3+ Kf5 Ke7 Kf4 f6 Ke4 Bb4 Kd5 Bd6 c5 f5 cxd6+ cxd6 b4 Kf6 b5 f4 b6 axb6 Kc6 f3 Kxb6 f2 a5 f1=Q a6 Qxa6+', 'Watneg', 'Chesssknock', 0, 'Chesssknock', 'Watneg', 7652, 5, 37);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (43, 'Nf3 e5 d3 e4 dxe4 Bc5 e5 d5 exd6 cxd6 e3 Qe7 Nc3 Qe5 Nd5 Qe6 Nc7+ Kd8 Nxe6+ fxe6 Bd3 Bd7 c3 Bc6 Be4 Bxe4 Nd2 d5 Nxe4 d4 Nxc5 Ke8 Qxd4 Nc6 Qxg7 Nd4 Qd7+ Kf8 Nxe6+ Nxe6 Qxe6 Kg7 Qf5 Kh6 Qf4+ Kg7 e4 Kg6 Qg3+ Kh5 e5 Nf6 Qg5#', 'Sharkfang', 'Aborigen100500', 0, 'Aborigen100500', 'Sharkfang', 6823, 7, 2);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (44, 'Nf3 Nf6 d3 g6 e4 Bg7 e5 O-O exf6 Bxf6 g3 Bg7 Bg2 d6 O-O f6 Bd2 Re8 Qc1 e6 Bh6 Qd7 Bxg7 Qxg7 c4 Qf7 c5 dxc5 Qxc5 e5 Qc1 Be6 Nc3 Nc6 d4 Nxd4 Nxd4 exd4 Ne4 Bf5 Nc5 b6 Rd1 bxc5 Qxc5 c6 Bxc6 Rac8 Qd5 Qxd5 Bxd5+ Kg7 Bf3 Be6 Kg2 Bf5 Rxd4 Red8 Rf4 Rd5 g4 Rd6 Rxf5 gxf5 gxf5 Kh6 h3 Kg5 Kh2 Kxf5 Re1 Re8 Bg4+ Kg6 Rxe8 Rd5 Re3 Re5 Kg3 Kg5 Rxe5+ fxe5 f4+ Kf6 Kf3 h5 fxe5+ Kxe5 Bxh5 Kd6 Bg4 Kc5 h4 Kb6 h5 a5 b3 a4 bxa4 Ka5 h6 Kxa4 h7 Ka3 h8=Q Kxa2 Qg7 Ka3 Qf6 Ka2 Qe6+ Ka3 Qb6 Ka2 Ke4 Ka3 Kd3 Ka2 Kc3 Ka3 Qb3#', 'LastGladiator2', 'toomanymanoevres', 0, 'toomanymanoevres', 'LastGladiator2', 9840, 34, 31);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (45, 'e3 Nf6 Bc4 g6 Qh5 gxh5 Nf3 d5 Bb5+ c6 Ne5 Nbd7 Nxf7 Kxf7 g4 cxb5 g5 Ne4 Rg1 Rg8 f4 Rg6 f5 Rxg5 Rf1 Rg2 Rf2 Qc7 d3 Rxf2 dxe4 Qxh2 Nc3 Qg1#', 'Ch5ssPlayer', 'Azumilover', 0, 'Azumilover', 'Ch5ssPlayer', 7451, 12, 14);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (46, 'Nf3 g6 d3 Bg7 e4 Bf8 c3 Bg7 Qc2 Bf8 Bd2 Bg7 g3 Bf8 Bg2 Bg7 O-O Bf8 d4 Bg7 e5 Bf8 e6 Bg7 exf7+ Kxf7 Ng5+ Ke8 Qb3 Nf6 Qf7#', 'kc6', 'cihanakif', 0, 'cihanakif', 'kc6', 1481, 37, 22);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (47, 'e4 d6 Bc4 Nf6 Qf3 e6 e5 dxe5 Qd1 e4 d4 Nc6 d5 exd5 Bxd5 Qxd5 f3 Qxd1+ Kxd1 exf3 Ke1 fxg2 Nh3 gxh1=Q+ Kf2 Qxh2+ Ke3 Qxh3+ Kd2 Be6 c3 Qg2+ Kd3 Bf5+ Ke3 Qd5 Kf4 Qe4+ Kg3 Qg4+ Kh2 Ne4 Kh1 Nf2+ Kh2 Bd6+ Bf4 Bxf4#', 'rehbwf', 'Tuzakli_Egitim', 0, 'rehbwf', 'Tuzakli_Egitim', 8092, 31, 7);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (48, 'Nf3 g5 d3 g4 Nfd2 g3 e4 gxf2+ Kxf2 e6 g3 Qf6+ Qf3 Bc5+ Kg2 Qd4 c3 Qf2+ Qxf2 Bxf2 Kxf2 Nf6 Nf3 Ng4+ Kg2 Ne3+ Bxe3 h5 Bd4 h4 Bxh8 h3+ Kxh3 d6 Kg2 e5 h4 Bg4 h5 Bxf3+ Kxf3 Nc6 Kg2 Kd8 h6 Kc8 h7 Kd7 Bg7 f5 h8=Q f4 gxf4 Ne7 Qh3+', 'LastGladiator2', 'toomanymanoevres', 0, 'toomanymanoevres', 'LastGladiator2', 7773, 8, 29);
-insert into singularGame (gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (49, 'e3 Nf6 Ne2 g6 Nf4 Bg7 Nxg6 hxg6 g3 d6 Bg2 Bh3 d3 Bxg2 Rg1 Bh3 Qe2 Bg4 Qf1 Bf3 Nd2 Nc6 Nxf3 Nb4 Qe2 e5 c3 Nc6 d4 e4 Nd2 d5 f3 exf3 Nxf3 Qd7 e4 O-O-O e5 Rde8 exf6 Rxe2+ Kxe2 Qe6+ Kd2 Bxf6 Kc2 Qf5+ Kd2 Qxf3 Kc2 Qf5+ Kb3 Qe4 a3 Qd3 Ka2 Qc4+ b3 Na5 bxc4 Nxc4 Rb1 Rxh2+ Bd2 Nxd2 Rgc1 Nc4+ Ka1 Ra2+ Kxa2 Be7 Ka1 Bxa3 Rb3 Bxc1 Kb1 Bd2 Kc2 Bxc3 Rxc3 f5 Rd3 f4 Re3 Kd7 Rf3 Kd6 Rxf4 Ne3+ Kd3 Nc4 Ke2 Ne5 Rf5 Ke7 Rf6 Kxf6 dxe5+ Kxe5 g4 d4 g5 Kf4', 'athena-pallada', 'PlemSovhoz', 0, 'athena-pallada', 'PlemSovhoz', 3893, 16, 29);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (1, 'e3 Nf6 d4 g6 c4 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O b6 b3 Bb7 Bb2 Ne4 Nbd2 Ndf6 Qc2 a5 Nxe4 Nxe4 Nd2 Nxd2 Qxd2 a4 d5 axb3 axb3 Qd7 Bxg7 Kxg7 Bg4 f5 Bf3 Kg8 Qd4 Rfd8 Rfe1 Qe8 e4 fxe4 Bxe4 Qf7 Bf3 Re8 Bg4 Qf6 Be6+ Kg7 Qxf6+ exf6 f4 f5 g4 Kf6 Kf2 h6 Kg3 fxg4 hxg4 Ra5 Rxa5 bxa5 Ra1 Ra8 f5 gxf5 gxf5 Ra6 Kf4 Rb6 Ra3 c6 dxc6 Bxc6 Rxa5 Rxb3 Ra6 Rf3+ Kg4 Be4 Rxd6 Ke5 Rd8 Rf1 Re8 Kf6 Rf8+ Ke5 Rh8 Rg1+ Kh3 Bxf5+ Bxf5 Kxf5 Kh2 Rc1 Rxh6 Rxc4 Rh5+ Kg4 Rd5 Rc2+ Kg1 Rc3 Rd2 Kg3 Rd3+ Rxd3', 'TheGreenCloud', 'LastGladiator2', 0, 1, 'LastGladiator2', 'TheGreenCloud', 7306, 18, 41);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (2, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Bd3 O-O O-O Nc6 Bg5 h6 Bf4 Nxd4 Nxd4 e5 Bxe5 dxe5 Nf3 Qe7 Nd5 Nxd5 exd5 e4 Re1 f5 Bc4 Kh7 c3 Qc5 Nd2 b5 Bb3 Bb7 Nf1 Rad8 Ne3 f4 Ng4 h5 Rxe4 hxg4 Qxg4 Bxd5 Rxf4 Bxb3 axb3 Rxf4 Qxf4 Rf8 Qh4+ Kg8 h3 Bf6 Qg3 Kg7 b4 Qb6 Rd1 Rf7 h4 Kh7 Rd2 Qe6 Kf1 Qc4+ Kg1 Qxh4 Qd3 Qh5 Qe3 Bg5 Qe6 Re7 Rd7 Qh4 Rxe7+ Bxe7 Qa6 Bd6 Qxb5 Qh2+ Kf1 Qh1+ Ke2 Qxg2 c4 Qe4+ Kd2 Bf4+ Kc3 Qe5+ Kb3 Qxb5 cxb5', 'fireheart92', 'igormezentsev', 0, 1, 'igormezentsev', 'fireheart92', 6532, 36, 2);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (3, 'Nf3 Nc6 g3 e5 d3 Bc5 Bg2 d6 Nc3 Bg4 h3 Bh5 a3 f5 Na4 Bb6 Nxb6 axb6 c4 Nge7 Qb3 Bf7 Ng5 O-O Nxf7 Rxf7 Bg5 Qd7 Bxe7 Nxe7 Bxb7 Rb8 Bd5 Nxd5 cxd5 f4 g4 Qe7 O-O-O Qh4 Rh2 Rf6 Kb1 Rbf8 Qc4 R8f7 Qc6 h6 Rc1 Kh7 Qb7 Rg6 Rxc7 Rxc7 Qxc7 Rxg4 hxg4 Qxh2 Qxd6 Qg1+ Ka2 Qxf2 Qxe5 Qc5 Qe4+ Kh8 Qe8+ Kh7 Qc6 Qe3 d6 Qxe2 d7 Qxd3 Qe6', 'TheGreenCloud', 'Josip_buje', 0, 1, 'TheGreenCloud', 'Josip_buje', 1143, 24, 10);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (4, 'e4 d6 Nc3 Nf6 Nf3 g6 d4 Bg7 Bd3 O-O Be3 a6 Qd2 b5 h4 h5 a3 Bb7 O-O-O Nbd7 d5 c6 dxc6 Bxc6 Bg5 Rc8 Be2 Nxe4 Nxe4 Bxe4 Qe3 Rxc2+', 'Mishka_The_Great', 'athena-pallada', 0, 1, 'Mishka_The_Great', 'athena-pallada', 1913, 39, 13);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (5, 'Nf3 e6 d3 d5 g3 h5 h4 Be7 Bg2 Nf6 Bg5 Nfd7 Bxe7 Qxe7 c3 e5 Qc2 Nf6 Nbd2 Ng4 e4 dxe4 Nxe4 Nc6 O-O-O a5 Rhe1 Be6 a4 Rb8 Nfg5 b5 Nxe6 fxe6 axb5 Rxb5 Qa4 O-O Qxb5 Nxf2 Nxf2 Rxf2 Bxc6 Qf6 Qxe5 Qf7 Qxe6 Qxe6 Rxe6 Rf3 Bxf3', 'Mishka_The_Great', 'Lord-Universe31', 0, 1, 'Lord-Universe31', 'Mishka_The_Great', 3094, 14, 29);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (6, 'b3 Nf6 Bb2 g6 Nc3 Bg7 h4 h5 e3 d5 Be2 c6 Nh3 Bxh3 Rxh3 Nbd7 d4 Qc7 Qd2 O-O O-O-O a5 f3 b5 g4 a4 g5 Ne8 f4 axb3 axb3 b4 Na4 Nd6 Bf3 Rfb8 Nc5 Nxc5 dxc5 Bxb2+ Kxb2 Nb5 Rhh1 Nc3 Ra1 e5 f5 e4 Be2 Qe5 Qd4 Qxd4 exd4 Nxe2 Rh2 Nxd4 Rf2 e3 Rff1 Nxf5', 'Chesssknock', 'may6enexttime', 0, 1, 'may6enexttime', 'Chesssknock', 3280, 40, 1);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (7, 'Nf3 e6 d3 a6 g3 b5 Bg2 d5 O-O Nd7 c4 Rb8 cxd5 exd5 Nd4 Nb6 Nc6 Qd6 Nxb8 c5 Nxa6 Bxa6 e4 d4 e5 Qe6 Qb3 Qxb3 axb3 Bb7 Bxb7 Kd7 Bf4 Ne7 Ra7 Ke6 Nd2 Ned5 Bxd5+ Nxd5 Ne4 Nxf4 gxf4 Kf5 Rxf7+ Kg6 e6 c4 bxc4 bxc4 dxc4 Bb4 Kh1 Re8 Rg1+ Kh6 f5 g6 Rg3 gxf5 Rf6+ Kh5 Rg5+ Kh4 Rh6#', 'rehbwf', 'chessmaster2006', 0, 1, 'chessmaster2006', 'rehbwf', 6892, 17, 3);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (8, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Bd3 O-O h3 Nc6 Be3 a6 Qd2 e5 d5 Ne7 Bh6 c6 Bxg7 Kxg7 O-O cxd5 exd5 b5 b4 Bb7 a4 bxa4 Rxa4 Nexd5 Nxd5 Bxd5 Nh2 Qc8 Rfa1 Bb7 Qe2 Nd5 c4 Nc3 Qc2 Nxa4 Rxa4 Qc6 Ra5 Qxg2#', 'Azumilover', 'Ch5ssPlayer', 0, 1, 'Azumilover', 'Ch5ssPlayer', 8715, 38, 24);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (9, 'Nf3 g6 g3 Bg7 Bg2 d6 O-O e5 c4 Ne7 Nc3 O-O d3 Nbc6 Rb1 h6 a3 Kh7 b4 f5 Qc2 Nd4 Nxd4 exd4 Nd5 c6 Nxe7 Qxe7 e3 Bd7 exd4 Bxd4 Bb2 Bxb2 Qxb2 f4 Rfe1 Qf7 Re4 f3 Bf1 Rae8 Rbe1 Bf5 R4e3 Rxe3 Rxe3 Bg4 Qd4 h5 Qxd6 Qf5 Re7+ Rf7 h3 Rxe7 Qxe7+ Kh6 hxg4 hxg4 Qe3+ Kg7 Qxa7 Qf7 Qd4+', 'may6enexttime', 'kc6', 0, 1, 'kc6', 'may6enexttime', 294, 31, 2);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (10, 'e4 d6 Nf3 Nf6 Nc3 g6 d4 Bg7 e5 Nfd7 e6 fxe6 Ng5 Nf6 Qe2 Nc6 Nxe6 Bxe6 Qxe6 Nxd4 Qc4 Nxc2+ Kd1 Nxa1 Qb5+ Qd7 Qxb7 O-O Bc4+ Kh8 Re1 e5 Nd5 Qg4+ Be2 Qd4+ Bd2 Nxd5 Bf3 Nf4 Kc1 Nd3+ Kb1 Nxe1 Bxe1 Rab8 Bc3 Qd3+', 'Tuzakli_Egitim', 'rehbwf', 0, 1, 'rehbwf', 'Tuzakli_Egitim', 8358, 24, 8);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (11, 'e4 d6 d4 Nf6 Bd3 e5 dxe5 dxe5 Nf3 Bc5 O-O Nbd7 h3 O-O Nc3 c6 Re1 Qc7 Be3 Bxe3 Rxe3 Nc5 Bf1 h6 b4 Ne6 Ne2 Rd8 Qc1 Nd4 Nexd4 exd4 Re1 Be6 Bd3 b6 a4 c5 bxc5 bxc5 e5 Nd5 Be4 Rab8 Rb1 Nc3 Rxb8 Rxb8 Nd2 Nxa4 Qa3 Nc3 f4 Bd5 Bxd5 Nxd5 Ne4 Nxf4 Qxc5 Qxc5 Nxc5 Rb2 e6 Nxe6 Nxe6 fxe6 Rxe6 Rxc2 Ra6 d3 Kf1 Rc1+', 'Ch5ssPlayer', 'Azumilover', 0, 1, 'Azumilover', 'Ch5ssPlayer', 119, 14, 28);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (12, 'Nf3 d6 g3 Nf6 Bg2 g6 O-O Bg7 c4 O-O Nc3 e5 d3 Re8 Rb1 c6 e4 d5 cxd5 cxd5 Re1 dxe4 dxe4 Qxd1 Rxd1 Nc6 Bg5 Bg4 h3 Bxf3 Bxf3 Rad8 Nd5 Rd6 Nxf6+ Bxf6 Rxd6 Bxg5 Rd7 Nd4 Kg2 Re7 Rxe7 Bxe7 h4 Kf8 Rc1 Bd6 Rc8+ Ke7 Rh8 h5 g4 hxg4 Bxg4 Kf6 Ra8 a6 Bc8 Be7 Bxb7 Kg7 Bd5 Bxh4 Ra7 Kh6 Rxf7 a5 Ra7 Bd8 Ra8 Bb6 Ra6 Bc7 Bf7 Kg5 Rxg6+ Kf4 f3 Ke3 Ra6 Nxf3 Rc6 Bd8 Rc3+ Kxe4 Rxf3 a4 Bg6+ Kd4 Rd3+ Kc5 Rxd8 e4 Bxe4 a3 b3 Kb4 Rc8 Ka5 Rb8 Ka6 Rb7 Ka5 Kf3 Ka6 Ke3 Ka5 Kd4 Ka6 Kc5 Ka5 Ra7#', 'may6enexttime', 'kc6', 0, 1, 'kc6', 'may6enexttime', 5466, 42, 29);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (13, 'e4 d6 d4 Nf6 Nc3 g6 Be3 a6 f3 b5 Qd2 Nbd7 Bh6 c5 dxc5 Nxc5 O-O-O Bb7 Kb1 Qc7 h4 Rc8 Bxf8 Rxf8 h5 Nxh5 Nge2 Nf6 g4 h5 gxh5 Nxh5 Bh3 e6 Nd5 Bxd5 exd5 Rd8 b4 Na4 dxe6 Qe7 exf7+ Rxf7 Nd4 Kf8 Nc6 Qf6 Nd4 Nf4 Bf1 Rc8 c4 bxc4 Qc2 Nb6 a3 c3 Bd3 Nxd3 Rxd3 Nd5 Re1 Nf4 Rdd1 Kg7 Rg1 Re8 Rdf1 Qxd4 Rg5 Qd2 Rfg1 Qxc2+ Kxc2 Re6 R5g4 Ne2 Kb3 Nxg1 Kxc3 Rxf3+', 'ARM__55555', 'toomanymanoevres', 0, 1, 'ARM__55555', 'toomanymanoevres', 3303, 27, 10);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (14, 'Nf3 d5 g3 c5 Bg2 Nc6 d4 cxd4 Nxd4 e6 O-O Nf6 c4 Bc5 Nb3 Bb4 a3 Be7 cxd5 exd5 Nc3 Be6 Bg5 d4 Nb5 Bxb3 Qxb3 a6 Bxc6+ bxc6 Nxd4 Qxd4 Rfd1 Qe5 Bf4 Qe6 Qb7 O-O Rac1 Rab8 Bxb8 Ne4 Bf4 Bg5 Qxc6 Qf5 Qd5 Qg6 Bxg5 Nxg5 h4 Ne6 Qd3 Qf6 Qxa6 Qxb2 Rc8 g6 Rxf8+ Kxf8 Qd6+ Kg7 Qd3 Qe5 a4 Qa5 Ra1 Nc5 Qb5 Qc3 Rb1 Ne4 Qb2 Kf6 Qxc3+ Nxc3 Rb6+ Ke5 a5 Kd5 a6 Na4 Rf6 Ke5 Rxf7 Nb6 a7 h5 Rb7 Na8 Rb8 Nc7 Rc8 Na8 Rxa8 g5 Re8+ Kd4 a8=Q g4 Qe4+ Kc3 Qd3+ Kb4 Rb8+ Kc5 Rc8+ Kb6 Qb1+ Ka7 Rc2 Ka6 Ra2#', 'VincentKeymer2004', 'Apodex64', 0, 1, 'Apodex64', 'VincentKeymer2004', 2663, 27, 34);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (15, 'd4 Nf6 Nf3 g6 g3 Bg7 Bg2 O-O O-O d6 b3 c6 Bb2 Bf5 c4 a5 Nc3 Ne4 e3 Nxc3 Bxc3 Be4 Nd2 Bxg2 Kxg2 Nd7 Qc2 e5 Rad1 Qc7 Nf3 Rfe8 dxe5 dxe5 e4 Nc5 Rd2 Bh6 Rdd1 b6 a3 f6 b4 axb4 axb4 Ne6 Rd3 c5 Rfd1 Nd4 Bxd4 exd4 bxc5 bxc5 Rb3 Qc6 Rdb1 Qxe4 Qxe4 Rxe4 Rb5 Bf8 Rb7 Re2 R1b2 Ra2 Rxe2 Rxe2 Kf1 Rc2 Rc7 Rxc4 Ne1 Rc1 Ke2 Ra1 Nd3 Ra2+ Kf3 Ra3 Ke2 Rc3 Nf4 Bd6 Rc8+ Kf7 Nd5 Rc2+ Kd3 Rxf2 Rc6 Ke6 Nf4+ Kd7 Ra6 Bxf4 gxf4 Rxf4 Kc4 Rf5 Ra7+ Kd6 Rxh7 Rh5 Rg7 Rxh2 Rxg6 Rf2 Rg8 Rc2+ Kd3 Rc3+ Kd2 Kd5 Rd8+ Kc4 Rf8 Rf3 Rf7 Rf2+ Ke1 Rf5', 'fireheart92', 'igormezentsev', 0, 1, 'igormezentsev', 'fireheart92', 6923, 31, 19);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (16, 'Nf3 Nf6 g3 g6 Bg2 Bg7 O-O d6 c4 Nbd7 Nc3 O-O d3 Re8 Rb1 e5 e4 Nb6 b4 a6 a4 Be6 a5 Nbd7 Ng5 c5 Nxe6 Rxe6 Nd5 Re8 Bg5 Qc8 Bh3 Qb8 bxc5 Nxd5 Bxd7', 'muisback', 'Apodex64', 0, 1, 'muisback', 'Apodex64', 1100, 8, 15);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (17, 'Nf3 Nf6 g3 g6 Bg2 Bg7 O-O d6 c4 O-O Nc3 Nc6 d3 e5 Rb1 Be6 b4 Qd7 b5 Ne7 Ng5 h5 Nxe6 Qxe6 Bxb7 Rac8 Bxc8 Rxc8 e4 h4 Nd5 Ng4 Nxe7+ Qxe7 Qxg4', 'muisback', 'Apodex64', 0, 1, 'muisback', 'Apodex64', 7831, 37, 30);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (18, 'b3 Nf6 Bb2 g6 e3 Bg7 f4 O-O Nf3 d6 Be2 Nbd7 O-O b6 h3 Bb7 c4 Ne4 Bxg7 Kxg7 d4 Ng3 Rf2 Nxe2+ Rxe2 Bxf3 gxf3 e5 fxe5 dxe5 Nc3 Qh4 Qe1 Qxh3 Rf2 exd4 exd4 Rae8 Qd2 Nf6 Re1 Rxe1+ Qxe1 Re8 Ne4 Nxe4 fxe4 Qg4+ Rg2 Qxe4 Qxe4 Rxe4 d5 h5 Rd2 Re7 d6 cxd6 Rxd6 Re2 a4 Re3 b4 Ra3 c5 bxc5 bxc5 Rxa4 c6 Rc4 Kf2 h4 Ke3 h3 Kd3 Rc1 Kd2 h2 Kxc1 h1=Q+ Kd2 Qh2+ Kd3 Qxd6+', 'fireheart92', 'ChessTheory64', 0, 1, 'fireheart92', 'ChessTheory64', 7353, 15, 4);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (19, 'Nf3 d5 g3 g6 Bg2 Bg7 O-O e6 d3 Ne7 Nbd2 O-O e4 dxe4 dxe4 f5 c3 fxe4 Nxe4 Nbc6 Qe2 Ne5 Nxe5 Bxe5 Ng5 Bg7 Nxe6 Bxe6 Qxe6+ Kh8 Bxb7 Rb8 Bg2 Nf5 Bf4 Rxb2 Rad1 Qf6 Qxf6 Bxf6 Bxc7 Rxa2 c4 Nd4 Bd5 Ne2+ Kg2 Kg7 Bd6 Rd8 c5 Ra4 Rd3 h5 Rb1 h4 Rb7+ Kh6 Bf3 hxg3 Bxe2 gxh2 Kxh2 Rh4+ Kg3 Re8 Re3 Rd8 Bf4+ Bg5 Bxg5+ Kxg5 Re5+ Kf6 Kxh4 Kxe5 Rxa7 Rd4+ Kg3 Kd5 Rd7+ Kxc5 Rxd4 Kxd4 Kf4 Kd5 Kg5 Ke6 Kxg6 Ke5 Kg5 Ke4 Kg4 Ke5 f4+ Kf6 f5 Kf7 Kg5 Kf8 f6 Kf7 Kf5 Kf8 Kg6 Kg8 f7+ Kf8 Bf1 Ke7 Kg7 Kd8 f8=Q+ Kd7 Qf6 Kc8 Qe7 Kb8 Ba6 Ka8 Qb7#', 'Ch5ssPlayer', 'Azumilover', 0, 1, 'Azumilover', 'Ch5ssPlayer', 2129, 10, 35);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (20, 'd4 Nf6 Nf3 g6 g3 Bg7 Bg2 O-O O-O d6 c4 c6 Nc3 Bf5 Ne1 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 h6 Bxf6 Bxf6 Ne4 Bg7 Nd3 Na6 Rfd1 Rd4 b3 Bxe4', 'nihalsarin2004', 'Lord-Universe31', 0, 1, 'nihalsarin2004', 'Lord-Universe31', 1147, 25, 39);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (21, 'Nf3 g6 g3 Bg7 Bg2 Nf6 O-O O-O c4 c5 Nc3 Nc6 d4 cxd4 Nxd4 Nxd4 Qxd4 d6 Qd3 Rb8 b3 a6 a4 Nd7 Bb2 Nc5 Qc2 Bf5 e4 Be6 h3 Qd7 Kh2 b5 axb5 axb5 Nxb5 Bxb2 Qxb2 Nd3 Qc3 Nc5 b4 Nb7 Nd4 f6 Nxe6 Qxe6 Ra7 Nd8 c5 Nc6 Ra4 dxc5 bxc5 Ne5 f4 Nc6 Ra6 Qd7 e5 fxe5 Rxc6 exf4 Rxf4 Rxf4 gxf4 Rf8 Qc4+ Kh8 Re6', 'Mishka_The_Great', 'athena-pallada', 0, 1, 'Mishka_The_Great', 'athena-pallada', 2428, 26, 7);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (22, 'Nc3 Nf6 d4 g6 e4 d6 f3 a6 Be3 b5 Qd2 Nbd7 Bd3 Bb7 h4 h5 Nh3 c5 b3 cxd4 Bxd4 Rc8 Nd5 Bg7 Nxf6+ Nxf6 c4 bxc4 Bxc4 O-O Nf4 e5 Nxh5 Nxh5 g4 Nf4 Be3 d5 exd5 Bxd5 Bxd5 Nxd5 Bh6 Nf4', 'rehbwf', 'Tuzakli_Egitim', 0, 1, 'rehbwf', 'Tuzakli_Egitim', 352, 6, 39);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (23, 'e4 d6 d4 Nf6 Nc3 g6 Bf4 a6 Qd2 b5 O-O-O b4 Nb1 Nxe4 Qxb4 Bg7 Be3 Nc6 Nf3 Nxb4', 'Ragehunter', 'ChessTheory64', 0, 1, 'ChessTheory64', 'Ragehunter', 1672, 5, 29);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (24, 'Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O c4 d6 Nc3 c6 d3 Qa5 e4 Qh5 Ng5 Qxd1 Rxd1 e5 h3 Na6 Be3 Re8 a3 h6 Nf3 Be6 b4 Nc7 a4 d5 cxd5 cxd5 Nxe5 Nxe4 dxe4 Bxe5 exd5 Bxc3 Rac1 Nxd5 Bxd5 Bxd5 Rxc3 Bf3 Rdc1 g5 Bxg5 hxg5 Rxf3 Rac8 Rxc8 Rxc8 Rf5 Rc4 Rxg5+ Kf8 Rb5 b6 a5 bxa5 Rxa5 Rxb4 Rxa7', 'LastGladiator2', 'TheGreenCloud', 0, 1, 'LastGladiator2', 'TheGreenCloud', 6443, 8, 34);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (25, 'd4 Nf6 Nf3 g6 Nc3 Bg7 e4 d6 Be3 O-O Qd2 a6 Bh6 b5 Bd3 Nc6 Bxg7 Kxg7 h4 h5 d5 Ne5 Nxe5 dxe5 f3 e6 g4 hxg4 h5 Nxh5 fxg4 Nf4 O-O-O exd5 Nxd5 Rh8 Nxf4 exf4 Qxf4 Be6 g5 Qd4 Rxh8 Rxh8 Bxb5 Qxd1+ Kxd1 axb5 Qf6+ Kh7 Qe5 Rd8+ Ke2 c6 b3 Ra8 Qb2 c5 Ke3 c4 Kd4 cxb3 cxb3 Kg8 Kc5 Rb8 Qe5 Ra8 Qh2 Bd7 Kb4 Re8 e5 Re7 Qf4 Re8 Qd4 Bc6 Qd6 Re6 Qd4 Re8 Kc5 Re6 a4 bxa4 bxa4 Bxa4 Qxa4 Rxe5+ Kd6 Rxg5 Ke7 Re5+ Kf6 Rf5+ Ke7 Re5+ Kd6 Re6+ Kd5 Kg7 Qd4+ Kg8 Qh4 Kg7 Qd8 Re1 Qg5 Re6 Qd8 Re1 Qg5 Re6 Qd8', 'HKZ2020', 'OjaiJoao', 0, 1, 'HKZ2020', 'OjaiJoao', 20, 17, 24);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (26, 'Nf3 d5 g3 Nf6 Bg2 c5 O-O h6 d3 Nc6 Nbd2 e6 c3 g6 Qc2 Bg7 e4 O-O Re1 b6 Nf1 a5 exd5 Nxd5 Ne3 Ba6 Nxd5 Qxd5 Ne5 Qxg2+ Kxg2 Nxe5 Rxe5 Bxe5 Bxh6 Rfd8 Rd1 Rd7 Bg5 f6 Be3 Rad8 d4 cxd4 cxd4 Bb7+ Kg1 Kg7 f4 Bxd4 Bxd4 Rxd4 Rxd4', 'TheGreenCloud', 'LastGladiator2', 0, 1, 'LastGladiator2', 'TheGreenCloud', 6558, 29, 27);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (27, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Be3 O-O Qd2 a6 Bh6 b5 Bd3 Nc6 h4 e5 d5 Nb4 h5 Nxd3+ cxd3 Bb7 Bxg7 Kxg7 hxg6 fxg6 Ng5 Bc8 Nxh7 Nxh7 Qh6+ Kf6 Qxh7 Bd7 Qh4+ Kg7 Qh6+ Kf6 O-O-O Rh8 Qe3 Kg7 Ne2 c6 dxc6 Bxc6 Ng3 Bd7 Kb1 Rc8 Rxh8 Qxh8 d4 Qh6 Qxh6+ Kxh6 dxe5 Bg4 f3 Be6 Rxd6 Bc4 Nf5+ Kg5 Rxg6+ Kf4 e6 Bd3+', 'Apodex64', 'muisback', 0, 1, 'muisback', 'Apodex64', 1449, 3, 11);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (28, 'Nf3 d5 g3 Nf6 Bg2 c5 O-O h6 d3 Nc6 Nbd2 e6 e4 g6 Re1 Bg7 e5 Ng4 d4 cxd4 Nb3 Ngxe5 Nbxd4 Nxf3+ Nxf3 O-O c3 Bd7 Bf4 Rc8 Qc1 Kh7 h4 Ne7 Nh2 Qb6 Be3 d4 Bf4 dxc3 bxc3 Rxc3 Qd2 Bc6 Rab1 Qa6 Ng4 Bxg2 Kxg2 Qc6+ Kg1 Nf5 Ne3 Nd4 Qd1 Nf3+ Kf1 Nxe1 Qxe1 e5 Bxh6 Bxh6', 'Josip_buje', 'muisback', 0, 1, 'Josip_buje', 'muisback', 9086, 19, 34);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (29, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Be3 O-O Qd2 a6 Bh6 b5 Bd3 Nc6 h4 Bxh6 Qxh6 e5 d5 Nd4 Nxd4 exd4 Ne2 Qe7 f3 Qe5 h5 g5 O-O-O c5 dxc6 Be6 g3 Kh8 f4 Qc5 Qxf6+ Kg8 e5 g4 Qg5+ Kh8 Qh6 f5 Qxe6 Qxc6 Nxd4 Qc7 Qxd6', 'Azumilover', 'Ch5ssPlayer', 0, 1, 'Azumilover', 'Ch5ssPlayer', 3969, 14, 34);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (30, 'Nf3 d5 g3 Nf6 Bg2 c5 O-O h6 d4 cxd4 Nxd4 e5 Nf3 Nc6 c4 d4 a3 a5 b3 Be7 e3 O-O exd4 exd4 Bb2 d3 Nc3 Bf5 Qd2 Qd7 Rad1 Rad8 Rfe1 Rfe8 Ne5 Nxe5 Rxe5 Bd6 Rxe8+ Rxe8 Nd5 Nxd5 Bxd5 Re2 Qc3 Be5 Qxe5 Rxe5 Bxe5 b5 Bc3 a4 bxa4 bxc4 Bxc4 Qxa4 Rb1 Qxc4 Rb8+ Kh7 Bb4 Be4 f3 Bxf3 Kf2 Qe4 Re8 Qxe8', 'VincentKeymer2004', 'Azumilover', 0, 1, 'VincentKeymer2004', 'Azumilover', 9536, 21, 11);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (31, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Be3 O-O Qd2 a6 Bh6 b5 Bd3 Nc6 h4 e5 d5 Nd4 Nxd4 exd4 Ne2 Re8 Bxg7 Kxg7 f3 c5 dxc6 Qb6 h5 d5 hxg6 fxg6 Qh6+ Kg8 exd5 Ra7 O-O-O Rg7 Nf4 Qc7 g4 Rd8 Kb1 Nxd5 Nxg6 hxg6 Bxg6 Kf8 Rde1 Qf4 Qh8+ Rg8 Qh5 Nf6 Qc5+ Kg7 Qe7+ Kxg6 Re6 Bxe6', 'fireheart92', 'igormezentsev', 0, 1, 'igormezentsev', 'fireheart92', 1715, 30, 7);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (32, 'Nf3 d5 g3 e6 Bg2 Nf6 O-O Be7 d3 O-O Nbd2 c5 e4 Nc6 Re1 Qc7 Nf1 b5 e5 Nd7 Bf4 Bb7 h4 Rfc8 h5 h6 Ne3 a5 Nxd5 exd5 e6 Bd6 exd7 Qxd7 Ne5 Nxe5 Bxe5 Bxe5 Rxe5 d4 Qe2 Bxg2 Kxg2 Re8 Re1 Kf8 Qf3 Rac8 b3 a4 Qe4 Rxe5 Qxe5 c4 bxc4 bxc4 dxc4 Rxc4 Qb8+ Rc8 Qb4+ Kg8 Rd1 Qd5+ Kg1 Qxa2 Rxd4 a3 Rd3 Qa1+ Kg2 a2 Qb7 Re8 Rf3 Rf8 Ra3 Qb1 Qa6 Qxc2 Rxa2 Qe4+ f3 Qd5 g4 Re8 Qa4 Qe6 Rd2 Kh8 Qb5 Kg8 Qd3 Qc8 Ra2 Qb8 Qd7 Qe5 Qd3 Qe6 Rb2 f5 Qxf5 Qxf5 gxf5 Re5 Kg3 Rxf5 Rh2 Kf7 f4 Kf6 Kg4 Rb5 Ra2 Rb6 Ra5 Rc6 Rf5+ Ke6 Rf8 Rb6 Ra8 Rc6 Rg8 Kf7 Rd8 Rc7 Rd5 Rc6 Kf5 Re6 Rd7+ Re7 Rxe7+ Kxe7 Kg6 Kf8 f5 Kg8 f6 gxf6 Kxf6 Kh7 Kf7 Kh8 Kg6 Kg8 Kxh6 Kh8 Kg5 Kg8 Kf4 Kh8 h6 Kg8 Ke3 Kh8 Kd2 Kh7 Ke1 Kxh6', 'chessmaster2006', 'rehbwf', 0, 1, 'chessmaster2006', 'rehbwf', 1355, 26, 27);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (33, 'Nf3 c6 g3 d5 Bg2 Bg4 h3 Bxf3 exf3 e5 O-O f5 Re1 Bd6 d4 e4 fxe4 fxe4 c4 Nf6 Nc3 O-O cxd5 cxd5 Qb3 Qb6 Nxd5 Qxb3 Nxf6+ Rxf6 axb3 Nc6 Be3 Re8 d5 Nb4 Rxa7 Nd3 Re2 Ref8 Bxe4 Nxf2 Rxf2 Rxf2 Bxf2 Rxf2 Kxf2 Bc5+ Ke2 Bxa7 d6 Kf7 Bd5+ Kf6 g4 Ke5 d7 Bb6 Bxb7 Kf4 Kd3 Kg3 Kc4 Kxh3 Kb5 Bd8 Bf3 Kg3 Bd1 g6 Kc6 h5 gxh5 gxh5 Bxh5 Kf4 b4', 'Aborigen100500', 'Sharkfang', 0, 1, 'Aborigen100500', 'Sharkfang', 5817, 10, 39);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (34, 'Nf3 d5 g3 c5 Bg2 Nf6 O-O Nc6 d4 cxd4 Nxd4 e5 Nxc6 bxc6 c4 Rb8 Nc3 d4 Bxc6+ Bd7 Bxd7+ Qxd7 Nb1 h5 f3 h4 g4 e4 Nd2 Bd6 Kh1 Qc7 Qa4+ Kf8 Nxe4 Bxh2 Nxf6 gxf6 e3 Be5 f4 Bd6 exd4 Rg8 Rg1 Rb4 Qa6 Rxc4 Be3 Qe7 Qxc4 Qe4+ Kh2 Qxe3 Qf1 Bxf4+ Kh1 Bg3 Rc1 Qe4+ Qg2 Qxg4 Rgf1 Rg6 Rcd1 a5 d5 Kg7 b3 a4 Rd3 axb3 axb3 Qc8 Rdf3 Qg4 Rd3 Qd7 Rfd1 Qc8 Qf1 Qc2 R1d2 Qc8 b4 Qc4 Qf3 Qc1+ Qd1 Qc8 Qf1 Qc4 Rd1 Qxb4 d6 Qb7+ Qg2 Qxg2+ Kxg2 Bxd6+ Kh3 Be5 Kxh4 f5 Rb1 f4 Rb7 Kf6 Rdb3 Bd4 Rf3 Be3 Kh3 Rg7 Rb3 Ke5 Rbxe3+ fxe3 Rxe3+ Kd4 Re7 Kd5 Kh4 Kd6 Re1 f5 Kh3 Rg8 Kh2 f4 Re4 Rg4 Kh3 Kd5 Re8 Rg3+ Kh2 Re3 Rf8 Ke4 Kg2 Rg3+ Kf2 Rh3 Re8+ Kf5 Rf8+ Ke4 Re8+ Kf5 Rf8+ Ke4', 'chessmaster2006', 'Ch5ssPlayer', 0, 1, 'Ch5ssPlayer', 'chessmaster2006', 5358, 20, 11);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (35, 'd4 Nf6 Bg5 g6 Bxf6 exf6 c3 d5 e3 f5 Nh3 Bd6 Nd2 c6 Bd3 Nd7 Qc2 Nf6 O-O-O Qa5 Kb1 b5 Nf4 h5 Nb3 Qb6 f3 a5 Rhe1 O-O Qf2 a4 Nc1 b4 c4 dxc4 Bxc4 Bxf4 exf4 Ba6 Bf1 Bxf1 Qxf1 Nd5 Ka1 Nxf4 Nd3 Nxd3 Qxd3 Rad8 g4 fxg4 fxg4 Rd5 Re4 Rfd8 h3 c5 Qf3 hxg4 Rxg4 Rxd4', 'may6enexttime', 'kc6', 0, 1, 'kc6', 'may6enexttime', 7315, 39, 18);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (36, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Bd3 O-O Be3 a6 O-O b5 a3 Bb7 h3 Nbd7 Bg5 h6 Bh4 c5 dxc5 Nxc5 Bxf6 Bxf6 Qe2 Nxd3 cxd3 e6 Rac1 Rc8 Na2 Qb6 Rxc8 Rxc8 Rc1 Rxc1+ Nxc1 b4 axb4 Qxb4 b3 Qc3 Nh2 Qxc1+ Qd1 Qxd1+ Nf1', 'ChessTheory64', 'Ragehunter', 0, 1, 'ChessTheory64', 'Ragehunter', 1736, 24, 40);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (37, 'Nf3 f6 e4 e5 d4 Bd6 dxe5 Bxe5 Nxe5 fxe5 Qh5+ Kf8 Qxe5 d6 Qf4+ Qf6 Nc3 Qxf4 Bxf4 Nf6 O-O-O Kf7 f3 Re8 g4 g5 Bxg5 Re5 Bxf6 Kxf6 Nd5+ Rxd5 Rxd5 Ke6 Bc4 Kd7 e5 Kc6 exd6 cxd6 Rhd1 Kb6 Rxd6+ Nc6 Rh6 Kc5 b3 b5 Rd5+ Kb6 Rxb5+ Kc7 Rc5 Bd7 Bb5 Rb8 Bxc6 Bxc6 Rcxc6+ Kb7 Rcf6 Rc8 Rxh7+ Rc7 Rxc7+ Kxc7 h4 Kd7 h5 Ke7 g5 a5 a4', 'fireheart92', 'ChessTheory64', 0, 1, 'fireheart92', 'ChessTheory64', 4256, 10, 28);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (38, 'd4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Nbd7 Nd2 Nc5 O-O Bd7 b3 Qe8 Bxf6 Bxf6 Bg4 Nd3 Bxd7 Qxd7 Qf3 Nf4 Nb5 Bg7 Rfd1 f5 Rac1 c5 dxc6 bxc6 Nc3 Rad8 Nf1 fxe4 Nxe4 Qe6 Qe3 d5 cxd5 cxd5 Neg3 h5 Rc7 h4 Ne2 Qg4 Nxf4 Rxf4 Rdc1 Rdf8 Qa7 R4f7 Rxf7 Rxf7 Rc7 Rxc7 Qxc7 h3 Qd8+ Kh7 Qxd5 e4 Ne3 Qe2 gxh3 Qf3 Qxa5 Qxh3 Qg5 Qf3 Qg3 Qf6 Qh3+ Kg8', 'Watneg', 'Chesssknock', 0, 1, 'Chesssknock', 'Watneg', 8355, 6, 17);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (39, 'Nf3 Nf6 g3 b6 Bg2 Bb7 O-O e6 c4 c5 Nc3 Be7 d4 cxd4 Qxd4 d6 Rd1 a5 Nb5', 'igormezentsev', 'Tuzakli_Egitim', 0, 1, 'Tuzakli_Egitim', 'igormezentsev', 2443, 19, 28);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (40, 'g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O d4 d6 c4 c6 Nc3 Bf5 h3 Ne4 e3 Nxc3 bxc3 Be4 Qb3 Qb6 Ba3 Qxb3 axb3 Nd7 Nd2 Bxg2 Kxg2 Nf6 Rfb1 a6 b4 Rfb8 b5 axb5 cxb5 cxb5 Rxb5 Ra6 Rb3 Rba8 Nb1 Ne4 Ra2 R6a7 Rab2 e5 f3 Nf6 Bxd6 exd4 cxd4 Ra2 Be5 Rxb2+ Rxb2 Nd5 Bxg7 Nxe3+ Kf2 Nd1+', 'Sharkfang', 'nihalsarin2004', 0, 1, 'Sharkfang', 'nihalsarin2004', 4317, 32, 23);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (41, 'Nf3 Nf6 d3 g6 e4 Bg7 e5 O-O exf6 Bxf6 g3 Bg7 Bg2 d6 O-O e6 c3 f6 d4 Qe7 Bd2 e5 Qc1 e4 Re1 f5 Ng5 d5 c4 Qf6 cxd5 c6 dxc6 Nxc6 Qc4+ Kh8 d5 Ne5 Bc3 Nxc4 Bxf6 Bxf6 Ne6 Bxe6 dxe6 Nxb2 Nc3 Nd3 Red1 Ne1 Rd3 e3 Rxe3 Nxg2 Kxg2 Kg7 Rb1 Be7 Rxb7 Rf7 exf7 Kxf7 Rexe7+ Kf6 Rf7+ Kg5 Ne2 Kg4 f4', 'Ch5ssPlayer', 'chessmaster2006', 0, 1, 'Ch5ssPlayer', 'chessmaster2006', 4671, 30, 30);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (42, 'Nc3 Nf6 d4 d6 Bg5 g6 Bf4 Bg7 Bg3 h5 Nf3 h4 e3 hxg3 hxg3 e6 Rxh8+ Bxh8 e4 Bg7 e5 dxe5 dxe5 Qxd1+ Rxd1 Nd5 Nxd5 exd5 Rxd5 Nc6 Rd1 Be6 Bb5 Rd8 Bxc6+ bxc6 Rxd8+ Kxd8 Nd4 Ke7 Nxc6+ Kd7 Nd4 Bxe5 Nf3 Bd6 Ke2 Bd5 Ke3 Bxf3 gxf3 Bc5+ Ke4 Bxf2 f4 Bxg3 f5 gxf5+ Kxf5 Bd6 Kf6 Ke8 c3 Bc5 b3 Be3 c4 Bd2 a4 Bc3+ Kf5 Ke7 Kf4 f6 Ke4 Bb4 Kd5 Bd6 c5 f5 cxd6+ cxd6 b4 Kf6 b5 f4 b6 axb6 Kc6 f3 Kxb6 f2 a5 f1=Q a6 Qxa6+', 'Watneg', 'Chesssknock', 0, 1, 'Chesssknock', 'Watneg', 7652, 5, 37);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (43, 'Nf3 e5 d3 e4 dxe4 Bc5 e5 d5 exd6 cxd6 e3 Qe7 Nc3 Qe5 Nd5 Qe6 Nc7+ Kd8 Nxe6+ fxe6 Bd3 Bd7 c3 Bc6 Be4 Bxe4 Nd2 d5 Nxe4 d4 Nxc5 Ke8 Qxd4 Nc6 Qxg7 Nd4 Qd7+ Kf8 Nxe6+ Nxe6 Qxe6 Kg7 Qf5 Kh6 Qf4+ Kg7 e4 Kg6 Qg3+ Kh5 e5 Nf6 Qg5#', 'Sharkfang', 'Aborigen100500', 0, 1, 'Aborigen100500', 'Sharkfang', 6823, 7, 2);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (44, 'Nf3 Nf6 d3 g6 e4 Bg7 e5 O-O exf6 Bxf6 g3 Bg7 Bg2 d6 O-O f6 Bd2 Re8 Qc1 e6 Bh6 Qd7 Bxg7 Qxg7 c4 Qf7 c5 dxc5 Qxc5 e5 Qc1 Be6 Nc3 Nc6 d4 Nxd4 Nxd4 exd4 Ne4 Bf5 Nc5 b6 Rd1 bxc5 Qxc5 c6 Bxc6 Rac8 Qd5 Qxd5 Bxd5+ Kg7 Bf3 Be6 Kg2 Bf5 Rxd4 Red8 Rf4 Rd5 g4 Rd6 Rxf5 gxf5 gxf5 Kh6 h3 Kg5 Kh2 Kxf5 Re1 Re8 Bg4+ Kg6 Rxe8 Rd5 Re3 Re5 Kg3 Kg5 Rxe5+ fxe5 f4+ Kf6 Kf3 h5 fxe5+ Kxe5 Bxh5 Kd6 Bg4 Kc5 h4 Kb6 h5 a5 b3 a4 bxa4 Ka5 h6 Kxa4 h7 Ka3 h8=Q Kxa2 Qg7 Ka3 Qf6 Ka2 Qe6+ Ka3 Qb6 Ka2 Ke4 Ka3 Kd3 Ka2 Kc3 Ka3 Qb3#', 'LastGladiator2', 'toomanymanoevres', 0, 1, 'toomanymanoevres', 'LastGladiator2', 9840, 34, 31);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (45, 'e3 Nf6 Bc4 g6 Qh5 gxh5 Nf3 d5 Bb5+ c6 Ne5 Nbd7 Nxf7 Kxf7 g4 cxb5 g5 Ne4 Rg1 Rg8 f4 Rg6 f5 Rxg5 Rf1 Rg2 Rf2 Qc7 d3 Rxf2 dxe4 Qxh2 Nc3 Qg1#', 'Ch5ssPlayer', 'Azumilover', 0, 1, 'Azumilover', 'Ch5ssPlayer', 7451, 12, 14);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (46, 'Nf3 g6 d3 Bg7 e4 Bf8 c3 Bg7 Qc2 Bf8 Bd2 Bg7 g3 Bf8 Bg2 Bg7 O-O Bf8 d4 Bg7 e5 Bf8 e6 Bg7 exf7+ Kxf7 Ng5+ Ke8 Qb3 Nf6 Qf7#', 'kc6', 'cihanakif', 0, 1, 'cihanakif', 'kc6', 1481, 37, 22);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (47, 'e4 d6 Bc4 Nf6 Qf3 e6 e5 dxe5 Qd1 e4 d4 Nc6 d5 exd5 Bxd5 Qxd5 f3 Qxd1+ Kxd1 exf3 Ke1 fxg2 Nh3 gxh1=Q+ Kf2 Qxh2+ Ke3 Qxh3+ Kd2 Be6 c3 Qg2+ Kd3 Bf5+ Ke3 Qd5 Kf4 Qe4+ Kg3 Qg4+ Kh2 Ne4 Kh1 Nf2+ Kh2 Bd6+ Bf4 Bxf4#', 'rehbwf', 'Tuzakli_Egitim', 0, 1, 'rehbwf', 'Tuzakli_Egitim', 8092, 31, 7);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (48, 'Nf3 g5 d3 g4 Nfd2 g3 e4 gxf2+ Kxf2 e6 g3 Qf6+ Qf3 Bc5+ Kg2 Qd4 c3 Qf2+ Qxf2 Bxf2 Kxf2 Nf6 Nf3 Ng4+ Kg2 Ne3+ Bxe3 h5 Bd4 h4 Bxh8 h3+ Kxh3 d6 Kg2 e5 h4 Bg4 h5 Bxf3+ Kxf3 Nc6 Kg2 Kd8 h6 Kc8 h7 Kd7 Bg7 f5 h8=Q f4 gxf4 Ne7 Qh3+', 'LastGladiator2', 'toomanymanoevres', 0, 1, 'toomanymanoevres', 'LastGladiator2', 7773, 8, 29);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (49, 'e3 Nf6 Ne2 g6 Nf4 Bg7 Nxg6 hxg6 g3 d6 Bg2 Bh3 d3 Bxg2 Rg1 Bh3 Qe2 Bg4 Qf1 Bf3 Nd2 Nc6 Nxf3 Nb4 Qe2 e5 c3 Nc6 d4 e4 Nd2 d5 f3 exf3 Nxf3 Qd7 e4 O-O-O e5 Rde8 exf6 Rxe2+ Kxe2 Qe6+ Kd2 Bxf6 Kc2 Qf5+ Kd2 Qxf3 Kc2 Qf5+ Kb3 Qe4 a3 Qd3 Ka2 Qc4+ b3 Na5 bxc4 Nxc4 Rb1 Rxh2+ Bd2 Nxd2 Rgc1 Nc4+ Ka1 Ra2+ Kxa2 Be7 Ka1 Bxa3 Rb3 Bxc1 Kb1 Bd2 Kc2 Bxc3 Rxc3 f5 Rd3 f4 Re3 Kd7 Rf3 Kd6 Rxf4 Ne3+ Kd3 Nc4 Ke2 Ne5 Rf5 Ke7 Rf6 Kxf6 dxe5+ Kxe5 g4 d4 g5 Kf4', 'athena-pallada', 'PlemSovhoz', 0, 1, 'athena-pallada', 'PlemSovhoz', 3893, 16, 29);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (50, 'e3 Nf6 Ne2 g6 Nf4 Bg7 Nxg6 hxg6 g3 d6 Bg2 Bh3 d3 Bxg2 Rg1 Bh3 Qe2 Bg4 Qf1 Bf3 Nd2 Nc6 Nxf3 Nb4 Qe2 e5 c3 Nc6 d4 e4 Nd2 d5 f3 exf3 Nxf3 Qd7 e4 O-O-O e5 Rde8 exf6 Rxe2+ Kxe2 Qe6+ Kd2 Bxf6 Kc2 Qf5+ Kd2 Qxf3 Kc2 Qf5+ Kb3 Qe4 a3 Qd3 Ka2 Qc4+ b3 Na5 bxc4 Nxc4 Rb1 Rxh2+ Bd2 Nxd2 Rgc1 Nc4+ Ka1 Ra2+ Kxa2 Be7 Ka1 Bxa3 Rb3 Bxc1 Kb1 Bd2 Kc2 Bxc3 Rxc3 f5 Rd3 f4 Re3 Kd7 Rf3 Kd6 Rxf4 Ne3+ Kd3 Nc4 Ke2 Ne5 Rf5 Ke7 Rf6 Kxf6 dxe5+ Kxe5 g4 d4 g5 Kf4', 'Siegwhite', 'flamingbishop', 0, 1, 'flamingbishop', 'Siegwhite', 3893, 16, 29);
+
+# Make sure to update games that are not played by professionals
+UPDATE singularGame
+SET professional = 1
+WHERE whiteUName IN (SELECT username FROM user WHERE professional = 0)
+OR blackUName IN (SELECT username FROM user WHERE professional = 0);
 
 # GameArchive
 CREATE TABLE IF NOT EXISTS gameArchive(
@@ -1073,3 +1082,214 @@ insert into userLibrary (libraryID, gameID, userID) values (50, 9, 26);
 insert into userLibrary (libraryID, gameID, userID) values (51, 12, 16);
 insert into userLibrary (libraryID, gameID, userID) values (52, 4, 4);
 insert into userLibrary (libraryID, gameID, userID) values (53, 23, 20);
+
+CREATE TABLE IF NOT EXISTS gameAds(
+    gameId INTEGER NOT NULL,
+    advertisementId INTEGER NOT NULL,
+    PRIMARY KEY (gameId, advertisementId),
+    FOREIGN KEY (gameId) REFERENCES singularGame (gameID)
+                                ON UPDATE RESTRICT ON DELETE RESTRICT,
+    FOREIGN KEY (advertisementId) REFERENCES advertisement (advertisementID)
+                                ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+insert into gameAds (gameId, advertisementId) values (40, 44);
+insert into gameAds (gameId, advertisementId) values (20, 11);
+insert into gameAds (gameId, advertisementId) values (4, 22);
+insert into gameAds (gameId, advertisementId) values (31, 17);
+insert into gameAds (gameId, advertisementId) values (32, 43);
+insert into gameAds (gameId, advertisementId) values (43, 26);
+insert into gameAds (gameId, advertisementId) values (22, 14);
+insert into gameAds (gameId, advertisementId) values (16, 23);
+insert into gameAds (gameId, advertisementId) values (2, 39);
+insert into gameAds (gameId, advertisementId) values (30, 32);
+insert into gameAds (gameId, advertisementId) values (16, 7);
+insert into gameAds (gameId, advertisementId) values (27, 34);
+insert into gameAds (gameId, advertisementId) values (42, 19);
+insert into gameAds (gameId, advertisementId) values (30, 43);
+insert into gameAds (gameId, advertisementId) values (27, 18);
+insert into gameAds (gameId, advertisementId) values (14, 39);
+insert into gameAds (gameId, advertisementId) values (39, 43);
+insert into gameAds (gameId, advertisementId) values (46, 3);
+insert into gameAds (gameId, advertisementId) values (7, 22);
+insert into gameAds (gameId, advertisementId) values (45, 11);
+insert into gameAds (gameId, advertisementId) values (23, 15);
+insert into gameAds (gameId, advertisementId) values (1, 8);
+insert into gameAds (gameId, advertisementId) values (41, 6);
+insert into gameAds (gameId, advertisementId) values (24, 3);
+insert into gameAds (gameId, advertisementId) values (27, 5);
+insert into gameAds (gameId, advertisementId) values (31, 22);
+insert into gameAds (gameId, advertisementId) values (41, 44);
+insert into gameAds (gameId, advertisementId) values (46, 15);
+insert into gameAds (gameId, advertisementId) values (27, 29);
+insert into gameAds (gameId, advertisementId) values (44, 36);
+insert into gameAds (gameId, advertisementId) values (24, 28);
+insert into gameAds (gameId, advertisementId) values (18, 37);
+insert into gameAds (gameId, advertisementId) values (24, 5);
+insert into gameAds (gameId, advertisementId) values (14, 4);
+insert into gameAds (gameId, advertisementId) values (34, 36);
+insert into gameAds (gameId, advertisementId) values (34, 6);
+insert into gameAds (gameId, advertisementId) values (9, 20);
+insert into gameAds (gameId, advertisementId) values (9, 42);
+insert into gameAds (gameId, advertisementId) values (31, 37);
+insert into gameAds (gameId, advertisementId) values (48, 13);
+insert into gameAds (gameId, advertisementId) values (7, 42);
+insert into gameAds (gameId, advertisementId) values (42, 30);
+insert into gameAds (gameId, advertisementId) values (37, 15);
+insert into gameAds (gameId, advertisementId) values (14, 6);
+insert into gameAds (gameId, advertisementId) values (34, 33);
+insert into gameAds (gameId, advertisementId) values (13, 27);
+insert into gameAds (gameId, advertisementId) values (46, 10);
+insert into gameAds (gameId, advertisementId) values (8, 25);
+insert into gameAds (gameId, advertisementId) values (15, 43);
+insert into gameAds (gameId, advertisementId) values (15, 29);
+insert into gameAds (gameId, advertisementId) values (43, 15);
+insert into gameAds (gameId, advertisementId) values (36, 8);
+insert into gameAds (gameId, advertisementId) values (27, 39);
+insert into gameAds (gameId, advertisementId) values (7, 1);
+insert into gameAds (gameId, advertisementId) values (12, 17);
+insert into gameAds (gameId, advertisementId) values (39, 38);
+insert into gameAds (gameId, advertisementId) values (11, 14);
+insert into gameAds (gameId, advertisementId) values (13, 10);
+insert into gameAds (gameId, advertisementId) values (13, 35);
+insert into gameAds (gameId, advertisementId) values (50, 38);
+insert into gameAds (gameId, advertisementId) values (13, 11);
+insert into gameAds (gameId, advertisementId) values (48, 27);
+insert into gameAds (gameId, advertisementId) values (20, 43);
+insert into gameAds (gameId, advertisementId) values (44, 7);
+insert into gameAds (gameId, advertisementId) values (10, 41);
+insert into gameAds (gameId, advertisementId) values (23, 23);
+insert into gameAds (gameId, advertisementId) values (38, 17);
+insert into gameAds (gameId, advertisementId) values (28, 9);
+insert into gameAds (gameId, advertisementId) values (17, 13);
+insert into gameAds (gameId, advertisementId) values (8, 18);
+insert into gameAds (gameId, advertisementId) values (50, 24);
+insert into gameAds (gameId, advertisementId) values (28, 10);
+insert into gameAds (gameId, advertisementId) values (34, 39);
+insert into gameAds (gameId, advertisementId) values (23, 39);
+insert into gameAds (gameId, advertisementId) values (29, 28);
+insert into gameAds (gameId, advertisementId) values (45, 41);
+insert into gameAds (gameId, advertisementId) values (3, 28);
+insert into gameAds (gameId, advertisementId) values (27, 35);
+insert into gameAds (gameId, advertisementId) values (14, 15);
+insert into gameAds (gameId, advertisementId) values (28, 32);
+insert into gameAds (gameId, advertisementId) values (31, 42);
+insert into gameAds (gameId, advertisementId) values (46, 12);
+insert into gameAds (gameId, advertisementId) values (12, 8);
+insert into gameAds (gameId, advertisementId) values (12, 16);
+insert into gameAds (gameId, advertisementId) values (34, 20);
+insert into gameAds (gameId, advertisementId) values (38, 1);
+insert into gameAds (gameId, advertisementId) values (4, 42);
+insert into gameAds (gameId, advertisementId) values (45, 13);
+insert into gameAds (gameId, advertisementId) values (19, 41);
+insert into gameAds (gameId, advertisementId) values (41, 42);
+insert into gameAds (gameId, advertisementId) values (18, 11);
+insert into gameAds (gameId, advertisementId) values (50, 33);
+insert into gameAds (gameId, advertisementId) values (47, 10);
+insert into gameAds (gameId, advertisementId) values (44, 24);
+insert into gameAds (gameId, advertisementId) values (19, 30);
+insert into gameAds (gameId, advertisementId) values (23, 6);
+insert into gameAds (gameId, advertisementId) values (44, 22);
+insert into gameAds (gameId, advertisementId) values (43, 23);
+insert into gameAds (gameId, advertisementId) values (11, 15);
+insert into gameAds (gameId, advertisementId) values (33, 13);
+insert into gameAds (gameId, advertisementId) values (42, 39);
+insert into gameAds (gameId, advertisementId) values (26, 30);
+insert into gameAds (gameId, advertisementId) values (21, 10);
+insert into gameAds (gameId, advertisementId) values (49, 43);
+insert into gameAds (gameId, advertisementId) values (23, 27);
+insert into gameAds (gameId, advertisementId) values (36, 28);
+insert into gameAds (gameId, advertisementId) values (34, 16);
+insert into gameAds (gameId, advertisementId) values (30, 18);
+insert into gameAds (gameId, advertisementId) values (3, 20);
+insert into gameAds (gameId, advertisementId) values (11, 1);
+insert into gameAds (gameId, advertisementId) values (26, 34);
+insert into gameAds (gameId, advertisementId) values (46, 36);
+insert into gameAds (gameId, advertisementId) values (48, 1);
+insert into gameAds (gameId, advertisementId) values (43, 25);
+insert into gameAds (gameId, advertisementId) values (17, 44);
+insert into gameAds (gameId, advertisementId) values (10, 34);
+insert into gameAds (gameId, advertisementId) values (48, 21);
+insert into gameAds (gameId, advertisementId) values (42, 11);
+insert into gameAds (gameId, advertisementId) values (17, 22);
+insert into gameAds (gameId, advertisementId) values (18, 19);
+insert into gameAds (gameId, advertisementId) values (6, 20);
+insert into gameAds (gameId, advertisementId) values (49, 38);
+insert into gameAds (gameId, advertisementId) values (4, 44);
+insert into gameAds (gameId, advertisementId) values (37, 4);
+insert into gameAds (gameId, advertisementId) values (22, 44);
+insert into gameAds (gameId, advertisementId) values (2, 32);
+insert into gameAds (gameId, advertisementId) values (24, 2);
+insert into gameAds (gameId, advertisementId) values (43, 2);
+insert into gameAds (gameId, advertisementId) values (43, 42);
+insert into gameAds (gameId, advertisementId) values (3, 39);
+insert into gameAds (gameId, advertisementId) values (4, 8);
+insert into gameAds (gameId, advertisementId) values (28, 17);
+insert into gameAds (gameId, advertisementId) values (39, 31);
+insert into gameAds (gameId, advertisementId) values (39, 34);
+insert into gameAds (gameId, advertisementId) values (17, 38);
+insert into gameAds (gameId, advertisementId) values (23, 9);
+insert into gameAds (gameId, advertisementId) values (23, 12);
+insert into gameAds (gameId, advertisementId) values (38, 43);
+insert into gameAds (gameId, advertisementId) values (42, 4);
+insert into gameAds (gameId, advertisementId) values (20, 34);
+insert into gameAds (gameId, advertisementId) values (46, 13);
+insert into gameAds (gameId, advertisementId) values (46, 4);
+insert into gameAds (gameId, advertisementId) values (21, 35);
+insert into gameAds (gameId, advertisementId) values (11, 5);
+insert into gameAds (gameId, advertisementId) values (23, 21);
+insert into gameAds (gameId, advertisementId) values (24, 17);
+insert into gameAds (gameId, advertisementId) values (24, 16);
+insert into gameAds (gameId, advertisementId) values (19, 5);
+insert into gameAds (gameId, advertisementId) values (28, 25);
+insert into gameAds (gameId, advertisementId) values (26, 26);
+insert into gameAds (gameId, advertisementId) values (14, 26);
+insert into gameAds (gameId, advertisementId) values (12, 22);
+insert into gameAds (gameId, advertisementId) values (3, 22);
+insert into gameAds (gameId, advertisementId) values (48, 24);
+insert into gameAds (gameId, advertisementId) values (35, 15);
+insert into gameAds (gameId, advertisementId) values (23, 33);
+insert into gameAds (gameId, advertisementId) values (20, 31);
+insert into gameAds (gameId, advertisementId) values (3, 26);
+insert into gameAds (gameId, advertisementId) values (37, 1);
+insert into gameAds (gameId, advertisementId) values (9, 33);
+insert into gameAds (gameId, advertisementId) values (36, 6);
+insert into gameAds (gameId, advertisementId) values (47, 16);
+insert into gameAds (gameId, advertisementId) values (35, 41);
+insert into gameAds (gameId, advertisementId) values (35, 4);
+insert into gameAds (gameId, advertisementId) values (19, 31);
+insert into gameAds (gameId, advertisementId) values (36, 26);
+insert into gameAds (gameId, advertisementId) values (11, 18);
+insert into gameAds (gameId, advertisementId) values (34, 42);
+insert into gameAds (gameId, advertisementId) values (32, 9);
+insert into gameAds (gameId, advertisementId) values (36, 37);
+insert into gameAds (gameId, advertisementId) values (6, 41);
+insert into gameAds (gameId, advertisementId) values (5, 12);
+insert into gameAds (gameId, advertisementId) values (43, 10);
+insert into gameAds (gameId, advertisementId) values (3, 42);
+insert into gameAds (gameId, advertisementId) values (42, 7);
+insert into gameAds (gameId, advertisementId) values (49, 39);
+insert into gameAds (gameId, advertisementId) values (26, 43);
+insert into gameAds (gameId, advertisementId) values (37, 2);
+insert into gameAds (gameId, advertisementId) values (33, 21);
+insert into gameAds (gameId, advertisementId) values (34, 34);
+insert into gameAds (gameId, advertisementId) values (35, 9);
+insert into gameAds (gameId, advertisementId) values (34, 11);
+insert into gameAds (gameId, advertisementId) values (11, 24);
+insert into gameAds (gameId, advertisementId) values (22, 32);
+insert into gameAds (gameId, advertisementId) values (6, 30);
+insert into gameAds (gameId, advertisementId) values (20, 12);
+insert into gameAds (gameId, advertisementId) values (28, 8);
+insert into gameAds (gameId, advertisementId) values (11, 42);
+insert into gameAds (gameId, advertisementId) values (16, 28);
+insert into gameAds (gameId, advertisementId) values (16, 24);
+insert into gameAds (gameId, advertisementId) values (29, 9);
+insert into gameAds (gameId, advertisementId) values (7, 2);
+insert into gameAds (gameId, advertisementId) values (18, 15);
+insert into gameAds (gameId, advertisementId) values (47, 23);
+insert into gameAds (gameId, advertisementId) values (21, 19);
+insert into gameAds (gameId, advertisementId) values (26, 31);
+insert into gameAds (gameId, advertisementId) values (15, 17);
+insert into gameAds (gameId, advertisementId) values (1, 2);
+insert into gameAds (gameId, advertisementId) values (1, 3);
+insert into gameAds (gameId, advertisementId) values (1, 4);
