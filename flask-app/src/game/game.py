@@ -30,54 +30,6 @@ def get_professionalgame():
 
     return jsonify(json_data)
 
-@game.route('/tournament', methods=['GET'])
-def get_alltournaments():
-    
-    query = '''
-        SELECT * FROM tournament
-    '''
-
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-
-    column_headers = [x[0] for x in cursor.description]
-
-    # create an empty dictionary object to use in 
-    # putting column headers together with data
-    json_data = []
-
-    # fetch all the data from the cursor
-    theData = cursor.fetchall()
-
-    # for each of the rows, zip the data elements together with
-    # the column headers. 
-    for row in theData:
-        json_data.append(dict(zip(column_headers, row)))
-    
-    return jsonify(json_data)
-
-@game.route('/tournament', methods=['POST'])
-def create_new_tournament():
-    
-    # collecting data from the request object 
-    the_data = request.json
-    current_app.logger.info(the_data)
-
-    #extracting the variable
-    tournament = the_data['tournamentID']
-    
-
-    # Constructing the query
-    query = 'insert into tournament (tournamentID) values ("'
-    query += int(tournament) + ')'
-    current_app.logger.info(query)
-
-    # executing and committing the insert statement 
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-    
-    return 'Success!'
 
 @game.route('/allgames', methods=['GET'])
 def get_allgames():
@@ -144,6 +96,24 @@ def create_new_game():
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
+
+# Delete specific advertiser from the database
+@game.route('/game/<gameID>', methods=['DELETE'])
+def delete_specific_game(gameID):
+
+    # create query that deletes the specific game from the table
+    query = '''
+        DELETE FROM singularGame
+        WHERE gameID = ''' + str(gameID)
+
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+   
+    return 'Success!'
 
 @game.route('/gamesbyID/<gameID>', methods=['GET'])
 def get_allgames_byID(gameID):
