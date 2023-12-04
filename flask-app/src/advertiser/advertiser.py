@@ -14,7 +14,7 @@ def get_top_advertiser():
     query = '''
         SELECT advertiserID, companyName, totalSpent, sales.salesID, firstName, lastName
         FROM sales JOIN advertiser ON sales.salesID = advertiser.salesID
-        ORDER BY totalSpent LIMIT 10
+        ORDER BY totalSpent DESC LIMIT 10
     '''
 
     # use cursor to query the database for a list of products
@@ -109,7 +109,7 @@ def post_advertiser():
 def get_specific_advertiser (id):
 
     # Create query that selects all attributes where the input ID is the advertiserID
-    query = 'SELECT advertiserID, companyName, totalSpent, topUser, userPreference, salesID FROM products WHERE advertiserID = ' + str(id)
+    query = 'SELECT advertiserID, companyName, totalSpent, topUser, userPreference, salesID FROM advertiser WHERE advertiserID = ' + str(id)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -126,8 +126,8 @@ def get_specific_advertiser (id):
     return jsonify(json_data)
 
 # Update specific advertiser to change the total spent
-@advertiser.route('/advertiser/<id, new_amount>', methods=['PUT'])
-def get_specific_advertiser (id, new_amount):
+@advertiser.route('/advertiser/<id>, <new_amount>', methods=['PUT'])
+def put_specific_advertiser (id, new_amount):
 
     # create query that sets the total spent to the new value for the specific advertiser
     query = '''
@@ -145,7 +145,7 @@ def get_specific_advertiser (id, new_amount):
 
 # Delete specific advertiser from the database
 @advertiser.route('/advertiser/<id>', methods=['DELETE'])
-def get_specific_advertiser (id):
+def delete_specific_advertiser (id):
 
     # create query that deletes the specific advertiser from the table
     query = '''
