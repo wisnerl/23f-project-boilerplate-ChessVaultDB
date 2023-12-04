@@ -10,6 +10,7 @@ def get_top_advertiser():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
+    # Create the query to order by totalSpent and limit by 10
     query = '''
         SELECT advertiserID, companyName, totalSpent, sales.salesID, firstName, lastName
         FROM sales JOIN advertiser ON sales.salesID = advertiser.salesID
@@ -37,12 +38,13 @@ def get_top_advertiser():
     return jsonify(json_data)
 
 
-# Get all the products from the database
+# Get all the advertisers from the database
 @advertiser.route('/advertiser', methods=['GET'])
 def get_advertiser():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
 
+    # create query that returns all attributes of all advertisers
     query = '''
         SELECT advertiserID, companyName, totalSpent, topUser, userPreference, salesID
         FROM advertiser
@@ -69,6 +71,7 @@ def get_advertiser():
 
     return jsonify(json_data)
 
+# Add a new advertiser to the database
 @advertiser.route('/advertiser', methods=['POST'])
 def post_advertiser():
     
@@ -101,15 +104,18 @@ def post_advertiser():
     
     return 'Success!'
 
+# Retrieve data about a specific advertiser
 @advertiser.route('/advertiser/<id>', methods=['GET'])
 def get_specific_advertiser (id):
 
+    # Create query that selects all attributes where the input ID is the advertiserID
     query = 'SELECT advertiserID, companyName, totalSpent, topUser, userPreference, salesID FROM products WHERE advertiserID = ' + str(id)
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
     cursor.execute(query)
     
+    # Set data into JSON and send to front end
     column_headers = [x[0] for x in cursor.description]
     json_data = []
     the_data = cursor.fetchall()
@@ -119,21 +125,38 @@ def get_specific_advertiser (id):
 
     return jsonify(json_data)
 
-@advertiser.route('/advertiser/<id>', methods=['PUT'])
+# Update specific advertiser to change the total spent
+@advertiser.route('/advertiser/<id, new_amount>', methods=['PUT'])
+def get_specific_advertiser (id, new_amount):
+
+    # create query that sets the total spent to the new value for the specific advertiser
+    query = '''
+        UPDATE advertiser
+        SET advertiser.totalSpent = ''' + str(new_amount) + ' WHERE advertiserID = ' + str(id)
+
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    
+    return 'Success!'
+
+# Delete specific advertiser from the database
+@advertiser.route('/advertiser/<id>', methods=['DELETE'])
 def get_specific_advertiser (id):
 
-    query = 'SELECT advertiserID, companyName, totalSpent, topUser, userPreference, salesID FROM products WHERE advertiserID = ' + str(id)
+    # create query that deletes the specific advertiser from the table
+    query = '''
+        DELETE FROM advertiser
+        WHERE advertiserID = ''' + str(id)
+
     current_app.logger.info(query)
 
+    # executing and committing the insert statement 
     cursor = db.get_db().cursor()
     cursor.execute(query)
+    db.get_db().commit()
     
-    column_headers = [x[0] for x in cursor.description]
-    json_data = []
-    the_data = cursor.fetchall()
-    
-    for row in the_data:
-        json_data.append(dict(zip(column_headers, row)))
-
-    return jsonify(json_data)
-    
+    return 'Success!'
