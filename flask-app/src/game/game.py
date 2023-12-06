@@ -57,6 +57,7 @@ def get_allgames():
     
     return jsonify(json_data)
 
+
 @game.route('/createsingulargame', methods=['POST'])
 def create_new_game():
     
@@ -140,6 +141,26 @@ def get_allgames_byID(gameID):
         json_data.append(dict(zip(column_headers, row)))
     
     return jsonify(json_data)
+
+
+# update number of spectators in a specific game
+@game.route('/update_spec/<gameID>, <new_amount>', methods=['PUT'])
+def update_specifc_games_byID(gameID, new_amount):
+    
+    # create a query that updates the total number of spectators for a specific game
+    query = '''
+        UPDATE singularGame
+        SET singularGame.spectators = ''' + int(new_amount) + 'WHERE gameID = ' + int(gameID)
+    
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return 'Success!'
+
 
 @game.route('/moveanalysis/<gameID>', methods=['GET'])
 def get_allmoves_byID(gameID):
