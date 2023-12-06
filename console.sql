@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS user (
     drawPercentage DOUBLE DEFAULT 0,
     lossPercentage DOUBLE DEFAULT 0,
     averageSpectators INTEGER DEFAULT 0, # rounding as half people not relevant for us
-    adMoney DECIMAL(50,2) DEFAULT 0, # always round to 2 decimal as it's money - any digit < x*10^50
+    adMoney DECIMAL(50,2) DEFAULT 0, # always round to 2 decimal as its money - any digit < x*10^50
     PRIMARY KEY (userID)
 );
 
