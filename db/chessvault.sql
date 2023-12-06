@@ -52,92 +52,132 @@ insert into sales (salesID, password, email, firstname, lastname, timeWorking) v
 insert into sales (salesID, password, email, firstname, lastname, timeWorking) values (34, 'fQ4\9=WdQ_H/OKn', 'cspollenx@dmoz.org', 'Cori', 'Spollen', 5438);
 insert into sales (salesID, password, email, firstname, lastname, timeWorking) values (35, 'vM5y$'')w*s', 'jrahly@odnoklassniki.ru', 'Jacenta', 'Rahl', 908);
 
+-- User table
+CREATE TABLE IF NOT EXISTS user (
+    userID INTEGER NOT NULL AUTO_INCREMENT,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    nationality TEXT NOT NULL,
+    dateCreated DATETIME DEFAULT CURRENT_TIMESTAMP,
+    following INTEGER, -- Recursive
+    notifications TEXT,
+    tag TEXT,
+    rating INTEGER DEFAULT 1200, -- 0 - infinity but to allow adjustment depending on initial level before playing
+    professional BOOLEAN DEFAULT 0, -- not professional until given title (1)
+    totalGames INTEGER DEFAULT 0, -- if not played any gamed then 0 - instead of null
+    totalWins INTEGER DEFAULT 0,
+    totalLosses INTEGER DEFAULT 0,
+    totalDraws INTEGER DEFAULT 0,
+    winPercentage DOUBLE DEFAULT 0,
+    drawPercentage DOUBLE DEFAULT 0,
+    lossPercentage DOUBLE DEFAULT 0,
+    averageSpectators INTEGER DEFAULT 0, -- rounding as half people not relevant for us
+    adMoney DECIMAL(50,2) DEFAULT 0, -- always round to 2 decimal as it's money - any digit < x*10^50
+    PRIMARY KEY (userID)
+);
+
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (1, 'OjaiJoao', '$2a$04$ZYKye/fLB4ELhIyqIvdf.OwM/RqECu5NuDK6aqJg.5nbdx3U/UKZq', 'ecolthard0@cisco.com', 'Eddi', 'Colthard', 'Afghanistan', 8, 'nan', 'GM', 2523, 1, 2824, 1657, 965, 202, 0.59, 0.07, 0.34, 8, 5454175.34);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (2, 'Siegwhite', '$2a$04$qVakipAG/KPrZQBFqTnY0uTLusZdTprnr4EN0fSbvoEuYQoKIJKl.', 'rtessier1@sbwire.com', 'Rafaelita', 'Tessier', 'Thailand', 19, 'New message', 'nan', 2678, 0, 3639, 1846, 1230, 563, 0.51, 0.15, 0.34, 19, 1264417.0);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (3, 'flamingbishop', '$2a$04$VAXSRAEM8JiBG0Glwh72VePdmt0A5OtKNuTaXBPHqyQhn0whWjuXa', 'mradleigh2@bandcamp.com', 'Muffin', 'Radleigh', 'Brazil', 15, 'Alert', 'nan', 2320, 0, 416, 344, 45, 27, 0.83, 0.06, 0.11, 15, 6159680.01);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (4, 'rehbwf', '$2a$04$4hnUFj9E94F5ISUw6SAFVuML.C1rgFX2nCW4VB/Um3ShQ/gEczcQm', 'nredmond@ddf.com', 'Nels', 'Redmond', 'Sweden', 12, 'Notification received', 'FM', 2001, 1, 39798, 28931, 9207, 1660, 0.73, 0.04, 0.23, 12, 2486222.19);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (5, 'Chesssknock', '$2a$04$NrVNrR64imiBbkGBNDfpfuMbBTIINp91g9Rgk/h8dX75ZhDhN.s7W', 'cvolette4@mapy.cz', 'Crysta', 'Volette', 'Republic of the Congo', 14, 'Notification received', 'GM', 2681, 1, 8691, 5455, 2521, 715, 0.63, 0.08, 0.29, 14, 6731198.52);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (6, 'Ragehunter', '$2a$04$MGLSRIktHKUWbuWh2hmWpu38lKhlKqpW.V5/TRmhD4qsGUwkHE5.W', 'nbento5@flavors.me', 'Nathan', 'Bento', 'Colombia', 32, 'Update', 'GM', 2694, 1, 30039, 20913, 7329, 1797, 0.7, 0.06, 0.24, 32, 2569390.27);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (7, 'kc6', '$2a$04$Jl0qfCRzgv1FQ4U36l8RkOqG1j2HQTcI9lkcjT3igpBh55/nRN9XS', 'ndutson6@hatena.ne.jp', 'Nollie', 'Dutson', 'Mongolia', 17, 'Update', 'nan', 2647, 0, 609, 365, 199, 45, 0.6, 0.07, 0.33, 17, 8819521.0);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (8, 'TheGreenCloud', '$2a$04$tFzzMX0iewhAf..qvpElG.CtHc4vUi02aHrLYEgeAZfuKCInJtkSm', 'lduncan7@hc360.com', 'Libbie', 'Duncan', 'China', 18, 'Update', 'nan', 2355, 0, 729, 416, 192, 121, 0.57, 0.17, 0.26, 18, 8220461.78);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (9, 'fireheart92', '$2a$04$LDYgs0D9joWwO.xWXDvmg.hea0Zu2Vte/lHIqdpzaRakuVazkrm12', 'ldumphries8@diigo.com', 'Lorri', 'Dumphries', 'Indonesia', 20, 'Reminder', 'nan', 2231, 0, 571, 474, 52, 45, 0.83, 0.08, 0.09, 20, 4733.22);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (10, 'Night-King96', '$2a$04$6UrgHwOJHvwgDS67LVXlGOD/6ex3yLO/LaYalb/fJ/TmKGsOGUmBq', 'clanceser2@g.com', 'Claudie', 'Lanceter', 'Indonesia', 25, 'Update', 'GM', 2461, 1, 18130, 10374, 6255, 1501, 0.57, 0.08, 0.35, 25, 6702017.64);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (11, 'Apodex64', '$2a$04$8VwCo8oytTYaMz8dTcOQTuJfYGzTXz.vTbEl/..7L3tsfTclBRNca', 'trupertia@wikimedia.org', 'Trixi', 'Ruperti', 'Brazil', 21, 'Notification received', 'nan', 2131, 0, 8228, 5588, 2083, 557, 0.68, 0.07, 0.25, 21, 142381.9);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (12, 'athena-pallada', '$2a$04$zQ4ex/6HN2KMwm1cjmS8t.jeeeVvXbrv7Nyu/waw8gjh2eAA6MYg2', 'lgullifantb@abc.net.au', 'Lexi', 'Gullifant', 'China', 28, 'Alert', 'GM', 2489, 1, 9987, 6587, 2324, 1076, 0.66, 0.11, 0.23, 28, 7073113.08);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (13, 'Watneg', '$2a$04$a9pSdBTGqNL0dcdqcEuIqOH8u7Xmwo/sTPu6eRnwdrkzfGTbPabfS', 'hbawcockc@nifty.com', 'Heinrik', 'Bawcock', 'Philippines', 23, 'Reminder', 'GM', 2696, 1, 4289, 2542, 1477, 270, 0.59, 0.06, 0.34, 23, 4011556.45);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (14, 'VincentKeymer2004', '$2a$04$EMwzRIVQIgAkyLHnJ8.b5ORWKnX9OwgyORpkr1Du1OOe9.IpW2FtS', 'jmewed@businessweek.com', 'Jacinda', 'Mewe', 'Vietnam', 28, 'Alert', 'GM', 2475, 1, 4801, 2866, 1371, 564, 0.6, 0.12, 0.29, 28, 4340914.53);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (15, 'Josip_buje', '$2a$04$hgj.Q98TYg4bQt3JhC7nR.vNPIiVOuQ2nlbb8VkXL5JkN4QIedmnS', 'ngumerye@stanford.edu', 'Nellie', 'Gumery', 'South Africa', 23, 'Notification received', 'GM', 2268, 1, 21776, 15875, 5001, 900, 0.73, 0.04, 0.23, 23, 5695017.33);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (16, 'may6enexttime', '$2a$04$Z9JuUpzTx4.N/h/JQpPiJuEonhlwIpGwxWiEeBWFW5qBTs2QhsEH.', 'mstatherf@cdc.gov', 'Mari', 'Stather', 'Brazil', 11, 'Alert', 'GM', 2278, 1, 15104, 9887, 4015, 1202, 0.65, 0.08, 0.27, 11, 7692860.65);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (17, 'chessmaster2006', '$2a$04$Yz3kNN4Gbmly0JTAk1OZMejG52A6OAO/Vs56rwXyJM.QtJXNeRk82', 'wvegasg@scientificamerican.com', 'Wendy', 'Vegas', 'Poland', 11, 'Notification received', 'GM', 2444, 1, 8547, 5886, 1984, 677, 0.69, 0.08, 0.23, 11, 5240463.21);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (18, 'ARM__55555', '$2a$04$UlP0dDTjcD3zsGvGeFSrWu/ecAeTY99iv36uTgQ9B4JrYtzi8vba2', 'cblenkinh@intel.com', 'Clarke', 'Blenkin', 'Greece', 30, 'Update', 'GM', 2625, 1, 14368, 9220, 4619, 529, 0.64, 0.04, 0.32, 30, 4214283.51);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (19, 'furuko01', '$2a$04$J1LWbs9vbRwq846ggSGXcueiQH4Qi6Fx5kudFyI.ARqq50TEY9gGS', 'darchdecknei@theglobeandmail.com', 'Donn', 'Archdeckne', 'Vietnam', 31, 'New message', 'GM', 2765, 1, 14645, 9873, 3575, 1197, 0.67, 0.08, 0.24, 31, 4233001.56);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (20, 'Sharkfang', '$2a$04$pPouZQ4cTKy2/e/8EGqjZeT3he7Eo509NCuNHgv04/a.48lio65te', 'tjoffej@bbc.co.uk', 'Tabbi', 'Joffe', 'Ireland', 21, 'Alert', 'GM', 2208, 1, 71696, 56401, 13300, 1995, 0.79, 0.03, 0.19, 21, 7269034.11);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (21, 'DrawDenied_Twitch', '$2a$04$H3r5ygBeMvLJS4JQULNiL.5yMIeHD72XnDZqyLTu3bowTD5nFYYD6', 'sskatcherk@w3.org', 'Shellysheldon', 'Skatcher', 'Portugal', 12, 'Update', 'GM', 2651, 1, 2847, 1790, 866, 191, 0.63, 0.07, 0.3, 12, 8522053.12);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (22, 'Mishka_The_Great', '$2a$04$m/oGhOdjIdGsaZ4VaIL/R.sERl9Nn7YB2oXVTzHhNJhtYexRPLFOe', 'dcrockattl@phpbb.com', 'Davey', 'Crockatt', 'China', 17, 'Alert', 'nan', 2344, 0, 4333, 3208, 673, 452, 0.74, 0.1, 0.16, 17, 8531869.62);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (23, 'Tuzakli_Egitim', '$2a$04$iWSnSI.IRPek8jq/ijW8NehgVYcNwgB9CndpZcKvpFFxpldHyS6i6', 'mmccarrollm@globo.com', 'Morrie', 'Mc Carroll', 'United States', 8, 'Reminder', 'nan', 2759, 0, 5514, 2355, 2638, 521, 0.43, 0.09, 0.48, 8, 4899888.92);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (24, 'muisback', '$2a$04$WEZLZKimQDDWV5sKtg8Bn.EWwPjlGLKpqseUMd6MCo.7dmhMlu/mm', 'dducarnen@amazon.de', 'Darlene', 'Ducarne', 'China', 31, 'Notification received', 'nan', 2250, 0, 326, 208, 78, 40, 0.64, 0.12, 0.24, 31, 9707035.73);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (25, 'toomanymanoevres', '$2a$04$hNQ96wxlt.ZPSoTwxO1Jqun07h1R46H0ZTm5Hoe42mBMUDROSq77.', 'aspourso@over-blog.com', 'Audrey', 'Spours', 'Portugal', 12, 'nan', 'GM', 2396, 1, 13618, 10133, 1493, 1992, 0.74, 0.15, 0.11, 12, 2940636.82);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (26, 'Rizzlerino', '$2a$04$8x8EmpRGsTDawtjRqCxJEePSH2cgirF9EsXZLaI180Y1at7984pBS', 'pfountainp@loc.gov', 'Philippine', 'Fountain', 'Guatemala', 31, 'Reminder', 'GM', 2253, 1, 31233, 20893, 8809, 1531, 0.67, 0.05, 0.28, 31, 9069128.98);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (27, 'PlemSovhoz', '$2a$04$.2qbwetTAudo82EZ0YSQa.5lmSKZkbtdiP3.OLciZ2eC7XB5LCG1e', 'jstainq@ted.com', 'Joni', 'Stain', 'Poland', 18, 'Update', 'GM', 2737, 1, 2167, 1582, 380, 205, 0.73, 0.09, 0.18, 18, 3341920.58);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (28, 'Ch5ssPlayer', '$2a$04$Hu0BOZ1WctimoeuLdQE3NOFq0TVQq/coExuPqf7otWP2vkKAd6.OC', 'tollanderr@reuters.com', 'Tanner', 'Ollander', 'Brazil', 22, 'Reminder', 'FM', 2313, 1, 32115, 21989, 8861, 1265, 0.68, 0.04, 0.28, 22, 1964678.32);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (29, 'ChessTheory64', '$2a$04$tnWBJQvGN1F.gJLTRVYSKuRazZt9czcqrp0iGhOKtx2ISS4Fr2Ef6', 'rbriddens@google.co.uk', 'Ricky', 'Bridden', 'China', 22, 'Reminder', 'FM', 2348, 1, 6246, 3671, 2221, 354, 0.59, 0.06, 0.36, 22, 5910281.52);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (30, 'Azumilover', '$2a$04$qHZNetpcsajcuJkvLTodwuv1cD7/iyA.GOXRmwyqeuVJLetwNqbVK', 'veisikovitsht@odnoklassniki.ru', 'Vanya', 'Eisikovitsh', 'China', 20, 'Alert', 'nan', 2602, 0, 29280, 19994, 8216, 1070, 0.68, 0.04, 0.28, 20, 5275323.25);
+insert into user (userID, username, password, email, firstname, lastname, nationality, following, notifications, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, lossPercentage, averageSpectators, adMoney) values (31, 'SVODMEVKO', '$2a$04$ie/7JnWqYH9oPSE7iThKPOOvNEhCU3Sbk7I1usNrjwCci/3Oau8.i', 'poconnellu@statcounter.com', 'Perice', 'Connell', 'Japan', 26, 'Alert', 'GM', 2074, 1, 43294, 31166, 10120, 2008, 0.72, 0.05, 0.23, 26, 3178408.99);
+
+-- Remove any nan values that are coming from data_generator.py python file
+UPDATE user SET notifications = NULL WHERE notifications = 'nan';
+UPDATE user SET tag = NULL WHERE tag = 'nan';
+
 -- Advertiser table
 CREATE TABLE IF NOT EXISTS advertiser (
     advertiserID INTEGER NOT NULL AUTO_INCREMENT,
     companyName VARCHAR(75) UNIQUE NOT NULL,
     totalSpent DOUBLE,
     topUser VARCHAR(100),
-    userPreference TEXT,
+    professional INTEGER DEFAULT 1,
     salesID INTEGER NOT NULL,
     PRIMARY KEY (advertiserID),
-    FOREIGN KEY (salesID) REFERENCES sales (salesID)
+    FOREIGN KEY (topUser) REFERENCES user (username)
                                       ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (1, 'Babbleblab', 3037902.07, 'may6enexttime', 'professional', 13);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (2, 'Aimbo', 61890046.77, 'A-Liang', 'professional', 4);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (3, 'Centizu', 54311939.56, 'athena-pallada', 'professional', 28);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (4, 'Twitternation', 67441313.87, 'fireheart92', 'professional', 1);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (5, 'Buzzshare', 70074658.78, 'Azumilover', 'professional', 23);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (6, 'Skynoodle', 43033406.54, 'DrawDenied_Twitch', 'professional', 35);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (7, 'Jetpulse', 1023881.38, 'IVK88', 'professional', 30);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (8, 'Jabbersphere', 80358881.57, 'Elda64', 'professional', 11);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (9, 'Tazz', 14026709.15, 'temp006', 'professional', 18);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (10, 'Feedbug', 58947588.55, 'Shant7777777', 'professional', 13);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (11, 'Trudeo', 45726987.84, 'Inventing_Invention', 'professional', 31);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (12, 'Babbleset', 87933879.88, 'Chesssplayer21', 'professional', 27);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (13, 'JumpXS', 27198481.37, 'BabaRamdev', 'professional', 16);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (14, 'Rhybox', 94863206.23, 'RussianBlizzard', 'professional', 30);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (15, 'Devshare', 37596279.79, 'wizard98', 'professional', 14);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (16, 'Gabtype', 47171069.49, 'KontraJaKO', 'professional', 21);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (17, 'Kwimbee', 80950043.25, 'arturchix', 'professional', 6);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (18, 'Voonder', 74924342.1, 'Arseniii_Nesterov', 'professional', 3);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (19, 'Pixonyx', 85410845.07, 'chesswithmra', 'professional', 9);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (20, 'Mydeo', 5503211.68, 'V_M', 'professional', 31);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (21, 'Cogibox', 19668087.27, 'RebeccaHarris', 'professional', 5);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (22, 'Devify', 26151260.44, 'Watneg', 'professional', 33);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (23, 'Lazz', 30820541.79, 'RealDavidNavara', 'professional', 31);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (24, 'Dazzlesphere', 19468385.06, 'Night-King96', 'professional', 5);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (25, 'Jetwire', 38816531.76, 'MatthewG-p4p', 'professional', 22);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (26, 'Fliptune', 18083189.84, 'klari64', 'professional', 14);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (27, 'Camido', 72422224.61, 'SindarovGM', 'professional', 26);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (28, 'Leexo', 50874736.19, 'PeshkaCh', 'professional', 6);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (29, 'Divanoodle', 12883966.62, 'AngelitoRT', 'professional', 19);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (30, 'Thoughtblab', 93872255.74, 'Mishka_The_Great', 'professional', 35);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (31, 'Shufflebeat', 32231570.7, 'Aronyak1', 'professional', 27);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (32, 'Devpulse', 56603956.88, 'dimochka_tsoi', 'professional', 8);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (33, 'Smitham Group', 60732.61, 'dbotcherby0', 'casual', 14);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (34, 'O''Reilly, Barton and Bogan', 83663.15, 'phanlin1', 'casual', 9);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (35, 'Kohler-Waelchi', 99976.78, 'goconor2', 'casual', 5);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (36, 'Feeney and Sons', 30336.74, 'nbessett3', 'casual', 28);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (37, 'Thiel-Hansen', 25139.9, 'ajouhning4', 'casual', 5);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (38, 'Schumm, Moen and Greenfelder', 6272.08, 'jmantha5', 'casual', 28);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (39, 'Durgan Group', 18244.54, 'brydeard6', 'casual', 2);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (40, 'O''Hara, Wehner and Hudson', 73452.92, 'eserjent7', 'casual', 10);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (41, 'Hackett, Sipes and Tromp', 29439.86, 'mdugood8', 'casual', 2);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (42, 'Marquardt and Sons', 30123.66, 'mmoden9', 'casual', 8);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (43, 'Stiedemann LLC', 26885.54, 'kgoodiera', 'casual', 28);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (44, 'Kutch-Altenwerth', 90583.83, 'mscholardb', 'casual', 18);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (45, 'Jakubowski LLC', 95208.95, 'llafontc', 'casual', 31);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (46, 'Ortiz and Sons', 53371.83, 'dfarressd', 'casual', 34);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (47, 'Quigley, Fahey and Marks', 68391.92, 'radenete', 'casual', 28);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (48, 'Littel, Conroy and Reichel', 9710.06, 'hritchleyf', 'casual', 9);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (49, 'Nienow Group', 50306.29, 'mguiraudg', 'casual', 11);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (50, 'Frami LLC', 69624.59, 'npaylerh', 'casual', 13);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (51, 'Harris, Stoltenberg and Stroman', 32694.16, 'jslymei', 'casual', 9);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (52, 'Kuphal, Predovic and Yundt', 48264.53, 'jbusej', 'casual', 22);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (53, 'Dare-Keeling', 71733.49, 'ssteptoek', 'casual', 30);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (54, 'Keeling and Sons', 33706.9, 'choveel', 'casual', 26);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (55, 'Kreiger, Cronin and Witting', 51837.05, 'scattowm', 'casual', 32);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (56, 'Schinner, Schaefer and Gutmann', 94108.1, 'amozzettin', 'casual', 12);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (57, 'Swift and Sons', 49231.76, 'ringledewo', 'casual', 30);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (58, 'Prosacco-Bogan', 22805.41, 'llepardp', 'casual', 32);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (59, 'Luettgen, Smitham and Schimmel', 29631.15, 'hleaverq', 'casual', 5);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (60, 'Abernathy, Lind and Botsford', 79581.88, 'swheelikerr', 'casual', 1);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (61, 'Cronin Inc', 92502.83, 'rmoraless', 'casual', 14);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (62, 'Stiedemann, Aufderhar and Berge', 18454.77, 'efelipet', 'casual', 6);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (63, 'Waters-Leuschke', 85450.6, 'hsolmanu', 'casual', 7);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (64, 'Lakin and Sons', 42922.44, 'aavramowv', 'casual', 4);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (65, 'Koss, Kuhlman and Jaskolski', 56618.82, 'mpottberryw', 'casual', 27);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (66, 'Purdy, Williamson and Cummerata', 33887.5, 'iwadelingx', 'casual', 31);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (67, 'Bartell-Dietrich', 16737.62, 'fhelliary', 'casual', 8);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (68, 'Upton-Cronin', 27447.53, 'tstillmannz', 'casual', 17);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (69, 'Koepp, Leffler and Price', 75934.01, 'svedeneev10', 'casual', 7);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (70, 'Berge-Leffler', 71938.86, 'ccorser11', 'casual', 2);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (71, 'Hickle-Daniel', 24770.53, 'ctwittey12', 'casual', 18);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (72, 'Emard and Sons', 97434.52, 'kverchambre13', 'casual', 3);
-insert into advertiser (advertiserID, companyName, totalSpent, topUser, userPreference, salesID) values (73, 'Lubowitz and Sons', 65812.05, 'srowe14', 'casual', 34);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (1, 'Wordware', 2258279.52, 'rehbwf', 1, 5);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (2, 'Plajo', 6473405.66, 'Siegwhite', 1, 35);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (3, 'Livefish', 858619.17, 'Tuzakli_Egitim', 1, 16);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (4, 'Gigashots', 8472207.11, 'TheGreenCloud', 1, 3);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (5, 'Tagchat', 1540955.92, 'ARM__55555', 1, 23);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (6, 'Ntag', 819356.01, 'toomanymanoevres', 1, 5);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (7, 'Edgeclub', 2169974.59, 'rehbwf', 1, 22);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (8, 'Rhynyx', 5612071.5, 'chessmaster2006', 1, 20);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (9, 'Ainyx', 3128949.94, 'rehbwf', 1, 3);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (10, 'Snaptags', 4850165.75, 'ARM__55555', 1, 11);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (11, 'Eayo', 7802660.21, 'chessmaster2006', 1, 4);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (12, 'Yozio', 8567090.68, 'DrawDenied_Twitch', 1, 34);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (13, 'Lazzy', 3427147.6, 'Azumilover', 1, 30);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (14, 'Skinder', 5927999.2, 'Azumilover', 1, 24);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (15, 'Yakidoo', 4931171.53, 'rehbwf', 1, 19);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (16, 'BlogXS', 1463993.27, 'rehbwf', 1, 12);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (17, 'Kwimbee', 1461055.21, 'rehbwf', 1, 5);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (18, 'Feedspan', 6222026.45, 'rehbwf', 1, 26);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (19, 'Yoveo', 2942753.79, 'rehbwf', 1, 14);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (20, 'Latz', 7368728.67, 'rehbwf', 1, 10);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (21, 'Meevee', 7961704.84, 'rehbwf', 1, 30);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (22, 'Flashset', 9861755.96, 'rehbwf', 1, 22);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (23, 'Wordpedia', 5631265.71, 'rehbwf', 1, 5);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (24, 'Dabshots', 941728.99, 'rehbwf', 1, 18);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (25, 'Cogidoo', 6459484.1, 'rehbwf', 1, 16);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (26, 'Zoomzone', 7617020.66, 'rehbwf', 1, 24);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (27, 'Wikibox', 1152305.86, 'rehbwf', 1, 3);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (28, 'Edgeify', 972040.59, 'rehbwf', 1, 7);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (29, 'Jetwire', 274837.71, 'rehbwf', 1, 17);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (30, 'Gabvine', 2841335.26, 'rehbwf', 1, 23);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (31, 'Rhybox', 860622.86, 'rehbwf', 1, 5);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (32, 'Skinix', 1241733.13, 'rehbwf', 1, 33);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (33, 'Devshare', 2273238.02, 'DrawDenied_Twitch', 1, 7);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (34, 'Demimbu', 4916888.51, 'rehbwf', 1, 20);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (35, 'Zoozzy', 8994399.11, 'rehbwf', 1, 1);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (36, 'Mybuzz', 6895143.42, 'rehbwf', 1, 24);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (37, 'Jetpulse', 2836812.75, 'rehbwf', 1, 8);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (38, 'Edgewire', 810411.42, 'rehbwf', 1, 3);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (39, 'Meetz', 2791685.91, 'rehbwf', 1, 24);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (40, 'Feedmix', 5063534.73, 'rehbwf', 1, 21);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (41, 'Oyoyo', 2622324.71, 'rehbwf', 1, 26);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (42, 'Skinte', 3990477.75, 'rehbwf', 1, 7);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (43, 'Jaxspan', 5195976.49, 'rehbwf', 1, 28);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (44, 'Fivebridge', 6918590.86, 'rehbwf', 1, 8);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (45, 'Fliptune', 590511.65, 'rehbwf', 1, 22);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (46, 'Babblestorm', 6963407.6, 'rehbwf', 1, 4);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (47, 'Dynabox', 9461786.1, 'rehbwf', 1, 18);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (48, 'Ntags', 4101069.36, 'rehbwf', 1, 12);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (49, 'Voolia', 1273643.35, 'rehbwf', 1, 5);
+insert into advertiser (advertiserID, companyName, totalSpent, topUser, professional, salesID) values (50, 'Realcube', 3275990.28, 'rehbwf', 1, 6);
 
 -- topAdvertisers table
 CREATE TABLE IF NOT EXISTS topAdvertisers (
@@ -150,81 +190,58 @@ CREATE TABLE IF NOT EXISTS topAdvertisers (
                                           ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-insert into topAdvertisers (advertiserID, salesID) values (1, 13);
-insert into topAdvertisers (advertiserID, salesID) values (2, 4);
-insert into topAdvertisers (advertiserID, salesID) values (3, 28);
-insert into topAdvertisers (advertiserID, salesID) values (4, 1);
-insert into topAdvertisers (advertiserID, salesID) values (5, 23);
-insert into topAdvertisers (advertiserID, salesID) values (6, 35);
-insert into topAdvertisers (advertiserID, salesID) values (7, 30);
-insert into topAdvertisers (advertiserID, salesID) values (8, 11);
-insert into topAdvertisers (advertiserID, salesID) values (9, 18);
-insert into topAdvertisers (advertiserID, salesID) values (10, 13);
-insert into topAdvertisers (advertiserID, salesID) values (11, 31);
-insert into topAdvertisers (advertiserID, salesID) values (12, 27);
-insert into topAdvertisers (advertiserID, salesID) values (13, 16);
-insert into topAdvertisers (advertiserID, salesID) values (14, 30);
-insert into topAdvertisers (advertiserID, salesID) values (15, 14);
-insert into topAdvertisers (advertiserID, salesID) values (16, 21);
-insert into topAdvertisers (advertiserID, salesID) values (17, 6);
-insert into topAdvertisers (advertiserID, salesID) values (18, 3);
-insert into topAdvertisers (advertiserID, salesID) values (19, 9);
-insert into topAdvertisers (advertiserID, salesID) values (20, 31);
-insert into topAdvertisers (advertiserID, salesID) values (21, 5);
-insert into topAdvertisers (advertiserID, salesID) values (22, 33);
-insert into topAdvertisers (advertiserID, salesID) values (23, 31);
-insert into topAdvertisers (advertiserID, salesID) values (24, 5);
-insert into topAdvertisers (advertiserID, salesID) values (25, 22);
-insert into topAdvertisers (advertiserID, salesID) values (26, 14);
-insert into topAdvertisers (advertiserID, salesID) values (27, 26);
-insert into topAdvertisers (advertiserID, salesID) values (28, 6);
-insert into topAdvertisers (advertiserID, salesID) values (29, 19);
-insert into topAdvertisers (advertiserID, salesID) values (30, 35);
-insert into topAdvertisers (advertiserID, salesID) values (31, 27);
-insert into topAdvertisers (advertiserID, salesID) values (32, 8);
-insert into topAdvertisers (advertiserID, salesID) values (33, 14);
-insert into topAdvertisers (advertiserID, salesID) values (34, 9);
-insert into topAdvertisers (advertiserID, salesID) values (35, 5);
-insert into topAdvertisers (advertiserID, salesID) values (36, 28);
-insert into topAdvertisers (advertiserID, salesID) values (37, 5);
-insert into topAdvertisers (advertiserID, salesID) values (38, 28);
-insert into topAdvertisers (advertiserID, salesID) values (39, 2);
-insert into topAdvertisers (advertiserID, salesID) values (40, 10);
-insert into topAdvertisers (advertiserID, salesID) values (41, 2);
-insert into topAdvertisers (advertiserID, salesID) values (42, 8);
-insert into topAdvertisers (advertiserID, salesID) values (43, 28);
-insert into topAdvertisers (advertiserID, salesID) values (44, 18);
-insert into topAdvertisers (advertiserID, salesID) values (45, 31);
-insert into topAdvertisers (advertiserID, salesID) values (46, 34);
-insert into topAdvertisers (advertiserID, salesID) values (47, 28);
-insert into topAdvertisers (advertiserID, salesID) values (48, 9);
-insert into topAdvertisers (advertiserID, salesID) values (49, 11);
-insert into topAdvertisers (advertiserID, salesID) values (50, 13);
-insert into topAdvertisers (advertiserID, salesID) values (51, 9);
-insert into topAdvertisers (advertiserID, salesID) values (52, 22);
-insert into topAdvertisers (advertiserID, salesID) values (53, 30);
-insert into topAdvertisers (advertiserID, salesID) values (54, 26);
-insert into topAdvertisers (advertiserID, salesID) values (55, 32);
-insert into topAdvertisers (advertiserID, salesID) values (56, 12);
-insert into topAdvertisers (advertiserID, salesID) values (57, 30);
-insert into topAdvertisers (advertiserID, salesID) values (58, 32);
-insert into topAdvertisers (advertiserID, salesID) values (59, 5);
-insert into topAdvertisers (advertiserID, salesID) values (60, 1);
-insert into topAdvertisers (advertiserID, salesID) values (61, 14);
-insert into topAdvertisers (advertiserID, salesID) values (62, 6);
-insert into topAdvertisers (advertiserID, salesID) values (63, 7);
-insert into topAdvertisers (advertiserID, salesID) values (64, 4);
-insert into topAdvertisers (advertiserID, salesID) values (65, 27);
-insert into topAdvertisers (advertiserID, salesID) values (66, 31);
-insert into topAdvertisers (advertiserID, salesID) values (67, 8);
-insert into topAdvertisers (advertiserID, salesID) values (68, 17);
-insert into topAdvertisers (advertiserID, salesID) values (69, 7);
-insert into topAdvertisers (advertiserID, salesID) values (70, 2);
-insert into topAdvertisers (advertiserID, salesID) values (71, 18);
-insert into topAdvertisers (advertiserID, salesID) values (72, 3);
-insert into topAdvertisers (advertiserID, salesID) values (73, 34);
+insert into topAdvertisers (salesID, advertiserID) values (30, 1);
+insert into topAdvertisers (salesID, advertiserID) values (17, 2);
+insert into topAdvertisers (salesID, advertiserID) values (3, 3);
+insert into topAdvertisers (salesID, advertiserID) values (12, 4);
+insert into topAdvertisers (salesID, advertiserID) values (2, 5);
+insert into topAdvertisers (salesID, advertiserID) values (32, 6);
+insert into topAdvertisers (salesID, advertiserID) values (22, 7);
+insert into topAdvertisers (salesID, advertiserID) values (6, 8);
+insert into topAdvertisers (salesID, advertiserID) values (7, 9);
+insert into topAdvertisers (salesID, advertiserID) values (20, 10);
+insert into topAdvertisers (salesID, advertiserID) values (14, 11);
+insert into topAdvertisers (salesID, advertiserID) values (11, 12);
+insert into topAdvertisers (salesID, advertiserID) values (4, 13);
+insert into topAdvertisers (salesID, advertiserID) values (2, 14);
+insert into topAdvertisers (salesID, advertiserID) values (4, 15);
+insert into topAdvertisers (salesID, advertiserID) values (20, 16);
+insert into topAdvertisers (salesID, advertiserID) values (25, 17);
+insert into topAdvertisers (salesID, advertiserID) values (15, 18);
+insert into topAdvertisers (salesID, advertiserID) values (14, 19);
+insert into topAdvertisers (salesID, advertiserID) values (3, 20);
+insert into topAdvertisers (salesID, advertiserID) values (24, 21);
+insert into topAdvertisers (salesID, advertiserID) values (9, 22);
+insert into topAdvertisers (salesID, advertiserID) values (13, 23);
+insert into topAdvertisers (salesID, advertiserID) values (34, 24);
+insert into topAdvertisers (salesID, advertiserID) values (29, 25);
+insert into topAdvertisers (salesID, advertiserID) values (13, 26);
+insert into topAdvertisers (salesID, advertiserID) values (29, 27);
+insert into topAdvertisers (salesID, advertiserID) values (3, 28);
+insert into topAdvertisers (salesID, advertiserID) values (2, 29);
+insert into topAdvertisers (salesID, advertiserID) values (16, 30);
+insert into topAdvertisers (salesID, advertiserID) values (20, 31);
+insert into topAdvertisers (salesID, advertiserID) values (4, 32);
+insert into topAdvertisers (salesID, advertiserID) values (3, 33);
+insert into topAdvertisers (salesID, advertiserID) values (25, 34);
+insert into topAdvertisers (salesID, advertiserID) values (24, 35);
+insert into topAdvertisers (salesID, advertiserID) values (1, 36);
+insert into topAdvertisers (salesID, advertiserID) values (13, 37);
+insert into topAdvertisers (salesID, advertiserID) values (11, 38);
+insert into topAdvertisers (salesID, advertiserID) values (9, 39);
+insert into topAdvertisers (salesID, advertiserID) values (23, 40);
+insert into topAdvertisers (salesID, advertiserID) values (30, 41);
+insert into topAdvertisers (salesID, advertiserID) values (22, 42);
+insert into topAdvertisers (salesID, advertiserID) values (11, 43);
+insert into topAdvertisers (salesID, advertiserID) values (5, 44);
+insert into topAdvertisers (salesID, advertiserID) values (30, 45);
+insert into topAdvertisers (salesID, advertiserID) values (21, 46);
+insert into topAdvertisers (salesID, advertiserID) values (1, 47);
+insert into topAdvertisers (salesID, advertiserID) values (6, 48);
+insert into topAdvertisers (salesID, advertiserID) values (3, 49);
+insert into topAdvertisers (salesID, advertiserID) values (29, 50);
 
-# Advertisement table
+-- Advertisement table
 CREATE TABLE IF NOT EXISTS advertisement (
     advertisementID INTEGER NOT NULL AUTO_INCREMENT,
     advertiserID INTEGER NOT NULL,
@@ -237,448 +254,323 @@ CREATE TABLE IF NOT EXISTS advertisement (
                                          ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (1, 72, 'Our product is the best in the market!', 244869732, 322, 70);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (2, 23, 'Unlock your potential with our innovative offerings!', 610673009, 764, 195);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (3, 12, 'Join thousands of satisfied customers today!', 9195582, 434, 140);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (4, 55, 'Our product is the best in the market!', 495739250, 621, 322);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (5, 43, 'Our product is the best in the market!', 759907296, 549, 487);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (6, 55, 'Unlock your potential with our innovative offerings!', 772595973, 147, 444);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (7, 44, 'Discover the power of our cutting-edge technology!', 506190819, 617, 183);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (8, 66, 'Our product is the best in the market!', 967102688, 828, 499);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (9, 43, 'Discover the power of our cutting-edge technology!', 799034570, 361, 477);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (10, 12, 'Our product is the best in the market!', 89690838, 547, 50);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (11, 44, 'Unlock your potential with our innovative offerings!', 490992268, 336, 485);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (12, 12, 'Our product is the best in the market!', 148251620, 411, 217);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (13, 23, 'Join thousands of satisfied customers today!', 105550855, 229, 199);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (14, 54, 'Experience the ultimate solution for all your needs!', 564539960, 71, 1);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (15, 12, 'Unlock your potential with our innovative offerings!', 244507805, 246, 413);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (16, 23, 'Experience the ultimate solution for all your needs!', 955367672, 309, 293);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (17, 45, 'Discover the power of our cutting-edge technology!', 445894359, 325, 330);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (18, 56, 'Unlock your potential with our innovative offerings!', 819000791, 115, 83);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (19, 49, 'Join thousands of satisfied customers today!', 286966671, 72, 457);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (20, 43, 'Discover the power of our cutting-edge technology!', 297505937, 795, 300);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (21, 62, 'Our product is the best in the market!', 984075598, 62, 386);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (22, 56, 'Unlock your potential with our innovative offerings!', 40388772, 225, 4);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (23, 34, 'Unlock your potential with our innovative offerings!', 830127687, 758, 246);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (24, 65, 'Join thousands of satisfied customers today!', 504728302, 374, 247);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (25, 23, 'Discover the power of our cutting-edge technology!', 814425341, 923, 287);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (26, 32, 'Discover the power of our cutting-edge technology!', 94004328, 23, 428);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (27, 1, 'Experience the ultimate solution for all your needs!', 151143274, 506, 350);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (28, 12, 'Experience the ultimate solution for all your needs!', 316112614, 197, 472);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (29, 23, 'Our product is the best in the market!', 935316599, 720, 158);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (30, 19, 'Unlock your potential with our innovative offerings!', 773556220, 864, 487);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (31, 23, 'Experience the ultimate solution for all your needs!', 314316031, 210, 139);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (32, 56, 'Unlock your potential with our innovative offerings!', 508230768, 484, 466);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (33, 43, 'Discover the power of our cutting-edge technology!', 141201328, 886, 193);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (34, 67, 'Unlock your potential with our innovative offerings!', 615534195, 661, 489);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (35, 32, 'Experience the ultimate solution for all your needs!', 899236994, 912, 390);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (36, 23, 'Experience the ultimate solution for all your needs!', 269170088, 292, 233);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (37, 54, 'Discover the power of our cutting-edge technology!', 462043973, 41, 491);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (38, 23, 'Join thousands of satisfied customers today!', 237557686, 332, 342);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (39, 21, 'Join thousands of satisfied customers today!', 128174471, 104, 316);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (40, 34, 'Experience the ultimate solution for all your needs!', 61283122, 718, 186);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (41, 12, 'Discover the power of our cutting-edge technology!', 437566265, 471, 242);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (42, 45, 'Join thousands of satisfied customers today!', 656592172, 257, 392);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (43, 27, 'Discover the power of our cutting-edge technology!', 396644057, 942, 448);
-insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (44, 33, 'Our product is the best in the market!', 609800700, 646, 297);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (1, 5, 'Exclusive Deal', 825437, 41, 46);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (2, 33, 'Exclusive Deal', 128274, 49, 21);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (3, 18, 'Buy One', 797337, 12, 49);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (4, 32, 'Exclusive Deal', 435286, 15, 20);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (5, 10, 'Buy One', 461438, 5, 7);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (6, 44, 'Exclusive Deal', 808933, 43, 45);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (7, 29, 'Buy One', 143251, 1, 47);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (8, 42, 'Limited Time Offer', 22150, 44, 35);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (9, 27, 'Exclusive Deal', 833313, 48, 41);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (10, 35, 'New Arrival Sale', 804013, 40, 7);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (11, 10, 'Get One Free', 87655, 19, 17);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (12, 22, 'Limited Time Offer', 839489, 32, 18);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (13, 39, 'Limited Time Offer', 852946, 22, 32);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (14, 24, 'Exclusive Deal', 510812, 12, 11);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (15, 4, '50% Off Today', 235962, 45, 42);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (16, 37, 'Get One Free', 430622, 5, 26);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (17, 4, 'Buy One', 311762, 12, 27);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (18, 26, 'Get One Free', 355241, 2, 16);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (19, 34, 'Get One Free', 156773, 40, 37);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (20, 20, 'Exclusive Deal', 884126, 9, 18);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (21, 7, 'Buy One', 444355, 23, 13);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (22, 25, 'Limited Time Offer', 33034, 45, 19);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (23, 35, 'New Arrival Sale', 653171, 20, 42);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (24, 12, 'Get One Free', 30959, 9, 23);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (25, 21, 'Limited Time Offer', 147165, 47, 17);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (26, 6, 'Buy One', 425871, 20, 21);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (27, 37, 'Limited Time Offer', 282915, 35, 15);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (28, 31, 'Get One Free', 718375, 11, 12);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (29, 13, '50% Off Today', 698756, 47, 49);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (30, 8, 'Exclusive Deal', 46799, 46, 1);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (31, 44, 'New Arrival Sale', 625844, 5, 49);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (32, 14, 'Exclusive Deal', 428939, 16, 40);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (33, 26, 'Get One Free', 837795, 34, 9);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (34, 28, '50% Off Today', 226236, 43, 44);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (35, 37, 'Limited Time Offer', 107336, 28, 30);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (36, 15, 'Exclusive Deal', 310622, 32, 41);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (37, 39, '50% Off Today', 703181, 20, 47);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (38, 4, 'Exclusive Deal', 639972, 25, 1);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (39, 30, 'Buy One', 381160, 21, 49);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (40, 18, 'Buy One', 51024, 46, 2);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (41, 40, 'Get One Free', 288899, 8, 12);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (42, 34, 'Limited Time Offer', 276507, 18, 34);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (43, 30, 'Buy One', 789038, 29, 24);
+insert into advertisement (advertisementID, advertiserID, content, viewNumber, monthlyUsers, monthlySpectators) values (44, 32, 'Exclusive Deal', 572294, 43, 18);
 
-
--- User table
-CREATE TABLE IF NOT EXISTS user (
-    userID INTEGER NOT NULL AUTO_INCREMENT,
-    username VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    firstname VARCHAR(100) NOT NULL,
-    lastname VARCHAR(100) NOT NULL,
-    birthdate DATE NOT NULL,
-    dateCreated DATETIME DEFAULT CURRENT_TIMESTAMP,
-    following INTEGER, # Recursive - double check
-    notifications TEXT,
-    advertiserID INTEGER,
-    PRIMARY KEY (userID),
-    FOREIGN KEY (advertiserID) REFERENCES advertiser (advertiserID)
-                                        ON UPDATE RESTRICT ON DELETE RESTRICT
+-- post table
+CREATE TABLE IF NOT EXISTS posts (
+    postID INTEGER NOT NULL AUTO_INCREMENT,
+    username VARCHAR(100) NOT NULL,
+    content TEXT,
+    datePublished DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (postID),
+    FOREIGN KEY (username) REFERENCES user (username)
+                                 ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (1, 'may6enexttime', 'fB4F``5R3', 'tsillett0@ameblo.jp', 'Theresita', 'Sillett', '1987-01-03', 6, 'New message', 54);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (2, 'A-Liang', 'mM6DBw+R', 'aellul1@amazon.co.jp', 'Alric', 'Ellul', '1964-05-30', 5, 'Notification received', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (3, 'athena-pallada', 'xR3Pc6rbu"', 'iburgill2@cnn.com', 'Ivette', 'Burgill', '1998-12-09', 20, 'Reminder', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (4, 'fireheart92', 'yG9iX#Y*&/u9GlE', 'zburley3@marriott.com', 'Zarla', 'Burley', '1972-08-04', 29, 'Alert', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (5, 'Azumilover', 'sP3?ZCN`.uQ', 'rastill4@gravatar.com', 'Romonda', 'Astill', '2000-10-05', 14, 'Update', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (6, 'DrawDenied_Twitch', 'qH5\&Olq6,$r0s', 'aokeshott5@bluehost.com', 'Andeee', 'Okeshott', '2000-12-05', 22, 'New message', 54);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (7, 'IVK88', 'cH6ieL(%gq"', 'rfattorini6@myspace.com', 'Rodie', 'Fattorini', '1977-11-23', 31, 'Notification received', 56);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (8, 'Elda64', 'kT8_id>!({bqP''', 'rgoudman7@ft.com', 'Rourke', 'Goudman', '2000-05-22', 23, 'Reminder', 65);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (9, 'temp006', 'fI6LH=Rmv|Xh', 'igennerich8@icq.com', 'Isabella', 'Gennerich', '2000-12-09', 4, 'Alert', 56);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (10, 'Shant7777777', 'iV7{/rty"E_#*', 'pbleckly9@netlog.com', 'Pernell', 'Bleckly', '2000-09-30', 7, 'Update', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (11, 'Inventing_Invention', 'kN3Sz,%QY<zC(fp', 'dhankarda@wikipedia.org', 'Devina', 'Hankard', '2000-05-14', 20, 'New message', 24);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (12, 'Chesssplayer21', 'hU5''Jn)M.Hc*q9#r', 'jfarranceb@last.fm', 'Jeddy', 'Farrance', '1989-12-29', 29, 'Notification received', 7);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (13, 'BabaRamdev', 'vG9Gx*e6f2cTd', 'cgetcliffec@google.com.hk', 'Corrie', 'Getcliffe', '2000-10-31', 26, 'Reminder', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (14, 'RussianBlizzard', 'gI5dwLUZkPw/=', 'kstannasd@slideshare.net', 'Kiele', 'Stannas', '1970-11-30', 12, 'Alert', 12);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (15, 'wizard98', 'eT9LoR,~', 'cimmse@squarespace.com', 'Chalmers', 'Imms', '2000-12-31', 17, 'Update', 12);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (16, 'KontraJaKO', 'eM1}vHH?eiGbt6JL', 'manyonf@alexa.com', 'Mimi', 'Anyon', '2000-08-31', 17, 'New message', 25);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (17, 'arturchix', 'bG2(M>,@JBKdH<', 'kmastertong@studiopress.com', 'Kessiah', 'Masterton', '2000-05-01', 26, 'Notification received', 28);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (18, 'Arseniii_Nesterov', 'hV2Wi_$kZ>)N', 'eswetlandh@columbia.edu', 'Eberhard', 'Swetland', '2000-10-30', 22, 'Reminder', 12);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (19, 'chesswithmra', 'tM2<6ejQ8f+=x1', 'oquippi@shop-pro.jp', 'Otha', 'Quipp', '1995-04-30', 27, 'Alert', 36);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (20, 'V_M', 'iK8{M/jR', 'dbrahamj@apple.com', 'Dunn', 'Braham', '2000-12-22', 15, 'Update', 61);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (21, 'RebeccaHarris', 'iL3Di/O8}TmJo"7{', 'ereimersk@photobucket.com', 'Elisabetta', 'Reimers', '2000-01-03', 13, 'New message', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (22, 'Watneg', 'pQ6"NNGxM', 'arheadl@shop-pro.jp', 'Alberik', 'Rhead', '2000-03-31', 26, 'Notification received', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (23, 'RealDavidNavara', 'lJ2GfSiP', 'dpottm@whitehouse.gov', 'Dodie', 'Pott', '1960-07-12', 2, 'Reminder', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (24, 'Night-King96', 'zE3>iD=pCM6j', 'mclappsonn@miibeian.gov.cn', 'Melosa', 'Clappson', '2000-12-31', 2, 'Alert', 54);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (25, 'MatthewG-p4p', 'cA7V_|1f', 'djewsburyo@cbsnews.com', 'Darrel', 'Jewsbury', '2000-06-08', 4, 'Update', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (26, 'klari64', 'gV240N.2PZGs', 'dabraminop@telegraph.co.uk', 'Damon', 'Abramino', '1978-10-30', 21, 'New message', 49);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (27, 'SindarovGM', 'lL5PkJAgO\z4I', 'rskogginsq@purevolume.com', 'Rey', 'Skoggins', '2000-11-11', 4, 'Notification received', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (28, 'PeshkaCh', 'gU1`0YGE0P=', 'peversfieldr@businessinsider.com', 'Pacorro', 'Eversfield', '1983-09-08', 20, 'Reminder', 1);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (29, 'AngelitoRT', 'mG8"A.}SH)E&E~|', 'afotitts@theglobeandmail.com', 'Alverta', 'Fotitt', '1980-10-07', 17, 'Alert', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (30, 'Mishka_The_Great', 'aP8P"5?gnl', 'ififoott@imdb.com', 'Idaline', 'Fifoot', '2000-01-30', 22, 'Update', 64);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (31, 'Aronyak1', 'yH19,O}P$&', 'mtidswellu@jigsy.com', 'Marty', 'Tidswell', '1963-09-07', 26, 'New message', 67);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (32, 'dimochka_tsoi', 'kK53cP=a/U', 'ffatharlyv@va.gov', 'Feliks', 'Fatharly', '2000-11-19', 30, 'Notification received', 12);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (33, 'dbotcherby0', '$2a$04$i2CalA3IY.EbnAPJ9RmMjudiB.x5.0wZBa.E.1SNBEUPWgRj3kuYa', 'kdionisi0@altervista.org', 'Kelcy', 'Dionisi', '1995-10-02', 9, 'Notification received', 72);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (34, 'phanlin1', '$2a$04$SRO8zzxeSw6M6mgQCknNfuutf8M9p/JeLCHmAbjNzlm0zQb5aglSO', 'dfree1@wunderground.com', 'Dionysus', 'Free', '2000-11-29', 19, 'Notification received', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (35, 'goconor2', '$2a$04$txlHlFxtjnRe3Ho.K1QvkOdVUzy635dAS7f3RZ3E.leR.nal7uvLa', 'bmellows2@hatena.ne.jp', 'Borg', 'Mellows', '1991-07-31', 4, 'Reminder', 56);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (36, 'nbessett3', '$2a$04$PZZQebo11v16WKe8ilmtoe6Cj8fpEaUaCi5tNHtlX1zcIbATI4RA.', 'fjankiewicz3@fotki.com', 'Florentia', 'Jankiewicz', '1993-04-28', 18, 'Alert', 66);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (37, 'ajouhning4', '$2a$04$3rgJnm0U2xurZdBMhkX5Puy725IffxMNjqUih89VfuSDUBUXW.KQG', 'delson4@freewebs.com', 'Drusy', 'Elson', '2000-12-02', 28, 'Notification received', 67);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (38, 'jmantha5', '$2a$04$e0qKuwZLMXcSkozXKgezDecv6FYkHQ2IyVifuyZXejaDqE/vuUbku', 'gdaal5@goo.gl', 'Guilbert', 'Daal', '2000-10-30', 27, 'Notification received', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (39, 'brydeard6', '$2a$04$ScoB0W45dNjxEC3m6buwDOsj4SyOqQ4Yewp2EUgAmPvZvWYjH1NMm', 'nseally6@google.ru', 'Nichole', 'Seally', '1970-05-21', 24, 'Update', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (40, 'eserjent7', '$2a$04$GHmwK48qcZBHPzyt94r9nOAKgQrdCNDbfj7cX9yUINcgNwybnsCP6', 'cfryman7@gizmodo.com', 'Cornie', 'Fryman', '1985-03-23', 5, 'Alert', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (41, 'mdugood8', '$2a$04$EozSfUrZ4YS32xBxolGtQeNvY1zfCH7nz2WDItqyybpCtlD3tbSgq', 'aschaffler8@utexas.edu', 'Alison', 'Schaffler', '1970-10-07', 15, 'Notification received', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (42, 'mmoden9', '$2a$04$/P8cMpe9Ipjpf.qRxm3GfuD5J3BM4pyRfHRfICLHVvgFlCGGPMoMq', 'hkaradzas9@ocn.ne.jp', 'Hedwiga', 'Karadzas', '2000-09-03', 25, 'Alert', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (43, 'kgoodiera', '$2a$04$ZKLGjLCVWAZGh8S/TihLm.mj3nnSyB//vIjgP8N12m/PL8b636Iwy', 'sastletta@nydailynews.com', 'Smitty', 'Astlett', '1985-12-16', 30, 'Alert', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (44, 'mscholardb', '$2a$04$LQPbFAX6TA8aSlFaSyicEe1o7ObMu2LXURfkPyEr1mM4EjqIFDSjy', 'cdaverinb@issuu.com', 'Chelsy', 'Daverin', '2000-10-29', 8, 'Reminder', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (45, 'llafontc', '$2a$04$RatdBK6iWQIMxDGGoQiGAeXB.DOC7hYgn3PcVG00hqrHoebf9grc2', 'tfinanc@is.gd', 'Teresina', 'Finan', '2000-06-19', 7, 'Update', 43);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (46, 'dfarressd', '$2a$04$NMW1BSk.BUMim17AWKZ89.c6Gh/ca3EmbB4Tn2TMMetCrAmiQMIiO', 'equarringtond@bravesites.com', 'Ezra', 'Quarrington', '2000-10-31', 16, 'Reminder', 12);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (47, 'radenete', '$2a$04$AJYcpwvTtk0290mKUqApVOSIgwvH5kisjTSTn4zwxpIGFbID.oERa', 'jjentgense@toplist.cz', 'Jacquenetta', 'Jentgens', '1971-12-12', 5, 'New message', 32);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (48, 'hritchleyf', '$2a$04$JTABiRM6QA41HJwwU2soPO8o9A/Oe4k3h0xoUtOU8SwbNEw8zYUR2', 'sokroyf@newyorker.com', 'Shamus', 'Okroy', '1983-10-23', 11, 'New message', 21);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (49, 'mguiraudg', '$2a$04$7TJ4ahAU9l6mxLDNPsbeAu4homjbGIRLysyWRDrUtTPP.ZgHQunEu', 'groyseg@123-reg.co.uk', 'Gaven', 'Royse', '2000-01-07', 7, 'Update', 12);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (50, 'npaylerh', '$2a$04$oYG/xlhVU2.q75qjmbb/U.LCh0349sy64WJpuIbS1xN5QpyiHr1za', 'fblibenh@nbcnews.com', 'Flo', 'Bliben', '2000-11-20', 11, 'New message', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (51, 'jslymei', '$2a$04$Ik3BJjl995tuv6MeSeZ38.wIu8gVWDvLNea2jElV2n5rYTjuITSWm', 'phenroti@walmart.com', 'Panchito', 'Henrot', '1996-11-27', 16, 'New message', 3);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (52, 'jbusej', '$2a$04$oD19N9QBoAcqjUKWwaQQdObjYmORnc.6J497q.usAIYsNBpRW9CQ.', 'sbosworthj@goodreads.com', 'Sterling', 'Bosworth', '2000-10-02', 17, 'New message', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (53, 'ssteptoek', '$2a$04$t5keUBWwowRZKtZAANbwEeAeyIwn3oqUDQrWRqdFZA8XCiwDoiiQu', 'lmuatk@istockphoto.com', 'Lavinie', 'Muat', '2000-12-30', 30, 'Alert', 32);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (54, 'choveel', '$2a$04$0GTNYo0a/Kphj/dg4HvyNuHvx3fGQeaeQ1GwCou1gFwL5bLPin62C', 'etownshendl@alexa.com', 'Elane', 'Townshend', '2000-11-30', 5, 'Alert', 43);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (55, 'scattowm', '$2a$04$XZKJcknNd3QrVIDaiP97j.v86slG5awVqd1ikADPri.oBwNnde64.', 'bvigerm@eepurl.com', 'Byrle', 'Viger', '1973-01-25', 24, 'New message', 55);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (56, 'amozzettin', '$2a$04$Et5LtrMrr3CWNI4U6RfxAOZdfxNsUotMPtlp8fZd6JI/j2AbU2b7a', 'sgobeln@sun.com', 'Storm', 'Gobel', '2000-12-23', 10, 'New message', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (57, 'ringledewo', '$2a$04$xw0f/wuOnocQifVjVRUBM.dGOui3ep3aBKSyaci5646MJoB5RTfHm', 'iporcaso@biglobe.ne.jp', 'Ingelbert', 'Porcas', '1981-09-03', 21, 'Update', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (58, 'llepardp', '$2a$04$RKTqYzhSdVmlI50NW5hvb.T5h9NCV8yxH2F39Bzmb9vBfdzI55tFO', 'adoryp@nhs.uk', 'Adara', 'Dory', '1960-11-01', 15, 'Update', 32);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (59, 'hleaverq', '$2a$04$.fDKO8MztuMpx/rsQQBoa.FrIM6NLg8p.gpNsXwUiVK/IXa6mh2IW', 'zbowlasq@google.co.uk', 'Zarah', 'Bowlas', '2000-12-03', 11, 'Alert', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (60, 'swheelikerr', '$2a$04$79vuANblxZiTNo12pn3R5eWxuw.Cm5KgbVNGJoijyQWDVaPnPciCO', 'fewingr@yelp.com', 'Fayette', 'Ewing', '2000-10-22', 5, 'Update', 32);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (61, 'rmoraless', '$2a$04$tvqwceZLyvrpskhGtphfbuUEN/ODKIW4WMopk/9MnMVH1i4WXz9wm', 'eshimmans@google.com.au', 'Elaine', 'Shimman', '2000-09-05', 16, 'New message', 2);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (62, 'efelipet', '$2a$04$xog7YN0KnXlfl/4LMIC89e1c/KdQwhUZAXzRWKNTa1Zl.encT9ZFC', 'subankt@sun.com', 'Sheffy', 'Ubank', '2000-08-18', 24, 'New message', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (63, 'hsolmanu', '$2a$04$RItSsI/i.wDjg/WzjyeVa.6XTNi9BN827lygugTApHUss.nth1voy', 'bmacadieu@howstuffworks.com', 'Bourke', 'MacAdie', '2000-10-01', 2, 'Notification received', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (64, 'aavramowv', '$2a$04$KWVkqwBKD9xbbEDssfDD4.HfumtO91FQxbj0yXvyzlSuUmbbi51p6', 'bkaliszewskiv@sohu.com', 'Brandice', 'Kaliszewski', '2000-10-07', 1, 'New message', 65);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (65, 'mpottberryw', '$2a$04$kSuWonZrfS5ILv7PkPFLJOpnqBWG8UoZoRfs7RpMx/rNsGADNglTG', 'tmullinsw@boston.com', 'Timothee', 'Mullins', '2000-10-05', 12, 'Notification received', 32);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (66, 'iwadelingx', '$2a$04$pvzKMkepcB4Ej5HodCgmYe.AVyVIy.asgomELGhPkR7iD5OVtY3/C', 'nhexumx@psu.edu', 'Nicoline', 'Hexum', '1981-04-07', 21, 'New message', 27);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (67, 'fhelliary', '$2a$04$f8rn65aqNdncRpD/gkPXY.jl.VCaj8bkR5nkQWI/C5WXwkISwn0I6', 'fblowery@instagram.com', 'Fayina', 'Blower', '2000-09-03', 19, 'Reminder', 54);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (68, 'tstillmannz', '$2a$04$PX2KBXet9vKWqemcXB5nxOZBMIcMkTFPhALXhwAagG6AxUUMIgVa2', 'fainsliez@fda.gov', 'Freddie', 'Ainslie', '2000-12-26', 1, 'Alert', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (69, 'svedeneev10', '$2a$04$rsfwFeGUpV8xigahR9P60uEmyMpDGgTUppXhJ2jFPqj159srdg5Fy', 'sawmack10@usgs.gov', 'Skylar', 'Awmack', '2000-01-02', 5, 'Alert', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (70, 'ccorser11', '$2a$04$wwAi/OZxDJjs/PuDpMHpF.eYLgLH4r52/yTS8xr99oRAMk463CBRK', 'cdeason11@exblog.jp', 'Clari', 'Deason', '1972-10-14', 1, 'New message', 54);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (71, 'ctwittey12', '$2a$04$MJFTn3VEWEydUGFusBOJAuS1MAJGShR2vknlnTdwWsKgU48Fxbv9S', 'ahedworth12@engadget.com', 'Annora', 'Hedworth', '1997-02-17', 2, 'Update', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (72, 'kverchambre13', '$2a$04$q7nVuDw8TWucvTH3RKW3OuWNiGGHQMRVEYdZZSqF8TFjlNZIVz1Ty', 'wtredger13@vkontakte.ru', 'Waldo', 'Tredger', '2000-03-05', 2, 'Update', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (73, 'srowe14', '$2a$04$jviv53hqpZvGDEgPSLv8xO.2nHDtZCFoyXUKAye95hD6pn7/g5Lu2', 'tmetts14@wunderground.com', 'Tatiania', 'Metts', '1972-10-30', 8, 'Alert', 13);
+insert into posts (postID, username, content) values (1, 'athena-pallada', 'Endgame Techniques');
+insert into posts (postID, username, content) values (2, 'ARM__55555', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (3, 'flamingbishop', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (4, 'DrawDenied_Twitch', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (5, 'chessmaster2006', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (6, 'furuko01', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (7, 'athena-pallada', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (8, 'Ch5ssPlayer', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (9, 'DrawDenied_Twitch', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (10, 'fireheart92', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (11, 'ARM__55555', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (12, 'ChessTheory64', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (13, 'flamingbishop', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (14, 'athena-pallada', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (15, 'chessmaster2006', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (16, 'athena-pallada', 'Endgame Techniques');
+insert into posts (postID, username, content) values (17, 'athena-pallada', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (18, 'chessmaster2006', 'Endgame Techniques');
+insert into posts (postID, username, content) values (19, 'Chesssknock', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (20, 'ARM__55555', 'Endgame Techniques');
+insert into posts (postID, username, content) values (21, 'DrawDenied_Twitch', 'Endgame Techniques');
+insert into posts (postID, username, content) values (22, 'Azumilover', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (23, 'ChessTheory64', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (24, 'ChessTheory64', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (25, 'furuko01', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (26, 'flamingbishop', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (27, 'flamingbishop', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (28, 'ARM__55555', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (29, 'Azumilover', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (30, 'athena-pallada', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (31, 'athena-pallada', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (32, 'ChessTheory64', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (33, 'ChessTheory64', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (34, 'Chesssknock', 'Endgame Techniques');
+insert into posts (postID, username, content) values (35, 'flamingbishop', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (36, 'ARM__55555', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (37, 'Chesssknock', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (38, 'Azumilover', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (39, 'athena-pallada', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (40, 'furuko01', 'Endgame Techniques');
+insert into posts (postID, username, content) values (41, 'ARM__55555', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (42, 'Ch5ssPlayer', 'Endgame Techniques');
+insert into posts (postID, username, content) values (43, 'DrawDenied_Twitch', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (44, 'furuko01', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (45, 'chessmaster2006', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (46, 'furuko01', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (47, 'ChessTheory64', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (48, 'chessmaster2006', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (49, 'Azumilover', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (50, 'Azumilover', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (51, 'furuko01', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (52, 'Apodex64', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (53, 'fireheart92', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (54, 'ARM__55555', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (55, 'ARM__55555', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (56, 'fireheart92', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (57, 'ChessTheory64', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (58, 'fireheart92', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (59, 'Chesssknock', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (60, 'ARM__55555', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (61, 'DrawDenied_Twitch', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (62, 'Azumilover', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (63, 'athena-pallada', 'Endgame Techniques');
+insert into posts (postID, username, content) values (64, 'athena-pallada', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (65, 'ARM__55555', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (66, 'athena-pallada', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (67, 'Azumilover', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (68, 'DrawDenied_Twitch', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (69, 'Azumilover', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (70, 'flamingbishop', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (71, 'chessmaster2006', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (72, 'flamingbishop', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (73, 'Apodex64', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (74, 'Azumilover', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (75, 'ChessTheory64', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (76, 'athena-pallada', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (77, 'Chesssknock', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (78, 'furuko01', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (79, 'ARM__55555', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (80, 'Apodex64', 'Endgame Techniques');
+insert into posts (postID, username, content) values (81, 'chessmaster2006', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (82, 'furuko01', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (83, 'Apodex64', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (84, 'ChessTheory64', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (85, 'ChessTheory64', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (86, 'Chesssknock', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (87, 'furuko01', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (88, 'ARM__55555', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (89, 'Apodex64', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (90, 'ARM__55555', 'Endgame Techniques');
+insert into posts (postID, username, content) values (91, 'flamingbishop', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (92, 'ChessTheory64', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (93, 'chessmaster2006', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (94, 'Chesssknock', 'Endgame Techniques');
+insert into posts (postID, username, content) values (95, 'flamingbishop', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (96, 'Apodex64', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (97, 'fireheart92', 'Endgame Techniques');
+insert into posts (postID, username, content) values (98, 'Chesssknock', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (99, 'flamingbishop', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (100, 'Ch5ssPlayer', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (101, 'ChessTheory64', 'Endgame Techniques');
+insert into posts (postID, username, content) values (102, 'ARM__55555', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (103, 'Chesssknock', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (104, 'ChessTheory64', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (105, 'flamingbishop', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (106, 'DrawDenied_Twitch', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (107, 'Chesssknock', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (108, 'Ch5ssPlayer', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (109, 'DrawDenied_Twitch', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (110, 'ARM__55555', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (111, 'Apodex64', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (112, 'Chesssknock', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (113, 'Apodex64', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (114, 'ARM__55555', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (115, 'Apodex64', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (116, 'furuko01', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (117, 'Ch5ssPlayer', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (118, 'athena-pallada', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (119, 'Azumilover', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (120, 'Ch5ssPlayer', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (121, 'chessmaster2006', 'Endgame Techniques');
+insert into posts (postID, username, content) values (122, 'Ch5ssPlayer', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (123, 'ChessTheory64', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (124, 'DrawDenied_Twitch', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (125, 'ARM__55555', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (126, 'furuko01', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (127, 'flamingbishop', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (128, 'DrawDenied_Twitch', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (129, 'fireheart92', 'Endgame Techniques');
+insert into posts (postID, username, content) values (130, 'furuko01', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (131, 'fireheart92', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (132, 'ARM__55555', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (133, 'furuko01', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (134, 'flamingbishop', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (135, 'Ch5ssPlayer', 'Endgame Techniques');
+insert into posts (postID, username, content) values (136, 'Azumilover', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (137, 'Ch5ssPlayer', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (138, 'DrawDenied_Twitch', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (139, 'DrawDenied_Twitch', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (140, 'furuko01', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (141, 'ChessTheory64', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (142, 'ARM__55555', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (143, 'Ch5ssPlayer', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (144, 'fireheart92', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (145, 'ChessTheory64', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (146, 'Ch5ssPlayer', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (147, 'flamingbishop', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (148, 'DrawDenied_Twitch', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (149, 'ARM__55555', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (150, 'fireheart92', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (151, 'Azumilover', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (152, 'fireheart92', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (153, 'flamingbishop', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (154, 'DrawDenied_Twitch', 'Endgame Techniques');
+insert into posts (postID, username, content) values (155, 'chessmaster2006', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (156, 'fireheart92', 'Endgame Techniques');
+insert into posts (postID, username, content) values (157, 'ARM__55555', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (158, 'chessmaster2006', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (159, 'athena-pallada', 'Endgame Techniques');
+insert into posts (postID, username, content) values (160, 'DrawDenied_Twitch', 'Endgame Techniques');
+insert into posts (postID, username, content) values (161, 'ChessTheory64', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (162, 'athena-pallada', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (163, 'chessmaster2006', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (164, 'Azumilover', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (165, 'furuko01', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (166, 'Apodex64', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (167, 'ChessTheory64', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (168, 'chessmaster2006', 'Endgame Techniques');
+insert into posts (postID, username, content) values (169, 'fireheart92', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (170, 'ChessTheory64', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (171, 'ChessTheory64', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (172, 'Chesssknock', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (173, 'ChessTheory64', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (174, 'chessmaster2006', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (175, 'Ch5ssPlayer', 'Endgame Techniques');
+insert into posts (postID, username, content) values (176, 'Apodex64', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (177, 'furuko01', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (178, 'chessmaster2006', 'Opening Repertoire for White');
+insert into posts (postID, username, content) values (179, 'athena-pallada', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (180, 'Azumilover', 'Endgame Techniques');
+insert into posts (postID, username, content) values (181, 'Apodex64', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (182, 'flamingbishop', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (183, 'Chesssknock', 'Endgame Techniques');
+insert into posts (postID, username, content) values (184, 'ChessTheory64', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (185, 'Apodex64', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (186, 'chessmaster2006', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (187, 'flamingbishop', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (188, 'ChessTheory64', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (189, 'Azumilover', 'Mastering the Sicilian Defense');
+insert into posts (postID, username, content) values (190, 'Chesssknock', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (191, 'ChessTheory64', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (192, 'ARM__55555', 'Analyzing Famous Chess Games');
+insert into posts (postID, username, content) values (193, 'fireheart92', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (194, 'Ch5ssPlayer', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (195, 'fireheart92', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (196, 'athena-pallada', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (197, 'furuko01', 'Tactics for Beginners');
+insert into posts (postID, username, content) values (198, 'ARM__55555', 'Improving Calculation Skills');
+insert into posts (postID, username, content) values (199, 'Azumilover', 'Introduction to Chess Strategy');
+insert into posts (postID, username, content) values (200, 'ChessTheory64', 'Improving Calculation Skills');
 
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (74, 'nwhaley0', '$2a$04$u19bJFPzBHZh1EfPrZSgIOVD.2j3zfP7PRzg2oqzv2ASNPLDuVRwO', 'nwhaley0@chron.com', 'Neill', 'Whaley', '2000-01-25', 11, 'Alert', 72);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (75, 'halster1', '$2a$04$8mZdTroj22DZ70jJ5FYnH.JhnsNVFNFphuXM6.FTXLI8GuteeW58y', 'halster1@gravatar.com', 'Hewett', 'Alster', '2000-08-27', 15, 'Notification received', 31);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (76, 'mlasselle2', '$2a$04$wzAi9AkHl2/a0L2bLXWG4euKbJIEhVc7BWiMDhF1X8lYvYJQhlYSe', 'mlasselle2@columbia.edu', 'Mikaela', 'Lasselle', '1993-02-11', 31, 'Update', 46);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (77, 'gjohananov3', '$2a$04$W4VXeAwM7YMUhfbUjQ0CY.cFVKgxrAORU.of9aKS5W.G5hxsYSsPq', 'gjohananov3@msn.com', 'Genevra', 'Johananov', '1968-05-05', 22, 'Notification received', 3);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (78, 'mfonso4', '$2a$04$I1tk1I7sPdJjCK1Sd.05cudi6juLr/lqPb8o1LJ3i4pr2kaIUjppq', 'mfonso4@zdnet.com', 'Mellisent', 'Fonso', '1977-05-22', 15, 'New message', 37);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (79, 'clesurf5', '$2a$04$lt9lMqkL4v9MJor1Pd0pq.y3MH7QhZgSLDTOBsjRNiBLcTa3D1Eu6', 'clesurf5@cloudflare.com', 'Chrysler', 'Lesurf', '2000-10-03', 8, 'Notification received', 58);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (80, 'jweaben6', '$2a$04$m4Ecpa5.jjJTSTLsKfAmuuI2qF6L6ecODnYbn3iakrnE6UHtvO4/y', 'jweaben6@a8.net', 'Jannel', 'Weaben', '2000-10-28', 25, 'Reminder', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (81, 'ktimmermann7', '$2a$04$Xb.RMEGxWJS626D1nC1mmeHi3tEYAuk/oFiRkFfjxaFVE71Jcb/tW', 'ktimmermann7@examiner.com', 'Kiele', 'Timmermann', '1976-10-04', 13, 'New message', 66);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (82, 'lbrownsea8', '$2a$04$aoNo8NDUSpphX9nbgRIZVOqitnVbcIf1gA9wJ5BfghoONOAnhEEKy', 'lbrownsea8@barnesandnoble.com', 'Livia', 'Brownsea', '2000-01-20', 21, 'Reminder', 36);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (83, 'jciabatteri9', '$2a$04$EwgICCyzCBl59pfcxGajNuneLS4v4e4/nMNG.Y6WZbAlBU9VtTtsC', 'jciabatteri9@mysql.com', 'Jermain', 'Ciabatteri', '1993-11-27', 22, 'Reminder', 29);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (84, 'lworgana', '$2a$04$Dw3CZXXNbCpFe2wzzeyDme0d9S5/T7g67Jj32YHDRQnM/aU9rO3fS', 'lworgana@ucoz.ru', 'Lorry', 'Worgan', '1975-12-03', 17, 'New message', 13);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (85, 'hgrouerb', '$2a$04$y.qDQJRFDErG9Rpwn3TpPuNaXUdLA4zD9d4LfvJOuyz9iZdshkwOa', 'hgrouerb@slashdot.org', 'Hettie', 'Grouer', '2000-11-20', 24, 'New message', 11);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (86, 'pslymec', '$2a$04$oM6YZ5j3Y8mZEwf5HIUGWuSpryD6YeiZ21Xq34GDYdtknuRLw.MGa', 'pslymec@vistaprint.com', 'Patience', 'Slyme', '2000-12-27', 4, 'New message', 59);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (87, 'wdemanged', '$2a$04$DSgNSMYEBuB1OG9P23isiuRVDJil.zaBZK5vPM9B0PZNgPAEkzbyC', 'wdemanged@networksolutions.com', 'Warren', 'Demange', '2000-11-18', 5, 'Reminder', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (88, 'mruberrye', '$2a$04$HWYbQuBimoFXskbTNjgNwOWq7D4hr/w.iZnPZ04J4YJSHgRPALuAC', 'mruberrye@addtoany.com', 'Michaela', 'Ruberry', '2000-03-13', 31, 'Reminder', 32);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (89, 'kprimakf', '$2a$04$CCxFwCCRpfcHFuLpaHHuyeyxvVYHPUEVr3Hm2Tje4bES6O0OfOk/6', 'kprimakf@bloglines.com', 'Katharina', 'Primak', '2000-11-05', 25, 'Alert', 5);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (90, 'ftiddg', '$2a$04$k2r9ZpySSn17aZA0U/a7DOAb3e3g46dvet/TCEyt5efh1RS6F/LhW', 'ftiddg@auda.org.au', 'Franciskus', 'Tidd', '2000-01-21', 28, 'Alert', 50);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (91, 'mkelingeh', '$2a$04$iTLx.9epnRPViUQwcgj7HOT3T.b4iRVykWIeFZg4uWqwRQ66PMeIm', 'mkelingeh@ezinearticles.com', 'Mano', 'Kelinge', '2000-11-03', 10, 'Update', 62);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (92, 'bsoutheyi', '$2a$04$1ELaLht32NCnkh78fpEyNeb2NtTK/iz9I29mUd9IK8vinyLzwJcGq', 'bsoutheyi@hibu.com', 'Barron', 'Southey', '1971-03-15', 10, 'New message', 33);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (93, 'zseelerj', '$2a$04$XzspnY1H9Zld0m4/gh51Y.JYC0EGWP5iJ7or/DEfweG9Ft0IwnwYq', 'zseelerj@rambler.ru', 'Zuzana', 'Seeler', '1998-12-20', 9, 'New message', 18);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (94, 'dschenkelk', '$2a$04$h5xGYfIXy6VjKhtcarRj9ezG39Rg/Weh8Ys3eoSGYCSevQ47l7xAi', 'dschenkelk@dedecms.com', 'Dulce', 'Schenkel', '2000-12-05', 11, 'New message', 54);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (95, 'braimanl', '$2a$04$dtoHlBYn7teSHRtObnPxW.q9T.V1SnLLdB4GeXSEUUGcS7GDuTtd6', 'braimanl@google.fr', 'Buckie', 'Raiman', '1998-04-06', 26, 'New message', 66);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (96, 'dhanrettym', '$2a$04$nvHPR4eTJIQflk618WDQ4eWTsf5ZEM7O20hFsmlyz3LPC/0LJTCwK', 'dhanrettym@ustream.tv', 'Dukey', 'Hanretty', '2000-02-09', 18, 'New message', 6);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (97, 'smatfinn', '$2a$04$vtH0XXKnQja7C1XT4EYnUe1HGHRuMCinEWr0riGcdFeorPIpmp.je', 'smatfinn@imageshack.us', 'Steffi', 'Matfin', '2000-03-20', 9, 'Update', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (98, 'nreddieo', '$2a$04$w/EBq0B6xd/vFWTmJqtkv.rHh7K78tuYAQCZGllRCeNTt44tvtXTu', 'nreddieo@disqus.com', 'Nicoli', 'Reddie', '2000-10-20', 12, 'Notification received', 46);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (99, 'hcohnp', '$2a$04$U0RpWWF8Yxd0hJSFFNNS3eCSkeNbO2q3f1dmoRtAd/8LD4pXHBCD.', 'hcohnp@npr.org', 'Hyacinth', 'Cohn', '1997-10-05', 14, 'Update', 25);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (100, 'cvonbrookq', '$2a$04$olTX8L6jsq2suKmOW4v.8u2JkysDGuqXzuiDwJu3dNs8k6aYceZHO', 'cvonbrookq@google.it', 'Cad', 'Von Brook', '1971-12-21', 22, 'Notification received', 33);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (101, 'dmitchinsonr', '$2a$04$ll6./aqoOBY9R6xAbPeR8OJhK.6gMsOpO51Xr/eqV21itgKKkDSQS', 'dmitchinsonr@msu.edu', 'Del', 'Mitchinson', '1960-11-27', 28, 'Notification received', 10);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (102, 'bwyres', '$2a$04$9coOWNoAVic5Bj8XzLD25OrsvxQ0SW/FBT7JWTKOeOQmxT6pwNG8G', 'bwyres@intel.com', 'Bea', 'Wyre', '1998-10-29', 7, 'Update', 14);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (103, 'wivant', '$2a$04$p2Cv3xRLmjvhOdRhd1pI.eGgWDawyGgxzfiqciviNTEigUDtEIat.', 'wivant@usa.gov', 'Willa', 'Ivan', '2000-06-17', 14, 'Notification received', 72);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (104, 'cbaumaieru', '$2a$04$C9x6Mmh.ndgydkUmhzxtSeD.1i2LBFnpr7UT4VT3UHCdo6BUXhCF6', 'cbaumaieru@sbwire.com', 'Cheryl', 'Baumaier', '2000-03-26', 28, 'Reminder', 35);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (105, 'mferrierev', '$2a$04$HCB8/9Ax8fEDJ.sgP62NBemKKduC1uIAmq32N8/YADWAeXnj6ffNO', 'mferrierev@yellowpages.com', 'Marci', 'Ferriere', '1988-10-24', 25, 'Update', 47);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (106, 'jmcmeekanw', '$2a$04$B4jtUlE73KrDgeNRQcIvueGwF4CjYQNDZa8JDY5QCpQiYJho2esZ6', 'jmcmeekanw@wsj.com', 'Jeremie', 'Mc Meekan', '1973-06-02', 5, 'Notification received', 43);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (107, 'gkoppeckx', '$2a$04$pPK6w0Ssvl0GKn7QBfH24O6rBZhLieBzNZKoIwWpb8fJgIXY8Ih8K', 'gkoppeckx@dedecms.com', 'Giustino', 'Koppeck', '2000-11-27', 19, 'Notification received', 4);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (108, 'ctrymey', '$2a$04$4hT9AXnyWn./XKeMEFRbFep6FBHfgf7xc5l1B1u0OP5QdIMippBxK', 'ctrymey@yellowpages.com', 'Clarinda', 'Tryme', '1961-07-29', 2, 'New message', 30);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (109, 'kfardyz', '$2a$04$mRtnV1d2z/9SzNRYEFccpeh/Q3NoBYPpR/HHBv7wQmaJ8jtDJ447m', 'kfardyz@sciencedaily.com', 'Kathy', 'Fardy', '1966-04-12', 21, 'Update', 68);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (110, 'mmabbett10', '$2a$04$0Jwx3hujssA/ILb84V0Vje5YfbgEQcaWjtcarCUi0v0Mp7nlkoSSK', 'mmabbett10@cnn.com', 'Mohammed', 'Mabbett', '2000-10-07', 16, 'New message', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (111, 'lblum11', '$2a$04$Mcp.3.3J8AY6f1zpGCWVV.6DiYU5g79y.kxXKZ2Ih7xHXJEDmIfVO', 'lblum11@blog.com', 'Lavinia', 'Blum', '1983-02-16', 7, 'Notification received', 48);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (112, 'tagdahl12', '$2a$04$AfZi5zvThCsdHJARiN/.W.Te7OS16eOhok/lGeLDwt2xWI3pIaXcm', 'tagdahl12@spotify.com', 'Tedie', 'Agdahl', '2000-04-27', 3, 'Reminder', 71);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (113, 'kfoale13', '$2a$04$As4qYRo.oNaDCQa2GoGbe.oJ9YMVEPI.cFht86lgJqxQJaUPomvkG', 'kfoale13@e-recht24.de', 'Kyla', 'Foale', '2000-10-06', 31, 'Alert', 36);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (114, 'bpoinsett14', '$2a$04$VCkU2EZInUTNyUJG7HCaD.IRgsSDpXBg4l0DxzLWFmERG8TDZrL3K', 'bpoinsett14@pcworld.com', 'Brenn', 'Poinsett', '1980-10-20', 3, 'Alert', 50);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (115, 'ktoffano15', '$2a$04$PHZSJ7/zWwaF0ecv49nFyuqxKpvn.21H9Be1fiAtV9wLYuNcv/Jru', 'ktoffano15@cdbaby.com', 'Klemens', 'Toffano', '2000-01-26', 8, 'Notification received', 21);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (116, 'mdemattia16', '$2a$04$UGJL2zwVTcoq1pDwyY5YkelC.LCparfzHo4l9UmYVu6v1VjFLC35y', 'mdemattia16@zdnet.com', 'Marten', 'De Mattia', '1990-08-20', 20, 'Reminder', 42);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (117, 'mbawden17', '$2a$04$5s/dhybfdw/wiJ7S4xgMKuo1mODbPmfWUOjprb7OVpA6cxK8ZD31a', 'mbawden17@goo.gl', 'Maurene', 'Bawden', '2000-10-22', 31, 'Update', 69);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (118, 'abernholt18', '$2a$04$gO98SebDpXUm.gqqno49iem0DxBI7GOGNkkbs9mbt7mn0Fk.ydXOO', 'abernholt18@discuz.net', 'Aubrette', 'Bernholt', '1971-10-03', 25, 'Alert', 11);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (119, 'dballsdon19', '$2a$04$Xn7KVfBhU/ZOkgOMbxOaeeHLtXmLH3RmARwsoHd9lyAevBUNosCEy', 'dballsdon19@hao123.com', 'Dacey', 'Ballsdon', '1987-11-27', 27, 'Alert', 41);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (120, 'rhuguenet1a', '$2a$04$Ulf5uRVWRtzVk8wGRsnKsOC8ckW4LTILTc0oR1tSxgmC4pD0fMI0q', 'rhuguenet1a@prnewswire.com', 'Rikki', 'Huguenet', '2000-10-20', 11, 'New message', 64);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (121, 'craddish1b', '$2a$04$BTXgwlrX7bgptsCAwmpUCOok.vv4NG2WyfQTq0U8KNYboMhTFaEd6', 'craddish1b@youtu.be', 'Charlotta', 'Raddish', '1963-10-27', 14, 'Reminder', 56);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (122, 'wdowner1c', '$2a$04$XUmO0A1u70J0J6EBuz25oecEqW7kTv6nQYkb2fZmVESIe8SxTqycS', 'wdowner1c@bloglovin.com', 'Wain', 'Downer', '1986-10-22', 27, 'Notification received', 28);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (123, 'hbigg1d', '$2a$04$TVfNXJdV7u9tYh7.DGIUjeq0fqwnmcSoWfcZgPY.nKv4nvvaQhxG.', 'hbigg1d@feedburner.com', 'Harper', 'Bigg', '2000-07-24', 2, 'Reminder', 57);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (124, 'itchir1e', '$2a$04$W5NznYJSbLOWhk2op66Mwe2Em1/45ET1fEOPmgyc9pCi/KSAfQiCy', 'itchir1e@godaddy.com', 'Isac', 'Tchir', '1993-11-03', 20, 'Reminder', 22);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (125, 'ksilley1f', '$2a$04$Q9ktOteDh57v94L9BtlhgeaVf9keeiKoxW7v4hXanK.5.lBtsNPke', 'ksilley1f@imgur.com', 'Klarrisa', 'Silley', '2000-02-03', 23, 'Notification received', 38);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (126, 'dffoulkes1g', '$2a$04$ZcSOAfZrbDjAqrdx0jZMZO2BppX2D4cKTMqds/GCR0Ysb6Bdb/P4e', 'dffoulkes1g@w3.org', 'Dell', 'Ffoulkes', '1975-10-27', 6, 'New message', 43);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (127, 'flockier1h', '$2a$04$dj62LVsNMRU.oRlthVy9d.vcHuseYQvXWyLzabwvwDPbOy1RqCZjm', 'flockier1h@youku.com', 'Fabien', 'Lockier', '2000-07-28', 21, 'Notification received', 39);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (128, 'hbazley1i', '$2a$04$kiEHLJ9oMZJ9wULdoMhgDuP1yTdPDeQi.aE.ieF55cI2KPnzyfj8u', 'hbazley1i@businesswire.com', 'Helli', 'Bazley', '2000-06-18', 20, 'Notification received', 67);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (129, 'gdomico1j', '$2a$04$goZZECRnwpTt.8mjwFooF.rsM8zHQEH36t4894m6XKMCSKtGCAvJK', 'gdomico1j@youtu.be', 'Georgeta', 'Domico', '1963-11-20', 30, 'Update', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (130, 'dgleasane1k', '$2a$04$9yjdd9G.TxOaubL0WaYaquXl1jEEgRPsk2s2ygMMtkBTPzBORpnAm', 'dgleasane1k@omniture.com', 'Darlleen', 'Gleasane', '2000-11-01', 18, 'Alert', 50);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (131, 'scavan1l', '$2a$04$QtQcMxRrNCybmD.5icWELuibP4AFtSvte/EyyHQ6kg0Q7SmZSmLr.', 'scavan1l@constantcontact.com', 'Shawn', 'Cavan', '1999-11-12', 8, 'Reminder', 48);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (132, 'hgisby1m', '$2a$04$4LZQ4XWUYn9uGIYfWAtNuuT.XIUb7xvjtNPcZmMCZqJIX8upkr.KS', 'hgisby1m@artisteer.com', 'Harrie', 'Gisby', '2000-11-21', 13, 'Reminder', 55);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (133, 'faizikowitz1n', '$2a$04$xoOdLvabezDU59it4tNfCOiYlbw37Nr7Qzai44Cc.0f.tptRq9aBK', 'faizikowitz1n@latimes.com', 'Feodor', 'Aizikowitz', '2000-10-10', 25, 'Update', 48);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (134, 'fbellon1o', '$2a$04$44LEFgrH3WETyN7g16CA3O51CsGwsIBdKEh82.K2jPyFL2BtnCleS', 'fbellon1o@ftc.gov', 'Frayda', 'Bellon', '2000-12-20', 25, 'New message', 24);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (135, 'kkeast1p', '$2a$04$qBxOofMAeZSOI3.M.4ICFe5wKHmp5fH6mMkMo2OAk1v7AOwRoYRlu', 'kkeast1p@topsy.com', 'Karlik', 'Keast', '2000-11-17', 14, 'Update', 61);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (136, 'mkirkby1q', '$2a$04$LyTclEkDyPYinrTdG5gm.Od34meWiCkPmRPcwz/vjcvlYcpH8cs0a', 'mkirkby1q@skype.com', 'Matthieu', 'Kirkby', '1985-12-27', 5, 'Reminder', 60);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (137, 'alabbett1r', '$2a$04$sUp5LkEwAVYlDmpRbP5P2OKlVNGBNASeFS/3ExzgqyJJ.LpsjfQ72', 'alabbett1r@privacy.gov.au', 'Alix', 'Labbett', '1977-12-20', 24, 'Reminder', 22);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (138, 'bohms1s', '$2a$04$Ue583gAZ4/j8oqcutFidIeyh9F458jEgTGHcGAXp7fbpDLLUdR1Me', 'bohms1s@nydailynews.com', 'Berkly', 'Ohms', '2000-10-15', 1, 'Alert', 60);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (139, 'gtowse1t', '$2a$04$5c45CX8jwSxPlExATfFbKuytaHqzLYFAbHzKQ4Ky3VMX7oYNyG6BW', 'gtowse1t@w3.org', 'Garrot', 'Towse', '2000-11-03', 23, 'New message', 1);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (140, 'nfilippov1u', '$2a$04$XRr2wwQPI/aS3hdj5SW1J.jghCvP55NngqWUejIALflvp5jmmXUEe', 'nfilippov1u@csmonitor.com', 'Northrop', 'Filippov', '2000-10-23', 25, 'Update', 55);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (141, 'wdermot1v', '$2a$04$XQTkqJkP.nVL9nNwBnReXuLIF/ASVlyZQkoWD78SuHT/zYv4p8pC6', 'wdermot1v@1und1.de', 'Witty', 'Dermot', '2000-07-16', 8, 'New message', 35);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (142, 'mkingsmill1w', '$2a$04$y.k/ukoK1rPZxQAZYH6v0OTmD4r4e7xR5BpT9tZ5ojS4eHxEBBqIu', 'mkingsmill1w@slate.com', 'Mildrid', 'Kingsmill', '1962-04-20', 10, 'Notification received', 7);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (143, 'rheckle1x', '$2a$04$gmJrBMB7BtSxD/KEI8/2buKp1FXDBqlRHDkxMSuEpjKwFRIjPU/ey', 'rheckle1x@geocities.jp', 'Regina', 'Heckle', '1962-08-01', 12, 'Reminder', 63);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (144, 'lfilshin1y', '$2a$04$E9YfW2kBP/8g4shxAkPXc.3YXuGIDqLsjorCyKNFEVg9V7MPmGO8C', 'lfilshin1y@sogou.com', 'Lanny', 'Filshin', '1970-08-21', 31, 'New message', 16);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (145, 'rjakubovitch1z', '$2a$04$RedDHI1ARkTVcY9c5xmkM.yJXn/spG4bBUSF22RivYf44fmE2TC4W', 'rjakubovitch1z@statcounter.com', 'Ruthy', 'Jakubovitch', '1987-03-03', 4, 'Reminder', 33);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (146, 'mstorton20', '$2a$04$v3i3IuzGhB5mme0.7f1cm.slQs9c4SIbf6GrMS60V26wIWnffJHBy', 'mstorton20@techcrunch.com', 'Maiga', 'Storton', '2000-08-20', 23, 'Notification received', 6);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (147, 'mmammatt21', '$2a$04$IvqhnrZpHe/2UMeiliETIOppR04cbxS0A3DvllJjCnaw9gCId1LiK', 'mmammatt21@columbia.edu', 'Mabelle', 'Mammatt', '1972-06-08', 10, 'Reminder', 64);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (148, 'jwhyard22', '$2a$04$fCUA2IyVumO.qGY4/lIlYet6aS6ZFVDT2ZcTc5sEidwXNpwKOsaVS', 'jwhyard22@mac.com', 'Jacinthe', 'Whyard', '1961-11-11', 29, 'Reminder', 30);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (149, 'ntravers23', '$2a$04$Xqj4hNtCdkKjoztJYbqsa.RStxNrUUJnxonMRa/DGuJTwe8WetyiO', 'ntravers23@woothemes.com', 'Nita', 'Travers', '1963-10-20', 28, 'Update', 3);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (150, 'lscoffins24', '$2a$04$dnTmzK5NOXYXMHOK8XgsA.IE/TJ7Sh.kzK5jX5PeiTDk4/J6xfF9u', 'lscoffins24@storify.com', 'Lek', 'Scoffins', '2000-12-09', 18, 'Notification received', 20);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (151, 'ywardington25', '$2a$04$L1lI1lN8SDkrhRFGM1i06e9EVY4KobIbtj7TyIrUqDF.ogAucS9ju', 'ywardington25@jugem.jp', 'Yuma', 'Wardington', '1981-11-27', 9, 'New message', 12);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (152, 'upyvis26', '$2a$04$xT.Wg0WmeTjJu4tViByR3uwP0mdS/yPRt2GAwnkM4mdykitITOwvK', 'upyvis26@dell.com', 'Ulric', 'Pyvis', '2000-04-08', 18, 'Update', 8);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (153, 'ecotgrave27', '$2a$04$vkgp3IMbi5lC94Liz1sIVuaZ.n04Cf22vtive4woeNqyQeop4E4MC', 'ecotgrave27@hexun.com', 'Essa', 'Cotgrave', '1979-05-04', 19, 'Alert', 54);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (154, 'lloftus28', '$2a$04$Oa.GrmBCVaROvIqkwNRsPerNk5N1kiIa2UzXNIQ6G8.HN6BmQDCG6', 'lloftus28@sciencedaily.com', 'Lemuel', 'Loftus', '1978-10-20', 20, 'New message', 39);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (155, 'mbarbara29', '$2a$04$22jKA6YviisuFms9.KzR9ud4k44zsy6gHf7VHvA8kRVUFAF3p9UzC', 'mbarbara29@baidu.com', 'Marie-ann', 'Barbara', '2000-12-03', 10, 'New message', 8);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (156, 'rjeppensen2a', '$2a$04$HtqZlPHf4sEE7tjqOdzwsuwzsiozMUV1MkPcJ.qVpiRl5P57novf2', 'rjeppensen2a@jalbum.net', 'Rheta', 'Jeppensen', '1994-10-20', 13, 'Update', 56);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (157, 'ikembery2b', '$2a$04$7lBnHEb/BeiKw7GtE8inVOYRBvo3.aKlxrIBfgHze9iANscvS4O.6', 'ikembery2b@dyndns.org', 'Iolande', 'Kembery', '1977-12-25', 4, 'Alert', 21);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (158, 'barmor2c', '$2a$04$7b7oiRBos8Haa4DpbB47TOO/NA7QvCxHj3kYVtfwKNMxOgYmfjV1m', 'barmor2c@yahoo.com', 'Brear', 'Armor', '2000-08-27', 22, 'New message', 6);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (159, 'idate2d', '$2a$04$P2tOe6kkv4tLnwHScJz8q.xCwL68WXvUPk1B8dgovmD.wNOyasHh6', 'idate2d@storify.com', 'Ian', 'Date', '1962-11-27', 19, 'Update', 35);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (160, 'edinse2e', '$2a$04$PmKE0tm6Bjd87yhSaM0q3.ZFMC1Z.nuqNVmpax3avXSBZ7r/AFn2O', 'edinse2e@photobucket.com', 'Evita', 'Dinse', '1961-01-27', 21, 'Update', 72);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (161, 'dmontgomery2f', '$2a$04$sVfclQ8g0iEFwh3ZcsDMh.fOMfHBowv9eRtwrV4yFrXnfMu8/Ksy.', 'dmontgomery2f@mozilla.com', 'Dulsea', 'Montgomery', '1988-11-04', 7, 'Alert', 7);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (162, 'lpina2g', '$2a$04$QhDqZ/6WPKmEbsSyMhMr/uzz5LqCmxMI1IzsBDAEeCzYuU6T9.R2a', 'lpina2g@nps.gov', 'Lynelle', 'Pina', '2000-06-27', 31, 'Alert', 71);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (163, 'hjenne2h', '$2a$04$Ri4H/aVEnHnz3CpFUnmVxunrDjzj3uQQkMCsztBkeHzCpVowNYttS', 'hjenne2h@about.me', 'Harriette', 'Jenne', '1962-11-06', 21, 'New message', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (164, 'mibeson2i', '$2a$04$C8sq1FW/cl05yuQr3Tfi9eKUOj7108X0CQDNgvbu8k.j0xey8G/7W', 'mibeson2i@wordpress.com', 'Marshal', 'Ibeson', '2000-06-17', 6, 'Update', 64);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (165, 'troder2j', '$2a$04$DDuLlfkQSiqbZyJ9kbDcGOZ5jnWwvM2hZBlflysbAHg4XsliJVBSa', 'troder2j@dailymail.co.uk', 'Tabbi', 'Roder', '1979-05-18', 28, 'Reminder', 14);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (166, 'ksotheron2k', '$2a$04$6dPcuwHvoqxt7qf0v.K3NOBRVPvefXSnwnNnr9UMWuV43AubkGpHa', 'ksotheron2k@amazonaws.com', 'Kesley', 'Sotheron', '2000-05-14', 18, 'Alert', 25);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (167, 'jvittore2l', '$2a$04$HDEnk.8Ur8ZJhylnHI7Z7.V6kPv3ZN/ESz29YAON.gQ0owMw8FVmK', 'jvittore2l@csmonitor.com', 'Jennee', 'Vittore', '1980-10-03', 32, 'New message', 30);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (168, 'ccardo2m', '$2a$04$jgro96U1WgADTx/KHhR5SeJG3V9lmAoHQDbdBvQnXuLHRmM6EKv9u', 'ccardo2m@dot.gov', 'Chandra', 'Cardo', '2000-12-07', 2, 'Alert', 48);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (169, 'mfreda2n', '$2a$04$4cSc4E3VzLFI/kRZzcEUX.0fjM19TN.Z1Ufn7KU5BEyV64AiWcOPa', 'mfreda2n@msn.com', 'Minnaminnie', 'Freda', '1983-05-02', 12, 'Alert', 28);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (170, 'rrunacres2o', '$2a$04$MmOJjUuoG.fw/QesYHU.xe5G4AqcKnGkWH/lpDpzRaIt7ZtEJhf1K', 'rrunacres2o@flavors.me', 'Raul', 'Runacres', '1983-09-20', 3, 'Notification received', 72);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (171, 'olansdown2p', '$2a$04$ZsWjrSJE4lGSRIPaCf0N1O7d6OXvMkp9OWoru68jPRjgQMqYXMKle', 'olansdown2p@posterous.com', 'Odele', 'Lansdown', '2000-12-20', 4, 'Update', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (172, 'kloade2q', '$2a$04$Ngi6BdJITLJ42eGEwGivieKUk9y5kjRFwqGehMFgjfgpy.91JSV/C', 'kloade2q@ycombinator.com', 'Ker', 'Loade', '2000-12-20', 20, 'Notification received', 54);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (173, 'gyakobowitz2r', '$2a$04$UJ2NndMRsp5.UCNG.ho81OVanFNQ/xckCq/FJGqDKaPbhLUOqO.7q', 'gyakobowitz2r@simplemachines.org', 'Gerry', 'Yakobowitz', '2000-04-15', 2, 'Reminder', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (174, 'ppiff2s', '$2a$04$FjM1goj1IiRB9G7JH1K37OJ57CT8HfbdULmCATMKYn7PcP6VwKkfG', 'ppiff2s@123-reg.co.uk', 'Padget', 'Piff', '1983-01-27', 22, 'Notification received', 73);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (175, 'apeasegod2t', '$2a$04$E3G/lPMEJfHi5Nhw2NJm/etYsgXv6xJAYdALpdv2Vu4g1ODBGhW.m', 'apeasegod2t@fda.gov', 'Angele', 'Peasegod', '1975-11-25', 26, 'Reminder', 49);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (176, 'estrickler2u', '$2a$04$0qrx6DyRAtYTLUUG4dGOa.84mrHO3NGXpm7O04A/HbfHdnH3.2lx2', 'estrickler2u@e-recht24.de', 'Erena', 'Strickler', '1985-07-07', 14, 'Reminder', 24);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (177, 'tbeynon2v', '$2a$04$BlwluwtVay8/z6yVcoNuAOIGnQ924GhpFDmI.MH1FoBXIoqaD0Kvm', 'tbeynon2v@nhs.uk', 'Tonie', 'Beynon', '2000-12-20', 18, 'Update', 73);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (178, 'lmendenhall2w', '$2a$04$.D7vU73DUTEgjTOFbXInTuEpGNdt.3rtOBX47yLRhioWqS/t8E7a2', 'lmendenhall2w@google.nl', 'Lindsey', 'Mendenhall', '1992-10-24', 26, 'Notification received', 12);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (179, 'lborel2x', '$2a$04$mMr27l5bV2NP3thL86bLYeQ9BKh0eEagh6EbQT9jtzpoRjljYh8N.', 'lborel2x@independent.co.uk', 'Letizia', 'Borel', '1969-10-20', 30, 'New message', 28);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (180, 'fhexter2y', '$2a$04$t1J/dSAvwHGor3rOmeTXU.TqvOn/66meanMHrbTKuruNpvehPZt5G', 'fhexter2y@surveymonkey.com', 'Felicio', 'Hexter', '1974-01-20', 2, 'Alert', 19);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (181, 'mtimmermann2z', '$2a$04$Uvcg2Wi/sx/OSVEXLBrgPexFi.Qkgk9vpSZH1kkqaYRNyyyTMuXk.', 'mtimmermann2z@constantcontact.com', 'Malva', 'Timmermann', '1969-10-04', 7, 'Notification received', 13);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (182, 'rnutty30', '$2a$04$zx/NF3jKTfSxQTYPiHu2dO3X7aAi/6mvWmZobiTzlpnpM94n0JSrm', 'rnutty30@mysql.com', 'Rebekkah', 'Nutty', '2000-12-20', 25, 'Update', 42);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (183, 'ileser31', '$2a$04$s.7/bEYS3h.UNSiBwwnxbOJd/MSaQIbYkNmiozh4TNr12Xunp4IIq', 'ileser31@state.tx.us', 'Ileane', 'Leser', '1997-11-17', 4, 'Notification received', 2);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (184, 'icommander32', '$2a$04$zhNnKkOQedX.7iTXDTTYT.BI2TboRRMw4QmdAkB0TK6rcXhF0tcXi', 'icommander32@bloglines.com', 'Ingamar', 'Commander', '1976-10-27', 27, 'Alert', 4);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (185, 'dbrandes33', '$2a$04$oWPfKFE0fv/YSEaYlvUmv.s5vJBBV2qLRkhMr/i0j2GWAU2YnwLDq', 'dbrandes33@princeton.edu', 'Dyane', 'Brandes', '1968-06-20', 20, 'New message', 31);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (186, 'rschapiro34', '$2a$04$6Rg2cQQEbB5gPnBRG6ckQOBk3PRAirxpi.EPlju8lF.vFmdrhYXpi', 'rschapiro34@marketwatch.com', 'Robbin', 'Schapiro', '1988-05-12', 20, 'Update', 47);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (187, 'aorange35', '$2a$04$sxFEpzVVFMzbaGtxuiqVp.X3En1Z9lWUGrwcByDY/nmYtiaVkD3Ou', 'aorange35@huffingtonpost.com', 'Aryn', 'Orange', '2000-05-27', 6, 'Notification received', 55);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (188, 'jwarn36', '$2a$04$lYr9CoyaIV8GJnVe6lcg0uAqGbuCsosyVjEzCIC06DJq5IGRL/DSu', 'jwarn36@bloglines.com', 'Johnathon', 'Warn', '2000-02-05', 3, 'Reminder', 57);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (189, 'nfealey37', '$2a$04$JSmuDZxkxPmGrLGRB1F1feCMTjNrKyhIbf/mSfKUp8akDmqy5tj82', 'nfealey37@sina.com.cn', 'Nicolea', 'Fealey', '1980-10-13', 1, 'Update', 18);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (190, 'nmatherson38', '$2a$04$.HXusniPyGbpk2XLCHs0x.Oir4QCxCurABUjNHSunUhrjDmgPPMam', 'nmatherson38@drupal.org', 'Niki', 'Matherson', '2000-07-11', 26, 'Reminder', 57);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (191, 'graubenheim39', '$2a$04$kg6aE4fCGwrw2SwMKTZzIOV1Td8R3wd7YH7idL1xiPgwTTVZtUzLy', 'graubenheim39@examiner.com', 'Gwenni', 'Raubenheim', '1975-11-12', 20, 'Reminder', 53);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (192, 'pspykings3a', '$2a$04$MUm7NoBRvuoqoD37/lUwu.omkiT0MHlpxLw474.gVNFpG7bHg2TY.', 'pspykings3a@columbia.edu', 'Paige', 'Spykings', '2000-10-03', 12, 'Notification received', 15);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (193, 'gmitkcov3b', '$2a$04$wL9KRjVpSNu49n21Nf59ReOAn6POs5xq7Ja84Ew5vIEM0zq1lIz16', 'gmitkcov3b@soundcloud.com', 'Georg', 'Mitkcov', '2000-02-03', 14, 'Update', 6);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (194, 'adyshart3c', '$2a$04$DXOI.tTeCZxC6DuQ4OpQ8Oj9IyGOXn8ipsf0CkaPXPBGAxJo9LdWG', 'adyshart3c@amazonaws.com', 'Agathe', 'Dyshart', '2000-11-11', 8, 'Alert', 7);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (195, 'hedwardes3d', '$2a$04$KBsN/HLKK.tD49X4TcrzM.KBoOt7TIrUUWu8v6ylhz.EUab02.yx.', 'hedwardes3d@google.pl', 'Hanni', 'Edwardes', '1984-11-20', 27, 'Notification received', 63);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (196, 'acariss3e', '$2a$04$NdLt1MDQWKQmhXSpFvpA4eMVpumKDiMq1ILLB8qWSXlKQNouA0XTq', 'acariss3e@sun.com', 'Albrecht', 'Cariss', '1989-11-03', 27, 'Notification received', 42);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (197, 'agerholz3f', '$2a$04$j4OorBE0v93sGiN3UXk/JuDL8lqqEgXVjen0mIxQcWWUEMQExUZUm', 'agerholz3f@columbia.edu', 'Allistir', 'Gerholz', '1964-05-09', 3, 'Alert', 41);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (198, 'ibernadzki3g', '$2a$04$n4VInPJ3e9PyZ7xRqYpm0Oeg1zsWNzY.2gnTmLo6CCFdPIehJswIu', 'ibernadzki3g@tumblr.com', 'Isabeau', 'Bernadzki', '1960-03-20', 14, 'Alert', 63);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (199, 'arivers3h', '$2a$04$/GsWP5ZHQ2eiedBtwgTo8eDHsl/6fDkN.EgKXiFuQwYKfQJDwow9.', 'arivers3h@deviantart.com', 'Alfi', 'Rivers', '2000-01-20', 31, 'Alert', 7);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (200, 'bhoggan3i', '$2a$04$hpAlOQZs.E.jv/XLiUnmmOI47.PBrEwule6NEpsNsDxS34yCG95Km', 'bhoggan3i@tamu.edu', 'Beatrisa', 'Hoggan', '2000-08-20', 6, 'Update', 51);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (201, 'wbattabee3j', '$2a$04$nCciYyfxVnutUljH1S.v9egcOdnVCoIbAF0hqv5EsiCkmk4E/Fszq', 'wbattabee3j@phoca.cz', 'Wildon', 'Battabee', '2000-01-06', 12, 'Alert', 6);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (202, 'egravy3k', '$2a$04$h6n7TSOX077AYvl4KsbUDu02xM9ldyEjQ1z3uQ5.LyrQ0/9bN9K/i', 'egravy3k@indiatimes.com', 'Ellene', 'Gravy', '2000-10-20', 19, 'Alert', 62);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (203, 'cerskinesandys3l', '$2a$04$/.8WHiHLGjmwOBJdFkLUQu/lCWhB0qSFn9nVYxCUOYNyNfAhVrZIu', 'cerskinesandys3l@biglobe.ne.jp', 'Chick', 'Erskine Sandys', '1998-04-08', 29, 'Notification received', 66);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (204, 'wacors3m', '$2a$04$H4nlutyPc4qc0jSP1DIttOypgm/l9QZ7RgxZ87315DCSBn0TRTOZm', 'wacors3m@ow.ly', 'Winonah', 'Acors', '1991-02-27', 1, 'Update', 58);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (205, 'ksynke3n', '$2a$04$BUCQg/dUvUrlJiKfTs6U3u6yJGjnBZzo5O9dMt43Afh.FtZah1ttm', 'ksynke3n@lulu.com', 'Korey', 'Synke', '2000-11-02', 1, 'Update', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (206, 'iwisedale3o', '$2a$04$1brQHcMLuWPMBnqBltcw4Oy6SfjtsXmaEvK/ehuLHXJtUAyu86KIC', 'iwisedale3o@census.gov', 'Ivory', 'Wisedale', '1984-09-19', 1, 'Alert', 40);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (207, 'mkingaby3p', '$2a$04$NVA8EVLI/tx1noDjOL7g9O4M3Q.QYvVZP/xzs/gGwuizib5y1txfq', 'mkingaby3p@vistaprint.com', 'Margie', 'Kingaby', '1969-07-06', 23, 'Alert', 24);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (208, 'mdeortega3q', '$2a$04$1Db4FmFZKSZ5f2ntLu9OAeHm6lxn5qbs10OeOQd.mATMXasjagwuy', 'mdeortega3q@auda.org.au', 'Melony', 'De Ortega', '1983-10-20', 13, 'Notification received', 38);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (209, 'hloren3r', '$2a$04$EwkltnEqpXh.3ICZmiSOi.DOtMxVNeNHVeRXOzWiI47AasRrfiVpO', 'hloren3r@histats.com', 'Hoebart', 'Loren', '1992-11-20', 17, 'Notification received', 40);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (210, 'nhulance3s', '$2a$04$9TJtl2mkpEofN6ez1yPpD.eZlMdg3P65uCtzGvNGUJ65THWOU8LTi', 'nhulance3s@berkeley.edu', 'Nicola', 'Hulance', '2000-12-24', 13, 'Update', 46);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (211, 'hokenfold3t', '$2a$04$z4xNuVono/oWV0GJSo6ePuZL6B8Ldqu/fMj9l68y4aHQoOMzce.9e', 'hokenfold3t@typepad.com', 'Henry', 'Okenfold', '2000-12-04', 30, 'Alert', 53);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (212, 'cdrinnan3u', '$2a$04$ipEWqAU7AkcHrxW67xaM8us1tBFV8uiK0EGHkjmEHU7ACVgIwWq.q', 'cdrinnan3u@pinterest.com', 'Cybill', 'Drinnan', '2000-10-27', 2, 'Alert', 49);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (213, 'ysenussi3v', '$2a$04$BD1tlXQO/qal8SNuhKgvI.tDehZQu2q.8huJUnhm12vtnCxcVxuIK', 'ysenussi3v@netscape.com', 'Yoko', 'Senussi', '1961-09-01', 6, 'New message', 21);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (214, 'kgierke3w', '$2a$04$ti32oAcFabvt6ydwqWdOaeeQ1muq5kcNyATYWufTLWhqc7T6FzD/.', 'kgierke3w@oracle.com', 'Klarrisa', 'Gierke', '2000-04-20', 21, 'Notification received', 71);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (215, 'dlenham3x', '$2a$04$QPDcMxaylxCx//y7L0ydLO9Dll7..DanpfAkZLLbASIQ4w.eoPrqy', 'dlenham3x@miibeian.gov.cn', 'Daisy', 'Lenham', '1967-09-27', 17, 'Alert', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (216, 'nmcmillam3y', '$2a$04$OjxzzYJItsxxQdNwJKcck.Cgar8zS5qgn3NKp68mdhVcZ6C9hAsg2', 'nmcmillam3y@reverbnation.com', 'Nora', 'McMillam', '1990-08-20', 11, 'Reminder', 60);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (217, 'anorcott3z', '$2a$04$2YRw9LMa8JKoEVOCNAJVqeJ.KAkbuGHZ0FWxj8jPOZGVWvw5fJ3sm', 'anorcott3z@ihg.com', 'Alister', 'Norcott', '2000-10-19', 12, 'Alert', 62);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (218, 'lbrayfield40', '$2a$04$LcSM0a.vUmum5AuPuKPcEuxxuYUerBC8hW1rUTDlTb8diqGewdRle', 'lbrayfield40@admin.ch', 'Lizette', 'Brayfield', '2000-10-27', 11, 'Notification received', 42);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (219, 'oduguid41', '$2a$04$y7bWHyStoEQCe9ZUuoF7Rux8CwzyNSC773FLm3LecXTYKDZRRDmHa', 'oduguid41@blogspot.com', 'Oswell', 'Duguid', '2000-12-27', 21, 'Reminder', 22);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (220, 'sswafield42', '$2a$04$tlIkAxL05.DQGA8qgkqKAu2w.288lORvT30fwcwH9p8yeawWnCHKa', 'sswafield42@csmonitor.com', 'Selinda', 'Swafield', '2000-06-14', 10, 'New message', 65);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (221, 'mcanero43', '$2a$04$JN6jBQxE0CZ.E7jGT6wkN.myqid4lgWic6d9/34NWEYgQWx6DseZW', 'mcanero43@joomla.org', 'Mort', 'Canero', '1967-01-27', 32, 'Notification received', 22);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (222, 'rmingus44', '$2a$04$hk2.vZt55zmouwnHQTrFnemsZYoeMj7HquBc.ERJ.5FJf8r5C06n2', 'rmingus44@sbwire.com', 'Rouvin', 'Mingus', '1962-02-17', 3, 'Notification received', 61);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (223, 'morans45', '$2a$04$HjLfj.z4hSsGCv3wG8zRHOatieBhoe0QJNoM6K/TgwxFw0ARhUe1O', 'morans45@booking.com', 'Margie', 'Orans', '2000-12-20', 27, 'Reminder', 15);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (224, 'afoulsham46', '$2a$04$7bccP79NhkZAFSIJrFAk3..va9xCzYb8yUiiDuf43CDCXFSBvy5Ie', 'afoulsham46@people.com.cn', 'Aili', 'Foulsham', '1986-04-27', 18, 'Update', 13);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (225, 'jassel47', '$2a$04$EEXm8x/ua/oRlGfYd2wNZuknkw3JUkoIMeS1cZZ.WJPXZzhqxjhmy', 'jassel47@miibeian.gov.cn', 'Janka', 'Assel', '2000-01-15', 26, 'Alert', 22);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (226, 'fhuyge48', '$2a$04$o.pKczVEeJ3lq8P43wfSKOqEuuTj1qw2jWKNK2eb6iQ2LEkH8IT.2', 'fhuyge48@newyorker.com', 'Fran', 'Huyge', '2000-03-05', 1, 'Update', 57);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (227, 'lmesias49', '$2a$04$912NNLRJGBdWKFFOW2HlK.z7NhDdWw5iv6Uo6J1PjMnqfyWFxN06q', 'lmesias49@senate.gov', 'Lee', 'Mesias', '1999-10-27', 23, 'Notification received', 53);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (228, 'gutley4a', '$2a$04$sXJ6mm7YmYPwUdGlsKKvXuOFCTTirK.Oe/j79dupkPaKM8ghDzJl2', 'gutley4a@barnesandnoble.com', 'Goldie', 'Utley', '2000-12-20', 27, 'New message', 65);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (229, 'zthurner4b', '$2a$04$et9PdbtoaQ9iw08EXRuWxeEaQKEIF73gIYYWHfo/26fgPPsw2TpX2', 'zthurner4b@google.fr', 'Zachary', 'Thurner', '2000-12-26', 15, 'Alert', 69);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (230, 'aconstantine4c', '$2a$04$VW92nXg/3YOljSbI9/Grs.6ebft/myLLIl70dMrRBqOAdx1i51wGu', 'aconstantine4c@twitpic.com', 'Anabal', 'Constantine', '1978-12-27', 8, 'New message', 61);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (231, 'jtrevett4d', '$2a$04$hnOAoXo2mHV8eHZCwj8/H.Fz1fsCqav61X5X45I3bKdMbJ5QGsH8K', 'jtrevett4d@deviantart.com', 'Jobey', 'Trevett', '1977-07-28', 4, 'Notification received', 31);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (232, 'rwinning4e', '$2a$04$8UUwzPUfGWmLjKkxjVDXLO7x7nAk1Oqj7hYP5YI0dTebEm2Lbl3zm', 'rwinning4e@aol.com', 'Rebeca', 'Winning', '2000-10-06', 7, 'Update', 16);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (233, 'mmccafferty4f', '$2a$04$.BKhaKZLjwcfo9uyhC8HL..3NYi3jIu.OwWjMP4dyAFLrqN9JeE1y', 'mmccafferty4f@ibm.com', 'Margareta', 'McCafferty', '2000-03-20', 18, 'Update', 38);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (234, 'mrewcastle4g', '$2a$04$f31BP6hJvKffASnmV42kKOJe17Sqc4U2ydux4D5mb7LYzUNaE5opm', 'mrewcastle4g@ning.com', 'Marlyn', 'Rewcastle', '1968-05-20', 3, 'Notification received', 17);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (235, 'mschaffel4h', '$2a$04$DB4ekXzjiCV2uIbQi.tCl.1hIrSP6lFtYWsxbZHhloWInOOBETrj.', 'mschaffel4h@tuttocitta.it', 'Muire', 'Schaffel', '1980-03-27', 13, 'Reminder', 59);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (236, 'aroscoe4i', '$2a$04$J86Dc6SHTPiFtSjtR8MJuell3AJSNvWcsr8pTbOczcaqE628hfjpq', 'aroscoe4i@tiny.cc', 'Ancell', 'Roscoe', '1992-09-06', 2, 'New message', 61);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (237, 'cpochin4j', '$2a$04$6bs.TJLUHZ75fgtYK12n6OWHwJxSkJrmEMbmR9Ja1dY//VzRMVW8m', 'cpochin4j@foxnews.com', 'Chad', 'Pochin', '1990-10-08', 12, 'Alert', 15);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (238, 'ntommen4k', '$2a$04$fYtZhobSn2UiYuK4CmtDZOc.56mn37sOhj.okya8sqjkg2JGmwSb.', 'ntommen4k@nps.gov', 'Noam', 'Tommen', '2000-10-20', 1, 'Update', 16);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (239, 'smcconnulty4l', '$2a$04$vZn3OcIzTogcMU9Xn4yWO.HyH0Ka5eI0w2UIt5kdSfb7oOTROalBe', 'smcconnulty4l@tinypic.com', 'Shanna', 'McConnulty', '1982-01-20', 32, 'Reminder', 62);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (240, 'kdaingerfield4m', '$2a$04$y9Ncj9Ht0XVN09sPuffrKum8nhbjIyUs5r65EL4MQU53uOO2qDZB6', 'kdaingerfield4m@sbwire.com', 'Keefe', 'Daingerfield', '2000-10-20', 21, 'Reminder', 14);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (241, 'jbraunroth4n', '$2a$04$G7PWTR6wbM4SNsGY8EmIAuTzPboHOc13PMoGV/BmcvVKeK72MEUBe', 'jbraunroth4n@example.com', 'Jobi', 'Braunroth', '2000-12-27', 21, 'New message', 18);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (242, 'lperrinchief4o', '$2a$04$ytg.l/x03fVRHm4D6Vz71Odl8CE8y2q1WA0ARaOKSIda95c4JTCsS', 'lperrinchief4o@vkontakte.ru', 'Lucio', 'Perrinchief', '1985-05-08', 6, 'Alert', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (243, 'fseven4p', '$2a$04$vYo7SVajnUg72qRCpB5kteGO1MXJDczGw8GGCmFInfZX1MK4m.vb6', 'fseven4p@51.la', 'Frederique', 'Seven', '2000-05-20', 5, 'Reminder', 31);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (244, 'cfranklin4q', '$2a$04$UInGsaDalw9Sa6.9668SO.TQpcsqw.GoVGAWkt7cTrOV8PXte.Cs.', 'cfranklin4q@jugem.jp', 'Cass', 'Franklin', '2000-11-29', 14, 'Update', 36);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (245, 'gabrams4r', '$2a$04$RaNJBlfTlESxkrluw/ZmiuxctLluLZ8ZPiDHZr1OvJEaztkeNxz5q', 'gabrams4r@typepad.com', 'Gianna', 'Abrams', '2000-09-03', 22, 'Update', 61);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (246, 'sjouen4s', '$2a$04$F9mRtj6qc6mdPjTMq87iMOnmECebRthlBlyLYzha86RIBKoxKRncK', 'sjouen4s@patch.com', 'Somerset', 'Jouen', '2000-12-20', 22, 'Notification received', 72);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (247, 'jcicco4t', '$2a$04$Bg8V7kfDuTzRuRUvSEJJg.DRuG1MYqrazG4Rlw6Q6EMSNGdLooEjq', 'jcicco4t@imgur.com', 'Jeffry', 'Cicco', '1970-06-27', 14, 'Notification received', 41);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (248, 'ccannicott4u', '$2a$04$NnaZcZWO9aS3hUQmJOtof.q2PQfO/JPJ3gtohLnlF.V/6Svx1swtm', 'ccannicott4u@comcast.net', 'Christan', 'Cannicott', '2000-12-18', 11, 'New message', 22);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (249, 'ileynham4v', '$2a$04$sKc2DbN1ZAqM3nogTCUqsuW8MPwJb.ZaB1VngRT16EVoVf7aeSJeS', 'ileynham4v@is.gd', 'Iosep', 'Leynham', '1991-12-03', 13, 'Reminder', 19);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (250, 'epocknoll4w', '$2a$04$OIbx/6cDwn6huvrWzUmjl.bSBMTh70yW/EUJWqUU0QfxTZYzXH.wG', 'epocknoll4w@dyndns.org', 'Edik', 'Pocknoll', '1980-09-15', 16, 'Reminder', 19);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (251, 'iaggis4x', '$2a$04$A2DF/WrKrxOKAzRdrGRgEuQy.awYA.IzxEW9R/xQUCld8dw.dq9sa', 'iaggis4x@oakley.com', 'Isidoro', 'Aggis', '2000-11-18', 1, 'Alert', 28);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (252, 'tattrie4y', '$2a$04$Hz8p4.wxgKsWQ7W27rxFiO9T0PI7EEsDPc9YBG2xKRVrjgU3Su1Ma', 'tattrie4y@dmoz.org', 'Tiffy', 'Attrie', '2000-12-08', 25, 'New message', 1);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (253, 'gredford4z', '$2a$04$XZQr/9xiON8kAtLD8bElYeZiUgvQpmIpoKS6ZpmIT3raZaJd0cQ/K', 'gredford4z@whitehouse.gov', 'Gayelord', 'Redford', '2000-11-20', 29, 'Alert', 5);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (254, 'hdella50', '$2a$04$npVyIW.rsfpp1GbUqZXy0eqhIpH1oLx/QRfTWT9Uy1kjeYJI29RRG', 'hdella50@myspace.com', 'Howard', 'Della', '2000-02-20', 25, 'Alert', 15);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (255, 'neager51', '$2a$04$aPiJwZxdVsGnq/Fyvkl55e6mLkM7sVregptBE6.zire.t1RCa4.lO', 'neager51@tinypic.com', 'Nilson', 'Eager', '2000-05-29', 1, 'Notification received', 36);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (256, 'helleray52', '$2a$04$/npFcRwSvaUQPF9vAg/oge2E0OAwwElJk9YkRbN2puXvLUIg8BNFm', 'helleray52@noaa.gov', 'Honoria', 'Elleray', '1962-06-28', 28, 'New message', 7);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (257, 'stanti53', '$2a$04$Sk7uhk3LDEWBw/R8hobJ0e8YvRLtBSL2YYt7NIyOyXbt9Ll3R1dIK', 'stanti53@loc.gov', 'Shem', 'Tanti', '2000-10-09', 20, 'New message', 26);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (258, 'shelliker54', '$2a$04$bgmoRImqChdQ36tGXt6MF.F1ikivLxXXoeT5LUKaShprtPc7h7gGa', 'shelliker54@stumbleupon.com', 'Simone', 'Helliker', '1986-02-03', 32, 'Notification received', 58);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (259, 'rhaskey55', '$2a$04$u5maH8.OZsGMLHc0MzHkp.qd2bcCUfa.dERKtxtpGCgOsPCTxVYcK', 'rhaskey55@about.com', 'Roger', 'Haskey', '2000-02-23', 18, 'Notification received', 44);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (260, 'jmacmaster56', '$2a$04$btUydQSM.wiZDFqCW7o3K.qBbILpMVlu/fsD2r.XkdfxU68nOmtQ6', 'jmacmaster56@vimeo.com', 'Jermaine', 'MacMaster', '1982-06-06', 30, 'Update', 57);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (261, 'rshowering57', '$2a$04$EqHjz4lFAD9Cc7hsvYvB2O2enBeLtrPxukahG5JVUhmP6PLUF7l1q', 'rshowering57@free.fr', 'Rhodia', 'Showering', '1979-02-27', 28, 'Notification received', 26);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (262, 'kgeffen58', '$2a$04$fjhg7jIXm2ZFfdoaByuSAe/KOcKIbu3.V4AFlhFUYFgMzYeFtqs.G', 'kgeffen58@over-blog.com', 'Kory', 'Geffen', '1970-10-27', 25, 'Alert', 42);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (263, 'abrodest59', '$2a$04$C7.GeLpyrCVIVgAdnrDZXeOCE/Rm0ANv7e8/NozfZywxjNN1nv1wK', 'abrodest59@hostgator.com', 'Atalanta', 'Brodest', '1964-12-20', 11, 'Notification received', 22);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (264, 'etimmes5a', '$2a$04$zYiukmSXtzYWaCMC8y6jTe1dUON.Dy0nKfHt3mDnVoytKxaAWyVmq', 'etimmes5a@mozilla.com', 'Emilee', 'Timmes', '1986-11-27', 22, 'Reminder', 71);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (265, 'mwyeth5b', '$2a$04$FlFuwWkyLn.5/DvOPxBpKOjs9TWsirEqf8BYYCbT5Alu8BPrTmXju', 'mwyeth5b@mit.edu', 'Matt', 'Wyeth', '1997-04-06', 21, 'Update', 36);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (266, 'gweine5c', '$2a$04$IyHORJu3NUHxGXzu8uQMkOzuWAIrKRRV9XzOeRunhV0813snm8C9.', 'gweine5c@squidoo.com', 'Gisella', 'Weine', '2000-06-11', 3, 'New message', 58);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (267, 'bwyd5d', '$2a$04$ZlcuAmJELHqu7nSkOpMVsO.zIWRJ7R2H..ZG1BhSb0ZO33OWAcriq', 'bwyd5d@ftc.gov', 'Boote', 'Wyd', '1996-12-09', 31, 'Alert', 60);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (268, 'wdowe5e', '$2a$04$uFkqoGGaasyKe5XvW5NgLOWZRkUHRb6yJ1nEUkq0Up/n.11N0bese', 'wdowe5e@sakura.ne.jp', 'Willie', 'Dowe', '1984-07-08', 10, 'New message', 42);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (269, 'spresswell5f', '$2a$04$EuMI7A8jVz0Hk7HFGS1Viujyo6osZ69a2J/6ZJl0Zy.vHCGEcQyKe', 'spresswell5f@ibm.com', 'Sharity', 'Presswell', '1984-12-27', 24, 'Alert', 58);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (270, 'bthyng5g', '$2a$04$EV2EAJ5xmWHjgMkflQVPG.me7Lu80O8xpY6DMHpNtb3bNdiLOcLle', 'bthyng5g@people.com.cn', 'Billi', 'Thyng', '1980-03-21', 9, 'Alert', 47);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (271, 'sarran5h', '$2a$04$v4jAcoNBsfVJ3MXZJabGkeafJxr5IS8nP8ebD45Lr3FpKRW0xooCW', 'sarran5h@who.int', 'Susanetta', 'Arran', '2000-02-01', 4, 'New message', 60);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (272, 'hmarusyak5i', '$2a$04$EEx.cmzn/ZpAG3NWmleq5eWN7fx2g9zphj9TxkvS9eVOPCHPQLwUu', 'hmarusyak5i@jigsy.com', 'Haroun', 'Marusyak', '1987-10-27', 12, 'Update', 11);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (273, 'rherrema5j', '$2a$04$awWZNsBAvOcEpWk8lfbOzeensBPwTL2jyemam53M.UW3vttu0PoZm', 'rherrema5j@amazon.co.uk', 'Rosabel', 'Herrema', '1975-08-23', 6, 'New message', 33);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (274, 'wsaw5k', '$2a$04$rkrcJ7hozZeO2Yrm62exG.lDRrwNwmC7yIeF5AhFgDgt4PT.Dh3ea', 'wsaw5k@berkeley.edu', 'Wittie', 'Saw', '1980-08-20', 32, 'Reminder', 19);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (275, 'lmogford5l', '$2a$04$scqiTu3SOoIlBWBRkrL32OUn1h9D.9ql37P.RifpwxnZLgy7ltQ5y', 'lmogford5l@hubpages.com', 'Lynett', 'Mogford', '1981-01-25', 19, 'Notification received', 3);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (276, 'fkew5m', '$2a$04$NoY.WrWPf/bXJ9ndHApvX.Y6Nn9J46KrIKKHcKzD2XXZDjSAame5y', 'fkew5m@tinypic.com', 'Fawnia', 'Kew', '2000-04-27', 20, 'Reminder', 38);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (277, 'rbassill5n', '$2a$04$V0pyLLM2W5oDOa2ed4gEuemqsAbqMED9RhxWTleV7I7YIZQbV7S1S', 'rbassill5n@ifeng.com', 'Rutter', 'Bassill', '1994-07-26', 18, 'Reminder', 13);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (278, 'awashtell5o', '$2a$04$k80HspI/onShef4F4iK.Uut1Lzs6Ie0hTucEY/lTknpnNNvX..mqu', 'awashtell5o@latimes.com', 'Angelo', 'Washtell', '1993-04-01', 3, 'Update', 73);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (279, 'mverdun5p', '$2a$04$TO6bOYA5TusHnMu1QHkmIudOaKki2bOTO/rmYD6P9dlgiHevDpeRW', 'mverdun5p@msu.edu', 'Marcille', 'Verdun', '2000-06-20', 5, 'Notification received', 72);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (280, 'jtutchell5q', '$2a$04$kkOd7wbYKiIO6QznN9b.s.OdF0dzvl3FYDR4kUhBt2cQ29/MmoHme', 'jtutchell5q@indiegogo.com', 'Jayne', 'Tutchell', '1970-07-20', 14, 'Update', 28);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (281, 'zgallimore5r', '$2a$04$Pwuw7BJfXOVbQN2dTuoXfOkuj7tQnPWxgxZcoVWC2W4xllzrPzaZS', 'zgallimore5r@cpanel.net', 'Zachary', 'Gallimore', '2000-01-20', 24, 'Notification received', 49);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (282, 'obaudasso5s', '$2a$04$SFa2CWI0DvwHyh2tXd8C8.snycT.qutKOTFst7UvDl6bEGy4vmgmW', 'obaudasso5s@amazon.com', 'Olly', 'Baudasso', '2000-04-20', 2, 'Reminder', 51);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (283, 'wtoyer5t', '$2a$04$DRuQSmEiIJ/fcBv8wZI0g.Dn7Vyd/6FrgOlvX3fOJtWsy/Tz1euKK', 'wtoyer5t@ameblo.jp', 'Wain', 'Toyer', '2000-10-14', 1, 'Alert', 33);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (284, 'cbrattell5u', '$2a$04$pTUp.UoWxncE4.bRy7Uunuzudk2/n9xxLtQG81SA6vQgdi6xeqyCa', 'cbrattell5u@google.com.au', 'Cathleen', 'Brattell', '1978-08-20', 17, 'Alert', 48);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (285, 'djenney5v', '$2a$04$a4S5F6zzUJdRtIu3qzN33eXicnUS2T5txK7VCxZ/nv4hw0uvLAbZe', 'djenney5v@examiner.com', 'Dannye', 'Jenney', '1991-12-27', 28, 'Reminder', 3);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (286, 'bcompson5w', '$2a$04$hhUvNlInsexK3QAHy7os2.rNwUW7lNm3T.xKOPXwo09rwrQQPS4ju', 'bcompson5w@nature.com', 'Beilul', 'Compson', '2000-12-27', 2, 'Alert', 51);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (287, 'ewilles5x', '$2a$04$CmeVAocgMDbGeQOZJzQrqecpGLamiE6of/Af6kBZ5hlw11VQv3s7m', 'ewilles5x@go.com', 'Errol', 'Willes', '1970-12-06', 17, 'Reminder', 60);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (288, 'cwilbore5y', '$2a$04$1lbsY4/5N0usvMa94SvGeenO9b56o.empZYmlkguU13rtRLRE5bZS', 'cwilbore5y@tiny.cc', 'Christoph', 'Wilbore', '2000-01-23', 29, 'New message', 59);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (289, 'alucchi5z', '$2a$04$3dptY1.UnSfWR6GIbso.NODza7lX7/40ggoaB38lm.AYVGRUpWp1K', 'alucchi5z@google.co.uk', 'Avrit', 'Lucchi', '2000-12-07', 27, 'Notification received', 43);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (290, 'cplane60', '$2a$04$0XQ39YCXxHg5GPwi4k.VweWSd0oiXKuYOpiZCmV4Qbo.86HK.jJ6C', 'cplane60@chronoengine.com', 'Christalle', 'Plane', '2000-10-05', 7, 'Update', 54);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (291, 'cvickerman61', '$2a$04$4BcXtDQZHjhXr8bW88xjNucftiDSeT1vnhLfMbnC8uu060NH/XE7a', 'cvickerman61@drupal.org', 'Claribel', 'Vickerman', '1986-11-27', 4, 'New message', 40);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (292, 'rwellman62', '$2a$04$BqAjO99rDd5P8G5fKeEz3.aoh.tYg4sTGqnPM9/YWd3P.Wc6oo9.K', 'rwellman62@storify.com', 'Rainer', 'Wellman', '2000-02-13', 26, 'Reminder', 36);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (293, 'ltenbroek63', '$2a$04$Wb1uGp.GPlnP.xnyopqJP.Bo54NWUD5IPw94uKTDTlFsY7m0OBjHq', 'ltenbroek63@sciencedaily.com', 'Loydie', 'Ten Broek', '1977-12-03', 18, 'Update', 27);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (294, 'gmityushin64', '$2a$04$zLUW7eBKX6Kdgg7Wag/uY.0LeQpQfjLEwGTq40ZVylMYt724ns07.', 'gmityushin64@reference.com', 'Gherardo', 'Mityushin', '2000-10-20', 3, 'New message', 39);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (295, 'measom65', '$2a$04$4SIAiiqbrpTg3MB7oyfEVOgrYfYC7ZGAT3az/O5kVtj/CCS0xQ/06', 'measom65@berkeley.edu', 'Minta', 'Easom', '1970-06-14', 17, 'Update', 66);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (296, 'rbourke66', '$2a$04$/tYtkUXXcTcEUYlsGPVdxuTzL.J/B8DZ5DAagTFBppnozILnfK9dy', 'rbourke66@paginegialle.it', 'Rosemaria', 'Bourke', '2000-08-27', 25, 'New message', 22);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (297, 'bgoaks67', '$2a$04$toylHxcIJXw9Oe6BA9H6FO941J5xWkfGZCx6D6gFuaoOICUR.7iwi', 'bgoaks67@usgs.gov', 'Bobbi', 'Goaks', '2000-10-21', 32, 'New message', 33);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (298, 'nbanbury68', '$2a$04$XgBwQUQHxBjGFWpkjycfLukFalNSnP9QdDQkeEPWh8mZPFn1W4ntm', 'nbanbury68@imgur.com', 'Nev', 'Banbury', '1967-07-20', 13, 'New message', 12);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (299, 'dcliss69', '$2a$04$Jp97H/S9XREMZhz0Q1Ed8erO0Ld6/ssKbBLSwP/b4XLW46U/ibiC2', 'dcliss69@friendfeed.com', 'Dew', 'Cliss', '1969-12-09', 2, 'Alert', 73);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (300, 'llapworth6a', '$2a$04$suWwQC0fTKb/c51Mp9vLfOx7Ac7mcjcQ4clIzOCMPqD2LogFlURx6', 'llapworth6a@illinois.edu', 'Lenard', 'Lapworth', '2000-11-18', 17, 'Update', 68);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (301, 'sbenoiton6b', '$2a$04$txtnspIl3TpjyDz.LOr24OpuIlUA7muGB9qQWx8oiBPkX5ltzoEJe', 'sbenoiton6b@noaa.gov', 'Sigfrid', 'Benoiton', '1973-10-22', 3, 'Update', 41);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (302, 'sitzkin6c', '$2a$04$WmwfKTItQ67EU2alwgc2dOUD3SscjU05xTKpmbuPEEl5bHRxj4ZpK', 'sitzkin6c@dailymotion.com', 'Sascha', 'Itzkin', '1960-11-27', 10, 'Notification received', 38);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (303, 'linnot6d', '$2a$04$g38KA10V0q4eKsCHVvGX6ea55ROqkpyrKqFBOZxZ2FFGTTKF4wrUS', 'linnot6d@shareasale.com', 'Louella', 'Innot', '2000-11-22', 4, 'Alert', 54);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (304, 'isimms6e', '$2a$04$q9vqAWI1OaUDQibGEFK5reZP.9EnYSPbck/I3gTLn00ZsEvASU20y', 'isimms6e@purevolume.com', 'Igor', 'Simms', '2000-04-13', 24, 'Alert', 52);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (305, 'ctrue6f', '$2a$04$3lYKRulxG3ZDD9s6Y0YEEebMhN0qTmkbBMsUVECl/on2zPDhiF/P.', 'ctrue6f@constantcontact.com', 'Carmelle', 'True', '2000-07-07', 18, 'Alert', 73);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (306, 'amcgrah6g', '$2a$04$Z3/qNO5AYt1JLqn9nUHxmO8WfVVIjytpXXylepEjMxhLeIadie146', 'amcgrah6g@privacy.gov.au', 'Anthiathia', 'McGrah', '1969-03-09', 28, 'New message', 5);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (307, 'eballintime6h', '$2a$04$98sGm1X6gRb/0jKMrFM8NeLpUAcWIx5DOJQYbUOA8E0m9r0fOqVTW', 'eballintime6h@eventbrite.com', 'Elden', 'Ballintime', '1998-12-01', 3, 'Reminder', 51);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (308, 'aspeke6i', '$2a$04$bO2hiqHnz3HHGxWcnRJYPuvwJ1fh0e0qzPSZ9c.VULeKnVs9iCrKW', 'aspeke6i@meetup.com', 'Allayne', 'Speke', '2000-12-27', 12, 'Notification received', 21);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (309, 'tbovey6j', '$2a$04$s7qV9CBmTsRH58jB.BqAZuagC.VHZxX8HUW/F/Jqs3zeB94lSnyXS', 'tbovey6j@google.es', 'Troy', 'Bovey', '1968-11-20', 24, 'Alert', 61);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (310, 'jhumbell6k', '$2a$04$6fW9zemFjw3sVq01.QhMBOp1msyu0Ys7ykOLJ3qUHT6mT1YiU9xIu', 'jhumbell6k@gizmodo.com', 'Jareb', 'Humbell', '1980-06-20', 22, 'Update', 63);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (311, 'etremaine6l', '$2a$04$pKyJjpxcyiCTIqZRM2UbuunSvEqMHZbJV1w3.E8ekJErnN3y0Y92G', 'etremaine6l@wikimedia.org', 'Ebony', 'Tremaine', '1978-10-27', 3, 'Notification received', 55);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (312, 'cfredi6m', '$2a$04$Qy4TXJV4LYiTSQyeWSEXzecrjfwXQqemPrgCAtZ2/17NI4Klfxwby', 'cfredi6m@time.com', 'Connie', 'Fredi', '2000-03-18', 19, 'Notification received', 13);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (313, 'kardy6n', '$2a$04$sUGXADRZwSMxGo87HKt.dueJrsquiKMfobv2wVFDLHKcMe2tp3twm', 'kardy6n@amazon.co.uk', 'Kiley', 'Ardy', '1983-04-27', 8, 'Notification received', 6);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (314, 'cmoxon6o', '$2a$04$VWS5q51ucOGswpIH2vSQj.LMUQx3swLb0K3jU5rV3hCw.Nw1Iu6JC', 'cmoxon6o@netlog.com', 'Corny', 'Moxon', '2000-06-15', 28, 'Notification received', 14);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (315, 'hyesipov6p', '$2a$04$pFpwPyZJ5aIF2CyIyyvkF.tfOBlUJjnRewphSJCi7TSfGRY5K0TvG', 'hyesipov6p@nytimes.com', 'Hill', 'Yesipov', '1962-11-16', 29, 'Alert', 2);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (316, 'thailey6q', '$2a$04$vvjtoOqxUKo2EuQHrDyQ/OdusQUESf7AYP09AJtfZ29HrrJqYY0Yq', 'thailey6q@uiuc.edu', 'Towny', 'Hailey', '1997-07-14', 27, 'Reminder', 48);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (317, 'speagram6r', '$2a$04$cNNVIYMdUWCrVuKOYu4NI.JTu03h7ZOCUicvBrPGCJxHOj2eiRFte', 'speagram6r@newyorker.com', 'Sollie', 'Peagram', '2000-09-03', 11, 'Notification received', 10);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (318, 'wcurphey6s', '$2a$04$9FPA3dSHsftUflzvRPsSieMlNLF4p4.bPUqUA2MR/sMkOn2nV8Z.y', 'wcurphey6s@godaddy.com', 'Wilmette', 'Curphey', '2000-07-02', 20, 'Alert', 43);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (319, 'acruces6t', '$2a$04$hegnWNly33A0ElkAF/fs0.qSLFLEK.riKOyg3frljVOMtMeoHNOtS', 'acruces6t@dmoz.org', 'Aguistin', 'Cruces', '2000-01-27', 29, 'Notification received', 15);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (320, 'ckleisel6u', '$2a$04$JnIHlhBSlTX6bjYJkfU6r.Tv3hu2U0TtvCADvGprndwSnOHceX4gO', 'ckleisel6u@opera.com', 'Cosimo', 'Kleisel', '1997-11-27', 11, 'Alert', 23);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (321, 'nbevar6v', '$2a$04$.xbXlq7qFQkDv0Nz7ImurukNwd7s08h3vcMIYww.uMtbVBUG6JMxG', 'nbevar6v@ifeng.com', 'Nevins', 'Bevar', '2000-12-05', 3, 'Alert', 57);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (322, 'hohrtmann6w', '$2a$04$hqhjUe5WtmoXBMXxtVHjrOD3GmP79g6ac8d.Eq1FoE9jOUzSyZJG6', 'hohrtmann6w@ucoz.com', 'Hendrika', 'Ohrtmann', '2000-12-08', 13, 'Update', 37);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (323, 'astabler6x', '$2a$04$hcDwnbJHURyc4zjoM5BkyOIYV0F5B4VIwXqdsRaWVF9IvbEFoOjAe', 'astabler6x@xing.com', 'Adela', 'Stabler', '2000-07-26', 31, 'Reminder', 1);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (324, 'cglaysher6y', '$2a$04$neDixD8OsL7i5.OiVsi.e.A4xQ.goIhrwJdtd13hJ8sMYv3x5QusS', 'cglaysher6y@ehow.com', 'Claudette', 'Glaysher', '1999-11-27', 19, 'New message', 29);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (325, 'aglitherow6z', '$2a$04$bVe41FwBwNxBSZdQwwEweuwjsAr1ry4SHVsdgqk8uS3s4TmmIAJWW', 'aglitherow6z@vk.com', 'Andi', 'Glitherow', '2000-04-27', 7, 'Update', 69);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (326, 'mguidera70', '$2a$04$UWsTHbyLq/w6S.8hNjTqFuUOd/fV5A7hJGx.QO5Qwaku.XIz0RWHC', 'mguidera70@umn.edu', 'Mommy', 'Guidera', '2000-11-20', 13, 'Reminder', 3);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (327, 'grides71', '$2a$04$FWQXn7yoEpSkzGj8z2quT.7J.I7KQvfnB23c/4DODiOyd92T7nWgq', 'grides71@smh.com.au', 'Germayne', 'Rides', '1989-11-13', 20, 'Reminder', 16);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (328, 'scroney72', '$2a$04$J7moLLKP32sEBAXd5G2Yj.GSpVTaqEiVRyVBB8vJxNQ2uqTUtDyl6', 'scroney72@barnesandnoble.com', 'Sigismund', 'Croney', '2000-05-22', 29, 'Update', 69);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (329, 'cdunk73', '$2a$04$4T4ZTHpgFDd./15sk5m15.AY/s.8VcLBwcYUCCTA.DSoaSlITmpeC', 'cdunk73@diigo.com', 'Carolyne', 'Dunk', '2000-01-04', 10, 'New message', 20);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (330, 'dpinnigar74', '$2a$04$WBwsugU3QqJIHGZxmnxxLOHo5DAV3zwnSnQc73pbmZppsdPgD5Fty', 'dpinnigar74@about.com', 'Dulcinea', 'Pinnigar', '2000-11-05', 3, 'Reminder', 39);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (331, 'asussams75', '$2a$04$GW.MyBYWcTbCWHgakb4wg.twJd7Kilj09XCZ55CWwK2Z5cafrUs2.', 'asussams75@themeforest.net', 'Artemus', 'Sussams', '2000-08-12', 2, 'New message', 21);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (332, 'pcollingridge76', '$2a$04$PO9/M9g83Z6sHjIF5F8yJOn3Q/dsV6C1..R1xPrRFrcJJJu8s8zdm', 'pcollingridge76@npr.org', 'Philipa', 'Collingridge', '2000-08-22', 20, 'Reminder', 43);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (333, 'pduffit77', '$2a$04$NSV72tdLD2X3FS8QDRGF6.l6VPW89kNPB0ZEArsHLO5nt8jpeeyBC', 'pduffit77@vkontakte.ru', 'Phil', 'Duffit', '2000-03-10', 28, 'Update', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (334, 'lspellsworth78', '$2a$04$TjF1wKLOLt1gfVEAMpe9euBPrf9yga40Kz4En1bhnidtD9FzSgoK6', 'lspellsworth78@facebook.com', 'Leilah', 'Spellsworth', '2000-10-09', 22, 'New message', 46);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (335, 'pghilardi79', '$2a$04$LNJQZEM6j34RIlAtn4r32uWPcv3nhE59fW7EQfPVRXdxzQS/x0LFW', 'pghilardi79@indiegogo.com', 'Pietra', 'Ghilardi', '1963-03-08', 4, 'Notification received', 53);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (336, 'mkollach7a', '$2a$04$XtNw2/FXNHtAAU/I1nORNe25J0U93VUzYOWf3UMlcHgm4kOQGd0Fm', 'mkollach7a@hubpages.com', 'Mike', 'Kollach', '2000-03-20', 16, 'Alert', 40);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (337, 'mrivallant7b', '$2a$04$Szz.4lindpWqCgyjhc3NmeE8DPaoCesgTStQLSDt7rm3/ylCGdgAC', 'mrivallant7b@msn.com', 'Marylinda', 'Rivallant', '2000-10-10', 25, 'Alert', 11);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (338, 'gjustis7c', '$2a$04$AvoRzJ9Gdq9wlTsKy//rMOmimybxdJeXXsAs2ZUAEBjmlwlrpou1q', 'gjustis7c@istockphoto.com', 'Gilligan', 'Justis', '1991-12-20', 4, 'Notification received', 49);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (339, 'xhutchence7d', '$2a$04$m3RENCRCQQxhxtWVUQgafePR2wf5VKSHKIGhhCkuHG9PbXx8Zro.6', 'xhutchence7d@ted.com', 'Xever', 'Hutchence', '2000-10-11', 16, 'Reminder', 50);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (340, 'yraselles7e', '$2a$04$FxSrSZwISy3lLYvwu24RlerHt9930G1CPBPJfD2el00LsZ/j7Hx.y', 'yraselles7e@4shared.com', 'Yetta', 'Raselles', '1998-05-11', 12, 'Update', 56);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (341, 'cpaolino7f', '$2a$04$lspnyQ/zNFL0DRX/j8y6aO2yHoxbcUrq5klkjvIxt5zW/UgQRpjN6', 'cpaolino7f@gravatar.com', 'Cosimo', 'Paolino', '1969-10-10', 1, 'Reminder', 34);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (342, 'abocking7g', '$2a$04$puU2jQFRnef2TFH9G5b3aOGTdEh8WWAqWxGqLREsu9U6fjbh7TZaa', 'abocking7g@trellian.com', 'Aretha', 'Bocking', '1997-01-20', 4, 'Alert', 16);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (343, 'dhawkwood7h', '$2a$04$.HJXB1FgqZTfuh4.P/Kh8.IwmzGvJduIqYzzEnHaCI0spuyXtlMFW', 'dhawkwood7h@aboutads.info', 'Dunstan', 'Hawkwood', '1986-08-27', 31, 'Update', 49);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (344, 'dshurrocks7i', '$2a$04$AS/BwdTzIgumuf9Ob6ApLOI/af3mr34pVyqhaAD0e7O10qIWDpsLu', 'dshurrocks7i@cnet.com', 'Dugald', 'Shurrocks', '2000-12-27', 24, 'Update', 42);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (345, 'jwinterbottom7j', '$2a$04$3eN8ASP.oRpEau/tqEn6a.DTEra7wIBQ7Ckrwx9SqMgV.Hiil1eQy', 'jwinterbottom7j@howstuffworks.com', 'Jessey', 'Winterbottom', '2000-12-27', 10, 'Notification received', 45);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (346, 'hfeldfisher7k', '$2a$04$Q9IZK8saYZyyemSeKN1/q.CmUgWSiCJJqg0s1yhOSYkaLULZY8y1W', 'hfeldfisher7k@cdbaby.com', 'Hesther', 'Feldfisher', '1990-08-15', 1, 'Reminder', 27);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (347, 'msaywood7l', '$2a$04$Q91avHqHLe/DMo3Gj7sXVe6SdKAsHhOTo26UTURGMiaNYZRw8kP6S', 'msaywood7l@nationalgeographic.com', 'Michaeline', 'Saywood', '2000-10-20', 28, 'New message', 17);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (348, 'omilkins7m', '$2a$04$qTOnHJNMGc9.5azj3An2pu4S1uNxIXrV0Q.bNVl.9aNbNr.MOgOWi', 'omilkins7m@cnbc.com', 'Orton', 'Milkins', '2000-05-27', 1, 'Notification received', 38);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (349, 'cgavey7n', '$2a$04$WlN3qmK7vr3sganUqhDxaO8jB2ly6eGsvqu1/Y.uagE.KcmsUvKK.', 'cgavey7n@theguardian.com', 'Carmella', 'Gavey', '2000-12-27', 23, 'New message', 32);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (350, 'lcoopland7o', '$2a$04$EM6aMUUqbBbb3GBVqr0OTeIHxaiI3ki2ajSLalJzSysT/G0i0JVb6', 'lcoopland7o@gmpg.org', 'Latia', 'Coopland', '2000-09-27', 31, 'Notification received', 48);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (351, 'alarge7p', '$2a$04$PFUpNXbahdJ2qJDyxKzAruHLg43Qyw5I.CdRbFteUdnwFaIrTjKAi', 'alarge7p@odnoklassniki.ru', 'Adore', 'Large', '2000-05-21', 7, 'Alert', 39);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (352, 'lheyward7q', '$2a$04$2P7naNa6cliLw6sEyZaKeui0GcyQUHV77Go4EuKuhAHYm8I4fLb/W', 'lheyward7q@netvibes.com', 'Lemuel', 'Heyward', '1991-07-20', 8, 'Alert', 58);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (353, 'cpeplow7r', '$2a$04$cyPJSLUGVuR.kgICTc3KxeV0STsQ5ERP5A0S.NriA4dwBIcIhBJly', 'cpeplow7r@icio.us', 'Casie', 'Peplow', '1974-06-08', 9, 'Notification received', 30);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (354, 'ipitone7s', '$2a$04$mPQ0Qlghw7CJrdmFfKipqO2S8AKRU8l7ustItIKCo.mjJKHbKRVdG', 'ipitone7s@scribd.com', 'Irita', 'Pitone', '2000-05-27', 31, 'Update', 29);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (355, 'bhaygreen7t', '$2a$04$UX5ZwDP9cfXEfWbl4xjKR.KiH.VvAriRgLLLyWFWMrMw728yx72Sy', 'bhaygreen7t@hhs.gov', 'Beaufort', 'Haygreen', '1970-12-09', 11, 'Notification received', 56);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (356, 'astranaghan7u', '$2a$04$0h1OrdB.K356AFLsC1fEsOOeql2YIa35IdiSfrOKj91rkQF9mDnp2', 'astranaghan7u@jigsy.com', 'Angelique', 'Stranaghan', '2000-05-04', 8, 'Alert', 27);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (357, 'mmanoelli7v', '$2a$04$B58QzKohtmYAd1yPPfyQtegh8t4RXUsg2EExfa1j6ca1P96A0JIcm', 'mmanoelli7v@cam.ac.uk', 'Mathian', 'Manoelli', '1960-10-24', 17, 'Alert', 53);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (358, 'fgunston7w', '$2a$04$0Hylaw2e2Bhbb4AqkyJ1v.CkcuO9HnwFXHayX710CM1GDI4Oa43bS', 'fgunston7w@scribd.com', 'Franklin', 'Gunston', '1973-01-27', 9, 'New message', 59);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (359, 'gcharlson7x', '$2a$04$Nv/mg.RQFwJbTHO3C8uZwOKbpabeGwSOrzQyZ5HqZ5cjU.DkRuim2', 'gcharlson7x@vkontakte.ru', 'Genni', 'Charlson', '1996-07-16', 14, 'Update', 11);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (360, 'smangham7y', '$2a$04$O02meRyMygWNEi68Ir1S5Oz1WCuA5h6iskFOX9TjyUjoNYZnHDi36', 'smangham7y@discovery.com', 'Sebastien', 'Mangham', '1994-02-04', 18, 'Update', 65);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (361, 'mchristopherson7z', '$2a$04$UWE4a01G23VNUEYbKxRsUe/pEYeWYl9Pdfk/gdEkxignLNuGtUqR2', 'mchristopherson7z@gravatar.com', 'Milena', 'Christopherson', '2000-11-20', 28, 'New message', 30);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (362, 'granahan80', '$2a$04$4iTYU/IQySJ0wG1yJbM.P.deXmzOoEQRt5QmD7Jzze2Oa7XMA4phO', 'granahan80@census.gov', 'Gav', 'Ranahan', '2000-08-03', 22, 'Reminder', 36);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (363, 'khauxby81', '$2a$04$NDmBiJ7UQb0MNC0eMqgET.Zxd.PsIS7Ff4tmclXis0j3FeKim0MTa', 'khauxby81@berkeley.edu', 'Kimball', 'Hauxby', '1972-12-20', 22, 'Reminder', 58);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (364, 'smaccaghan82', '$2a$04$/dVj4d7AAmhHN6/o7cgRh.Lko/aRyTiwKq021iKnudyqZ40znLI.S', 'smaccaghan82@zimbio.com', 'Salli', 'MacCaghan', '1981-10-27', 18, 'Alert', 31);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (365, 'rattenbrough83', '$2a$04$Ie1AMRYLuby3cPvj.Ahqhe0A27cShKo1LdpCjP5Vw3dGskh.bqMSC', 'rattenbrough83@ycombinator.com', 'Reena', 'Attenbrough', '2000-12-14', 31, 'Notification received', 42);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (366, 'fbumphrey84', '$2a$04$yZIc1Y0llJIJuX7vdavy1eERaPpggcO05MnMWhArMpo1YBmDyfVPm', 'fbumphrey84@uol.com.br', 'Fabien', 'Bumphrey', '1967-08-09', 13, 'Reminder', 51);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (367, 'fwaryk85', '$2a$04$.BIQ70kcUrm.pkOOiAVsSe0dS2a39GqY0fbTI2T9K0uTN.kXzsb0S', 'fwaryk85@spotify.com', 'Fawnia', 'Waryk', '2000-11-11', 31, 'Notification received', 35);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (368, 'jfinnick86', '$2a$04$rBoguS4Fu9kOO9nD1nS79elfRZnUW4tCpYFbC9o87WtvxdHGCYKcm', 'jfinnick86@photobucket.com', 'Joell', 'Finnick', '2000-11-26', 3, 'Alert', 68);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (369, 'rself87', '$2a$04$.Q5MFIckP5bP8QT92EYZ3eGO1hAnnpuHPOb.ikc9tQ.wM5ICSaeIa', 'rself87@creativecommons.org', 'Rycca', 'Self', '1982-03-20', 20, 'Reminder', 48);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (370, 'smcgaughay88', '$2a$04$F.yt3b0.1ZBCMiohvz/XOuiWv/OSQ4iRI.vLoqdJ6X95LfBspHmoO', 'smcgaughay88@techcrunch.com', 'Sharity', 'McGaughay', '1967-07-06', 9, 'Reminder', 17);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (371, 'mtrinkwon89', '$2a$04$owKYTYqYAr54M7e0SZq1x.1LeETGTtDL63mEIVWqzagUze7UGXVGu', 'mtrinkwon89@quantcast.com', 'Milissent', 'Trinkwon', '2000-10-09', 17, 'Reminder', 58);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (372, 'ndeane8a', '$2a$04$Gcd6rgBjUoJos.cxetkTzeZw7CBSZlb46.n86qRiS9k5GZpgEkcgu', 'ndeane8a@pcworld.com', 'Nathanael', 'Deane', '2000-10-04', 31, 'Reminder', 30);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (373, 'bmetcalf8b', '$2a$04$6w7XS2uXyZ8jJtMChY4z8uOn/UhKFU9b/m4OqDLlAN3pwti6PjQ/O', 'bmetcalf8b@purevolume.com', 'Brok', 'Metcalf', '2000-01-20', 31, 'Alert', 57);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (374, 'erance8c', '$2a$04$W.pl6SyIoXh81oRnCAH6iepmQn4sYlTwvz9jH.ACeLjNG2mUQdlD2', 'erance8c@sun.com', 'Euphemia', 'Rance', '2000-12-20', 13, 'Update', 20);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (375, 'vdolden8d', '$2a$04$8WLjLcK5TKkXA0OtEvESjeT40GmD0UPYM.jd62AfPRqibadIGpIq2', 'vdolden8d@surveymonkey.com', 'Vilma', 'Dolden', '1973-11-03', 10, 'Notification received', 24);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (376, 'ekiloh8e', '$2a$04$G4fO1TxLUSuLeNn4jSt5zOTYg.SFs2.NZ6vEZjjDGH2xGvZvSFDVq', 'ekiloh8e@symantec.com', 'Edlin', 'Kiloh', '1965-10-13', 27, 'Reminder', 64);
-insert into user (userID, username, password, email, firstname, lastname, birthdate, following, notifications, advertiserID) values (377, 'tdobel8f', '$2a$04$FCEJ9IRxyL5fULviZKDSCe6wmVwb9S1CKYREctkOrW25ZuI4FhQjO', 'tdobel8f@businessweek.com', 'Tilda', 'Dobel', '1985-07-27', 28, 'Reminder', 70);
+-- community table
+CREATE TABLE IF NOT EXISTS community (
+    communityID INTEGER NOT NULL AUTO_INCREMENT,
+    postID INTEGER NOT NULL,
+    communityName TEXT,
+    PRIMARY KEY (communityID),
+    FOREIGN KEY (postID) REFERENCES posts (postID)
+                                     ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+insert into community (communityID, postID, communityName) values (1, 10, 'Rook''s Retreat');
+insert into community (communityID, postID, communityName) values (2, 22, 'Chess Club');
+insert into community (communityID, postID, communityName) values (3, 132, 'Checkmate Masters');
+insert into community (communityID, postID, communityName) values (4, 173, 'Knight''s Gambit');
+insert into community (communityID, postID, communityName) values (5, 13, 'Chess Club');
+insert into community (communityID, postID, communityName) values (6, 163, 'Knight''s Gambit');
+insert into community (communityID, postID, communityName) values (7, 39, 'Rook''s Retreat');
+insert into community (communityID, postID, communityName) values (8, 112, 'Chess Club');
+insert into community (communityID, postID, communityName) values (9, 136, 'Queen''s Court');
+insert into community (communityID, postID, communityName) values (10, 3, 'Chess Club');
+insert into community (communityID, postID, communityName) values (11, 15, 'Rook''s Retreat');
+insert into community (communityID, postID, communityName) values (12, 54, 'Checkmate Masters');
+insert into community (communityID, postID, communityName) values (13, 181, 'Rook''s Retreat');
+insert into community (communityID, postID, communityName) values (14, 17, 'Checkmate Masters');
+insert into community (communityID, postID, communityName) values (15, 98, 'Checkmate Masters');
+insert into community (communityID, postID, communityName) values (16, 121, 'Queen''s Court');
+insert into community (communityID, postID, communityName) values (17, 142, 'Checkmate Masters');
+insert into community (communityID, postID, communityName) values (18, 160, 'Rook''s Retreat');
+insert into community (communityID, postID, communityName) values (19, 57, 'Checkmate Masters');
+insert into community (communityID, postID, communityName) values (20, 50, 'Chess Club');
+insert into community (communityID, postID, communityName) values (21, 159, 'Queen''s Court');
+insert into community (communityID, postID, communityName) values (22, 82, 'Chess Club');
+insert into community (communityID, postID, communityName) values (23, 168, 'Knight''s Gambit');
+insert into community (communityID, postID, communityName) values (24, 118, 'Chess Club');
+insert into community (communityID, postID, communityName) values (25, 55, 'Grandmaster Alliance');
+insert into community (communityID, postID, communityName) values (26, 159, 'Knight''s Gambit');
+insert into community (communityID, postID, communityName) values (27, 37, 'Rook''s Retreat');
+insert into community (communityID, postID, communityName) values (28, 124, 'Queen''s Court');
+insert into community (communityID, postID, communityName) values (29, 189, 'Knight''s Gambit');
+insert into community (communityID, postID, communityName) values (30, 17, 'Rook''s Retreat');
+insert into community (communityID, postID, communityName) values (31, 8, 'Checkmate Masters');
+insert into community (communityID, postID, communityName) values (32, 5, 'Chess Club');
+insert into community (communityID, postID, communityName) values (33, 67, 'Chess Club');
+insert into community (communityID, postID, communityName) values (34, 177, 'Queen''s Court');
+insert into community (communityID, postID, communityName) values (35, 47, 'Checkmate Masters');
+insert into community (communityID, postID, communityName) values (36, 75, 'Rook''s Retreat');
+insert into community (communityID, postID, communityName) values (37, 42, 'Rook''s Retreat');
+insert into community (communityID, postID, communityName) values (38, 84, 'Grandmaster Alliance');
+insert into community (communityID, postID, communityName) values (39, 133, 'Knight''s Gambit');
+insert into community (communityID, postID, communityName) values (40, 148, 'Grandmaster Alliance');
+insert into community (communityID, postID, communityName) values (41, 49, 'Grandmaster Alliance');
+insert into community (communityID, postID, communityName) values (42, 171, 'Rook''s Retreat');
+insert into community (communityID, postID, communityName) values (43, 120, 'Knight''s Gambit');
+insert into community (communityID, postID, communityName) values (44, 46, 'Knight''s Gambit');
+insert into community (communityID, postID, communityName) values (45, 128, 'Rook''s Retreat');
+insert into community (communityID, postID, communityName) values (46, 192, 'Rook''s Retreat');
+insert into community (communityID, postID, communityName) values (47, 25, 'Chess Club');
+insert into community (communityID, postID, communityName) values (48, 139, 'Knight''s Gambit');
+insert into community (communityID, postID, communityName) values (49, 195, 'Checkmate Masters');
+insert into community (communityID, postID, communityName) values (50, 73, 'Queen''s Court');
 
 -- Admin table
 CREATE TABLE IF NOT EXISTS admin (
@@ -739,240 +631,206 @@ CREATE TABLE IF NOT EXISTS report (
                                   ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-insert into report (reportID, content, adminID, userID) values (1, 'Poor', 28, 200);
-insert into report (reportID, content, adminID, userID) values (2, 'Average', 19, 206);
-insert into report (reportID, content, adminID, userID) values (3, 'Excellent', 24, 78);
-insert into report (reportID, content, adminID, userID) values (4, 'Excellent', 20, 38);
-insert into report (reportID, content, adminID, userID) values (5, 'Poor', 19, 274);
-insert into report (reportID, content, adminID, userID) values (6, 'Poor', 33, 35);
-insert into report (reportID, content, adminID, userID) values (7, 'Average', 23, 275);
-insert into report (reportID, content, adminID, userID) values (8, 'Terrible', 2, 317);
-insert into report (reportID, content, adminID, userID) values (9, 'Good', 5, 299);
-insert into report (reportID, content, adminID, userID) values (10, 'Excellent', 9, 47);
-insert into report (reportID, content, adminID, userID) values (11, 'Poor', 33, 173);
-insert into report (reportID, content, adminID, userID) values (12, 'Good', 17, 227);
-insert into report (reportID, content, adminID, userID) values (13, 'Excellent', 14, 289);
-insert into report (reportID, content, adminID, userID) values (14, 'Excellent', 12, 362);
-insert into report (reportID, content, adminID, userID) values (15, 'Terrible', 28, 315);
-insert into report (reportID, content, adminID, userID) values (16, 'Poor', 25, 105);
-insert into report (reportID, content, adminID, userID) values (17, 'Excellent', 28, 119);
-insert into report (reportID, content, adminID, userID) values (18, 'Poor', 13, 82);
-insert into report (reportID, content, adminID, userID) values (19, 'Average', 1, 89);
-insert into report (reportID, content, adminID, userID) values (20, 'Excellent', 13, 233);
-insert into report (reportID, content, adminID, userID) values (21, 'Excellent', 32, 99);
-insert into report (reportID, content, adminID, userID) values (22, 'Excellent', 15, 263);
-insert into report (reportID, content, adminID, userID) values (23, 'Average', 20, 335);
-insert into report (reportID, content, adminID, userID) values (24, 'Poor', 11, 162);
-insert into report (reportID, content, adminID, userID) values (25, 'Average', 31, 103);
-insert into report (reportID, content, adminID, userID) values (26, 'Good', 14, 224);
-insert into report (reportID, content, adminID, userID) values (27, 'Good', 12, 167);
-insert into report (reportID, content, adminID, userID) values (28, 'Poor', 23, 209);
-insert into report (reportID, content, adminID, userID) values (29, 'Good', 14, 66);
-insert into report (reportID, content, adminID, userID) values (30, 'Terrible', 7, 20);
-insert into report (reportID, content, adminID, userID) values (31, 'Terrible', 27, 143);
-insert into report (reportID, content, adminID, userID) values (32, 'Poor', 33, 80);
-insert into report (reportID, content, adminID, userID) values (33, 'Excellent', 3, 49);
-insert into report (reportID, content, adminID, userID) values (34, 'Average', 14, 175);
-insert into report (reportID, content, adminID, userID) values (35, 'Poor', 24, 55);
-insert into report (reportID, content, adminID, userID) values (36, 'Average', 6, 100);
-insert into report (reportID, content, adminID, userID) values (37, 'Poor', 29, 287);
-insert into report (reportID, content, adminID, userID) values (38, 'Poor', 20, 2);
-insert into report (reportID, content, adminID, userID) values (39, 'Poor', 18, 153);
-insert into report (reportID, content, adminID, userID) values (40, 'Good', 11, 113);
-insert into report (reportID, content, adminID, userID) values (41, 'Good', 28, 369);
-insert into report (reportID, content, adminID, userID) values (42, 'Good', 8, 153);
-insert into report (reportID, content, adminID, userID) values (43, 'Good', 20, 349);
-insert into report (reportID, content, adminID, userID) values (44, 'Poor', 9, 248);
-insert into report (reportID, content, adminID, userID) values (45, 'Good', 20, 23);
-insert into report (reportID, content, adminID, userID) values (46, 'Terrible', 30, 63);
-insert into report (reportID, content, adminID, userID) values (47, 'Average', 7, 215);
-insert into report (reportID, content, adminID, userID) values (48, 'Excellent', 15, 68);
-insert into report (reportID, content, adminID, userID) values (49, 'Excellent', 18, 234);
-insert into report (reportID, content, adminID, userID) values (50, 'Excellent', 22, 178);
-insert into report (reportID, content, adminID, userID) values (51, 'Terrible', 8, 355);
-insert into report (reportID, content, adminID, userID) values (52, 'Excellent', 6, 368);
-insert into report (reportID, content, adminID, userID) values (53, 'Excellent', 15, 248);
-insert into report (reportID, content, adminID, userID) values (54, 'Poor', 29, 56);
-insert into report (reportID, content, adminID, userID) values (55, 'Poor', 26, 336);
-insert into report (reportID, content, adminID, userID) values (56, 'Terrible', 18, 189);
-insert into report (reportID, content, adminID, userID) values (57, 'Average', 18, 102);
-insert into report (reportID, content, adminID, userID) values (58, 'Terrible', 10, 277);
-insert into report (reportID, content, adminID, userID) values (59, 'Excellent', 15, 297);
-insert into report (reportID, content, adminID, userID) values (60, 'Good', 29, 188);
-insert into report (reportID, content, adminID, userID) values (61, 'Average', 30, 249);
-insert into report (reportID, content, adminID, userID) values (62, 'Good', 30, 271);
-insert into report (reportID, content, adminID, userID) values (63, 'Terrible', 14, 282);
-insert into report (reportID, content, adminID, userID) values (64, 'Terrible', 27, 331);
-insert into report (reportID, content, adminID, userID) values (65, 'Average', 4, 314);
-insert into report (reportID, content, adminID, userID) values (66, 'Excellent', 32, 103);
-insert into report (reportID, content, adminID, userID) values (67, 'Excellent', 22, 198);
-insert into report (reportID, content, adminID, userID) values (68, 'Poor', 31, 17);
-insert into report (reportID, content, adminID, userID) values (69, 'Average', 21, 56);
-insert into report (reportID, content, adminID, userID) values (70, 'Excellent', 4, 144);
-insert into report (reportID, content, adminID, userID) values (71, 'Excellent', 17, 348);
-insert into report (reportID, content, adminID, userID) values (72, 'Excellent', 29, 211);
-insert into report (reportID, content, adminID, userID) values (73, 'Average', 17, 254);
-insert into report (reportID, content, adminID, userID) values (74, 'Excellent', 5, 181);
-insert into report (reportID, content, adminID, userID) values (75, 'Good', 12, 130);
-insert into report (reportID, content, adminID, userID) values (76, 'Terrible', 2, 1);
-insert into report (reportID, content, adminID, userID) values (77, 'Poor', 27, 206);
-insert into report (reportID, content, adminID, userID) values (78, 'Excellent', 14, 121);
-insert into report (reportID, content, adminID, userID) values (79, 'Good', 1, 308);
-insert into report (reportID, content, adminID, userID) values (80, 'Terrible', 19, 142);
-insert into report (reportID, content, adminID, userID) values (81, 'Average', 4, 315);
-insert into report (reportID, content, adminID, userID) values (82, 'Poor', 33, 218);
-insert into report (reportID, content, adminID, userID) values (83, 'Terrible', 33, 192);
-insert into report (reportID, content, adminID, userID) values (84, 'Terrible', 32, 173);
-insert into report (reportID, content, adminID, userID) values (85, 'Average', 21, 152);
-insert into report (reportID, content, adminID, userID) values (86, 'Terrible', 16, 306);
-insert into report (reportID, content, adminID, userID) values (87, 'Poor', 20, 331);
-insert into report (reportID, content, adminID, userID) values (88, 'Average', 13, 24);
-insert into report (reportID, content, adminID, userID) values (89, 'Terrible', 33, 234);
-insert into report (reportID, content, adminID, userID) values (90, 'Terrible', 26, 131);
-insert into report (reportID, content, adminID, userID) values (91, 'Excellent', 3, 223);
-insert into report (reportID, content, adminID, userID) values (92, 'Excellent', 6, 173);
-insert into report (reportID, content, adminID, userID) values (93, 'Poor', 18, 125);
-insert into report (reportID, content, adminID, userID) values (94, 'Poor', 4, 231);
-insert into report (reportID, content, adminID, userID) values (95, 'Excellent', 24, 120);
-insert into report (reportID, content, adminID, userID) values (96, 'Terrible', 1, 178);
-insert into report (reportID, content, adminID, userID) values (97, 'Excellent', 11, 216);
-insert into report (reportID, content, adminID, userID) values (98, 'Terrible', 3, 333);
-insert into report (reportID, content, adminID, userID) values (99, 'Terrible', 17, 276);
-insert into report (reportID, content, adminID, userID) values (100, 'Average', 13, 189);
-
--- post table
-CREATE TABLE IF NOT EXISTS posts (
-    postID INTEGER NOT NULL AUTO_INCREMENT,
-    userID INTEGER NOT NULL,
-    content TEXT,
-    datePublished DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (postID),
-    FOREIGN KEY (userID) REFERENCES user (userID)
-                                 ON UPDATE RESTRICT ON DELETE RESTRICT
-);
-
-insert into posts (postID, userID, content) values (1, 348, 'Good');
-insert into posts (postID, userID, content) values (2, 47, 'Good');
-insert into posts (postID, userID, content) values (3, 191, 'Average');
-insert into posts (postID, userID, content) values (4, 214, 'Excellent');
-insert into posts (postID, userID, content) values (5, 136, 'Poor');
-insert into posts (postID, userID, content) values (6, 139, 'Excellent');
-insert into posts (postID, userID, content) values (7, 327, 'Average');
-insert into posts (postID, userID, content) values (8, 136, 'Terrible');
-insert into posts (postID, userID, content) values (9, 249, 'Terrible');
-insert into posts (postID, userID, content) values (10, 276, 'Excellent');
-insert into posts (postID, userID, content) values (11, 355, 'Terrible');
-insert into posts (postID, userID, content) values (12, 365, 'Good');
-insert into posts (postID, userID, content) values (13, 146, 'Good');
-insert into posts (postID, userID, content) values (14, 245, 'Poor');
-insert into posts (postID, userID, content) values (15, 125, 'Excellent');
-insert into posts (postID, userID, content) values (16, 230, 'Terrible');
-insert into posts (postID, userID, content) values (17, 299, 'Excellent');
-insert into posts (postID, userID, content) values (18, 40, 'Good');
-insert into posts (postID, userID, content) values (19, 38, 'Excellent');
-insert into posts (postID, userID, content) values (20, 86, 'Poor');
-insert into posts (postID, userID, content) values (21, 228, 'Average');
-insert into posts (postID, userID, content) values (22, 319, 'Terrible');
-insert into posts (postID, userID, content) values (23, 64, 'Terrible');
-insert into posts (postID, userID, content) values (24, 57, 'Excellent');
-insert into posts (postID, userID, content) values (25, 146, 'Terrible');
-insert into posts (postID, userID, content) values (26, 172, 'Good');
-insert into posts (postID, userID, content) values (27, 262, 'Excellent');
-insert into posts (postID, userID, content) values (28, 338, 'Poor');
-insert into posts (postID, userID, content) values (29, 64, 'Excellent');
-insert into posts (postID, userID, content) values (30, 295, 'Terrible');
-insert into posts (postID, userID, content) values (31, 35, 'Good');
-insert into posts (postID, userID, content) values (32, 147, 'Good');
-insert into posts (postID, userID, content) values (33, 280, 'Poor');
-insert into posts (postID, userID, content) values (34, 137, 'Poor');
-insert into posts (postID, userID, content) values (35, 267, 'Average');
-insert into posts (postID, userID, content) values (36, 355, 'Average');
-insert into posts (postID, userID, content) values (37, 184, 'Terrible');
-insert into posts (postID, userID, content) values (38, 71, 'Average');
-insert into posts (postID, userID, content) values (39, 234, 'Excellent');
-insert into posts (postID, userID, content) values (40, 359, 'Terrible');
-insert into posts (postID, userID, content) values (41, 62, 'Terrible');
-insert into posts (postID, userID, content) values (42, 64, 'Average');
-insert into posts (postID, userID, content) values (43, 94, 'Good');
-insert into posts (postID, userID, content) values (44, 219, 'Good');
-insert into posts (postID, userID, content) values (45, 359, 'Good');
-insert into posts (postID, userID, content) values (46, 278, 'Good');
-insert into posts (postID, userID, content) values (47, 171, 'Good');
-insert into posts (postID, userID, content) values (48, 64, 'Excellent');
-insert into posts (postID, userID, content) values (49, 64, 'Terrible');
-insert into posts (postID, userID, content) values (50, 230, 'Good');
-insert into posts (postID, userID, content) values (51, 317, 'Terrible');
-insert into posts (postID, userID, content) values (52, 97, 'Good');
-insert into posts (postID, userID, content) values (53, 104, 'Average');
-insert into posts (postID, userID, content) values (54, 51, 'Poor');
-insert into posts (postID, userID, content) values (55, 367, 'Good');
-
--- community table
-CREATE TABLE IF NOT EXISTS community (
-    postID INTEGER NOT NULL AUTO_INCREMENT,
-    listOfUsers INTEGER NOT NULL,
-    PRIMARY KEY (postID, listOfUsers),
-    FOREIGN KEY (listOfUsers) REFERENCES user (userID)
-                                     ON UPDATE RESTRICT ON DELETE RESTRICT ,
-    FOREIGN KEY (postID) REFERENCES posts (postID)
-                                     ON UPDATE RESTRICT ON DELETE RESTRICT
-);
-
-insert into community (postID, listOfUsers) values (1, 348);
-insert into community (postID, listOfUsers) values (2, 47);
-insert into community (postID, listOfUsers) values (3, 191);
-insert into community (postID, listOfUsers) values (4, 214);
-insert into community (postID, listOfUsers) values (5, 136);
-insert into community (postID, listOfUsers) values (6, 139);
-insert into community (postID, listOfUsers) values (7, 327);
-insert into community (postID, listOfUsers) values (8, 136);
-insert into community (postID, listOfUsers) values (9, 249);
-insert into community (postID, listOfUsers) values (10, 276);
-insert into community (postID, listOfUsers) values (11, 355);
-insert into community (postID, listOfUsers) values (12, 365);
-insert into community (postID, listOfUsers) values (13, 146);
-insert into community (postID, listOfUsers) values (14, 245);
-insert into community (postID, listOfUsers) values (15, 125);
-insert into community (postID, listOfUsers) values (16, 230);
-insert into community (postID, listOfUsers) values (17, 299);
-insert into community (postID, listOfUsers) values (18, 40);
-insert into community (postID, listOfUsers) values (19, 38);
-insert into community (postID, listOfUsers) values (20, 86);
-insert into community (postID, listOfUsers) values (21, 228);
-insert into community (postID, listOfUsers) values (22, 319);
-insert into community (postID, listOfUsers) values (23, 64);
-insert into community (postID, listOfUsers) values (24, 57);
-insert into community (postID, listOfUsers) values (25, 146);
-insert into community (postID, listOfUsers) values (26, 172);
-insert into community (postID, listOfUsers) values (27, 262);
-insert into community (postID, listOfUsers) values (28, 338);
-insert into community (postID, listOfUsers) values (29, 64);
-insert into community (postID, listOfUsers) values (30, 295);
-insert into community (postID, listOfUsers) values (31, 35);
-insert into community (postID, listOfUsers) values (32, 147);
-insert into community (postID, listOfUsers) values (33, 280);
-insert into community (postID, listOfUsers) values (34, 137);
-insert into community (postID, listOfUsers) values (35, 267);
-insert into community (postID, listOfUsers) values (36, 355);
-insert into community (postID, listOfUsers) values (37, 184);
-insert into community (postID, listOfUsers) values (38, 71);
-insert into community (postID, listOfUsers) values (39, 234);
-insert into community (postID, listOfUsers) values (40, 359);
-insert into community (postID, listOfUsers) values (41, 62);
-insert into community (postID, listOfUsers) values (42, 64);
-insert into community (postID, listOfUsers) values (43, 94);
-insert into community (postID, listOfUsers) values (44, 219);
-insert into community (postID, listOfUsers) values (45, 359);
-insert into community (postID, listOfUsers) values (46, 278);
-insert into community (postID, listOfUsers) values (47, 171);
-insert into community (postID, listOfUsers) values (48, 64);
-insert into community (postID, listOfUsers) values (49, 64);
-insert into community (postID, listOfUsers) values (50, 230);
-insert into community (postID, listOfUsers) values (51, 317);
-insert into community (postID, listOfUsers) values (52, 97);
-insert into community (postID, listOfUsers) values (53, 104);
-insert into community (postID, listOfUsers) values (54, 51);
-insert into community (postID, listOfUsers) values (55, 367);
+insert into report (reportID, content, adminID, userID) values (1, 'Opponent made an illegal promotion', 8, 10);
+insert into report (reportID, content, adminID, userID) values (2, 'Opponent touched a piece and didn''t move it', 26, 17);
+insert into report (reportID, content, adminID, userID) values (3, 'Opponent made an illegal en passant capture', 7, 14);
+insert into report (reportID, content, adminID, userID) values (4, 'Opponent made an illegal en passant capture', 1, 8);
+insert into report (reportID, content, adminID, userID) values (5, 'Opponent made an illegal en passant capture', 1, 17);
+insert into report (reportID, content, adminID, userID) values (6, 'Opponent made an illegal castle', 32, 18);
+insert into report (reportID, content, adminID, userID) values (7, 'Opponent made an illegal draw offer', 22, 7);
+insert into report (reportID, content, adminID, userID) values (8, 'Opponent made an illegal en passant capture', 30, 27);
+insert into report (reportID, content, adminID, userID) values (9, 'Opponent used illegal move', 31, 22);
+insert into report (reportID, content, adminID, userID) values (10, 'Opponent made an illegal castle', 18, 22);
+insert into report (reportID, content, adminID, userID) values (11, 'Opponent moved a pawn two squares forward on its second move', 1, 3);
+insert into report (reportID, content, adminID, userID) values (12, 'Opponent touched a piece and didn''t move it', 1, 25);
+insert into report (reportID, content, adminID, userID) values (13, 'Opponent moved a pawn two squares forward on its second move', 20, 18);
+insert into report (reportID, content, adminID, userID) values (14, 'Opponent made an illegal draw offer', 12, 14);
+insert into report (reportID, content, adminID, userID) values (15, 'Opponent made an illegal draw offer', 20, 30);
+insert into report (reportID, content, adminID, userID) values (16, 'Opponent moved a pawn two squares forward on its second move', 15, 17);
+insert into report (reportID, content, adminID, userID) values (17, 'Opponent moved a pawn two squares forward on its second move', 1, 16);
+insert into report (reportID, content, adminID, userID) values (18, 'Opponent made an illegal promotion', 30, 22);
+insert into report (reportID, content, adminID, userID) values (19, 'Opponent made an illegal castle', 21, 19);
+insert into report (reportID, content, adminID, userID) values (20, 'Opponent made an illegal castle', 1, 12);
+insert into report (reportID, content, adminID, userID) values (21, 'Opponent moved a piece to an invalid square', 22, 1);
+insert into report (reportID, content, adminID, userID) values (22, 'Opponent made an illegal promotion', 33, 7);
+insert into report (reportID, content, adminID, userID) values (23, 'Opponent made an illegal en passant capture', 3, 12);
+insert into report (reportID, content, adminID, userID) values (24, 'Opponent made an illegal en passant capture', 30, 10);
+insert into report (reportID, content, adminID, userID) values (25, 'Opponent made an illegal promotion', 26, 20);
+insert into report (reportID, content, adminID, userID) values (26, 'Opponent moved a piece to an invalid square', 25, 12);
+insert into report (reportID, content, adminID, userID) values (27, 'Opponent made an illegal checkmate', 21, 10);
+insert into report (reportID, content, adminID, userID) values (28, 'Opponent made an illegal stalemate', 2, 1);
+insert into report (reportID, content, adminID, userID) values (29, 'Opponent touched a piece and didn''t move it', 26, 2);
+insert into report (reportID, content, adminID, userID) values (30, 'Opponent used illegal move', 27, 14);
+insert into report (reportID, content, adminID, userID) values (31, 'Opponent made an illegal en passant capture', 6, 16);
+insert into report (reportID, content, adminID, userID) values (32, 'Opponent made an illegal checkmate', 13, 30);
+insert into report (reportID, content, adminID, userID) values (33, 'Opponent made an illegal checkmate', 25, 16);
+insert into report (reportID, content, adminID, userID) values (34, 'Opponent made an illegal castle', 17, 19);
+insert into report (reportID, content, adminID, userID) values (35, 'Opponent moved a piece to an invalid square', 9, 26);
+insert into report (reportID, content, adminID, userID) values (36, 'Opponent used illegal move', 4, 9);
+insert into report (reportID, content, adminID, userID) values (37, 'Opponent moved a piece to an invalid square', 10, 2);
+insert into report (reportID, content, adminID, userID) values (38, 'Opponent made an illegal en passant capture', 23, 16);
+insert into report (reportID, content, adminID, userID) values (39, 'Opponent moved a piece to an invalid square', 22, 23);
+insert into report (reportID, content, adminID, userID) values (40, 'Opponent moved a pawn two squares forward on its second move', 18, 14);
+insert into report (reportID, content, adminID, userID) values (41, 'Opponent made an illegal en passant capture', 32, 20);
+insert into report (reportID, content, adminID, userID) values (42, 'Opponent made an illegal stalemate', 17, 3);
+insert into report (reportID, content, adminID, userID) values (43, 'Opponent made an illegal checkmate', 16, 29);
+insert into report (reportID, content, adminID, userID) values (44, 'Opponent touched a piece and didn''t move it', 25, 19);
+insert into report (reportID, content, adminID, userID) values (45, 'Opponent made an illegal stalemate', 23, 23);
+insert into report (reportID, content, adminID, userID) values (46, 'Opponent used illegal move', 11, 13);
+insert into report (reportID, content, adminID, userID) values (47, 'Opponent made an illegal promotion', 27, 20);
+insert into report (reportID, content, adminID, userID) values (48, 'Opponent touched a piece and didn''t move it', 19, 21);
+insert into report (reportID, content, adminID, userID) values (49, 'Opponent made an illegal draw offer', 19, 7);
+insert into report (reportID, content, adminID, userID) values (50, 'Opponent moved a piece to an invalid square', 22, 13);
+insert into report (reportID, content, adminID, userID) values (51, 'Opponent made an illegal en passant capture', 8, 17);
+insert into report (reportID, content, adminID, userID) values (52, 'Opponent made an illegal checkmate', 26, 15);
+insert into report (reportID, content, adminID, userID) values (53, 'Opponent made an illegal castle', 10, 19);
+insert into report (reportID, content, adminID, userID) values (54, 'Opponent made an illegal en passant capture', 2, 30);
+insert into report (reportID, content, adminID, userID) values (55, 'Opponent moved a pawn two squares forward on its second move', 14, 8);
+insert into report (reportID, content, adminID, userID) values (56, 'Opponent made an illegal checkmate', 14, 19);
+insert into report (reportID, content, adminID, userID) values (57, 'Opponent made an illegal checkmate', 5, 19);
+insert into report (reportID, content, adminID, userID) values (58, 'Opponent moved a pawn two squares forward on its second move', 1, 13);
+insert into report (reportID, content, adminID, userID) values (59, 'Opponent touched a piece and didn''t move it', 31, 5);
+insert into report (reportID, content, adminID, userID) values (60, 'Opponent made an illegal castle', 23, 2);
+insert into report (reportID, content, adminID, userID) values (61, 'Opponent made an illegal castle', 15, 17);
+insert into report (reportID, content, adminID, userID) values (62, 'Opponent touched a piece and didn''t move it', 26, 30);
+insert into report (reportID, content, adminID, userID) values (63, 'Opponent made an illegal promotion', 11, 21);
+insert into report (reportID, content, adminID, userID) values (64, 'Opponent used illegal move', 23, 12);
+insert into report (reportID, content, adminID, userID) values (65, 'Opponent made an illegal checkmate', 15, 13);
+insert into report (reportID, content, adminID, userID) values (66, 'Opponent made an illegal promotion', 12, 16);
+insert into report (reportID, content, adminID, userID) values (67, 'Opponent made an illegal en passant capture', 33, 21);
+insert into report (reportID, content, adminID, userID) values (68, 'Opponent touched a piece and didn''t move it', 14, 7);
+insert into report (reportID, content, adminID, userID) values (69, 'Opponent moved a piece to an invalid square', 31, 27);
+insert into report (reportID, content, adminID, userID) values (70, 'Opponent moved a piece to an invalid square', 20, 12);
+insert into report (reportID, content, adminID, userID) values (71, 'Opponent moved a pawn two squares forward on its second move', 8, 16);
+insert into report (reportID, content, adminID, userID) values (72, 'Opponent moved a pawn two squares forward on its second move', 26, 5);
+insert into report (reportID, content, adminID, userID) values (73, 'Opponent made an illegal stalemate', 33, 11);
+insert into report (reportID, content, adminID, userID) values (74, 'Opponent made an illegal checkmate', 3, 30);
+insert into report (reportID, content, adminID, userID) values (75, 'Opponent moved a pawn two squares forward on its second move', 28, 30);
+insert into report (reportID, content, adminID, userID) values (76, 'Opponent made an illegal en passant capture', 14, 6);
+insert into report (reportID, content, adminID, userID) values (77, 'Opponent made an illegal checkmate', 20, 9);
+insert into report (reportID, content, adminID, userID) values (78, 'Opponent moved a piece to an invalid square', 5, 10);
+insert into report (reportID, content, adminID, userID) values (79, 'Opponent moved a piece to an invalid square', 16, 12);
+insert into report (reportID, content, adminID, userID) values (80, 'Opponent made an illegal castle', 11, 22);
+insert into report (reportID, content, adminID, userID) values (81, 'Opponent made an illegal draw offer', 12, 3);
+insert into report (reportID, content, adminID, userID) values (82, 'Opponent moved a pawn two squares forward on its second move', 26, 23);
+insert into report (reportID, content, adminID, userID) values (83, 'Opponent made an illegal castle', 30, 20);
+insert into report (reportID, content, adminID, userID) values (84, 'Opponent made an illegal en passant capture', 12, 4);
+insert into report (reportID, content, adminID, userID) values (85, 'Opponent used illegal move', 20, 5);
+insert into report (reportID, content, adminID, userID) values (86, 'Opponent touched a piece and didn''t move it', 32, 11);
+insert into report (reportID, content, adminID, userID) values (87, 'Opponent made an illegal draw offer', 6, 16);
+insert into report (reportID, content, adminID, userID) values (88, 'Opponent made an illegal draw offer', 1, 29);
+insert into report (reportID, content, adminID, userID) values (89, 'Opponent made an illegal checkmate', 11, 16);
+insert into report (reportID, content, adminID, userID) values (90, 'Opponent made an illegal checkmate', 31, 4);
+insert into report (reportID, content, adminID, userID) values (91, 'Opponent moved a piece to an invalid square', 9, 10);
+insert into report (reportID, content, adminID, userID) values (92, 'Opponent made an illegal promotion', 25, 8);
+insert into report (reportID, content, adminID, userID) values (93, 'Opponent moved a pawn two squares forward on its second move', 25, 16);
+insert into report (reportID, content, adminID, userID) values (94, 'Opponent made an illegal promotion', 16, 21);
+insert into report (reportID, content, adminID, userID) values (95, 'Opponent made an illegal castle', 14, 12);
+insert into report (reportID, content, adminID, userID) values (96, 'Opponent moved a pawn two squares forward on its second move', 27, 29);
+insert into report (reportID, content, adminID, userID) values (97, 'Opponent made an illegal draw offer', 7, 14);
+insert into report (reportID, content, adminID, userID) values (98, 'Opponent made an illegal en passant capture', 24, 8);
+insert into report (reportID, content, adminID, userID) values (99, 'Opponent made an illegal en passant capture', 7, 8);
+insert into report (reportID, content, adminID, userID) values (100, 'Opponent moved a pawn two squares forward on its second move', 26, 21);
+insert into report (reportID, content, adminID, userID) values (101, 'Opponent made an illegal promotion', 6, 30);
+insert into report (reportID, content, adminID, userID) values (102, 'Opponent made an illegal castle', 20, 11);
+insert into report (reportID, content, adminID, userID) values (103, 'Opponent made an illegal en passant capture', 29, 6);
+insert into report (reportID, content, adminID, userID) values (104, 'Opponent moved a piece to an invalid square', 28, 20);
+insert into report (reportID, content, adminID, userID) values (105, 'Opponent moved a pawn two squares forward on its second move', 3, 21);
+insert into report (reportID, content, adminID, userID) values (106, 'Opponent moved a pawn two squares forward on its second move', 28, 17);
+insert into report (reportID, content, adminID, userID) values (107, 'Opponent made an illegal en passant capture', 13, 6);
+insert into report (reportID, content, adminID, userID) values (108, 'Opponent made an illegal castle', 12, 10);
+insert into report (reportID, content, adminID, userID) values (109, 'Opponent moved a pawn two squares forward on its second move', 33, 18);
+insert into report (reportID, content, adminID, userID) values (110, 'Opponent moved a pawn two squares forward on its second move', 25, 28);
+insert into report (reportID, content, adminID, userID) values (111, 'Opponent made an illegal castle', 11, 29);
+insert into report (reportID, content, adminID, userID) values (112, 'Opponent used illegal move', 19, 6);
+insert into report (reportID, content, adminID, userID) values (113, 'Opponent made an illegal castle', 6, 20);
+insert into report (reportID, content, adminID, userID) values (114, 'Opponent made an illegal draw offer', 33, 26);
+insert into report (reportID, content, adminID, userID) values (115, 'Opponent made an illegal draw offer', 22, 6);
+insert into report (reportID, content, adminID, userID) values (116, 'Opponent made an illegal checkmate', 20, 23);
+insert into report (reportID, content, adminID, userID) values (117, 'Opponent moved a pawn two squares forward on its second move', 21, 28);
+insert into report (reportID, content, adminID, userID) values (118, 'Opponent moved a piece to an invalid square', 10, 25);
+insert into report (reportID, content, adminID, userID) values (119, 'Opponent used illegal move', 3, 19);
+insert into report (reportID, content, adminID, userID) values (120, 'Opponent moved a pawn two squares forward on its second move', 24, 19);
+insert into report (reportID, content, adminID, userID) values (121, 'Opponent made an illegal promotion', 18, 30);
+insert into report (reportID, content, adminID, userID) values (122, 'Opponent made an illegal stalemate', 4, 23);
+insert into report (reportID, content, adminID, userID) values (123, 'Opponent made an illegal draw offer', 13, 20);
+insert into report (reportID, content, adminID, userID) values (124, 'Opponent touched a piece and didn''t move it', 30, 18);
+insert into report (reportID, content, adminID, userID) values (125, 'Opponent made an illegal checkmate', 29, 7);
+insert into report (reportID, content, adminID, userID) values (126, 'Opponent made an illegal stalemate', 26, 1);
+insert into report (reportID, content, adminID, userID) values (127, 'Opponent made an illegal checkmate', 10, 19);
+insert into report (reportID, content, adminID, userID) values (128, 'Opponent made an illegal castle', 24, 22);
+insert into report (reportID, content, adminID, userID) values (129, 'Opponent made an illegal checkmate', 29, 24);
+insert into report (reportID, content, adminID, userID) values (130, 'Opponent made an illegal stalemate', 14, 20);
+insert into report (reportID, content, adminID, userID) values (131, 'Opponent touched a piece and didn''t move it', 19, 20);
+insert into report (reportID, content, adminID, userID) values (132, 'Opponent made an illegal stalemate', 15, 19);
+insert into report (reportID, content, adminID, userID) values (133, 'Opponent touched a piece and didn''t move it', 19, 18);
+insert into report (reportID, content, adminID, userID) values (134, 'Opponent moved a pawn two squares forward on its second move', 30, 14);
+insert into report (reportID, content, adminID, userID) values (135, 'Opponent made an illegal draw offer', 24, 9);
+insert into report (reportID, content, adminID, userID) values (136, 'Opponent touched a piece and didn''t move it', 11, 14);
+insert into report (reportID, content, adminID, userID) values (137, 'Opponent made an illegal en passant capture', 13, 9);
+insert into report (reportID, content, adminID, userID) values (138, 'Opponent made an illegal en passant capture', 15, 14);
+insert into report (reportID, content, adminID, userID) values (139, 'Opponent touched a piece and didn''t move it', 24, 14);
+insert into report (reportID, content, adminID, userID) values (140, 'Opponent made an illegal castle', 15, 30);
+insert into report (reportID, content, adminID, userID) values (141, 'Opponent made an illegal draw offer', 12, 27);
+insert into report (reportID, content, adminID, userID) values (142, 'Opponent touched a piece and didn''t move it', 32, 4);
+insert into report (reportID, content, adminID, userID) values (143, 'Opponent made an illegal stalemate', 7, 13);
+insert into report (reportID, content, adminID, userID) values (144, 'Opponent made an illegal draw offer', 31, 20);
+insert into report (reportID, content, adminID, userID) values (145, 'Opponent made an illegal en passant capture', 4, 9);
+insert into report (reportID, content, adminID, userID) values (146, 'Opponent moved a pawn two squares forward on its second move', 5, 27);
+insert into report (reportID, content, adminID, userID) values (147, 'Opponent made an illegal en passant capture', 29, 6);
+insert into report (reportID, content, adminID, userID) values (148, 'Opponent moved a piece to an invalid square', 25, 27);
+insert into report (reportID, content, adminID, userID) values (149, 'Opponent touched a piece and didn''t move it', 3, 13);
+insert into report (reportID, content, adminID, userID) values (150, 'Opponent made an illegal en passant capture', 24, 8);
+insert into report (reportID, content, adminID, userID) values (151, 'Opponent moved a pawn two squares forward on its second move', 23, 23);
+insert into report (reportID, content, adminID, userID) values (152, 'Opponent made an illegal en passant capture', 7, 3);
+insert into report (reportID, content, adminID, userID) values (153, 'Opponent made an illegal checkmate', 9, 19);
+insert into report (reportID, content, adminID, userID) values (154, 'Opponent touched a piece and didn''t move it', 18, 29);
+insert into report (reportID, content, adminID, userID) values (155, 'Opponent made an illegal stalemate', 17, 1);
+insert into report (reportID, content, adminID, userID) values (156, 'Opponent made an illegal castle', 16, 21);
+insert into report (reportID, content, adminID, userID) values (157, 'Opponent touched a piece and didn''t move it', 27, 29);
+insert into report (reportID, content, adminID, userID) values (158, 'Opponent moved a pawn two squares forward on its second move', 7, 29);
+insert into report (reportID, content, adminID, userID) values (159, 'Opponent made an illegal checkmate', 13, 19);
+insert into report (reportID, content, adminID, userID) values (160, 'Opponent made an illegal castle', 29, 15);
+insert into report (reportID, content, adminID, userID) values (161, 'Opponent made an illegal castle', 11, 4);
+insert into report (reportID, content, adminID, userID) values (162, 'Opponent made an illegal checkmate', 7, 4);
+insert into report (reportID, content, adminID, userID) values (163, 'Opponent made an illegal castle', 33, 25);
+insert into report (reportID, content, adminID, userID) values (164, 'Opponent used illegal move', 26, 10);
+insert into report (reportID, content, adminID, userID) values (165, 'Opponent made an illegal draw offer', 16, 4);
+insert into report (reportID, content, adminID, userID) values (166, 'Opponent made an illegal checkmate', 22, 23);
+insert into report (reportID, content, adminID, userID) values (167, 'Opponent made an illegal castle', 4, 22);
+insert into report (reportID, content, adminID, userID) values (168, 'Opponent made an illegal draw offer', 21, 29);
+insert into report (reportID, content, adminID, userID) values (169, 'Opponent made an illegal promotion', 29, 23);
+insert into report (reportID, content, adminID, userID) values (170, 'Opponent moved a pawn two squares forward on its second move', 29, 29);
+insert into report (reportID, content, adminID, userID) values (171, 'Opponent made an illegal en passant capture', 30, 3);
+insert into report (reportID, content, adminID, userID) values (172, 'Opponent used illegal move', 12, 21);
+insert into report (reportID, content, adminID, userID) values (173, 'Opponent touched a piece and didn''t move it', 25, 29);
+insert into report (reportID, content, adminID, userID) values (174, 'Opponent used illegal move', 20, 1);
+insert into report (reportID, content, adminID, userID) values (175, 'Opponent moved a piece to an invalid square', 3, 2);
+insert into report (reportID, content, adminID, userID) values (176, 'Opponent moved a piece to an invalid square', 14, 4);
+insert into report (reportID, content, adminID, userID) values (177, 'Opponent made an illegal checkmate', 22, 1);
+insert into report (reportID, content, adminID, userID) values (178, 'Opponent made an illegal castle', 8, 27);
+insert into report (reportID, content, adminID, userID) values (179, 'Opponent moved a piece to an invalid square', 12, 14);
+insert into report (reportID, content, adminID, userID) values (180, 'Opponent made an illegal checkmate', 10, 24);
+insert into report (reportID, content, adminID, userID) values (181, 'Opponent used illegal move', 2, 22);
+insert into report (reportID, content, adminID, userID) values (182, 'Opponent made an illegal en passant capture', 23, 20);
+insert into report (reportID, content, adminID, userID) values (183, 'Opponent made an illegal stalemate', 25, 3);
+insert into report (reportID, content, adminID, userID) values (184, 'Opponent moved a piece to an invalid square', 28, 23);
+insert into report (reportID, content, adminID, userID) values (185, 'Opponent moved a pawn two squares forward on its second move', 9, 26);
+insert into report (reportID, content, adminID, userID) values (186, 'Opponent made an illegal en passant capture', 25, 17);
+insert into report (reportID, content, adminID, userID) values (187, 'Opponent made an illegal en passant capture', 6, 22);
+insert into report (reportID, content, adminID, userID) values (188, 'Opponent moved a piece to an invalid square', 21, 28);
+insert into report (reportID, content, adminID, userID) values (189, 'Opponent moved a piece to an invalid square', 11, 2);
+insert into report (reportID, content, adminID, userID) values (190, 'Opponent made an illegal en passant capture', 31, 2);
+insert into report (reportID, content, adminID, userID) values (191, 'Opponent made an illegal en passant capture', 31, 29);
+insert into report (reportID, content, adminID, userID) values (192, 'Opponent touched a piece and didn''t move it', 28, 2);
+insert into report (reportID, content, adminID, userID) values (193, 'Opponent touched a piece and didn''t move it', 3, 13);
+insert into report (reportID, content, adminID, userID) values (194, 'Opponent made an illegal castle', 10, 6);
+insert into report (reportID, content, adminID, userID) values (195, 'Opponent made an illegal en passant capture', 6, 26);
+insert into report (reportID, content, adminID, userID) values (196, 'Opponent made an illegal castle', 5, 24);
+insert into report (reportID, content, adminID, userID) values (197, 'Opponent made an illegal en passant capture', 5, 27);
+insert into report (reportID, content, adminID, userID) values (198, 'Opponent moved a pawn two squares forward on its second move', 29, 12);
+insert into report (reportID, content, adminID, userID) values (199, 'Opponent made an illegal promotion', 30, 10);
+insert into report (reportID, content, adminID, userID) values (200, 'Opponent made an illegal en passant capture', 21, 18);
 
 -- Tournament table
 CREATE TABLE IF NOT EXISTS tournament (
@@ -990,15 +848,48 @@ insert into tournament (tournamentID) values (7);
 insert into tournament (tournamentID) values (8);
 insert into tournament (tournamentID) values (9);
 insert into tournament (tournamentID) values (10);
+insert into tournament (tournamentID) values (11);
+insert into tournament (tournamentID) values (12);
+insert into tournament (tournamentID) values (13);
+insert into tournament (tournamentID) values (14);
+insert into tournament (tournamentID) values (15);
+insert into tournament (tournamentID) values (16);
+insert into tournament (tournamentID) values (17);
+insert into tournament (tournamentID) values (18);
+insert into tournament (tournamentID) values (19);
+insert into tournament (tournamentID) values (20);
+insert into tournament (tournamentID) values (21);
+insert into tournament (tournamentID) values (22);
+insert into tournament (tournamentID) values (23);
+insert into tournament (tournamentID) values (24);
+insert into tournament (tournamentID) values (25);
+insert into tournament (tournamentID) values (26);
+insert into tournament (tournamentID) values (27);
+insert into tournament (tournamentID) values (28);
+insert into tournament (tournamentID) values (29);
+insert into tournament (tournamentID) values (30);
+insert into tournament (tournamentID) values (31);
+insert into tournament (tournamentID) values (32);
+insert into tournament (tournamentID) values (33);
+insert into tournament (tournamentID) values (34);
+insert into tournament (tournamentID) values (35);
+insert into tournament (tournamentID) values (36);
+insert into tournament (tournamentID) values (37);
+insert into tournament (tournamentID) values (38);
+insert into tournament (tournamentID) values (39);
+insert into tournament (tournamentID) values (40);
+insert into tournament (tournamentID) values (41);
+insert into tournament (tournamentID) values (42);
+insert into tournament (tournamentID) values (43);
 
 -- SingularGame table
 CREATE TABLE IF NOT EXISTS singularGame (
     gameID INTEGER NOT NULL AUTO_INCREMENT,
-    moves TEXT NOT NULL, # string of all moves in a game
-    professional BOOLEAN DEFAULT 0,
-    winnerID INTEGER,
-    loserID INTEGER,
-    draw BOOLEAN,
+    moves TEXT, # string of all moves in a game
+    winner TEXT,
+    loser TEXT,
+    draw INTEGER DEFAULT 0,
+    professional INTEGER DEFAULT 0,
     whiteUName VARCHAR(100) NOT NULL,
     blackUName VARCHAR(100) NOT NULL,
     spectators INTEGER DEFAULT 0,
@@ -1011,108 +902,64 @@ CREATE TABLE IF NOT EXISTS singularGame (
                                         ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (1, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 287, 196, 0, 'rshowering57', 'etimmes5a', 373, 13, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (2, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 11, 179, 0, 'rshowering57', 'etimmes5a', 338, 36, 3);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (3, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 188, 86, 0, 'rshowering57', 'etimmes5a', 136, 40, 10);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (4, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 204, 309, 0, 'rshowering57', 'etimmes5a', 120, 9, 7);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (5, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 210, 195, 0, 'rshowering57', 'etimmes5a', 97, 40, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (6, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 85, 73, 0, 'rshowering57', 'etimmes5a', 91, 11, 3);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (7, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 102, 120, 0, 'rshowering57', 'etimmes5a', 312, 29, 8);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (8, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 288, 368, 0, 'rshowering57', 'etimmes5a', 265, 44, 7);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (9, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 290, 10, 0, 'rshowering57', 'etimmes5a', 108, 40, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (10, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 14, 151, 0, 'rshowering57', 'etimmes5a', 262, 30, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (11, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 175, 163, 0, 'rshowering57', 'etimmes5a', 226, 16, 4);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (12, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 119, 126, 0, 'rshowering57', 'etimmes5a', 147, 18, 4);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (13, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 284, 292, 0, 'rshowering57', 'etimmes5a', 218, 29, 9);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (14, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 308, 162, 0, 'rshowering57', 'etimmes5a', 331, 28, 1);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (15, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 18, 141, 0, 'rshowering57', 'etimmes5a', 12, 4, 10);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (16, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 129, 137, 0, 'rshowering57', 'etimmes5a', 241, 30, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (17, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 370, 185, 0, 'rshowering57', 'etimmes5a', 21, 9, 4);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (18, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 222, 354, 0, 'rshowering57', 'etimmes5a', 148, 28, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (19, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 146, 11, 0, 'rshowering57', 'etimmes5a', 99, 40, 3);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (20, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 110, 191, 0, 'rshowering57', 'etimmes5a', 205, 11, 3);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (21, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 173, 348, 0, 'rshowering57', 'etimmes5a', 338, 43, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (22, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 84, 12, 0, 'rshowering57', 'etimmes5a', 274, 28, 3);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (23, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 99, 282, 0, 'rshowering57', 'etimmes5a', 86, 23, 4);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (24, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 75, 316, 0, 'rshowering57', 'etimmes5a', 275, 44, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (25, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 326, 24, 0, 'rshowering57', 'etimmes5a', 182, 33, 10);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (26, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 298, 201, 0, 'rshowering57', 'etimmes5a', 246, 15, 8);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (27, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 152, 4, 0, 'rshowering57', 'etimmes5a', 69, 27, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (28, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 100, 252, 0, 'rshowering57', 'etimmes5a', 73, 37, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (29, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 298, 101, 0, 'rshowering57', 'etimmes5a', 147, 18, 9);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (30, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 4, 336, 0, 'rshowering57', 'etimmes5a', 258, 19, 9);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (31, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 89, 341, 0, 'rshowering57', 'etimmes5a', 223, 12, 6);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (32, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 235, 315, 0, 'rshowering57', 'etimmes5a', 112, 13, 6);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (33, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 317, 184, 0, 'rshowering57', 'etimmes5a', 12, 20, 3);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (34, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 120, 19, 0, 'rshowering57', 'etimmes5a', 13, 21, 9);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (35, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 298, 157, 0, 'rshowering57', 'etimmes5a', 55, 35, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (36, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 169, 232, 0, 'rshowering57', 'etimmes5a', 37, 33, 9);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (37, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 317, 218, 0, 'rshowering57', 'etimmes5a', 232, 29, 3);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (38, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 234, 308, 0, 'rshowering57', 'etimmes5a', 259, 30, 6);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (39, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 45, 210, 0, 'rshowering57', 'etimmes5a', 375, 3, 8);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (40, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 68, 277, 0, 'rshowering57', 'etimmes5a', 113, 10, 4);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (41, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 133, 3, 0, 'rshowering57', 'etimmes5a', 151, 33, 10);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (42, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 218, 81, 0, 'rshowering57', 'etimmes5a', 128, 12, 10);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (43, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 144, 309, 0, 'rshowering57', 'etimmes5a', 267, 22, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (44, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 262, 207, 0, 'rshowering57', 'etimmes5a', 62, 20, 1);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (45, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 31, 365, 0, 'rshowering57', 'etimmes5a', 69, 30, 7);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (46, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 304, 313, 0, 'rshowering57', 'etimmes5a', 15, 17, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (47, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 271, 280, 0, 'rshowering57', 'etimmes5a', 20, 7, 4);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (48, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 350, 345, 0, 'rshowering57', 'etimmes5a', 216, 40, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (49, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 274, 231, 0, 'rshowering57', 'etimmes5a', 205, 8, 7);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (50, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 198, 133, 0, 'rshowering57', 'etimmes5a', 225, 42, 9);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (51, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 114, 314, 0, 'rshowering57', 'etimmes5a', 296, 13, 8);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (52, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 112, 221, 0, 'rshowering57', 'etimmes5a', 44, 31, 6);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (53, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 56, 81, 0, 'rshowering57', 'etimmes5a', 56, 12, 7);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (54, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 82, 273, 0, 'rshowering57', 'etimmes5a', 304, 18, 3);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (55, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 260, 213, 0, 'rshowering57', 'etimmes5a', 193, 32, 1);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (56, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 133, 372, 0, 'rshowering57', 'etimmes5a', 315, 36, 4);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (57, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 114, 128, 0, 'rshowering57', 'etimmes5a', 191, 40, 6);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (58, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 33, 169, 0, 'rshowering57', 'etimmes5a', 356, 10, 9);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (59, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 177, 373, 0, 'rshowering57', 'etimmes5a', 109, 9, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (60, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 255, 367, 0, 'rshowering57', 'etimmes5a', 297, 23, 7);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (61, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 350, 128, 0, 'rshowering57', 'etimmes5a', 195, 26, 1);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (62, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 38, 170, 0, 'rshowering57', 'etimmes5a', 168, 28, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (63, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 368, 270, 0, 'rshowering57', 'etimmes5a', 67, 35, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (64, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 27, 54, 0, 'rshowering57', 'etimmes5a', 308, 20, 6);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (65, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 48, 247, 0, 'rshowering57', 'etimmes5a', 229, 40, 6);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (66, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 142, 6, 0, 'rshowering57', 'etimmes5a', 187, 22, 1);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (67, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 134, 30, 0, 'rshowering57', 'etimmes5a', 162, 26, 9);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (68, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 187, 377, 0, 'rshowering57', 'etimmes5a', 323, 39, 1);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (69, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 96, 303, 0, 'rshowering57', 'etimmes5a', 81, 40, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (70, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 88, 259, 0, 'rshowering57', 'etimmes5a', 349, 18, 7);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (71, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 349, 36, 0, 'rshowering57', 'etimmes5a', 223, 31, 10);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (72, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 372, 50, 0, 'rshowering57', 'etimmes5a', 268, 30, 8);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (73, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 21, 36, 0, 'rshowering57', 'etimmes5a', 10, 40, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (74, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 186, 234, 0, 'rshowering57', 'etimmes5a', 303, 32, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (75, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 339, 20, 0, 'rshowering57', 'etimmes5a', 111, 40, 8);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (76, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 289, 211, 0, 'rshowering57', 'etimmes5a', 306, 12, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (77, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 223, 332, 0, 'rshowering57', 'etimmes5a', 131, 18, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (78, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 87, 112, 0, 'rshowering57', 'etimmes5a', 268, 17, 8);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (79, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 232, 20, 0, 'rshowering57', 'etimmes5a', 22, 31, 3);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (80, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 248, 349, 0, 'rshowering57', 'etimmes5a', 7, 34, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (81, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 185, 92, 0, 'rshowering57', 'etimmes5a', 344, 13, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (82, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 13, 377, 0, 'rshowering57', 'etimmes5a', 254, 34, 1);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (83, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 81, 29, 0, 'rshowering57', 'etimmes5a', 52, 42, 7);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (84, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 224, 10, 0, 'rshowering57', 'etimmes5a', 166, 32, 8);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (85, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 345, 267, 0, 'rshowering57', 'etimmes5a', 198, 36, 6);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (86, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 219, 41, 0, 'rshowering57', 'etimmes5a', 112, 18, 9);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (87, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 154, 376, 0, 'rshowering57', 'etimmes5a', 315, 27, 4);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (88, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 355, 325, 0, 'rshowering57', 'etimmes5a', 193, 10, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (89, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 137, 36, 0, 'rshowering57', 'etimmes5a', 232, 16, 8);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (90, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 90, 302, 0, 'rshowering57', 'etimmes5a', 76, 4, 10);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (91, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 256, 160, 0, 'rshowering57', 'etimmes5a', 316, 16, 10);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (92, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 231, 196, 0, 'rshowering57', 'etimmes5a', 197, 44, 8);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (93, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 164, 147, 0, 'rshowering57', 'etimmes5a', 263, 11, 1);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (94, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 328, 6, 0, 'rshowering57', 'etimmes5a', 62, 33, 5);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (95, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 297, 310, 0, 'rshowering57', 'etimmes5a', 110, 5, 2);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (96, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 30, 294, 0, 'rshowering57', 'etimmes5a', 132, 18, 6);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (97, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', true, 275, 83, 0, 'rshowering57', 'etimmes5a', 213, 16, 3);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (98, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 135, 374, 0, 'rshowering57', 'etimmes5a', 167, 40, 10);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (99, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 277, 374, 0, 'rshowering57', 'etimmes5a', 339, 30, 8);
-insert into singularGame (gameID, moves, professional, winnerID, loserID, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (100, 'Nf3 Nf6 d4 d6 g3 g6 Bg2 Bg7 O-O O-O c4 Ne4 Nc3 Nxc3 bxc3 Nc6 e4 e5 Be3 Re8 c5 dxc5 d5 Na5 Bxc5 b6 Ba3 Nc4 Bc1 c6 dxc6 Qc7 Qa4 Nd6 Rd1 Be6 Ba3 Nc4 Ng5 Nxa3 Nxe6 Rxe6 Qxa3 Rxc6 Rd3 Rc8 Rad1 Bf8 Qb3 Rxc3 Qa4 Rxd3 Rxd3 Qc6 Qxa7 Bc5 Rf3 Rc7 Qb8+ Kg7 Qd8 Bd4 h4 Rd7 Qe8 Qe6 Qxe6 fxe6 Bh3 Rf7 Kg2 Rxf3 Kxf3 Kf6 Bg4 h6 Bh3 g5 hxg5+ hxg5 Bf1 Ke7 Bc4 Kf6 Bb3 Ke7 Kg2 Kf6 f3 Ke7 Kh3 Kf6 Kg4 Bf2 Bc2 Be1 Bd3 Bf2 Be2 Be1 Bc4 Bf2 Bb3 Be1 Kh3 Bf2 Kg2 Be1 Kf1 Bc3 Kf2 Bd4+ Ke2 Bc5 Kf1 Bd4 Kg2 Be3 Kh3 Bd4 Kg4 Bc5 f4 gxf4 gxf4 exf4 Kxf4 e5+ Kf3 Bd4 Bd5 Ke7 Ke2 Kd6 Kd3 Bc5 Kc4 Bd4 Kb5 Bc5 Ka6 Bd4 Kb7 Bc5 a4 Bd4 Ka6 Bc5 Kb5 Bd4 Kc4 Bc5 Kb3 Bd4 Kc4 Bc5 Kb5 Bd4 Ka6 Bc5 Kb7 Bd4 Kc8 Kc5 Kb7 Kb4 Bc6 Ka5 Kc7 Bc3 Bb5 Bd4 Kc6 Bc3 Kd5 Bd4 Kc4 Ba1 Kd3 Bd4 Kc2 Bc5 Kb3 Bd4 Kc4 Bc5 Kd5 Bd4 Ke6 Bc5 Kf5 Bd4 Kg4 Bc3 Kf3 Bd4 Ke2 Bc3 Kf1 Bd4 Kg2 Kb4 Kh3 Ka5 Kg4 Kb4 Kf5 Ka5 Ke6', false, 207, 224, 0, 'rshowering57', 'etimmes5a', 272, 1, 3);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (1, 'e3 Nf6 d4 g6 c4 Bg7 Nf3 O-O Be2 d6 h3 Nbd7 O-O b6 b3 Bb7 Bb2 Ne4 Nbd2 Ndf6 Qc2 a5 Nxe4 Nxe4 Nd2 Nxd2 Qxd2 a4 d5 axb3 axb3 Qd7 Bxg7 Kxg7 Bg4 f5 Bf3 Kg8 Qd4 Rfd8 Rfe1 Qe8 e4 fxe4 Bxe4 Qf7 Bf3 Re8 Bg4 Qf6 Be6+ Kg7 Qxf6+ exf6 f4 f5 g4 Kf6 Kf2 h6 Kg3 fxg4 hxg4 Ra5 Rxa5 bxa5 Ra1 Ra8 f5 gxf5 gxf5 Ra6 Kf4 Rb6 Ra3 c6 dxc6 Bxc6 Rxa5 Rxb3 Ra6 Rf3+ Kg4 Be4 Rxd6 Ke5 Rd8 Rf1 Re8 Kf6 Rf8+ Ke5 Rh8 Rg1+ Kh3 Bxf5+ Bxf5 Kxf5 Kh2 Rc1 Rxh6 Rxc4 Rh5+ Kg4 Rd5 Rc2+ Kg1 Rc3 Rd2 Kg3 Rd3+ Rxd3', 'TheGreenCloud', 'LastGladiator2', 0, 1, 'LastGladiator2', 'TheGreenCloud', 7306, 18, 41);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (2, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Bd3 O-O O-O Nc6 Bg5 h6 Bf4 Nxd4 Nxd4 e5 Bxe5 dxe5 Nf3 Qe7 Nd5 Nxd5 exd5 e4 Re1 f5 Bc4 Kh7 c3 Qc5 Nd2 b5 Bb3 Bb7 Nf1 Rad8 Ne3 f4 Ng4 h5 Rxe4 hxg4 Qxg4 Bxd5 Rxf4 Bxb3 axb3 Rxf4 Qxf4 Rf8 Qh4+ Kg8 h3 Bf6 Qg3 Kg7 b4 Qb6 Rd1 Rf7 h4 Kh7 Rd2 Qe6 Kf1 Qc4+ Kg1 Qxh4 Qd3 Qh5 Qe3 Bg5 Qe6 Re7 Rd7 Qh4 Rxe7+ Bxe7 Qa6 Bd6 Qxb5 Qh2+ Kf1 Qh1+ Ke2 Qxg2 c4 Qe4+ Kd2 Bf4+ Kc3 Qe5+ Kb3 Qxb5 cxb5', 'fireheart92', 'igormezentsev', 0, 1, 'igormezentsev', 'fireheart92', 6532, 36, 2);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (3, 'Nf3 Nc6 g3 e5 d3 Bc5 Bg2 d6 Nc3 Bg4 h3 Bh5 a3 f5 Na4 Bb6 Nxb6 axb6 c4 Nge7 Qb3 Bf7 Ng5 O-O Nxf7 Rxf7 Bg5 Qd7 Bxe7 Nxe7 Bxb7 Rb8 Bd5 Nxd5 cxd5 f4 g4 Qe7 O-O-O Qh4 Rh2 Rf6 Kb1 Rbf8 Qc4 R8f7 Qc6 h6 Rc1 Kh7 Qb7 Rg6 Rxc7 Rxc7 Qxc7 Rxg4 hxg4 Qxh2 Qxd6 Qg1+ Ka2 Qxf2 Qxe5 Qc5 Qe4+ Kh8 Qe8+ Kh7 Qc6 Qe3 d6 Qxe2 d7 Qxd3 Qe6', 'TheGreenCloud', 'Josip_buje', 0, 1, 'TheGreenCloud', 'Josip_buje', 1143, 24, 10);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (4, 'e4 d6 Nc3 Nf6 Nf3 g6 d4 Bg7 Bd3 O-O Be3 a6 Qd2 b5 h4 h5 a3 Bb7 O-O-O Nbd7 d5 c6 dxc6 Bxc6 Bg5 Rc8 Be2 Nxe4 Nxe4 Bxe4 Qe3 Rxc2+', 'Mishka_The_Great', 'athena-pallada', 0, 1, 'Mishka_The_Great', 'athena-pallada', 1913, 39, 13);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (5, 'Nf3 e6 d3 d5 g3 h5 h4 Be7 Bg2 Nf6 Bg5 Nfd7 Bxe7 Qxe7 c3 e5 Qc2 Nf6 Nbd2 Ng4 e4 dxe4 Nxe4 Nc6 O-O-O a5 Rhe1 Be6 a4 Rb8 Nfg5 b5 Nxe6 fxe6 axb5 Rxb5 Qa4 O-O Qxb5 Nxf2 Nxf2 Rxf2 Bxc6 Qf6 Qxe5 Qf7 Qxe6 Qxe6 Rxe6 Rf3 Bxf3', 'Mishka_The_Great', 'Lord-Universe31', 0, 1, 'Lord-Universe31', 'Mishka_The_Great', 3094, 14, 29);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (6, 'b3 Nf6 Bb2 g6 Nc3 Bg7 h4 h5 e3 d5 Be2 c6 Nh3 Bxh3 Rxh3 Nbd7 d4 Qc7 Qd2 O-O O-O-O a5 f3 b5 g4 a4 g5 Ne8 f4 axb3 axb3 b4 Na4 Nd6 Bf3 Rfb8 Nc5 Nxc5 dxc5 Bxb2+ Kxb2 Nb5 Rhh1 Nc3 Ra1 e5 f5 e4 Be2 Qe5 Qd4 Qxd4 exd4 Nxe2 Rh2 Nxd4 Rf2 e3 Rff1 Nxf5', 'Chesssknock', 'may6enexttime', 0, 1, 'may6enexttime', 'Chesssknock', 3280, 40, 1);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (7, 'Nf3 e6 d3 a6 g3 b5 Bg2 d5 O-O Nd7 c4 Rb8 cxd5 exd5 Nd4 Nb6 Nc6 Qd6 Nxb8 c5 Nxa6 Bxa6 e4 d4 e5 Qe6 Qb3 Qxb3 axb3 Bb7 Bxb7 Kd7 Bf4 Ne7 Ra7 Ke6 Nd2 Ned5 Bxd5+ Nxd5 Ne4 Nxf4 gxf4 Kf5 Rxf7+ Kg6 e6 c4 bxc4 bxc4 dxc4 Bb4 Kh1 Re8 Rg1+ Kh6 f5 g6 Rg3 gxf5 Rf6+ Kh5 Rg5+ Kh4 Rh6#', 'rehbwf', 'chessmaster2006', 0, 1, 'chessmaster2006', 'rehbwf', 6892, 17, 3);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (8, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Bd3 O-O h3 Nc6 Be3 a6 Qd2 e5 d5 Ne7 Bh6 c6 Bxg7 Kxg7 O-O cxd5 exd5 b5 b4 Bb7 a4 bxa4 Rxa4 Nexd5 Nxd5 Bxd5 Nh2 Qc8 Rfa1 Bb7 Qe2 Nd5 c4 Nc3 Qc2 Nxa4 Rxa4 Qc6 Ra5 Qxg2#', 'Azumilover', 'Ch5ssPlayer', 0, 1, 'Azumilover', 'Ch5ssPlayer', 8715, 38, 24);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (9, 'Nf3 g6 g3 Bg7 Bg2 d6 O-O e5 c4 Ne7 Nc3 O-O d3 Nbc6 Rb1 h6 a3 Kh7 b4 f5 Qc2 Nd4 Nxd4 exd4 Nd5 c6 Nxe7 Qxe7 e3 Bd7 exd4 Bxd4 Bb2 Bxb2 Qxb2 f4 Rfe1 Qf7 Re4 f3 Bf1 Rae8 Rbe1 Bf5 R4e3 Rxe3 Rxe3 Bg4 Qd4 h5 Qxd6 Qf5 Re7+ Rf7 h3 Rxe7 Qxe7+ Kh6 hxg4 hxg4 Qe3+ Kg7 Qxa7 Qf7 Qd4+', 'may6enexttime', 'kc6', 0, 1, 'kc6', 'may6enexttime', 294, 31, 2);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (10, 'e4 d6 Nf3 Nf6 Nc3 g6 d4 Bg7 e5 Nfd7 e6 fxe6 Ng5 Nf6 Qe2 Nc6 Nxe6 Bxe6 Qxe6 Nxd4 Qc4 Nxc2+ Kd1 Nxa1 Qb5+ Qd7 Qxb7 O-O Bc4+ Kh8 Re1 e5 Nd5 Qg4+ Be2 Qd4+ Bd2 Nxd5 Bf3 Nf4 Kc1 Nd3+ Kb1 Nxe1 Bxe1 Rab8 Bc3 Qd3+', 'Tuzakli_Egitim', 'rehbwf', 0, 1, 'rehbwf', 'Tuzakli_Egitim', 8358, 24, 8);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (11, 'e4 d6 d4 Nf6 Bd3 e5 dxe5 dxe5 Nf3 Bc5 O-O Nbd7 h3 O-O Nc3 c6 Re1 Qc7 Be3 Bxe3 Rxe3 Nc5 Bf1 h6 b4 Ne6 Ne2 Rd8 Qc1 Nd4 Nexd4 exd4 Re1 Be6 Bd3 b6 a4 c5 bxc5 bxc5 e5 Nd5 Be4 Rab8 Rb1 Nc3 Rxb8 Rxb8 Nd2 Nxa4 Qa3 Nc3 f4 Bd5 Bxd5 Nxd5 Ne4 Nxf4 Qxc5 Qxc5 Nxc5 Rb2 e6 Nxe6 Nxe6 fxe6 Rxe6 Rxc2 Ra6 d3 Kf1 Rc1+', 'Ch5ssPlayer', 'Azumilover', 0, 1, 'Azumilover', 'Ch5ssPlayer', 119, 14, 28);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (12, 'Nf3 d6 g3 Nf6 Bg2 g6 O-O Bg7 c4 O-O Nc3 e5 d3 Re8 Rb1 c6 e4 d5 cxd5 cxd5 Re1 dxe4 dxe4 Qxd1 Rxd1 Nc6 Bg5 Bg4 h3 Bxf3 Bxf3 Rad8 Nd5 Rd6 Nxf6+ Bxf6 Rxd6 Bxg5 Rd7 Nd4 Kg2 Re7 Rxe7 Bxe7 h4 Kf8 Rc1 Bd6 Rc8+ Ke7 Rh8 h5 g4 hxg4 Bxg4 Kf6 Ra8 a6 Bc8 Be7 Bxb7 Kg7 Bd5 Bxh4 Ra7 Kh6 Rxf7 a5 Ra7 Bd8 Ra8 Bb6 Ra6 Bc7 Bf7 Kg5 Rxg6+ Kf4 f3 Ke3 Ra6 Nxf3 Rc6 Bd8 Rc3+ Kxe4 Rxf3 a4 Bg6+ Kd4 Rd3+ Kc5 Rxd8 e4 Bxe4 a3 b3 Kb4 Rc8 Ka5 Rb8 Ka6 Rb7 Ka5 Kf3 Ka6 Ke3 Ka5 Kd4 Ka6 Kc5 Ka5 Ra7#', 'may6enexttime', 'kc6', 0, 1, 'kc6', 'may6enexttime', 5466, 42, 29);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (13, 'e4 d6 d4 Nf6 Nc3 g6 Be3 a6 f3 b5 Qd2 Nbd7 Bh6 c5 dxc5 Nxc5 O-O-O Bb7 Kb1 Qc7 h4 Rc8 Bxf8 Rxf8 h5 Nxh5 Nge2 Nf6 g4 h5 gxh5 Nxh5 Bh3 e6 Nd5 Bxd5 exd5 Rd8 b4 Na4 dxe6 Qe7 exf7+ Rxf7 Nd4 Kf8 Nc6 Qf6 Nd4 Nf4 Bf1 Rc8 c4 bxc4 Qc2 Nb6 a3 c3 Bd3 Nxd3 Rxd3 Nd5 Re1 Nf4 Rdd1 Kg7 Rg1 Re8 Rdf1 Qxd4 Rg5 Qd2 Rfg1 Qxc2+ Kxc2 Re6 R5g4 Ne2 Kb3 Nxg1 Kxc3 Rxf3+', 'ARM__55555', 'toomanymanoevres', 0, 1, 'ARM__55555', 'toomanymanoevres', 3303, 27, 10);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (14, 'Nf3 d5 g3 c5 Bg2 Nc6 d4 cxd4 Nxd4 e6 O-O Nf6 c4 Bc5 Nb3 Bb4 a3 Be7 cxd5 exd5 Nc3 Be6 Bg5 d4 Nb5 Bxb3 Qxb3 a6 Bxc6+ bxc6 Nxd4 Qxd4 Rfd1 Qe5 Bf4 Qe6 Qb7 O-O Rac1 Rab8 Bxb8 Ne4 Bf4 Bg5 Qxc6 Qf5 Qd5 Qg6 Bxg5 Nxg5 h4 Ne6 Qd3 Qf6 Qxa6 Qxb2 Rc8 g6 Rxf8+ Kxf8 Qd6+ Kg7 Qd3 Qe5 a4 Qa5 Ra1 Nc5 Qb5 Qc3 Rb1 Ne4 Qb2 Kf6 Qxc3+ Nxc3 Rb6+ Ke5 a5 Kd5 a6 Na4 Rf6 Ke5 Rxf7 Nb6 a7 h5 Rb7 Na8 Rb8 Nc7 Rc8 Na8 Rxa8 g5 Re8+ Kd4 a8=Q g4 Qe4+ Kc3 Qd3+ Kb4 Rb8+ Kc5 Rc8+ Kb6 Qb1+ Ka7 Rc2 Ka6 Ra2#', 'VincentKeymer2004', 'Apodex64', 0, 1, 'Apodex64', 'VincentKeymer2004', 2663, 27, 34);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (15, 'd4 Nf6 Nf3 g6 g3 Bg7 Bg2 O-O O-O d6 b3 c6 Bb2 Bf5 c4 a5 Nc3 Ne4 e3 Nxc3 Bxc3 Be4 Nd2 Bxg2 Kxg2 Nd7 Qc2 e5 Rad1 Qc7 Nf3 Rfe8 dxe5 dxe5 e4 Nc5 Rd2 Bh6 Rdd1 b6 a3 f6 b4 axb4 axb4 Ne6 Rd3 c5 Rfd1 Nd4 Bxd4 exd4 bxc5 bxc5 Rb3 Qc6 Rdb1 Qxe4 Qxe4 Rxe4 Rb5 Bf8 Rb7 Re2 R1b2 Ra2 Rxe2 Rxe2 Kf1 Rc2 Rc7 Rxc4 Ne1 Rc1 Ke2 Ra1 Nd3 Ra2+ Kf3 Ra3 Ke2 Rc3 Nf4 Bd6 Rc8+ Kf7 Nd5 Rc2+ Kd3 Rxf2 Rc6 Ke6 Nf4+ Kd7 Ra6 Bxf4 gxf4 Rxf4 Kc4 Rf5 Ra7+ Kd6 Rxh7 Rh5 Rg7 Rxh2 Rxg6 Rf2 Rg8 Rc2+ Kd3 Rc3+ Kd2 Kd5 Rd8+ Kc4 Rf8 Rf3 Rf7 Rf2+ Ke1 Rf5', 'fireheart92', 'igormezentsev', 0, 1, 'igormezentsev', 'fireheart92', 6923, 31, 19);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (16, 'Nf3 Nf6 g3 g6 Bg2 Bg7 O-O d6 c4 Nbd7 Nc3 O-O d3 Re8 Rb1 e5 e4 Nb6 b4 a6 a4 Be6 a5 Nbd7 Ng5 c5 Nxe6 Rxe6 Nd5 Re8 Bg5 Qc8 Bh3 Qb8 bxc5 Nxd5 Bxd7', 'muisback', 'Apodex64', 0, 1, 'muisback', 'Apodex64', 1100, 8, 15);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (17, 'Nf3 Nf6 g3 g6 Bg2 Bg7 O-O d6 c4 O-O Nc3 Nc6 d3 e5 Rb1 Be6 b4 Qd7 b5 Ne7 Ng5 h5 Nxe6 Qxe6 Bxb7 Rac8 Bxc8 Rxc8 e4 h4 Nd5 Ng4 Nxe7+ Qxe7 Qxg4', 'muisback', 'Apodex64', 0, 1, 'muisback', 'Apodex64', 7831, 37, 30);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (18, 'b3 Nf6 Bb2 g6 e3 Bg7 f4 O-O Nf3 d6 Be2 Nbd7 O-O b6 h3 Bb7 c4 Ne4 Bxg7 Kxg7 d4 Ng3 Rf2 Nxe2+ Rxe2 Bxf3 gxf3 e5 fxe5 dxe5 Nc3 Qh4 Qe1 Qxh3 Rf2 exd4 exd4 Rae8 Qd2 Nf6 Re1 Rxe1+ Qxe1 Re8 Ne4 Nxe4 fxe4 Qg4+ Rg2 Qxe4 Qxe4 Rxe4 d5 h5 Rd2 Re7 d6 cxd6 Rxd6 Re2 a4 Re3 b4 Ra3 c5 bxc5 bxc5 Rxa4 c6 Rc4 Kf2 h4 Ke3 h3 Kd3 Rc1 Kd2 h2 Kxc1 h1=Q+ Kd2 Qh2+ Kd3 Qxd6+', 'fireheart92', 'ChessTheory64', 0, 1, 'fireheart92', 'ChessTheory64', 7353, 15, 4);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (19, 'Nf3 d5 g3 g6 Bg2 Bg7 O-O e6 d3 Ne7 Nbd2 O-O e4 dxe4 dxe4 f5 c3 fxe4 Nxe4 Nbc6 Qe2 Ne5 Nxe5 Bxe5 Ng5 Bg7 Nxe6 Bxe6 Qxe6+ Kh8 Bxb7 Rb8 Bg2 Nf5 Bf4 Rxb2 Rad1 Qf6 Qxf6 Bxf6 Bxc7 Rxa2 c4 Nd4 Bd5 Ne2+ Kg2 Kg7 Bd6 Rd8 c5 Ra4 Rd3 h5 Rb1 h4 Rb7+ Kh6 Bf3 hxg3 Bxe2 gxh2 Kxh2 Rh4+ Kg3 Re8 Re3 Rd8 Bf4+ Bg5 Bxg5+ Kxg5 Re5+ Kf6 Kxh4 Kxe5 Rxa7 Rd4+ Kg3 Kd5 Rd7+ Kxc5 Rxd4 Kxd4 Kf4 Kd5 Kg5 Ke6 Kxg6 Ke5 Kg5 Ke4 Kg4 Ke5 f4+ Kf6 f5 Kf7 Kg5 Kf8 f6 Kf7 Kf5 Kf8 Kg6 Kg8 f7+ Kf8 Bf1 Ke7 Kg7 Kd8 f8=Q+ Kd7 Qf6 Kc8 Qe7 Kb8 Ba6 Ka8 Qb7#', 'Ch5ssPlayer', 'Azumilover', 0, 1, 'Azumilover', 'Ch5ssPlayer', 2129, 10, 35);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (20, 'd4 Nf6 Nf3 g6 g3 Bg7 Bg2 O-O O-O d6 c4 c6 Nc3 Bf5 Ne1 e5 dxe5 dxe5 Qxd8 Rxd8 Bg5 h6 Bxf6 Bxf6 Ne4 Bg7 Nd3 Na6 Rfd1 Rd4 b3 Bxe4', 'nihalsarin2004', 'Lord-Universe31', 0, 1, 'nihalsarin2004', 'Lord-Universe31', 1147, 25, 39);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (21, 'Nf3 g6 g3 Bg7 Bg2 Nf6 O-O O-O c4 c5 Nc3 Nc6 d4 cxd4 Nxd4 Nxd4 Qxd4 d6 Qd3 Rb8 b3 a6 a4 Nd7 Bb2 Nc5 Qc2 Bf5 e4 Be6 h3 Qd7 Kh2 b5 axb5 axb5 Nxb5 Bxb2 Qxb2 Nd3 Qc3 Nc5 b4 Nb7 Nd4 f6 Nxe6 Qxe6 Ra7 Nd8 c5 Nc6 Ra4 dxc5 bxc5 Ne5 f4 Nc6 Ra6 Qd7 e5 fxe5 Rxc6 exf4 Rxf4 Rxf4 gxf4 Rf8 Qc4+ Kh8 Re6', 'Mishka_The_Great', 'athena-pallada', 0, 1, 'Mishka_The_Great', 'athena-pallada', 2428, 26, 7);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (22, 'Nc3 Nf6 d4 g6 e4 d6 f3 a6 Be3 b5 Qd2 Nbd7 Bd3 Bb7 h4 h5 Nh3 c5 b3 cxd4 Bxd4 Rc8 Nd5 Bg7 Nxf6+ Nxf6 c4 bxc4 Bxc4 O-O Nf4 e5 Nxh5 Nxh5 g4 Nf4 Be3 d5 exd5 Bxd5 Bxd5 Nxd5 Bh6 Nf4', 'rehbwf', 'Tuzakli_Egitim', 0, 1, 'rehbwf', 'Tuzakli_Egitim', 352, 6, 39);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (23, 'e4 d6 d4 Nf6 Nc3 g6 Bf4 a6 Qd2 b5 O-O-O b4 Nb1 Nxe4 Qxb4 Bg7 Be3 Nc6 Nf3 Nxb4', 'Ragehunter', 'ChessTheory64', 0, 1, 'ChessTheory64', 'Ragehunter', 1672, 5, 29);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (24, 'Nf3 Nf6 g3 g6 Bg2 Bg7 O-O O-O c4 d6 Nc3 c6 d3 Qa5 e4 Qh5 Ng5 Qxd1 Rxd1 e5 h3 Na6 Be3 Re8 a3 h6 Nf3 Be6 b4 Nc7 a4 d5 cxd5 cxd5 Nxe5 Nxe4 dxe4 Bxe5 exd5 Bxc3 Rac1 Nxd5 Bxd5 Bxd5 Rxc3 Bf3 Rdc1 g5 Bxg5 hxg5 Rxf3 Rac8 Rxc8 Rxc8 Rf5 Rc4 Rxg5+ Kf8 Rb5 b6 a5 bxa5 Rxa5 Rxb4 Rxa7', 'LastGladiator2', 'TheGreenCloud', 0, 1, 'LastGladiator2', 'TheGreenCloud', 6443, 8, 34);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (25, 'd4 Nf6 Nf3 g6 Nc3 Bg7 e4 d6 Be3 O-O Qd2 a6 Bh6 b5 Bd3 Nc6 Bxg7 Kxg7 h4 h5 d5 Ne5 Nxe5 dxe5 f3 e6 g4 hxg4 h5 Nxh5 fxg4 Nf4 O-O-O exd5 Nxd5 Rh8 Nxf4 exf4 Qxf4 Be6 g5 Qd4 Rxh8 Rxh8 Bxb5 Qxd1+ Kxd1 axb5 Qf6+ Kh7 Qe5 Rd8+ Ke2 c6 b3 Ra8 Qb2 c5 Ke3 c4 Kd4 cxb3 cxb3 Kg8 Kc5 Rb8 Qe5 Ra8 Qh2 Bd7 Kb4 Re8 e5 Re7 Qf4 Re8 Qd4 Bc6 Qd6 Re6 Qd4 Re8 Kc5 Re6 a4 bxa4 bxa4 Bxa4 Qxa4 Rxe5+ Kd6 Rxg5 Ke7 Re5+ Kf6 Rf5+ Ke7 Re5+ Kd6 Re6+ Kd5 Kg7 Qd4+ Kg8 Qh4 Kg7 Qd8 Re1 Qg5 Re6 Qd8 Re1 Qg5 Re6 Qd8', 'HKZ2020', 'OjaiJoao', 0, 1, 'HKZ2020', 'OjaiJoao', 20, 17, 24);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (26, 'Nf3 d5 g3 Nf6 Bg2 c5 O-O h6 d3 Nc6 Nbd2 e6 c3 g6 Qc2 Bg7 e4 O-O Re1 b6 Nf1 a5 exd5 Nxd5 Ne3 Ba6 Nxd5 Qxd5 Ne5 Qxg2+ Kxg2 Nxe5 Rxe5 Bxe5 Bxh6 Rfd8 Rd1 Rd7 Bg5 f6 Be3 Rad8 d4 cxd4 cxd4 Bb7+ Kg1 Kg7 f4 Bxd4 Bxd4 Rxd4 Rxd4', 'TheGreenCloud', 'LastGladiator2', 0, 1, 'LastGladiator2', 'TheGreenCloud', 6558, 29, 27);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (27, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Be3 O-O Qd2 a6 Bh6 b5 Bd3 Nc6 h4 e5 d5 Nb4 h5 Nxd3+ cxd3 Bb7 Bxg7 Kxg7 hxg6 fxg6 Ng5 Bc8 Nxh7 Nxh7 Qh6+ Kf6 Qxh7 Bd7 Qh4+ Kg7 Qh6+ Kf6 O-O-O Rh8 Qe3 Kg7 Ne2 c6 dxc6 Bxc6 Ng3 Bd7 Kb1 Rc8 Rxh8 Qxh8 d4 Qh6 Qxh6+ Kxh6 dxe5 Bg4 f3 Be6 Rxd6 Bc4 Nf5+ Kg5 Rxg6+ Kf4 e6 Bd3+', 'Apodex64', 'muisback', 0, 1, 'muisback', 'Apodex64', 1449, 3, 11);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (28, 'Nf3 d5 g3 Nf6 Bg2 c5 O-O h6 d3 Nc6 Nbd2 e6 e4 g6 Re1 Bg7 e5 Ng4 d4 cxd4 Nb3 Ngxe5 Nbxd4 Nxf3+ Nxf3 O-O c3 Bd7 Bf4 Rc8 Qc1 Kh7 h4 Ne7 Nh2 Qb6 Be3 d4 Bf4 dxc3 bxc3 Rxc3 Qd2 Bc6 Rab1 Qa6 Ng4 Bxg2 Kxg2 Qc6+ Kg1 Nf5 Ne3 Nd4 Qd1 Nf3+ Kf1 Nxe1 Qxe1 e5 Bxh6 Bxh6', 'Josip_buje', 'muisback', 0, 1, 'Josip_buje', 'muisback', 9086, 19, 34);
+insert into singularGame (gameID, moves, winner, loser, draw, professional,whiteUName, blackUName, spectators, advertisementID, tournamentID) values (29, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Be3 O-O Qd2 a6 Bh6 b5 Bd3 Nc6 h4 Bxh6 Qxh6 e5 d5 Nd4 Nxd4 exd4 Ne2 Qe7 f3 Qe5 h5 g5 O-O-O c5 dxc6 Be6 g3 Kh8 f4 Qc5 Qxf6+ Kg8 e5 g4 Qg5+ Kh8 Qh6 f5 Qxe6 Qxc6 Nxd4 Qc7 Qxd6', 'Azumilover', 'Ch5ssPlayer', 0, 1, 'Azumilover', 'Ch5ssPlayer', 3969, 14, 34);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (30, 'Nf3 d5 g3 Nf6 Bg2 c5 O-O h6 d4 cxd4 Nxd4 e5 Nf3 Nc6 c4 d4 a3 a5 b3 Be7 e3 O-O exd4 exd4 Bb2 d3 Nc3 Bf5 Qd2 Qd7 Rad1 Rad8 Rfe1 Rfe8 Ne5 Nxe5 Rxe5 Bd6 Rxe8+ Rxe8 Nd5 Nxd5 Bxd5 Re2 Qc3 Be5 Qxe5 Rxe5 Bxe5 b5 Bc3 a4 bxa4 bxc4 Bxc4 Qxa4 Rb1 Qxc4 Rb8+ Kh7 Bb4 Be4 f3 Bxf3 Kf2 Qe4 Re8 Qxe8', 'VincentKeymer2004', 'Azumilover', 0, 1, 'VincentKeymer2004', 'Azumilover', 9536, 21, 11);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (31, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Be3 O-O Qd2 a6 Bh6 b5 Bd3 Nc6 h4 e5 d5 Nd4 Nxd4 exd4 Ne2 Re8 Bxg7 Kxg7 f3 c5 dxc6 Qb6 h5 d5 hxg6 fxg6 Qh6+ Kg8 exd5 Ra7 O-O-O Rg7 Nf4 Qc7 g4 Rd8 Kb1 Nxd5 Nxg6 hxg6 Bxg6 Kf8 Rde1 Qf4 Qh8+ Rg8 Qh5 Nf6 Qc5+ Kg7 Qe7+ Kxg6 Re6 Bxe6', 'fireheart92', 'igormezentsev', 0, 1, 'igormezentsev', 'fireheart92', 1715, 30, 7);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (32, 'Nf3 d5 g3 e6 Bg2 Nf6 O-O Be7 d3 O-O Nbd2 c5 e4 Nc6 Re1 Qc7 Nf1 b5 e5 Nd7 Bf4 Bb7 h4 Rfc8 h5 h6 Ne3 a5 Nxd5 exd5 e6 Bd6 exd7 Qxd7 Ne5 Nxe5 Bxe5 Bxe5 Rxe5 d4 Qe2 Bxg2 Kxg2 Re8 Re1 Kf8 Qf3 Rac8 b3 a4 Qe4 Rxe5 Qxe5 c4 bxc4 bxc4 dxc4 Rxc4 Qb8+ Rc8 Qb4+ Kg8 Rd1 Qd5+ Kg1 Qxa2 Rxd4 a3 Rd3 Qa1+ Kg2 a2 Qb7 Re8 Rf3 Rf8 Ra3 Qb1 Qa6 Qxc2 Rxa2 Qe4+ f3 Qd5 g4 Re8 Qa4 Qe6 Rd2 Kh8 Qb5 Kg8 Qd3 Qc8 Ra2 Qb8 Qd7 Qe5 Qd3 Qe6 Rb2 f5 Qxf5 Qxf5 gxf5 Re5 Kg3 Rxf5 Rh2 Kf7 f4 Kf6 Kg4 Rb5 Ra2 Rb6 Ra5 Rc6 Rf5+ Ke6 Rf8 Rb6 Ra8 Rc6 Rg8 Kf7 Rd8 Rc7 Rd5 Rc6 Kf5 Re6 Rd7+ Re7 Rxe7+ Kxe7 Kg6 Kf8 f5 Kg8 f6 gxf6 Kxf6 Kh7 Kf7 Kh8 Kg6 Kg8 Kxh6 Kh8 Kg5 Kg8 Kf4 Kh8 h6 Kg8 Ke3 Kh8 Kd2 Kh7 Ke1 Kxh6', 'chessmaster2006', 'rehbwf', 0, 1, 'chessmaster2006', 'rehbwf', 1355, 26, 27);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (33, 'Nf3 c6 g3 d5 Bg2 Bg4 h3 Bxf3 exf3 e5 O-O f5 Re1 Bd6 d4 e4 fxe4 fxe4 c4 Nf6 Nc3 O-O cxd5 cxd5 Qb3 Qb6 Nxd5 Qxb3 Nxf6+ Rxf6 axb3 Nc6 Be3 Re8 d5 Nb4 Rxa7 Nd3 Re2 Ref8 Bxe4 Nxf2 Rxf2 Rxf2 Bxf2 Rxf2 Kxf2 Bc5+ Ke2 Bxa7 d6 Kf7 Bd5+ Kf6 g4 Ke5 d7 Bb6 Bxb7 Kf4 Kd3 Kg3 Kc4 Kxh3 Kb5 Bd8 Bf3 Kg3 Bd1 g6 Kc6 h5 gxh5 gxh5 Bxh5 Kf4 b4', 'Aborigen100500', 'Sharkfang', 0, 1, 'Aborigen100500', 'Sharkfang', 5817, 10, 39);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (34, 'Nf3 d5 g3 c5 Bg2 Nf6 O-O Nc6 d4 cxd4 Nxd4 e5 Nxc6 bxc6 c4 Rb8 Nc3 d4 Bxc6+ Bd7 Bxd7+ Qxd7 Nb1 h5 f3 h4 g4 e4 Nd2 Bd6 Kh1 Qc7 Qa4+ Kf8 Nxe4 Bxh2 Nxf6 gxf6 e3 Be5 f4 Bd6 exd4 Rg8 Rg1 Rb4 Qa6 Rxc4 Be3 Qe7 Qxc4 Qe4+ Kh2 Qxe3 Qf1 Bxf4+ Kh1 Bg3 Rc1 Qe4+ Qg2 Qxg4 Rgf1 Rg6 Rcd1 a5 d5 Kg7 b3 a4 Rd3 axb3 axb3 Qc8 Rdf3 Qg4 Rd3 Qd7 Rfd1 Qc8 Qf1 Qc2 R1d2 Qc8 b4 Qc4 Qf3 Qc1+ Qd1 Qc8 Qf1 Qc4 Rd1 Qxb4 d6 Qb7+ Qg2 Qxg2+ Kxg2 Bxd6+ Kh3 Be5 Kxh4 f5 Rb1 f4 Rb7 Kf6 Rdb3 Bd4 Rf3 Be3 Kh3 Rg7 Rb3 Ke5 Rbxe3+ fxe3 Rxe3+ Kd4 Re7 Kd5 Kh4 Kd6 Re1 f5 Kh3 Rg8 Kh2 f4 Re4 Rg4 Kh3 Kd5 Re8 Rg3+ Kh2 Re3 Rf8 Ke4 Kg2 Rg3+ Kf2 Rh3 Re8+ Kf5 Rf8+ Ke4 Re8+ Kf5 Rf8+ Ke4', 'chessmaster2006', 'Ch5ssPlayer', 0, 1, 'Ch5ssPlayer', 'chessmaster2006', 5358, 20, 11);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (35, 'd4 Nf6 Bg5 g6 Bxf6 exf6 c3 d5 e3 f5 Nh3 Bd6 Nd2 c6 Bd3 Nd7 Qc2 Nf6 O-O-O Qa5 Kb1 b5 Nf4 h5 Nb3 Qb6 f3 a5 Rhe1 O-O Qf2 a4 Nc1 b4 c4 dxc4 Bxc4 Bxf4 exf4 Ba6 Bf1 Bxf1 Qxf1 Nd5 Ka1 Nxf4 Nd3 Nxd3 Qxd3 Rad8 g4 fxg4 fxg4 Rd5 Re4 Rfd8 h3 c5 Qf3 hxg4 Rxg4 Rxd4', 'may6enexttime', 'kc6', 0, 1, 'kc6', 'may6enexttime', 7315, 39, 18);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (36, 'e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Bd3 O-O Be3 a6 O-O b5 a3 Bb7 h3 Nbd7 Bg5 h6 Bh4 c5 dxc5 Nxc5 Bxf6 Bxf6 Qe2 Nxd3 cxd3 e6 Rac1 Rc8 Na2 Qb6 Rxc8 Rxc8 Rc1 Rxc1+ Nxc1 b4 axb4 Qxb4 b3 Qc3 Nh2 Qxc1+ Qd1 Qxd1+ Nf1', 'ChessTheory64', 'Ragehunter', 0, 1, 'ChessTheory64', 'Ragehunter', 1736, 24, 40);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (37, 'Nf3 f6 e4 e5 d4 Bd6 dxe5 Bxe5 Nxe5 fxe5 Qh5+ Kf8 Qxe5 d6 Qf4+ Qf6 Nc3 Qxf4 Bxf4 Nf6 O-O-O Kf7 f3 Re8 g4 g5 Bxg5 Re5 Bxf6 Kxf6 Nd5+ Rxd5 Rxd5 Ke6 Bc4 Kd7 e5 Kc6 exd6 cxd6 Rhd1 Kb6 Rxd6+ Nc6 Rh6 Kc5 b3 b5 Rd5+ Kb6 Rxb5+ Kc7 Rc5 Bd7 Bb5 Rb8 Bxc6 Bxc6 Rcxc6+ Kb7 Rcf6 Rc8 Rxh7+ Rc7 Rxc7+ Kxc7 h4 Kd7 h5 Ke7 g5 a5 a4', 'fireheart92', 'ChessTheory64', 0, 1, 'fireheart92', 'ChessTheory64', 4256, 10, 28);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (38, 'd4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 d5 a5 Bg5 h6 Bh4 Nbd7 Nd2 Nc5 O-O Bd7 b3 Qe8 Bxf6 Bxf6 Bg4 Nd3 Bxd7 Qxd7 Qf3 Nf4 Nb5 Bg7 Rfd1 f5 Rac1 c5 dxc6 bxc6 Nc3 Rad8 Nf1 fxe4 Nxe4 Qe6 Qe3 d5 cxd5 cxd5 Neg3 h5 Rc7 h4 Ne2 Qg4 Nxf4 Rxf4 Rdc1 Rdf8 Qa7 R4f7 Rxf7 Rxf7 Rc7 Rxc7 Qxc7 h3 Qd8+ Kh7 Qxd5 e4 Ne3 Qe2 gxh3 Qf3 Qxa5 Qxh3 Qg5 Qf3 Qg3 Qf6 Qh3+ Kg8', 'Watneg', 'Chesssknock', 0, 1, 'Chesssknock', 'Watneg', 8355, 6, 17);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (39, 'Nf3 Nf6 g3 b6 Bg2 Bb7 O-O e6 c4 c5 Nc3 Be7 d4 cxd4 Qxd4 d6 Rd1 a5 Nb5', 'igormezentsev', 'Tuzakli_Egitim', 0, 1, 'Tuzakli_Egitim', 'igormezentsev', 2443, 19, 28);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (40, 'g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O d4 d6 c4 c6 Nc3 Bf5 h3 Ne4 e3 Nxc3 bxc3 Be4 Qb3 Qb6 Ba3 Qxb3 axb3 Nd7 Nd2 Bxg2 Kxg2 Nf6 Rfb1 a6 b4 Rfb8 b5 axb5 cxb5 cxb5 Rxb5 Ra6 Rb3 Rba8 Nb1 Ne4 Ra2 R6a7 Rab2 e5 f3 Nf6 Bxd6 exd4 cxd4 Ra2 Be5 Rxb2+ Rxb2 Nd5 Bxg7 Nxe3+ Kf2 Nd1+', 'Sharkfang', 'nihalsarin2004', 0, 1, 'Sharkfang', 'nihalsarin2004', 4317, 32, 23);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (41, 'Nf3 Nf6 d3 g6 e4 Bg7 e5 O-O exf6 Bxf6 g3 Bg7 Bg2 d6 O-O e6 c3 f6 d4 Qe7 Bd2 e5 Qc1 e4 Re1 f5 Ng5 d5 c4 Qf6 cxd5 c6 dxc6 Nxc6 Qc4+ Kh8 d5 Ne5 Bc3 Nxc4 Bxf6 Bxf6 Ne6 Bxe6 dxe6 Nxb2 Nc3 Nd3 Red1 Ne1 Rd3 e3 Rxe3 Nxg2 Kxg2 Kg7 Rb1 Be7 Rxb7 Rf7 exf7 Kxf7 Rexe7+ Kf6 Rf7+ Kg5 Ne2 Kg4 f4', 'Ch5ssPlayer', 'chessmaster2006', 0, 1, 'Ch5ssPlayer', 'chessmaster2006', 4671, 30, 30);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (42, 'Nc3 Nf6 d4 d6 Bg5 g6 Bf4 Bg7 Bg3 h5 Nf3 h4 e3 hxg3 hxg3 e6 Rxh8+ Bxh8 e4 Bg7 e5 dxe5 dxe5 Qxd1+ Rxd1 Nd5 Nxd5 exd5 Rxd5 Nc6 Rd1 Be6 Bb5 Rd8 Bxc6+ bxc6 Rxd8+ Kxd8 Nd4 Ke7 Nxc6+ Kd7 Nd4 Bxe5 Nf3 Bd6 Ke2 Bd5 Ke3 Bxf3 gxf3 Bc5+ Ke4 Bxf2 f4 Bxg3 f5 gxf5+ Kxf5 Bd6 Kf6 Ke8 c3 Bc5 b3 Be3 c4 Bd2 a4 Bc3+ Kf5 Ke7 Kf4 f6 Ke4 Bb4 Kd5 Bd6 c5 f5 cxd6+ cxd6 b4 Kf6 b5 f4 b6 axb6 Kc6 f3 Kxb6 f2 a5 f1=Q a6 Qxa6+', 'Watneg', 'Chesssknock', 0, 1, 'Chesssknock', 'Watneg', 7652, 5, 37);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (43, 'Nf3 e5 d3 e4 dxe4 Bc5 e5 d5 exd6 cxd6 e3 Qe7 Nc3 Qe5 Nd5 Qe6 Nc7+ Kd8 Nxe6+ fxe6 Bd3 Bd7 c3 Bc6 Be4 Bxe4 Nd2 d5 Nxe4 d4 Nxc5 Ke8 Qxd4 Nc6 Qxg7 Nd4 Qd7+ Kf8 Nxe6+ Nxe6 Qxe6 Kg7 Qf5 Kh6 Qf4+ Kg7 e4 Kg6 Qg3+ Kh5 e5 Nf6 Qg5#', 'Sharkfang', 'Aborigen100500', 0, 1, 'Aborigen100500', 'Sharkfang', 6823, 7, 2);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (44, 'Nf3 Nf6 d3 g6 e4 Bg7 e5 O-O exf6 Bxf6 g3 Bg7 Bg2 d6 O-O f6 Bd2 Re8 Qc1 e6 Bh6 Qd7 Bxg7 Qxg7 c4 Qf7 c5 dxc5 Qxc5 e5 Qc1 Be6 Nc3 Nc6 d4 Nxd4 Nxd4 exd4 Ne4 Bf5 Nc5 b6 Rd1 bxc5 Qxc5 c6 Bxc6 Rac8 Qd5 Qxd5 Bxd5+ Kg7 Bf3 Be6 Kg2 Bf5 Rxd4 Red8 Rf4 Rd5 g4 Rd6 Rxf5 gxf5 gxf5 Kh6 h3 Kg5 Kh2 Kxf5 Re1 Re8 Bg4+ Kg6 Rxe8 Rd5 Re3 Re5 Kg3 Kg5 Rxe5+ fxe5 f4+ Kf6 Kf3 h5 fxe5+ Kxe5 Bxh5 Kd6 Bg4 Kc5 h4 Kb6 h5 a5 b3 a4 bxa4 Ka5 h6 Kxa4 h7 Ka3 h8=Q Kxa2 Qg7 Ka3 Qf6 Ka2 Qe6+ Ka3 Qb6 Ka2 Ke4 Ka3 Kd3 Ka2 Kc3 Ka3 Qb3#', 'LastGladiator2', 'toomanymanoevres', 0, 1, 'toomanymanoevres', 'LastGladiator2', 9840, 34, 31);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (45, 'e3 Nf6 Bc4 g6 Qh5 gxh5 Nf3 d5 Bb5+ c6 Ne5 Nbd7 Nxf7 Kxf7 g4 cxb5 g5 Ne4 Rg1 Rg8 f4 Rg6 f5 Rxg5 Rf1 Rg2 Rf2 Qc7 d3 Rxf2 dxe4 Qxh2 Nc3 Qg1#', 'Ch5ssPlayer', 'Azumilover', 0, 1, 'Azumilover', 'Ch5ssPlayer', 7451, 12, 14);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (46, 'Nf3 g6 d3 Bg7 e4 Bf8 c3 Bg7 Qc2 Bf8 Bd2 Bg7 g3 Bf8 Bg2 Bg7 O-O Bf8 d4 Bg7 e5 Bf8 e6 Bg7 exf7+ Kxf7 Ng5+ Ke8 Qb3 Nf6 Qf7#', 'kc6', 'cihanakif', 0, 1, 'cihanakif', 'kc6', 1481, 37, 22);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (47, 'e4 d6 Bc4 Nf6 Qf3 e6 e5 dxe5 Qd1 e4 d4 Nc6 d5 exd5 Bxd5 Qxd5 f3 Qxd1+ Kxd1 exf3 Ke1 fxg2 Nh3 gxh1=Q+ Kf2 Qxh2+ Ke3 Qxh3+ Kd2 Be6 c3 Qg2+ Kd3 Bf5+ Ke3 Qd5 Kf4 Qe4+ Kg3 Qg4+ Kh2 Ne4 Kh1 Nf2+ Kh2 Bd6+ Bf4 Bxf4#', 'rehbwf', 'Tuzakli_Egitim', 0, 1, 'rehbwf', 'Tuzakli_Egitim', 8092, 31, 7);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (48, 'Nf3 g5 d3 g4 Nfd2 g3 e4 gxf2+ Kxf2 e6 g3 Qf6+ Qf3 Bc5+ Kg2 Qd4 c3 Qf2+ Qxf2 Bxf2 Kxf2 Nf6 Nf3 Ng4+ Kg2 Ne3+ Bxe3 h5 Bd4 h4 Bxh8 h3+ Kxh3 d6 Kg2 e5 h4 Bg4 h5 Bxf3+ Kxf3 Nc6 Kg2 Kd8 h6 Kc8 h7 Kd7 Bg7 f5 h8=Q f4 gxf4 Ne7 Qh3+', 'LastGladiator2', 'toomanymanoevres', 0, 1, 'toomanymanoevres', 'LastGladiator2', 7773, 8, 29);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (49, 'e3 Nf6 Ne2 g6 Nf4 Bg7 Nxg6 hxg6 g3 d6 Bg2 Bh3 d3 Bxg2 Rg1 Bh3 Qe2 Bg4 Qf1 Bf3 Nd2 Nc6 Nxf3 Nb4 Qe2 e5 c3 Nc6 d4 e4 Nd2 d5 f3 exf3 Nxf3 Qd7 e4 O-O-O e5 Rde8 exf6 Rxe2+ Kxe2 Qe6+ Kd2 Bxf6 Kc2 Qf5+ Kd2 Qxf3 Kc2 Qf5+ Kb3 Qe4 a3 Qd3 Ka2 Qc4+ b3 Na5 bxc4 Nxc4 Rb1 Rxh2+ Bd2 Nxd2 Rgc1 Nc4+ Ka1 Ra2+ Kxa2 Be7 Ka1 Bxa3 Rb3 Bxc1 Kb1 Bd2 Kc2 Bxc3 Rxc3 f5 Rd3 f4 Re3 Kd7 Rf3 Kd6 Rxf4 Ne3+ Kd3 Nc4 Ke2 Ne5 Rf5 Ke7 Rf6 Kxf6 dxe5+ Kxe5 g4 d4 g5 Kf4', 'athena-pallada', 'PlemSovhoz', 0, 1, 'athena-pallada', 'PlemSovhoz', 3893, 16, 29);
+insert into singularGame (gameID, moves, winner, loser, draw, professional, whiteUName, blackUName, spectators, advertisementID, tournamentID) values (50, 'e3 Nf6 Ne2 g6 Nf4 Bg7 Nxg6 hxg6 g3 d6 Bg2 Bh3 d3 Bxg2 Rg1 Bh3 Qe2 Bg4 Qf1 Bf3 Nd2 Nc6 Nxf3 Nb4 Qe2 e5 c3 Nc6 d4 e4 Nd2 d5 f3 exf3 Nxf3 Qd7 e4 O-O-O e5 Rde8 exf6 Rxe2+ Kxe2 Qe6+ Kd2 Bxf6 Kc2 Qf5+ Kd2 Qxf3 Kc2 Qf5+ Kb3 Qe4 a3 Qd3 Ka2 Qc4+ b3 Na5 bxc4 Nxc4 Rb1 Rxh2+ Bd2 Nxd2 Rgc1 Nc4+ Ka1 Ra2+ Kxa2 Be7 Ka1 Bxa3 Rb3 Bxc1 Kb1 Bd2 Kc2 Bxc3 Rxc3 f5 Rd3 f4 Re3 Kd7 Rf3 Kd6 Rxf4 Ne3+ Kd3 Nc4 Ke2 Ne5 Rf5 Ke7 Rf6 Kxf6 dxe5+ Kxe5 g4 d4 g5 Kf4', 'Siegwhite', 'flamingbishop', 0, 1, 'flamingbishop', 'Siegwhite', 3893, 16, 29);
 
--- GameArchive
+# Make sure to update games that are not played by professionals
+UPDATE singularGame
+SET professional = 1
+WHERE whiteUName IN (SELECT username FROM user WHERE professional = 0)
+OR blackUName IN (SELECT username FROM user WHERE professional = 0);
+
+# GameArchive
 CREATE TABLE IF NOT EXISTS gameArchive(
     gameID INTEGER NOT NULL,
     PRIMARY KEY (gameID),
@@ -1169,57 +1016,6 @@ insert into gameArchive (gameID) values (46);
 insert into gameArchive (gameID) values (47);
 insert into gameArchive (gameID) values (48);
 insert into gameArchive (gameID) values (49);
-insert into gameArchive (gameID) values (50);
-insert into gameArchive (gameID) values (51);
-insert into gameArchive (gameID) values (52);
-insert into gameArchive (gameID) values (53);
-insert into gameArchive (gameID) values (54);
-insert into gameArchive (gameID) values (55);
-insert into gameArchive (gameID) values (56);
-insert into gameArchive (gameID) values (57);
-insert into gameArchive (gameID) values (58);
-insert into gameArchive (gameID) values (59);
-insert into gameArchive (gameID) values (60);
-insert into gameArchive (gameID) values (61);
-insert into gameArchive (gameID) values (62);
-insert into gameArchive (gameID) values (63);
-insert into gameArchive (gameID) values (64);
-insert into gameArchive (gameID) values (65);
-insert into gameArchive (gameID) values (66);
-insert into gameArchive (gameID) values (67);
-insert into gameArchive (gameID) values (68);
-insert into gameArchive (gameID) values (69);
-insert into gameArchive (gameID) values (70);
-insert into gameArchive (gameID) values (71);
-insert into gameArchive (gameID) values (72);
-insert into gameArchive (gameID) values (73);
-insert into gameArchive (gameID) values (74);
-insert into gameArchive (gameID) values (75);
-insert into gameArchive (gameID) values (76);
-insert into gameArchive (gameID) values (77);
-insert into gameArchive (gameID) values (78);
-insert into gameArchive (gameID) values (79);
-insert into gameArchive (gameID) values (80);
-insert into gameArchive (gameID) values (81);
-insert into gameArchive (gameID) values (82);
-insert into gameArchive (gameID) values (83);
-insert into gameArchive (gameID) values (84);
-insert into gameArchive (gameID) values (85);
-insert into gameArchive (gameID) values (86);
-insert into gameArchive (gameID) values (87);
-insert into gameArchive (gameID) values (88);
-insert into gameArchive (gameID) values (89);
-insert into gameArchive (gameID) values (90);
-insert into gameArchive (gameID) values (91);
-insert into gameArchive (gameID) values (92);
-insert into gameArchive (gameID) values (93);
-insert into gameArchive (gameID) values (94);
-insert into gameArchive (gameID) values (95);
-insert into gameArchive (gameID) values (96);
-insert into gameArchive (gameID) values (97);
-insert into gameArchive (gameID) values (98);
-insert into gameArchive (gameID) values (99);
-insert into gameArchive (gameID) values (100);
 
 # UserLibrary
 CREATE TABLE IF NOT EXISTS userLibrary (
@@ -1233,114 +1029,267 @@ CREATE TABLE IF NOT EXISTS userLibrary (
                                        ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-insert into userLibrary (libraryID, gameID, userID) values (1, 85, 48);
-insert into userLibrary (libraryID, gameID, userID) values (2, 41, 260);
-insert into userLibrary (libraryID, gameID, userID) values (3, 25, 354);
-insert into userLibrary (libraryID, gameID, userID) values (4, 22, 155);
-insert into userLibrary (libraryID, gameID, userID) values (5, 94, 324);
-insert into userLibrary (libraryID, gameID, userID) values (6, 51, 290);
-insert into userLibrary (libraryID, gameID, userID) values (7, 65, 251);
-insert into userLibrary (libraryID, gameID, userID) values (8, 37, 15);
-insert into userLibrary (libraryID, gameID, userID) values (9, 60, 147);
-insert into userLibrary (libraryID, gameID, userID) values (10, 82, 295);
-insert into userLibrary (libraryID, gameID, userID) values (11, 46, 156);
-insert into userLibrary (libraryID, gameID, userID) values (12, 86, 139);
-insert into userLibrary (libraryID, gameID, userID) values (13, 41, 129);
-insert into userLibrary (libraryID, gameID, userID) values (14, 91, 67);
-insert into userLibrary (libraryID, gameID, userID) values (15, 5, 340);
-insert into userLibrary (libraryID, gameID, userID) values (16, 64, 226);
-insert into userLibrary (libraryID, gameID, userID) values (17, 13, 234);
-insert into userLibrary (libraryID, gameID, userID) values (18, 42, 109);
-insert into userLibrary (libraryID, gameID, userID) values (19, 76, 270);
-insert into userLibrary (libraryID, gameID, userID) values (20, 84, 372);
-insert into userLibrary (libraryID, gameID, userID) values (21, 60, 90);
-insert into userLibrary (libraryID, gameID, userID) values (22, 24, 343);
-insert into userLibrary (libraryID, gameID, userID) values (23, 92, 239);
-insert into userLibrary (libraryID, gameID, userID) values (24, 71, 250);
-insert into userLibrary (libraryID, gameID, userID) values (25, 58, 82);
-insert into userLibrary (libraryID, gameID, userID) values (26, 18, 71);
-insert into userLibrary (libraryID, gameID, userID) values (27, 42, 102);
-insert into userLibrary (libraryID, gameID, userID) values (28, 97, 260);
-insert into userLibrary (libraryID, gameID, userID) values (29, 100, 313);
-insert into userLibrary (libraryID, gameID, userID) values (30, 44, 236);
-insert into userLibrary (libraryID, gameID, userID) values (31, 63, 75);
-insert into userLibrary (libraryID, gameID, userID) values (32, 18, 239);
-insert into userLibrary (libraryID, gameID, userID) values (33, 79, 95);
-insert into userLibrary (libraryID, gameID, userID) values (34, 86, 260);
-insert into userLibrary (libraryID, gameID, userID) values (35, 82, 231);
-insert into userLibrary (libraryID, gameID, userID) values (36, 53, 359);
-insert into userLibrary (libraryID, gameID, userID) values (37, 69, 150);
+insert into userLibrary (libraryID, gameID, userID) values (1, 36, 9);
+insert into userLibrary (libraryID, gameID, userID) values (2, 5, 14);
+insert into userLibrary (libraryID, gameID, userID) values (3, 40, 25);
+insert into userLibrary (libraryID, gameID, userID) values (4, 37, 1);
+insert into userLibrary (libraryID, gameID, userID) values (5, 19, 25);
+insert into userLibrary (libraryID, gameID, userID) values (6, 10, 12);
+insert into userLibrary (libraryID, gameID, userID) values (7, 44, 9);
+insert into userLibrary (libraryID, gameID, userID) values (8, 35, 19);
+insert into userLibrary (libraryID, gameID, userID) values (9, 24, 27);
+insert into userLibrary (libraryID, gameID, userID) values (10, 15, 16);
+insert into userLibrary (libraryID, gameID, userID) values (11, 32, 31);
+insert into userLibrary (libraryID, gameID, userID) values (12, 25, 8);
+insert into userLibrary (libraryID, gameID, userID) values (13, 2, 25);
+insert into userLibrary (libraryID, gameID, userID) values (14, 3, 17);
+insert into userLibrary (libraryID, gameID, userID) values (15, 14, 7);
+insert into userLibrary (libraryID, gameID, userID) values (16, 26, 23);
+insert into userLibrary (libraryID, gameID, userID) values (17, 43, 17);
+insert into userLibrary (libraryID, gameID, userID) values (18, 42, 25);
+insert into userLibrary (libraryID, gameID, userID) values (19, 23, 1);
+insert into userLibrary (libraryID, gameID, userID) values (20, 5, 12);
+insert into userLibrary (libraryID, gameID, userID) values (21, 23, 2);
+insert into userLibrary (libraryID, gameID, userID) values (22, 12, 13);
+insert into userLibrary (libraryID, gameID, userID) values (23, 11, 19);
+insert into userLibrary (libraryID, gameID, userID) values (24, 15, 10);
+insert into userLibrary (libraryID, gameID, userID) values (25, 12, 4);
+insert into userLibrary (libraryID, gameID, userID) values (26, 24, 7);
+insert into userLibrary (libraryID, gameID, userID) values (27, 23, 24);
+insert into userLibrary (libraryID, gameID, userID) values (28, 12, 6);
+insert into userLibrary (libraryID, gameID, userID) values (29, 12, 4);
+insert into userLibrary (libraryID, gameID, userID) values (30, 12, 24);
+insert into userLibrary (libraryID, gameID, userID) values (31, 29, 4);
+insert into userLibrary (libraryID, gameID, userID) values (32, 9, 27);
+insert into userLibrary (libraryID, gameID, userID) values (33, 13, 26);
+insert into userLibrary (libraryID, gameID, userID) values (34, 12, 27);
+insert into userLibrary (libraryID, gameID, userID) values (35, 12, 8);
+insert into userLibrary (libraryID, gameID, userID) values (36, 23, 8);
+insert into userLibrary (libraryID, gameID, userID) values (37, 7, 6);
+insert into userLibrary (libraryID, gameID, userID) values (38, 12, 24);
+insert into userLibrary (libraryID, gameID, userID) values (39, 27, 23);
+insert into userLibrary (libraryID, gameID, userID) values (40, 12, 27);
+insert into userLibrary (libraryID, gameID, userID) values (41, 28, 25);
+insert into userLibrary (libraryID, gameID, userID) values (42, 12, 4);
+insert into userLibrary (libraryID, gameID, userID) values (43, 14, 18);
+insert into userLibrary (libraryID, gameID, userID) values (44, 12, 30);
+insert into userLibrary (libraryID, gameID, userID) values (45, 12, 26);
+insert into userLibrary (libraryID, gameID, userID) values (46, 12, 1);
+insert into userLibrary (libraryID, gameID, userID) values (47, 12, 11);
+insert into userLibrary (libraryID, gameID, userID) values (48, 3, 7);
+insert into userLibrary (libraryID, gameID, userID) values (49, 12, 18);
+insert into userLibrary (libraryID, gameID, userID) values (50, 9, 26);
+insert into userLibrary (libraryID, gameID, userID) values (51, 12, 16);
+insert into userLibrary (libraryID, gameID, userID) values (52, 4, 4);
+insert into userLibrary (libraryID, gameID, userID) values (53, 23, 20);
 
--- player table
-CREATE TABLE IF NOT EXISTS player (
-    userID INTEGER NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    username VARCHAR(100) NOT NULL,
-    firstname VARCHAR(100) NOT NULL,
-    lastname VARCHAR(100) NOT NULL,
-    tag TEXT,
-    rating INTEGER DEFAULT 1200, -- 0 - infinity but to allow adjustment depending on initial level before playing
-    professional BOOLEAN DEFAULT 0, -- not professional until given title (1)
-    totalGames INTEGER DEFAULT 0, -- if not played any gamed then 0 - instead of null
-    totalWins INTEGER DEFAULT 0,
-    totalLosses INTEGER DEFAULT 0,
-    totalDraws INTEGER DEFAULT 0,
-    winPercentage DOUBLE DEFAULT 0,
-    drawPercentage DOUBLE DEFAULT 0,
-    averageSpectators INTEGER DEFAULT 0, # rounding as half people not relevant for us
-    adMoney DECIMAL(50,2) DEFAULT 0, -- always round to 2 decimal as its money - any digit < x*10^50
-    gameID INTEGER NOT NULL,
-    PRIMARY KEY (userID),
-    FOREIGN KEY (userID) REFERENCES user (userID)
-                                  ON UPDATE RESTRICT ON DELETE RESTRICT ,
-    FOREIGN KEY (username) REFERENCES user (username)
-                                  ON UPDATE RESTRICT ON DELETE RESTRICT ,
-    FOREIGN KEY (email) REFERENCES user (email)
-                                  ON UPDATE RESTRICT ON DELETE RESTRICT ,
-    FOREIGN KEY (gameID) REFERENCES singularGame (gameID)
-                                  ON UPDATE RESTRICT ON DELETE RESTRICT
+CREATE TABLE IF NOT EXISTS gameAds(
+    gameId INTEGER NOT NULL,
+    advertisementId INTEGER NOT NULL,
+    PRIMARY KEY (gameId, advertisementId),
+    FOREIGN KEY (gameId) REFERENCES singularGame (gameID)
+                                ON UPDATE RESTRICT ON DELETE RESTRICT,
+    FOREIGN KEY (advertisementId) REFERENCES advertisement (advertisementID)
+                                ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (1, 'tdobel8f@businessweek.com', 'tdobel8f', 'Tilda', 'Dobel', 'GM', 2762, 1, 10, 4, 4, 2, 0.4, 0.2, 34, 57286, 40);
-insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (2, 'ekiloh8e@symantec.com', 'ekiloh8e', 'Edlin', 'Kiloh', 'GM', 3026, 1, 10, 4, 4, 2, 0.4, 0.2, 25, 26400, 47);
-insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (3, 'vdolden8d@surveymonkey.com', 'vdolden8d', 'Vilma', 'Dolden', 'GM', 2700, 1, 10, 4, 4, 2, 0.4, 0.2, 51, 88556, 39);
-insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (4, 'erance8c@sun.com', 'erance8c', 'Euphemia', 'Rance', 'GM', 3062, 1, 10, 4, 4, 2, 0.4, 0.2, 107, 14435, 6);
-insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (5, 'bmetcalf8b@purevolume.com', 'bmetcalf8b', 'Brok', 'Metcalf', 'GM', 2895, 1, 10, 4, 4, 2, 0.4, 0.2, 89, 20152, 15);
-insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (6, 'ndeane8a@pcworld.com', 'ndeane8a', 'Nathanael', 'Deane', 'GM', 2906, 1, 10, 4, 4, 2, 0.4, 0.2, 42, 36344, 92);
-insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (7, 'mtrinkwon89@quantcast.com', 'mtrinkwon89', 'Milissent', 'Trinkwon', 'GM', 3159, 1, 10, 4, 4, 2, 0.4, 0.2, 60, 90346, 90);
-insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (8, 'smcgaughay88@techcrunch.com', 'smcgaughay88', 'Sharity', 'McGaughay', 'GM', 2903, 1, 10, 4, 4, 2, 0.4, 0.2, 106, 82220, 1);
-insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (9, 'rself87@creativecommons.org', 'rself87', 'Rycca', 'Self', 'GM', 2733, 1, 10, 4, 4, 2, 0.4, 0.2, 78, 66797, 23);
-insert into player (userID, email, username, firstname, lastname, tag, rating, professional, totalGames, totalWins, totalLosses, totalDraws, winPercentage, drawPercentage, averageSpectators, adMoney, gameID) values (10, 'jfinnick86@photobucket.com', 'jfinnick86', 'Joell', 'Finnick', 'GM', 2980, 1, 10, 4, 4, 2, 0.4, 0.2, 60, 62299, 94);
-
--- spectator table
-CREATE TABLE IF NOT EXISTS spectator (
-    userID INTEGER NOT NULL,
-    username VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    firstname VARCHAR(100) NOT NULL,
-    lastname VARCHAR(100) NOT NULL,
-    gameID INTEGER NOT NULL,
-    playerID INTEGER NOT NULL,
-    PRIMARY KEY (userID),
-    FOREIGN KEY (playerID) REFERENCES player (userID)
-                                     ON UPDATE RESTRICT ON DELETE RESTRICT ,
-    FOREIGN KEY (userID) REFERENCES user (userID)
-                                     ON UPDATE RESTRICT ON DELETE RESTRICT ,
-    FOREIGN KEY (username) REFERENCES user (username)
-                                     ON UPDATE RESTRICT ON DELETE RESTRICT ,
-    FOREIGN KEY (email) REFERENCES user (email)
-                                     ON UPDATE RESTRICT ON DELETE RESTRICT ,
-    FOREIGN KEY (gameID) REFERENCES singularGame (gameID)
-                                     ON UPDATE RESTRICT ON DELETE RESTRICT
-);
-
-insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (1, 'tdobel8f', 'tdobel8f@businessweek.com', 'Tilda', 'Dobel', 40, 8);
-insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (2, 'ekiloh8e', 'ekiloh8e@symantec.com', 'Edlin', 'Kiloh', 47, 8);
-insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (3, 'vdolden8d', 'vdolden8d@surveymonkey.com', 'Vilma', 'Dolden', 39, 2);
-insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (4, 'erance8c', 'erance8c@sun.com', 'Euphemia', 'Rance', 6, 2);
-insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (5, 'bmetcalf8b', 'bmetcalf8b@purevolume.com', 'Brok', 'Metcalf', 15, 7);
-insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (6, 'ndeane8a', 'ndeane8a@pcworld.com', 'Nathanael', 'Deane', 92, 3);
-insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (7, 'mtrinkwon89', 'mtrinkwon89@quantcast.com', 'Milissent', 'Trinkwon', 90, 4);
-insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (8, 'smcgaughay88', 'smcgaughay88@techcrunch.com', 'Sharity', 'McGaughay', 1, 5);
-insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (9, 'rself87', 'rself87@creativecommons.org', 'Rycca', 'Self', 23, 5);
-insert into spectator (userID, username, email, firstname, lastname, gameID, playerID) values (10, 'jfinnick86', 'jfinnick86@photobucket.com', 'Joell', 'Finnick', 94, 10);
+insert into gameAds (gameId, advertisementId) values (40, 44);
+insert into gameAds (gameId, advertisementId) values (20, 11);
+insert into gameAds (gameId, advertisementId) values (4, 22);
+insert into gameAds (gameId, advertisementId) values (31, 17);
+insert into gameAds (gameId, advertisementId) values (32, 43);
+insert into gameAds (gameId, advertisementId) values (43, 26);
+insert into gameAds (gameId, advertisementId) values (22, 14);
+insert into gameAds (gameId, advertisementId) values (16, 23);
+insert into gameAds (gameId, advertisementId) values (2, 39);
+insert into gameAds (gameId, advertisementId) values (30, 32);
+insert into gameAds (gameId, advertisementId) values (16, 7);
+insert into gameAds (gameId, advertisementId) values (27, 34);
+insert into gameAds (gameId, advertisementId) values (42, 19);
+insert into gameAds (gameId, advertisementId) values (30, 43);
+insert into gameAds (gameId, advertisementId) values (27, 18);
+insert into gameAds (gameId, advertisementId) values (14, 39);
+insert into gameAds (gameId, advertisementId) values (39, 43);
+insert into gameAds (gameId, advertisementId) values (46, 3);
+insert into gameAds (gameId, advertisementId) values (7, 22);
+insert into gameAds (gameId, advertisementId) values (45, 11);
+insert into gameAds (gameId, advertisementId) values (23, 15);
+insert into gameAds (gameId, advertisementId) values (1, 8);
+insert into gameAds (gameId, advertisementId) values (41, 6);
+insert into gameAds (gameId, advertisementId) values (24, 3);
+insert into gameAds (gameId, advertisementId) values (27, 5);
+insert into gameAds (gameId, advertisementId) values (31, 22);
+insert into gameAds (gameId, advertisementId) values (41, 44);
+insert into gameAds (gameId, advertisementId) values (46, 15);
+insert into gameAds (gameId, advertisementId) values (27, 29);
+insert into gameAds (gameId, advertisementId) values (44, 36);
+insert into gameAds (gameId, advertisementId) values (24, 28);
+insert into gameAds (gameId, advertisementId) values (18, 37);
+insert into gameAds (gameId, advertisementId) values (24, 5);
+insert into gameAds (gameId, advertisementId) values (14, 4);
+insert into gameAds (gameId, advertisementId) values (34, 36);
+insert into gameAds (gameId, advertisementId) values (34, 6);
+insert into gameAds (gameId, advertisementId) values (9, 20);
+insert into gameAds (gameId, advertisementId) values (9, 42);
+insert into gameAds (gameId, advertisementId) values (31, 37);
+insert into gameAds (gameId, advertisementId) values (48, 13);
+insert into gameAds (gameId, advertisementId) values (7, 42);
+insert into gameAds (gameId, advertisementId) values (42, 30);
+insert into gameAds (gameId, advertisementId) values (37, 15);
+insert into gameAds (gameId, advertisementId) values (14, 6);
+insert into gameAds (gameId, advertisementId) values (34, 33);
+insert into gameAds (gameId, advertisementId) values (13, 27);
+insert into gameAds (gameId, advertisementId) values (46, 10);
+insert into gameAds (gameId, advertisementId) values (8, 25);
+insert into gameAds (gameId, advertisementId) values (15, 43);
+insert into gameAds (gameId, advertisementId) values (15, 29);
+insert into gameAds (gameId, advertisementId) values (43, 15);
+insert into gameAds (gameId, advertisementId) values (36, 8);
+insert into gameAds (gameId, advertisementId) values (27, 39);
+insert into gameAds (gameId, advertisementId) values (7, 1);
+insert into gameAds (gameId, advertisementId) values (12, 17);
+insert into gameAds (gameId, advertisementId) values (39, 38);
+insert into gameAds (gameId, advertisementId) values (11, 14);
+insert into gameAds (gameId, advertisementId) values (13, 10);
+insert into gameAds (gameId, advertisementId) values (13, 35);
+insert into gameAds (gameId, advertisementId) values (50, 38);
+insert into gameAds (gameId, advertisementId) values (13, 11);
+insert into gameAds (gameId, advertisementId) values (48, 27);
+insert into gameAds (gameId, advertisementId) values (20, 43);
+insert into gameAds (gameId, advertisementId) values (44, 7);
+insert into gameAds (gameId, advertisementId) values (10, 41);
+insert into gameAds (gameId, advertisementId) values (23, 23);
+insert into gameAds (gameId, advertisementId) values (38, 17);
+insert into gameAds (gameId, advertisementId) values (28, 9);
+insert into gameAds (gameId, advertisementId) values (17, 13);
+insert into gameAds (gameId, advertisementId) values (8, 18);
+insert into gameAds (gameId, advertisementId) values (50, 24);
+insert into gameAds (gameId, advertisementId) values (28, 10);
+insert into gameAds (gameId, advertisementId) values (34, 39);
+insert into gameAds (gameId, advertisementId) values (23, 39);
+insert into gameAds (gameId, advertisementId) values (29, 28);
+insert into gameAds (gameId, advertisementId) values (45, 41);
+insert into gameAds (gameId, advertisementId) values (3, 28);
+insert into gameAds (gameId, advertisementId) values (27, 35);
+insert into gameAds (gameId, advertisementId) values (14, 15);
+insert into gameAds (gameId, advertisementId) values (28, 32);
+insert into gameAds (gameId, advertisementId) values (31, 42);
+insert into gameAds (gameId, advertisementId) values (46, 12);
+insert into gameAds (gameId, advertisementId) values (12, 8);
+insert into gameAds (gameId, advertisementId) values (12, 16);
+insert into gameAds (gameId, advertisementId) values (34, 20);
+insert into gameAds (gameId, advertisementId) values (38, 1);
+insert into gameAds (gameId, advertisementId) values (4, 42);
+insert into gameAds (gameId, advertisementId) values (45, 13);
+insert into gameAds (gameId, advertisementId) values (19, 41);
+insert into gameAds (gameId, advertisementId) values (41, 42);
+insert into gameAds (gameId, advertisementId) values (18, 11);
+insert into gameAds (gameId, advertisementId) values (50, 33);
+insert into gameAds (gameId, advertisementId) values (47, 10);
+insert into gameAds (gameId, advertisementId) values (44, 24);
+insert into gameAds (gameId, advertisementId) values (19, 30);
+insert into gameAds (gameId, advertisementId) values (23, 6);
+insert into gameAds (gameId, advertisementId) values (44, 22);
+insert into gameAds (gameId, advertisementId) values (43, 23);
+insert into gameAds (gameId, advertisementId) values (11, 15);
+insert into gameAds (gameId, advertisementId) values (33, 13);
+insert into gameAds (gameId, advertisementId) values (42, 39);
+insert into gameAds (gameId, advertisementId) values (26, 30);
+insert into gameAds (gameId, advertisementId) values (21, 10);
+insert into gameAds (gameId, advertisementId) values (49, 43);
+insert into gameAds (gameId, advertisementId) values (23, 27);
+insert into gameAds (gameId, advertisementId) values (36, 28);
+insert into gameAds (gameId, advertisementId) values (34, 16);
+insert into gameAds (gameId, advertisementId) values (30, 18);
+insert into gameAds (gameId, advertisementId) values (3, 20);
+insert into gameAds (gameId, advertisementId) values (11, 1);
+insert into gameAds (gameId, advertisementId) values (26, 34);
+insert into gameAds (gameId, advertisementId) values (46, 36);
+insert into gameAds (gameId, advertisementId) values (48, 1);
+insert into gameAds (gameId, advertisementId) values (43, 25);
+insert into gameAds (gameId, advertisementId) values (17, 44);
+insert into gameAds (gameId, advertisementId) values (10, 34);
+insert into gameAds (gameId, advertisementId) values (48, 21);
+insert into gameAds (gameId, advertisementId) values (42, 11);
+insert into gameAds (gameId, advertisementId) values (17, 22);
+insert into gameAds (gameId, advertisementId) values (18, 19);
+insert into gameAds (gameId, advertisementId) values (6, 20);
+insert into gameAds (gameId, advertisementId) values (49, 38);
+insert into gameAds (gameId, advertisementId) values (4, 44);
+insert into gameAds (gameId, advertisementId) values (37, 4);
+insert into gameAds (gameId, advertisementId) values (22, 44);
+insert into gameAds (gameId, advertisementId) values (2, 32);
+insert into gameAds (gameId, advertisementId) values (24, 2);
+insert into gameAds (gameId, advertisementId) values (43, 2);
+insert into gameAds (gameId, advertisementId) values (43, 42);
+insert into gameAds (gameId, advertisementId) values (3, 39);
+insert into gameAds (gameId, advertisementId) values (4, 8);
+insert into gameAds (gameId, advertisementId) values (28, 17);
+insert into gameAds (gameId, advertisementId) values (39, 31);
+insert into gameAds (gameId, advertisementId) values (39, 34);
+insert into gameAds (gameId, advertisementId) values (17, 38);
+insert into gameAds (gameId, advertisementId) values (23, 9);
+insert into gameAds (gameId, advertisementId) values (23, 12);
+insert into gameAds (gameId, advertisementId) values (38, 43);
+insert into gameAds (gameId, advertisementId) values (42, 4);
+insert into gameAds (gameId, advertisementId) values (20, 34);
+insert into gameAds (gameId, advertisementId) values (46, 13);
+insert into gameAds (gameId, advertisementId) values (46, 4);
+insert into gameAds (gameId, advertisementId) values (21, 35);
+insert into gameAds (gameId, advertisementId) values (11, 5);
+insert into gameAds (gameId, advertisementId) values (23, 21);
+insert into gameAds (gameId, advertisementId) values (24, 17);
+insert into gameAds (gameId, advertisementId) values (24, 16);
+insert into gameAds (gameId, advertisementId) values (19, 5);
+insert into gameAds (gameId, advertisementId) values (28, 25);
+insert into gameAds (gameId, advertisementId) values (26, 26);
+insert into gameAds (gameId, advertisementId) values (14, 26);
+insert into gameAds (gameId, advertisementId) values (12, 22);
+insert into gameAds (gameId, advertisementId) values (3, 22);
+insert into gameAds (gameId, advertisementId) values (48, 24);
+insert into gameAds (gameId, advertisementId) values (35, 15);
+insert into gameAds (gameId, advertisementId) values (23, 33);
+insert into gameAds (gameId, advertisementId) values (20, 31);
+insert into gameAds (gameId, advertisementId) values (3, 26);
+insert into gameAds (gameId, advertisementId) values (37, 1);
+insert into gameAds (gameId, advertisementId) values (9, 33);
+insert into gameAds (gameId, advertisementId) values (36, 6);
+insert into gameAds (gameId, advertisementId) values (47, 16);
+insert into gameAds (gameId, advertisementId) values (35, 41);
+insert into gameAds (gameId, advertisementId) values (35, 4);
+insert into gameAds (gameId, advertisementId) values (19, 31);
+insert into gameAds (gameId, advertisementId) values (36, 26);
+insert into gameAds (gameId, advertisementId) values (11, 18);
+insert into gameAds (gameId, advertisementId) values (34, 42);
+insert into gameAds (gameId, advertisementId) values (32, 9);
+insert into gameAds (gameId, advertisementId) values (36, 37);
+insert into gameAds (gameId, advertisementId) values (6, 41);
+insert into gameAds (gameId, advertisementId) values (5, 12);
+insert into gameAds (gameId, advertisementId) values (43, 10);
+insert into gameAds (gameId, advertisementId) values (3, 42);
+insert into gameAds (gameId, advertisementId) values (42, 7);
+insert into gameAds (gameId, advertisementId) values (49, 39);
+insert into gameAds (gameId, advertisementId) values (26, 43);
+insert into gameAds (gameId, advertisementId) values (37, 2);
+insert into gameAds (gameId, advertisementId) values (33, 21);
+insert into gameAds (gameId, advertisementId) values (34, 34);
+insert into gameAds (gameId, advertisementId) values (35, 9);
+insert into gameAds (gameId, advertisementId) values (34, 11);
+insert into gameAds (gameId, advertisementId) values (11, 24);
+insert into gameAds (gameId, advertisementId) values (22, 32);
+insert into gameAds (gameId, advertisementId) values (6, 30);
+insert into gameAds (gameId, advertisementId) values (20, 12);
+insert into gameAds (gameId, advertisementId) values (28, 8);
+insert into gameAds (gameId, advertisementId) values (11, 42);
+insert into gameAds (gameId, advertisementId) values (16, 28);
+insert into gameAds (gameId, advertisementId) values (16, 24);
+insert into gameAds (gameId, advertisementId) values (29, 9);
+insert into gameAds (gameId, advertisementId) values (7, 2);
+insert into gameAds (gameId, advertisementId) values (18, 15);
+insert into gameAds (gameId, advertisementId) values (47, 23);
+insert into gameAds (gameId, advertisementId) values (21, 19);
+insert into gameAds (gameId, advertisementId) values (26, 31);
+insert into gameAds (gameId, advertisementId) values (15, 17);
+insert into gameAds (gameId, advertisementId) values (1, 2);
+insert into gameAds (gameId, advertisementId) values (1, 3);
+insert into gameAds (gameId, advertisementId) values (1, 4);

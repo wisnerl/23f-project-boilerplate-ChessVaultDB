@@ -4,7 +4,7 @@ from src import db
 
 game = Blueprint('game', __name__)
 
-# Get all the products from the database
+# Get all professional games from singularGame table
 @game.route('/singularGameType', methods=['GET'])
 def get_professionalgame():
     # get a cursor object from the database
@@ -31,14 +31,16 @@ def get_professionalgame():
     return jsonify(json_data)
 
 
-@game.route('/allgames', methods=['GET'])
+# get all games from the singularGame table
+@game.route('/game', methods=['GET'])
 def get_allgames():
     
+    # write query to get all games from singularGame
     query = '''
         SELECT * FROM singularGame
     '''
 
-    cursor = db.get_db().cursor()
+    cursor = db.get_db().cursor()   
     cursor.execute(query)
 
     column_headers = [x[0] for x in cursor.description]
@@ -58,7 +60,8 @@ def get_allgames():
     return jsonify(json_data)
 
 
-@game.route('/createsingulargame', methods=['POST'])
+# create new game for the singularGame table
+@game.route('/game', methods=['POST'])
 def create_new_game():
     
     # collecting data from the request object 
@@ -98,7 +101,7 @@ def create_new_game():
     cursor.execute(query)
     db.get_db().commit()
 
-# Delete specific advertiser from the database
+# Delete specific game from the singluarGame table
 @game.route('/game/<gameID>', methods=['DELETE'])
 def delete_specific_game(gameID):
 
@@ -116,9 +119,12 @@ def delete_specific_game(gameID):
    
     return 'Success!'
 
+
+# get all games by gameID from singularGame table
 @game.route('/gamesbyID/<gameID>', methods=['GET'])
 def get_allgames_byID(gameID):
     
+    # write query to get all games from singularGame table by specifying gameID
     query = '''
         SELECT * FROM singularGame
         WHERE gameID = ''' + str(gameID)
@@ -162,6 +168,7 @@ def update_specifc_games_byID(gameID, new_amount):
     return 'Success!'
 
 
+# 
 @game.route('/moveanalysis/<gameID>', methods=['GET'])
 def get_allmoves_byID(gameID):
     
