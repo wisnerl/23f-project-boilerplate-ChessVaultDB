@@ -139,3 +139,10 @@ Mark wants the ability to get the number of spectators per online game, and also
 <p align="center">
 <img src="Schema.png" />
 </p>
+
+## Starting Up Docker Containers
+### Note: the following assume you're in a terminal and in the same directory (use the `cd your directory` command to change directory if needed) as the `docker-compose.yml` file.
+- `docker compose build`
+  - build new images based on the `docker-compose.yml` file.
+- `docker compose up`
+  - start all the services and other things listed in the `docker-compose.yml` file. If the containers don't yet exist, they'll be created.
