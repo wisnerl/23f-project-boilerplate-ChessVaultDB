@@ -4,21 +4,20 @@ Created on Sat Nov 25 18:48:43 2023
 @author: Ildi Hoxhallari
 """
 
-# import time
-# import berserk
-# import random
+import berserk
+import random
 import pandas as pd
 
-"""
 token = 'lip_A9mYmqA1qD4MxbTYQhzB'
 
 # Create a session object with your personal API token
 session = berserk.TokenSession(token)
+
 # Create a client object with the session
 client = berserk.Client(session)
 
 # Get a list of users.
-
+# Get a list of variants.
 variants = ['bullet', 'blitz', 'rapid', 'classical']
 
 # Create an empty list to store the results
@@ -43,12 +42,14 @@ for result in results:
     unique_users.add(result['user'])
 
 # Convert the set to a list
-unique_users = list(unique_users)
+unique_users = list(unique_users)[:31]
+for user in unique_users:
+    print(user)
 
 # Generate games.
 game_data = []
 
-games = list(client.games.export_by_player('sharkfang', max=55))
+games = list(client.games.export_by_player('sharkfang', max=50))
 for game in games:
     white = unique_users[random.randint(0, len(unique_users)-1)]
     black = unique_users[unique_users.index(white)-3]
@@ -67,11 +68,8 @@ for game in games:
 
 df = pd.DataFrame(game_data)
 df.to_csv('data.csv')
-"""
 
-"""
 # Build user table from lichess.org API
-
 # Create an empty list to store the user data
 user_data = []
 
@@ -103,10 +101,8 @@ df = pd.DataFrame(user_data)
 df = df.dropna()
 df.to_csv('data.csv')
 print(df)
-"""
 
 # Generate SQL query.
-
 meta = []
 data = pd.read_csv('data.csv')
 
@@ -119,3 +115,4 @@ for index, row in data.iterrows():
 for row in meta:
     print(
         'insert into ' + 'singularGame ' + '(gameID, moves, winner, loser, draw, whiteUName, blackUName, spectators, advertisementID, tournamentID) ' + f"values ({row[0]}, '{row[1]}', '{row[2]}', '{row[3]}', {row[4]}, '{row[5]}', '{row[6]}', {row[7]}, {row[8]}, {row[9]});")
+    
