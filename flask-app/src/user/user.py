@@ -36,13 +36,13 @@ def get_all_stats():
 
 # feature 2
 @user.route('/playerStats/<userID>', methods=['GET'])
-def get_statistics(userID):
+def get_statistics(username):
     
     query = '''
         SELECT userID, username, rating, totalGames, totalWins, totalLosses, totalDraws, 
                winPercentage, drawPercentage
         FROM user 
-        WHERE userID = ''' + str(userID)
+        WHERE username = ''' + str(username)
 
     cursor = db.get_db().cursor()
     cursor.execute(query)
