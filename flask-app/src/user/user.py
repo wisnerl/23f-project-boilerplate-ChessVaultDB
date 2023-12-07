@@ -59,6 +59,33 @@ def get_statistics(username):
 
 ####################################### USER GAMES #########################################################
 
+# get all users
+@user.route('/users', methods=['GET'])
+def get_all_users():
+    
+    query = '''
+        SELECT userID, username, rating
+        FROM user '''
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    column_headers = [x[0] for x in cursor.description]
+
+    # create an empty dictionary object to use in 
+    # putting column headers together with data
+    json_data = []
+
+    # fetch all the data from the cursor
+    theData = cursor.fetchall()
+
+    # for each of the rows, zip the data elements together with
+    # the column headers. 
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+    
+    return jsonify(json_data)
+
 # get all a users games
 @user.route('/playerGames/<username>', methods=['GET'])
 def get_gameHistory(username):
